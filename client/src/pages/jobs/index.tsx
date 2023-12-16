@@ -1,0 +1,92 @@
+import{ useEffect, useState } from "react";
+import { UseQueryResult, useQuery } from "react-query";
+import { publicRequest } from "../../lib/axios";
+import { useLocation } from 'react-router-dom';
+import { IJob } from "../../types/postgres/types";
+import JobCard from "../../components/ui/JobCard";
+import Loader from "../../components/ui/Loader";
+import Error from "../../components/ui/Error";
+import Layout from "../../components/ui/Layout";
+import Industries from "../../components/shared/Industries";
+import Categories from "../../components/shared/Categories";
+
+const Jobs = () => {
+  let location = useLocation().search;
+  const category = new URLSearchParams(location).get("category");
+  const industry = new URLSearchParams(location).get("industry");
+  const id = new URLSearchParams(location).get("id");
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [id]);
+
+  const getJobs = async () => {
+    if (category) {
+      const result = await publicRequest.get(
+        `/api/v1/jobs/categories/${id}`
+      );
+      return result.data;
+    }
+    if (industry) {
+      const result = await publicRequest.get(
+        `/api/v1/jobs/industries/${id}`
+      );
+      return result.data;
+    }
+  };
+  const {
+    data: jobs,
+    isLoading,
+    isError,
+  }: UseQueryResult<IJob[]> = useQuery(["jobs", id], getJobs);
+
+
+
+
+  // if (isLoading) return <Loader />;
+  if (isError) return <Error />;
+
+ 
+
+  return (
+ <Layout>
+     <div className="min-h-[80vh] grid gap-sm">
+      <div className="grid gap-xs bg-green-50 p-sm">
+        <h2 className="text-2xl font-bold text-black-light"> {industry || category}</h2>
+      <p>
+      This list show the latest job vacancy in {industry || category} Jobs in
+        Nepal. The brief job detail has job title, name of the organization, job
+        location, required experiences, key skills and the deadline to apply.
+        Most recent job are shown on first. Click on the job that interests you,
+        read the job detail and if it is suitable for you, Click on the apply
+        now button to send your job application.
+      </p>
+      </div>
+     <main className="grid gap-sm">
+     <section className="grid gap-sm   grid-cols-[repeat(auto-fit,minmax(250px,1fr))]">
+        {jobs !== undefined && jobs?.length > 0 ? jobs?.map((job) => {
+          return <JobCard job={job} key={job.job_id} />;
+        })  : <div className="h-[200px] grid place-items-center bg-green-50">
+          <p className="text-black-light font-bold">No jobs found</p>
+          <img src="https://static.merojob.com/images/search/industry/jobs_by_industry.svg" alt="" />
+          </div>}
+      </section>
+      <div className="grid gap-xs flex-[0.3] ">
+            <header className="font-semibold border-y-sm uppercase border-default w-fit p-sm text-xl text-green-dark">
+              Jobs By Category
+            </header>
+           <Categories/>
+          </div>
+     </main>
+     <div className="grid gap-xs flex-[0.3] ">
+            <header className="font-semibold border-y-sm uppercase border-default w-fit p-sm text-xl text-green-dark">
+              Jobs By Industry
+            </header>
+           <Industries/>
+          </div>
+    </div>
+ </Layout>
+  );
+};
+
+export default Jobs;

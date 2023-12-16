@@ -1,0 +1,127 @@
+
+import * as Yup from "yup";
+
+
+export const registerValidationSchema = Yup.object().shape({
+  fullName: Yup.string()
+    .required("Name is required")
+    .min(5, "Name can not be less than 5 character"),
+  phoneNumber: Yup.number().typeError('Phone number must be a number type')
+    .required("")
+    .min(10, "Must be 10 digit"),
+  email: Yup.string().required("").email("Email is invalid"),
+  password: Yup.string()
+    .required("")
+    .min(6, "Password must be at least 6 characters")
+    .max(20, "Password must not exceed 20 characters"),
+  confirmPassword: Yup.string()
+    .required("")
+    .oneOf([Yup.ref("password")], "Confirm Password does not match"),
+});
+
+
+export const EmployerBasicInformationSchema = Yup.object().shape({
+  summary: Yup.string().required(),
+  industryType: Yup.number().required(),
+  organizationName:Yup.string().required(),
+  address:Yup.string().required(),
+  phoneNumber:Yup.number().required('required').min(10),
+});
+
+export const CreateJobStepOneSchema = Yup.object().shape({
+  title: Yup.string().required(""),
+  experienceRequired: Yup.string().required(),
+  salary: Yup.string().required(),
+  deadline: Yup.date()
+    .min(new Date(), "deadline must be in the future")
+    .required("deadline is required")
+    .typeError("deadline must be a valid date"),
+  categoryId: Yup.mixed().required(),
+  location: Yup.string().required(""),
+});
+
+export const CreateJobStepTwoSchema = Yup.object().shape({
+  level: Yup.string().required(),
+  noOfVacancy: Yup.number()
+    .required()
+    .typeError("total vacancy must be a number type"),
+  description: Yup.string().required(),
+  type: Yup.string().required(),
+});
+
+export const JobseekerJobPreferenceSchema = Yup.object().shape({
+  objective: Yup.string().required(),
+  jobTitle:Yup.string().required('required'),
+  jobCategories:Yup.array()
+  .of(Yup.string().required())
+  .min(1, 'This is required')
+  .required(),
+  jobIndustries:Yup.array()
+  .of(Yup.string().required())
+  .min(1, 'This is required')
+  .required(),
+availableFor:Yup.string().required('required'),
+jobLevel:Yup.string().required('required'),
+jobLocation:Yup.string().required('required'),
+expectedSalary:Yup.string().required('required'),
+skills:Yup.array()
+.of(Yup.string().required())
+.min(1, 'This is required')
+.required()
+
+})
+export const JobseekerBasicInfoSchema = Yup.object().shape({
+  fullname: Yup.string().required('required'),
+ image:Yup.string(),
+  currentAddress:Yup.string().required('required'),
+permanentAddress:Yup.string().required('required'),
+phoneNumber:Yup.string().required('required'),
+gender:Yup.string().oneOf(['male','female','other']).required('required'),
+dateOfBirth: Yup.date()
+.max(new Date(), "deadline must be in the past")
+.required("deadline is required")
+.typeError("deadline must be a valid date"),
+})
+
+export const JobseekerEducationSchema = Yup.object().shape({
+  degree:Yup.string().required('required'),
+course:Yup.string().required('required'),
+institute:Yup.string().required('required'), 
+graduationYear:Yup.date()
+.required("deadline is required")
+.typeError("deadline must be a valid date"),
+location:Yup.string().required('required'),
+
+marksType: Yup.string().test({
+  name: 'requiredIfOtherFieldAvailable',
+  test: function(this: Yup.TestContext, value) {
+    const marksValue = this.parent.marksValue as string;
+    return marksValue !== undefined ? !!value : true;
+  },
+  message: 'Marks Type is required when Marks Value is present',
+}),
+marksValue: Yup.string().test({
+  name: 'requiredIfOtherFieldAvailable',
+  test: function(this: Yup.TestContext, value) {
+    const marksType = this.parent.marksType as string;
+    return marksType !== undefined ? !!value : true;
+  },
+  message: 'Marks Value is required when Marks Type is present',
+}),
+})
+
+export const JobseekerExperienceSchema = Yup.object().shape({
+  organizationName:Yup.string().required('required'),
+organizationType:Yup.string().required('required'),
+jobLocation:Yup.string().required('required'),
+jobTitle:Yup.string().required('required'),
+jobCategory:Yup.string().required('required'),
+jobLevel:Yup.string().required('required'),
+startDate:Yup.date()
+.required("required")
+.typeError("deadline must be a valid date"),
+endDate:Yup.date()
+.required("required")
+.typeError("deadline must be a valid date"),
+duties:Yup.string().required('required')
+})

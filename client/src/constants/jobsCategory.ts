@@ -1,0 +1,23 @@
+export const jobsCategory = [
+    ' Sales / Public Relations ',
+    ' NGO / INGO / Social Work',
+    ' Teaching / Education',
+    ' IT & Telecommunication ',
+    'Journalism / Editor / Media ',
+    ' General Mgmt. / Administration',
+    'Construction / Engineering ',
+    ' Others ',
+    'Accounting / Finance ',
+    '  Banking / Insurance /Financial Service',
+    ' Marketing / Advertising / Customer Service',
+    ' Healthcare / Pharma / Biotech',
+    '  Architecture / Interior Design',
+    ' Human Resource /Org. Development',
+    '    Hospitality ',
+    ' Secretarial / Front Office / Data Entry',
+    ' Research and Development',
+    ' Creative / Graphics / Designing',
+    ' Legal Services',
+    'Commercial / Logistics / Supply Chain',
+    ' Production / Maintenance / Quality'
+]

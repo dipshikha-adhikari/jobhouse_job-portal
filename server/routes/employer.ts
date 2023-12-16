@@ -1,0 +1,15 @@
+import { createBasicInformation, updateBasicInformation } from "../controllers/profiles/employer/basicInformation"
+import { getEmployerProfile, getEmployerProfileById } from "../controllers/profiles/employer/getProfile"
+import { createOtherInformation, updateOtherInformation } from "../controllers/profiles/employer/otherInformation"
+
+const express = require('express')
+const router = express.Router()
+const verifyToken = require('../middlewares/verifyToken')
+
+router.get('/profile',verifyToken, getEmployerProfile)
+router.get('/profile/:employerId', getEmployerProfileById)
+router.post('/profile/basicInformation',verifyToken, createBasicInformation)
+router.put('/profile/basicInformation',verifyToken, updateBasicInformation)
+router.post('/profile/otherInformation',verifyToken, createOtherInformation)
+router.put('/profile/otherInformation',verifyToken, updateOtherInformation)
+module.exports = router
