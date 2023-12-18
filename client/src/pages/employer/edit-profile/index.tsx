@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import BasicInformation from "./BasicInformation";
 import useAuthStore from "../../../store/auth";
-import NoUser from "../../NoUser";
-import Error from "../../../components/ui/Error";
+import NoUser from "../../../components/shared/NoUser";
+import Error from "../../../components/shared/Error";
 import { useProfile } from "../hooks/useProfile";
-import Loader from "../../../components/ui/Loader";
+import Loader from "../../../components/shared/Loader";
 import { useCurrentUser } from "../../../hooks/useCurrentUser";
 import OtherInformation from "./OtherInformation";
 import { Link, useParams } from "react-router-dom";
@@ -13,7 +13,7 @@ const EditProfile = () => {
   const [isEditorOpen, setIsEditorOpen] = useState<boolean>(false);
   const { isAunthenticated } = useAuthStore();
   const { role } = useCurrentUser();
-  const { profile, isLoading } = useProfile();
+  const { profile, isLoading,error } = useProfile();
   const params = useParams();
   const title = params.title;
 
@@ -48,6 +48,7 @@ const EditProfile = () => {
 
   if (isLoading) return <Loader />;
   if (!isAunthenticated) return <NoUser />;
+  if(error) return <Error/>
   if (role !== "employer") return <Error />;
 
   return (

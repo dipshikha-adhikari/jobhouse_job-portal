@@ -4,8 +4,8 @@ import CreateJobStepTwo from "../../components/forms/CreateJobStepTwo";
 import ProgressBar from "../../components/ui/ProgressBar";
 import { useCurrentJob } from "../../hooks/useCurrentJob";
 import useAuthStore from "../../store/auth";
-import NoUser from "../NoUser";
-import Error from "../../components/ui/Error";
+import NoUser from "../../components/shared/NoUser";
+import Error from "../../components/shared/Error";
 import { useParams } from "react-router-dom";
 import { useCurrentUser } from "../../hooks/useCurrentUser";
 

@@ -1,6 +1,6 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import Editor from "../../components/ui/Editor";
+import Editor from "../shared/Editor";
 import useJobInputs from "../../store/jobInputs";
 import { useEffect, useState } from "react";
 import {  useNavigate, useParams } from "react-router-dom";

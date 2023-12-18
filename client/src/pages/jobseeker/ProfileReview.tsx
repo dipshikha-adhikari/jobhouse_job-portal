@@ -1,6 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 import { useCurrentJob } from "../../hooks/useCurrentJob";
-import Error from "../../components/ui/Error";
+import Error from "../../components/shared/Error";
 import { useJobseekerProfile } from "./hooks/useJobseekerProfile";
 import { useCurrentUser } from "../../hooks/useCurrentUser";
 import moment from "moment";

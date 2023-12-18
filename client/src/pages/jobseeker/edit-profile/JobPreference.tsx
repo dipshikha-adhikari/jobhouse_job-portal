@@ -1,68 +1,67 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useEffect, useRef, useState } from 'react'
+import { ChangeEvent, FormEvent, useEffect, useRef, useState } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { FaEdit } from 'react-icons/fa'
 import { JobseekerJobPreferenceSchema } from '../../../utils/validationSchema'
 import MultipleSelectCheckmarks from '../../../components/mui/MultipleSelect'
-import { jobsCategory } from '../../../constants/jobsCategory'
-import { industryCategories } from '../../../constants/industryCategories'
 import TagsInputBox from '../../../components/ui/TagsInputBox'
 import { IJobseekerJobPreferenceInputs } from '../../../types/react/types'
 import { updateJobPrefetence } from '../actions/updateJobPreference'
+import { useJobseekerProfile } from '../hooks/useJobseekerProfile'
+import { IJobseekerJobPreference } from '../../../types/postgres/types'
+import { useCategories } from '../../../hooks/useCategories'
+import { useIndustries } from '../../../hooks/useIndustries'
 
+type JobPreference = {
+  profile:IJobseekerJobPreference,
+  isLoading:boolean,
+  isError:boolean
+}
 
-
-const JobPreference = ({profile}:any) => {
+const JobPreference = () => {
   const[isEditorOpen, setIsEditorOpen] = useState(false)
-const textRef = useRef<HTMLTextAreaElement>(null)
-const[jobCategories, setJobCategories] = useState<string[]>([])
-const[jobIndustries, setJobIndustries] = useState<string[]>([])
-const[summary, setSummary] = useState('')
 const[isLoading, setIsLoading] = useState(false)
 const{register,handleSubmit, formState:{errors}, setValue, control} = useForm({resolver:yupResolver(JobseekerJobPreferenceSchema)})
-
+const {profile}:JobPreference = useJobseekerProfile('jobPreference')
+const {categories} = useCategories()
+const {industries} = useIndustries()
 
 useEffect(() => {
-if(profile?.job_preference){
-  setJobCategories(profile.job_preference.job_categories)
-  setJobIndustries(profile.job_preference.job_industries)
-  setSummary( profile.job_preference.summary)
-  setValue('jobCategories', profile.job_preference.job_categories)
-  setValue('jobIndustries', profile.job_preference.job_industries)
-  setValue('availableFor',profile.job_preference.available_for)
-  setValue('jobLevel', profile.job_preference.job_level)
-  setValue('expectedSalary', profile.job_preference.expected_salary)
-  setValue('jobLocation', profile.job_preference.job_location)
-  setValue('jobTitle', profile.job_preference.job_title)
-  setValue('objective', profile.job_preference.summary )
-  setValue('skills', profile.job_preference.skills)
+
+if(profile){
+  setValue('jobCategories', profile.category_names)
+  setValue('jobIndustries', profile.industry_names)
+  setValue('availableFor',profile.available_for)
+  setValue('jobLevel', profile.job_level)
+  setValue('expectedSalary', profile.expected_salary)
+  setValue('jobLocation', profile.job_location)
+  setValue('jobTitle', profile.job_title)
+  setValue('objective', profile.summary )
+  setValue('skills', profile.skills)
 }
 },[profile])
  
-function autoGrow(){
-    if(textRef.current){
-      setSummary(textRef.current.value)
-      textRef.current.style.height = '100px'
-      textRef.current.style.height = (textRef.current.scrollHeight ) + 'px'
-    }
+function autoGrow(e:FormEvent<HTMLTextAreaElement>){
+  e.currentTarget.style.height = '100px'
+  e.currentTarget.style.height = e.currentTarget.scrollHeight + 'px'
+   
   }
 
 const submitJobPreference:SubmitHandler<IJobseekerJobPreferenceInputs> = (data) => {
-data['objective'] = summary
-updateJobPrefetence(data, setIsLoading, setIsEditorOpen)
+updateJobPrefetence(data, setIsLoading, setIsEditorOpen, industries, categories)
 }
 
   return (
     <div className='grid gap-sm '>
       <header className='text-green-dark flex justify-between  font-semibold'>
-        Basic Information 
+       Job Preference
       {!isEditorOpen &&   <span className='border-sm  px-sm flex items-center cursor-pointer gap-xs rounded-sm' onClick={() => setIsEditorOpen(true)}><FaEdit/> Edit</span>}
       </header>
     <form className='grid gap-sm ' onSubmit={handleSubmit(submitJobPreference)}>
     <section className='grid gap-sm'>
         <div>
         <div className='grid gap-xs sm:flex '>
-          <span >Objective</span> <div className='flex-1'> <textarea placeholder=' your objective' disabled={!isEditorOpen} {...register('objective')}  value={summary}    ref={textRef}  onInput={autoGrow}  className={`border-sm w-full  outline-none p-sm resize-none `}></textarea></div>
+          <span >Objective</span> <div className='flex-1'> <textarea placeholder=' your objective' disabled={!isEditorOpen} {...register('objective')}    onInput={(e) => autoGrow(e)}   className={`border-sm w-full  outline-none p-sm resize-none `}></textarea></div>
         </div>
         <p className='text-orange-dark'>{errors.objective?.message}</p>
         </div>
@@ -80,8 +79,8 @@ updateJobPrefetence(data, setIsLoading, setIsEditorOpen)
          name='jobCategories'
          control={control}
          disabled={!isEditorOpen} 
-         render={({field:{onChange}}) => {
-          return <MultipleSelectCheckmarks isEditorOpen={isEditorOpen} value={jobCategories} onChange={onChange} values={jobsCategory} setState={setJobCategories}/>
+         render={({field}) => {
+          return <MultipleSelectCheckmarks field={field} isEditorOpen={isEditorOpen} type='category'  values={categories} />
          }}
          />
         </div>
@@ -93,9 +92,9 @@ updateJobPrefetence(data, setIsLoading, setIsEditorOpen)
           <Controller
          name='jobIndustries'
          control={control}
-         render={({field:{onChange}}) => {
+         render={({field}) => {
           
-          return <MultipleSelectCheckmarks isEditorOpen={isEditorOpen} value={jobIndustries} onChange={onChange} values={industryCategories}  setState={setJobIndustries}/>
+          return <MultipleSelectCheckmarks field={field} type='industry' isEditorOpen={isEditorOpen} values={industries}  />
          }}
          />
         </div> 
@@ -108,7 +107,7 @@ updateJobPrefetence(data, setIsLoading, setIsEditorOpen)
          name='skills'
          control={control}
          render={({field:{onChange}}) => {
-          return <TagsInputBox isEditorOpen={isEditorOpen} values={profile?.job_preference?.skills} onChange={onChange}/>
+          return <TagsInputBox isEditorOpen={isEditorOpen} values={profile?.skills} onChange={onChange}/>
          }}
          />
         </div>

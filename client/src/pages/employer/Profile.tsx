@@ -5,24 +5,23 @@ import { FaPhoneAlt } from "react-icons/fa";
 import { Link, useParams } from 'react-router-dom';
 import Layout from '../../components/ui/Layout';
 import { useProfile } from './hooks/useProfile';
-import Error from '../../components/ui/Error';
-import Loader from '../../components/ui/Loader';
+import Error from '../../components/shared/Error';
+import Loader from '../../components/shared/Loader';
 import RecentJobs from './RecentJobs';
 import { useEffect } from 'react';
 
 const Profile = () => {
     const user = useCurrentUser();
-const {profile, isLoading} = useProfile()
+const {profile, isLoading,error} = useProfile()
 const params = useParams()
 const id = params.id
 
 useEffect(() => {
   window.scrollTo(0,0)
     },[])
-    console.log(profile)
 
 if(isLoading) return <Loader/>
-if(id === undefined && user.role !== 'employer') return <Error/>
+if(error || user.role !== 'employer') return <Error/>
 
    return (
     <Layout>

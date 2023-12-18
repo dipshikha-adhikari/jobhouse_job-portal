@@ -1,38 +1,72 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { JobseekerExperienceSchema } from '../../../utils/validationSchema';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { IJobseekerExperienceInputs } from '../../../types/react/types';
-import { industryCategories } from '../../../constants/industryCategories';
-import Editor from '../../../components/ui/Editor'
+import Editor from '../../../components/shared/Editor'
 import { IJobseekerExperience } from '../../../types/postgres/types';
+import { useCategories } from '../../../hooks/useCategories';
+import { updateExperience } from '../actions/updateExperience';
+import moment from 'moment';
+import { useIndustries } from '../../../hooks/useIndustries';
 
 type ExperienceFormProps = {
-    isEditorOpen:boolean,
+    profile?:IJobseekerExperience | undefined
+    isEditorOpen:boolean
     setIsEditorOpen:(props:any) => void 
-    experience?:IJobseekerExperience
+    isError:boolean
 }
 
-const ExperienceForm = ({isEditorOpen, setIsEditorOpen, experience}:ExperienceFormProps) => {
+const ExperienceForm = ({isEditorOpen, setIsEditorOpen, profile}:ExperienceFormProps) => {
     const [isLoading, setIsLoading] = useState(false);
+    const ref = useRef<HTMLDivElement>(null)
+    const {categories} = useCategories()
+    const {industries} = useIndustries()
     const {
       register,
       handleSubmit,
-      setError,
       control,
+      setValue,
       formState: { errors },
     } = useForm({ resolver: yupResolver(JobseekerExperienceSchema) });
   
-    
+    useEffect(() => {
+if(profile){
+  let startDate:any = moment(profile.start_date).format('YYYY-MM-DD')
+  let endDate:any = moment(profile.end_date).format('YYYY-MM-DD')
+  setValue('organizationName', profile.organization_name)
+  setValue('organizationType', profile.organization_type)
+  setValue('jobTitle', profile.job_title)
+  setValue('jobCategory', profile.job_category)
+  setValue('jobLocation', profile.job_location)
+  setValue('duties', profile.duties)
+  setValue('jobLevel', profile.job_level)
+  setValue('startDate', startDate)
+  setValue('endDate', endDate)
+}
+    },[profile])
 
     const onSubmit: SubmitHandler<IJobseekerExperienceInputs> = (data) => {
-        console.log(data);
+      updateExperience(data,profile,setIsLoading, setIsEditorOpen)
+        window.scrollTo({
+          top:0,
+          left:0,
+        })
       };
     
+      const handleCancel = () => {
+        if(ref.current){
+          window.scrollTo({
+            top:0,
+            left:0,
+          })
+        }
+        setIsEditorOpen(false)
+      }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} >
-     <section className='grid gap-sm' >
+    <form onSubmit={handleSubmit(onSubmit)}  >
+     <section className='grid gap-sm' ref={ref}>
         <div>
         <div className='grid sm:flex gap-xs items-center'>
           <span>Organization Name </span> <input type="text" {...register('organizationName')} placeholder='ABC company' className='outline-none p-xs border-sm'/>
@@ -43,9 +77,9 @@ const ExperienceForm = ({isEditorOpen, setIsEditorOpen, experience}:ExperienceFo
        <div className='grid sm:flex gap-xs items-center'>
           <span>Nature of Organization </span> <select {...register('organizationType')} className='outline-none p-xs border-sm'>
             <option value="">Select</option>
-            {industryCategories.map(cat => {
-              return <option value={cat} key={cat}>{cat}</option>
-            })}
+          {industries?.map(item => {
+            return <option key={item.industry_id} value={item.industry_name} >{item.industry_name}</option>
+          })}
           </select>
         </div>
         <p className="text-red-600 text-sm">{isEditorOpen && errors.organizationType?.message}</p>
@@ -65,7 +99,10 @@ const ExperienceForm = ({isEditorOpen, setIsEditorOpen, experience}:ExperienceFo
       <div>
       <div className='grid sm:flex gap-xs items-center'>
           <span>Job Category </span> <select {...register('jobCategory')} className='outline-none p-xs border-sm'>
-            <option value="">Information/Computer</option>
+            <option value="">Select</option>
+          {categories?.map(cat => {
+              return <option value={cat.category_name} key={cat.category_id}>{cat.category_name}</option>
+            })}
           </select>
         </div>
         <p className="text-red-600 text-sm">{isEditorOpen && errors.jobCategory?.message}</p>
@@ -73,6 +110,8 @@ const ExperienceForm = ({isEditorOpen, setIsEditorOpen, experience}:ExperienceFo
        <div>
        <div className='grid sm:flex gap-xs items-center'>
           <span>Job Level</span> <select {...register('jobLevel')}  className='outline-none p-xs border-sm'>
+          <option value="">Select</option>
+
             <option value="entry">Entry Level</option>
             <option value="intermediate">Intermediate Level</option>
             <option value="senior"> Senior Level</option>
@@ -94,13 +133,13 @@ const ExperienceForm = ({isEditorOpen, setIsEditorOpen, experience}:ExperienceFo
         <p className="text-red-600 text-sm">{isEditorOpen && errors.endDate?.message}</p>
        </div>
        <div>
-       <div className='grid sm:flex gap-xs '>
+       <div className='grid sm:flex gap-xs h-fit '>
           <span>Duties & Responsibilities</span>
           <Controller
           name='duties'
           control={control}
           render={({field:{onChange}}) => (
-            <Editor onChange={onChange} initialValue={experience?.duties} />
+            <Editor onChange={onChange} initialValue={profile?.duties} />
           )}
           />
         </div>
@@ -108,7 +147,7 @@ const ExperienceForm = ({isEditorOpen, setIsEditorOpen, experience}:ExperienceFo
        </div>
         {isEditorOpen &&  <div className='flex  gap-xs'>
      <button className='bg-green-dark h-full text-white p-sm rounded-sm'>Save</button>
-     <button className='border-green-dark border-sm  text-green-dark p-sm rounded-sm' onClick={() => setIsEditorOpen(false)}>Cancel</button>
+     <button className='border-green-dark border-sm  text-green-dark p-sm rounded-sm' onClick={handleCancel}>Cancel</button>
      </div>}
       </section>
      </form>

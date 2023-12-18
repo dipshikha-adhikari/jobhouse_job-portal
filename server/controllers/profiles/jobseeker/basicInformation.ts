@@ -11,7 +11,7 @@ interface IUserRequest extends Request {
 
 export const createBasicInfo= (req: IUserRequest, res: Response) => {
     const { id } = req.user
-    const {fullname, date_of_birth, phone_number, permanent_address,current_address, gender  }:IJobseekerBasicInformation = req.body
+    const {fullname, date_of_birth, phone_number, permanent_address,current_address, gender, image  }:IJobseekerBasicInformation = req.body
   
             if (isValidBasicInformation(req.body)) {
                 pool.query('select * from users where user_id = $1', [id], function (err: Error, result: QueryResult) {
@@ -21,8 +21,8 @@ export const createBasicInfo= (req: IUserRequest, res: Response) => {
                         if(role !== 'jobseeker'){
                             return res.status(401).send({ message: 'Only jobseeker is allowed' })
                         }
-                        const query = `insert into jobseekers_basic_information (user_id,fullname, date_of_birth, phone_number, permanent_address,current_address, gender  ) values($1, $2, $3,$4,$5,$6,$7)`
-                        pool.query(query, [id, fullname, date_of_birth, phone_number, permanent_address,current_address, gender ], function (err: Error, result: QueryResult) {
+                        const query = `insert into jobseekers_basic_information (user_id,fullname, date_of_birth, phone_number, permanent_address,current_address, gender, image  ) values($1, $2, $3,$4,$5,$6,$7, $8)`
+                        pool.query(query, [id, fullname, date_of_birth, phone_number, permanent_address,current_address, gender, image ], function (err: Error, result: QueryResult) {
                             if (err) return res.status(400).send({ message: err })
                             return res.status(201).send({ message: 'Success' })
                         })

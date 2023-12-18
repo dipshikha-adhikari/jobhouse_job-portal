@@ -2,8 +2,8 @@ import { useQuery } from "react-query";
 import { publicRequest } from "../../lib/axios";
 import JobCard from "../../components/ui/JobCard";
 import { IJob } from "../../types/postgres/types";
-import Loader from "../../components/ui/Loader";
-import Error from "../../components/ui/Error";
+import Loader from "../../components/shared/Loader";
+import Error from "../../components/shared/Error";
 import Industries from "../../components/shared/Industries";
 import Categories from "../../components/shared/Categories";
 

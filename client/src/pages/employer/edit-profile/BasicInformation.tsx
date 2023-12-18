@@ -3,7 +3,7 @@ import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { EmployerBasicInformationSchema } from "../../../utils/validationSchema";
 import { useCurrentUser } from "../../../hooks/useCurrentUser";
-import NoUser from "../../NoUser";
+import NoUser from "../../../components/shared/NoUser";
 import useAuthStore from "../../../store/auth";
 import { IEmployerBasicInformationInputs } from "../../../types/react/types";
 import SelectIndustry from "../../../components/mui/SelectIndustry";

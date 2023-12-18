@@ -8,16 +8,12 @@ export interface IEmployerProfile  {
     image: string;
     address:string
     email:string
-    phone_number:number
     cover_image: string;
     industry_id: number
     industry_type:string
     organization_name: string
   }
-other_information:{
-  website:string
-  id:string
-}
+other_information: IEmployerOtherInformation
   
 }
 
@@ -31,12 +27,9 @@ export interface IEmployerBasicInformation {
   }
 };
 
-export interface IEmployerContactDetails {
-  contact_details: {
-    address: string,
-    phone_number: string,
+export interface IEmployerOtherInformation {
+  id:string
     website?: string
-  }
 }
 
 
@@ -53,7 +46,6 @@ export interface IJob {
   level: string;
   type: string;
   employer_details:{
-    phone_number:number;
   organization_name:string;
   image:string 
   cover_image:string 
@@ -65,47 +57,33 @@ export interface IJob {
   category_name:string
 }
 
+
 export interface IJobseekerProfile {
-  basic_information: {
-    image: string,
-    current_address: string
-    fullname: string
-    phone_number: string
-    gender: string
-    date_of_birth: string
-    permanent_address:string
-  },
-  education: [
-    {
-      course: string
-      degree: string
-      education_board: string
-      graduation_year: string
-      institute_name: string
-      location:string
-marks:{
-  percent:string 
-  gpa:string
-}
-    }
-  ],
+  basic_information: IJobseekerBasicInformation,
+  education: IJobseekerEducation[],
   experience: IJobseekerExperience[]
-  job_preference: {
-    summary: string
-    available_for: string
-    job_categories: string[]
-    job_industries: string[]
-    job_title: string
-    job_level: string
-    skills: []
-    expected_salary: string
-    job_location: string
-  },
+  job_preference: IJobseekerJobPreference,
   jobseeker_id: string
   user_id: string
 }
 
+export interface IJobseekerJobPreference {
+  id:string
+  summary: string
+  available_for: string
+  job_categories: number[]
+  category_names:string[]
+  industry_names:string[]
+  job_industries: number[]
+  job_title: string
+  job_level: string
+  skills: []
+  expected_salary: string
+  job_location: string
+}
+
 export interface IJobseekerExperience {
+  id:string
   organization_name:string 
 organization_type:string
 job_location:string 
@@ -115,4 +93,29 @@ job_level:string
 start_date:Date 
 end_date:Date 
 duties:string 
+}
+
+export interface IJobseekerBasicInformation {
+  id:string
+  image: string,
+  current_address: string
+  fullname: string
+  gender: string
+  date_of_birth: string
+  permanent_address:string
+  phone_number:string
+}
+
+export interface IJobseekerEducation {
+  id:string
+  course: string
+  degree: string
+  education_board: string
+  graduation_year: string
+  institute_name: string
+  location:string
+marks:{
+type:string 
+value:string
+}
 }

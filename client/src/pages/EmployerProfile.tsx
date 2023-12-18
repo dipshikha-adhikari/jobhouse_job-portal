@@ -4,10 +4,10 @@ import { FaPhoneAlt } from "react-icons/fa";
 import { Link, useParams } from 'react-router-dom';
 
 import { useEffect } from 'react';
-import Loader from "../components/ui/Loader";
+import Loader from "../components/shared/Loader";
 import { UseQueryResult, useQuery } from "react-query";
 import { publicRequest } from "../lib/axios";
-import Error from "../components/ui/Error";
+import Error from "../components/shared/Error";
 import Layout from "../components/ui/Layout";
 import { IEmployerProfile } from "../types/postgres/types";
 import RecentJobs from "./employer/RecentJobs";

@@ -3,7 +3,7 @@ import JobCard from './JobCard';
 import { UseQueryResult, useQuery } from 'react-query';
 import { IJob } from '../../types/postgres/types';
 import { privateRequest } from '../../lib/axios';
-import Error from '../../components/ui/Error';
+import Error from '../../components/shared/Error';
 
 type AllJobsProps = {
   employerId: string | undefined;

@@ -1,31 +1,80 @@
-import React, { useEffect, useState } from 'react'
-import { FaEdit } from 'react-icons/fa'
-import { IJobseekerProfile } from '../../../types/postgres/types';
-import ExperienceForm from './ExperienceForm';
+import {  useState } from "react";
+import { IJobseekerExperience } from "../../../types/postgres/types";
+import { useJobseekerProfile } from "../hooks/useJobseekerProfile";
+import ExperienceForm from "./ExperienceForm";
+import ExperienceBox from "../../../components/ui/ExperienceBox";
 
 type ExperienceProps = {
-  profile:IJobseekerProfile | undefined
+  profile: IJobseekerExperience[] | undefined;
+  isLoading: boolean;
+  isError: boolean;
+};
+
+const Experience = () => {
+  const [isEditorOpen, setIsEditorOpen] = useState(false);
+  const{profile}:ExperienceProps = useJobseekerProfile('experience')
+
+
+
+  if (profile === undefined) {
+    return (
+      <div className="grid min-h-[80vh] gap-sm">
+        {!isEditorOpen && (
+          <div className="grid gap-sm h-fit">
+            <p>No Experience available!</p>
+            <button
+              className="w-fit border-sm  border-green-dark text-green-dark rounded-sm px-sm p-xs"
+              onClick={() => setIsEditorOpen(true)}
+            >
+              Add New
+            </button>
+          </div>
+        )}
+
+        <section>
+          {isEditorOpen && (
+            <ExperienceForm
+              profile={profile}
+              isError
+              setIsEditorOpen={setIsEditorOpen}
+              isEditorOpen={isEditorOpen}
+            />
+          )}
+        </section>
+      </div>
+    );
   }
 
-const Experience = ({profile}:ExperienceProps) => {
-  const[isEditorOpen, setIsEditorOpen] = useState(false)
- 
-
- 
   return (
-    <div className='grid gap-sm'>
-        <header className='text-green-dark flex justify-between  font-semibold'>
-        Basic Information 
-      {!isEditorOpen &&   <span className='border-sm border-green-dark px-sm flex items-center cursor-pointer gap-xs rounded-sm' onClick={() => setIsEditorOpen(true)}><FaEdit/> Edit</span>}
-      </header>
-     <section>
-      {profile?.experience ? profile?.experience.map(exp => {
-        return <ExperienceForm setIsEditorOpen={setIsEditorOpen} isEditorOpen={isEditorOpen} experience={exp}/>
-      }) : <ExperienceForm setIsEditorOpen={setIsEditorOpen} isEditorOpen={isEditorOpen} />}
-     </section>
+    <div className="flex gap-sm flex-col min-h-[80vh] ">
      
-    </div>
-  )
-}
 
-export default Experience
+    <section className="grid gap-sm">
+    {profile !== undefined &&
+        profile?.map((item:any) => {
+          return (
+          <ExperienceBox item={item}/>
+  )
+          } )
+}
+    </section>
+    <section>
+      {!isEditorOpen &&   <button
+              className="w-fit border-sm h-fit  border-green-dark text-green-dark rounded-sm px-sm p-xs"
+              onClick={() => setIsEditorOpen(true)}
+            >
+              Add New
+            </button>}
+           
+          {isEditorOpen && (
+            <ExperienceForm
+              isError
+              setIsEditorOpen={setIsEditorOpen}
+              isEditorOpen={isEditorOpen}
+            />
+          )}
+        </section>
+</div>
+)}
+
+export default Experience;

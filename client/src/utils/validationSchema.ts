@@ -89,6 +89,7 @@ course:Yup.string().required('required'),
 institute:Yup.string().required('required'), 
 graduationYear:Yup.date()
 .required("deadline is required")
+.max(new Date(), "deadline must be in the past")
 .typeError("deadline must be a valid date"),
 location:Yup.string().required('required'),
 
@@ -96,7 +97,7 @@ marksType: Yup.string().test({
   name: 'requiredIfOtherFieldAvailable',
   test: function(this: Yup.TestContext, value) {
     const marksValue = this.parent.marksValue as string;
-    return marksValue !== undefined ? !!value : true;
+    return marksValue !== ''? !!value : true;
   },
   message: 'Marks Type is required when Marks Value is present',
 }),
@@ -104,7 +105,7 @@ marksValue: Yup.string().test({
   name: 'requiredIfOtherFieldAvailable',
   test: function(this: Yup.TestContext, value) {
     const marksType = this.parent.marksType as string;
-    return marksType !== undefined ? !!value : true;
+    return marksType !== '' ? !!value : true;
   },
   message: 'Marks Value is required when Marks Type is present',
 }),

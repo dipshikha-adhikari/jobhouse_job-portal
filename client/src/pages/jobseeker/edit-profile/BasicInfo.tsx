@@ -1,29 +1,34 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { FaEdit } from 'react-icons/fa'
 import { IJobseekerBasicInfoInputs } from '../../../types/react/types'
 import { JobseekerBasicInfoSchema } from '../../../utils/validationSchema'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { IJobseekerProfile } from '../../../types/postgres/types'
+import { IJobseekerBasicInformation } from '../../../types/postgres/types';
 import { useCurrentUser } from '../../../hooks/useCurrentUser'
 import moment from 'moment'
 import { ChangeEvent } from 'react';
 import { updateBasicInfo } from '../actions/updateBasicInfo'
+import Loader from '../../../components/shared/Loader'
+import { useJobseekerProfile } from '../hooks/useJobseekerProfile'
 
-type BasicInfoProps = {
-profile:IJobseekerProfile | undefined
+type BasicInfo = {
+  profile:IJobseekerBasicInformation,
+  isLoading:boolean,
+  isError:boolean
 }
 
-const BasicInfo = ({profile}:BasicInfoProps) => {
+const BasicInfo = () => {
   const[isEditorOpen, setIsEditorOpen] = useState(false)
   const[isLoading, setIsLoading] = useState(false)
   const[image, setImage] = useState<any>()
   const[imagePreview, setImagePreview] = useState<any>()
   const {fullName, phoneNumber} = useCurrentUser()
   const{register,handleSubmit, formState:{errors}, setValue} = useForm({resolver:yupResolver(JobseekerBasicInfoSchema)})
-  
+  const {profile:basicInfo}:BasicInfo = useJobseekerProfile('basicInformation')
+
   useEffect(() => {
-    if(!profile?.basic_information ){
+    if(!basicInfo ){
       setValue('fullname', fullName!)
       setValue('phoneNumber', phoneNumber!)
     }
@@ -31,22 +36,21 @@ const BasicInfo = ({profile}:BasicInfoProps) => {
 
   useEffect(() => {
   
-  if(profile?.basic_information){
-    let dateOfBirth:any = moment(profile.basic_information.date_of_birth).format("YYYY-MM-DD")
-    let gender:any = profile.basic_information?.gender
-setValue('fullname' , profile?.basic_information?.fullname)
-setValue('currentAddress', profile.basic_information.current_address)
+  if(basicInfo ){
+    let dateOfBirth:any = moment(basicInfo?.date_of_birth).format("YYYY-MM-DD")
+    let gender:any = basicInfo?.gender
+setValue('fullname' , basicInfo?.fullname)
+setValue('currentAddress', basicInfo?.current_address)
 setValue('dateOfBirth', dateOfBirth)
 setValue('gender',gender)
-setValue('image', profile.basic_information?.image)
-setValue('permanentAddress', profile.basic_information?.permanent_address)
-setValue('phoneNumber', profile.basic_information?.phone_number)
+setValue('permanentAddress', basicInfo?.permanent_address)
+setValue('phoneNumber', basicInfo?.phone_number)
   }
-},[profile])
+},[basicInfo])
 
 const onSubmit:SubmitHandler<IJobseekerBasicInfoInputs> = (data) => {
   let dataToBeSent = {...data, image}
-updateBasicInfo(dataToBeSent, setIsLoading, setIsEditorOpen)
+updateBasicInfo(dataToBeSent, setIsLoading, setIsEditorOpen, basicInfo)
 }
 
 const handleImage = (e:ChangeEvent< HTMLInputElement>) => {
@@ -57,6 +61,8 @@ const handleImage = (e:ChangeEvent< HTMLInputElement>) => {
   }
 }
 
+
+if(isLoading) return <Loader/>
   return (
     <div className='grid gap-sm '>
       <header className='text-green-dark flex justify-between  font-semibold'>
@@ -73,9 +79,9 @@ const handleImage = (e:ChangeEvent< HTMLInputElement>) => {
        </div>
       <div className=''>
       <div className='grid sm:flex gap-xs items-center'>
-          <span>Profile Picture </span> <input type="file" disabled={!isEditorOpen} {...register('image')}  onChange={(e) => handleImage(e)}  placeholder='Upload image' className='outline-none p-xs border-sm'/>
+          <span>basicInfo Picture </span> <input type="file" disabled={!isEditorOpen}   onChange={(e) => handleImage(e)}  placeholder='Upload image' className='outline-none p-xs border-sm'/>
         </div>
-        {profile?.basic_information?.image || imagePreview &&  <img src={profile?.basic_information?.image || imagePreview} alt="" className='w-20 h-20 object-cover'/>}
+        {basicInfo?.image || imagePreview &&  <img src={basicInfo?.image || imagePreview} alt="" className='w-20 h-20 object-cover'/>}
        
       </div>
        <div>

@@ -39,7 +39,6 @@ const OtherInformation = ({ isEditorOpen, setIsEditorOpen, profile }: IOtherInfo
     await updateOtherInformation(data, profile, setIsLoading, setIsEditorOpen);
   };
 
-  console.log(profile)
 
   return (
 

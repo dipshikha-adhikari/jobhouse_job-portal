@@ -1,18 +1,18 @@
-import { UseQueryResult, useQuery } from "react-query"
+import { useQuery } from "react-query"
 import { privateRequest } from "../../../lib/axios"
 import useAuthStore from "../../../store/auth"
-import { IJobseekerProfile } from "../../../types/postgres/types"
 
-export const useJobseekerProfile = () => {
-const {isAunthenticated} = useAuthStore()
+export const useJobseekerProfile = (query?: any) => {
+    const { isAunthenticated } = useAuthStore()
 
-    const getProfile = async() => {
-        if(!isAunthenticated) return;
-        const result = await privateRequest('/api/v1/jobseeker/profile')
+
+    const getProfile = async () => {
+        if (!isAunthenticated) return;
+        const result = await privateRequest(`/api/v1/jobseeker/profile?query=${query}`)
         return result.data
     }
 
-    const {data:profile, isLoading, isError}:UseQueryResult<IJobseekerProfile> = useQuery('jobseekerProfile', getProfile)
+    const { data: profile, isLoading, isError } = useQuery(['jobseekerProfile', query], getProfile)
 
-    return {profile, isLoading, isError}
+    return { profile, isLoading, isError }
 }

@@ -2,48 +2,59 @@ import { Link, useParams } from "react-router-dom";
 import JobPreference from "./JobPreference";
 import BasicInfo from "./BasicInfo";
 import Education from "./Education";
-import Skills from "./Skills";
 import Experience from "./Experience";
-import Others from "./Others";
 import { useJobseekerProfile } from "../hooks/useJobseekerProfile";
 import { useCurrentUser } from "../../../hooks/useCurrentUser";
-import Error from "../../../components/ui/Error";
+import Error from "../../../components/shared/Error";
+import Loader from "../../../components/shared/Loader";
+import useAuthStore from "../../../store/auth";
+import NoUser from "../../../components/shared/NoUser";
+import { useEffect } from "react";
 
-const EditProfile = () => {
-  const params = useParams();
-  const title = params.title;
-  const {profile} = useJobseekerProfile()
-const {role} = useCurrentUser()
-  
 let data = [
   {
     title: "Job Preference",
     link: "job-preference",
-    component: <JobPreference profile={profile}/>,
+    component: <JobPreference />,
   },
   {
     title: "Basic Information",
     link: "basic-info",
-    component: <BasicInfo profile={profile} />,
+    component: <BasicInfo />,
   },
   {
     title: "Education",
     link: "education",
-    component: <Education profile={profile} />,
+    component: <Education />,
   },
   {
     title: "Work Experience",
     link: "experience",
-    component: <Experience profile={profile} />,
+    component: <Experience />,
   },
- 
 ];
 
-if(role !== 'jobseeker') return <Error/>
+const EditProfile = () => {
+  const params = useParams();
+  const title = params.title;
+  const { isLoading } = useJobseekerProfile();
+  const { role } = useCurrentUser();
+  const { isAunthenticated } = useAuthStore();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  if (isLoading) return <Loader />;
+  if (!isAunthenticated) return <NoUser />;
+  if (role !== "jobseeker") return <Error />;
+
   return (
     <div className="grid gap-10 max-w-5xl mx-auto md:flex w-full sm:p-10 lg:p-sm">
       <section className="w-full grid    gap-10 h-fit flex-[0.5]">
-        <h2 className="font-semibold text-xl text-green-dark pt-md  ">EDIT PROFILE</h2>
+        <h2 className="font-semibold text-xl text-green-dark pt-md  ">
+          EDIT PROFILE
+        </h2>
         <ul className="grid gap-xs  ">
           {data.map((item) => {
             return (
@@ -60,9 +71,11 @@ if(role !== 'jobseeker') return <Error/>
           })}
         </ul>
       </section>
-      <section className="border-sm p-md md:p-xl  flex-1   border-blue-darktmd:border-none">
+      <section className=" md:p-xl  flex-1  ">
         {data.map((item) => {
-          return <div key={item.link}>{title === item.link && item.component}</div>;
+          return (
+            <div key={item.link}>{title === item.link && item.component}</div>
+          );
         })}
       </section>
     </div>

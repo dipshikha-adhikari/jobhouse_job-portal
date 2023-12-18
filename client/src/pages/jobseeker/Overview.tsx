@@ -5,22 +5,29 @@ import { useEffect, useState } from "react";
 import AppliedJobsTable from "../../components/ui/AppliedJobsTable";
 import { useCurrentUser } from "../../hooks/useCurrentUser";
 import { useJobseekerProfile } from "./hooks/useJobseekerProfile";
-import { jobsCategory } from "../../constants/jobsCategory";
 import { Link } from "react-router-dom";
 import Layout from "../../components/ui/Layout";
-import NoUser from "../NoUser";
+import NoUser from "../../components/shared/NoUser";
 import useAuthStore from "../../store/auth";
-import Error from "../../components/ui/Error";
+import Error from "../../components/shared/Error";
+import Categories from "../../components/shared/Categories";
+import moment from "moment";
+import { IJobseekerProfile } from "../../types/postgres/types";
+
+type Profile = {
+  profile : IJobseekerProfile
+}
 
 const Overview = () => {
   const [selected, setSelected] = useState("matchingJobs");
   const[progress, setProgress] = useState(0)
   const {fullName, role} = useCurrentUser()
-const {profile} = useJobseekerProfile()
+const {profile}:Profile = useJobseekerProfile()
 const{isAunthenticated} = useAuthStore()
 
 useEffect(() => {
 calculateProgress()
+window.scrollTo(0,0)
 },[profile])
 
 function calculateProgress(){
@@ -38,7 +45,7 @@ function calculateProgress(){
  if(profile?.job_preference){
   progress += val
  }
-//  setProgress(progress)
+ setProgress(progress)
 }
 
 if(!isAunthenticated) return <NoUser/>
@@ -59,8 +66,8 @@ if(role !== 'jobseeker') return <Error/>
           <div>
             <h2 className="font-semibold">{profile?.basic_information?.fullname || fullName}</h2>
             <span>Profile Completeness : {progress}%</span>
-            <span className="w-[100px] my-2 h-1 grid relative bg-gray-light">
-              <span className={`absolute left-0 h-full w-[${progress}%] bg-blue-dark`}></span>
+            <span className="w-[150px] my-2 h-1 grid relative bg-gray-light">
+              <span className={`absolute left-0 rounded-full h-full w-[${progress}%] bg-green-dark`}></span>
             </span>
           </div>
         </div>
@@ -73,7 +80,7 @@ if(role !== 'jobseeker') return <Error/>
         <div className="flex gap-4 items-center">
           <FaCalendar />{" "}
           <div className="grid">
-            Age <span className="font-semibold">{profile?.basic_information?.date_of_birth || 'Not available'}</span>
+            Age <span className="font-semibold">{moment(profile?.basic_information?.date_of_birth).format('MMM Do YYYY') || 'Not available'}</span>
           </div>
         </div>
         <div className="flex gap-4 items-center">
@@ -85,7 +92,7 @@ if(role !== 'jobseeker') return <Error/>
         <div className="flex gap-4 items-center">
           <BiCategoryAlt />{" "}
           <div className="grid">
-            Prefered Job Category <span className="font-semibold">{profile?.job_preference?.job_categories || 'Not available'} </span>
+            Prefered Job Category <span className="font-semibold">{profile?.job_preference.category_names || 'Not available'} </span>
           </div>
         </div>
         <div className="flex gap-4 items-center">
@@ -129,19 +136,7 @@ if(role !== 'jobseeker') return <Error/>
             <header className="font-semibold border-y-md w-fit border-gray-light  py-xs text-xl">
               Jobs By Category
             </header>
-            <div className="grid  p-sm sm:flex flex-wrap sm:gap-sm">
-              {jobsCategory.map((cat) => {
-                return (
-                  <Link
-                  to={`/jobs?category=${cat}`}
-                    key={cat}
-                    className="font-normal sm:border-b-sm border-gray-light text-black-light hover:text-black-dark"
-                  >
-                    {cat}
-                  </Link>
-                );
-              })}
-            </div>
+            <Categories/>
           </div>
 
          

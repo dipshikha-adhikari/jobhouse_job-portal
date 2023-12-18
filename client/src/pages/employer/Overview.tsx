@@ -8,7 +8,8 @@ import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useProfile } from "./hooks/useProfile";
 import AllJobs from "./AllJobs";
-import Error from "../../components/ui/Error";
+import Error from "../../components/shared/Error";
+import Loader from "../../components/shared/Loader";
 
 const Overview = () => {
   const [selected, setSelected] = useState("");
@@ -35,8 +36,8 @@ const Overview = () => {
   }, [profile]);
   
   if (user.role !== 'employer') return <Error />;
-  // if (isLoading) return <div>loading..</div>;
-  if (error) return <div>{error.message}</div>;
+  if (isLoading) return <Loader/>;
+  if (error) return <Error/>;
 
   return (
     <Layout>

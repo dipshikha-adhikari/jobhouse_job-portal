@@ -1,5 +1,4 @@
 import { SubmitHandler, useForm } from "react-hook-form";
-import { jobsCategory } from "../../constants/jobsCategory";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useJobInputs from "../../store/jobInputs";
 import { useEffect } from "react";

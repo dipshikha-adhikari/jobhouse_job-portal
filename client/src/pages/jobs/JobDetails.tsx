@@ -1,9 +1,9 @@
 import { useCurrentUser } from "../../hooks/useCurrentUser";
 import { useCurrentJob } from "../../hooks/useCurrentJob";
-import Error from "../../components/ui/Error";
+import Error from "../../components/shared/Error";
 import { Link, useNavigate } from "react-router-dom";
 import useAuthStore from "../../store/auth";
-import Loader from "../../components/ui/Loader";
+import Loader from "../../components/shared/Loader";
 import { useEffect } from "react";
 
 const Job = () => {

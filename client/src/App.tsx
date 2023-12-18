@@ -10,7 +10,7 @@ import Profile from "./pages/jobseeker/Profile";
 import EditProfile from "./pages/jobseeker/edit-profile";
 import JobseekerRegister from "./components/forms/JobseekerRegister";
 import EmployerOverview from "./pages/employer/Overview";
-import WrongRoute from "./pages/WrongRoute";
+import WrongRoute from "./components/shared/WrongRoute";
 import { Toaster } from "react-hot-toast";
 import { QueryClient, QueryClientProvider } from "react-query";
 import Job from "./pages/jobs/JobDetails";

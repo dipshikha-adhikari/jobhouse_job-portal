@@ -72,7 +72,7 @@ export const createEducation= (req: IUserRequest, res: Response) => {
             const{educationId} = req.params
             const {course,institute_name,degree, graduation_year, marks,location }:IJobseekerEducation = req.body
           
-        
+       
         
             if (marks !== undefined && marks !== null) {
                 if (

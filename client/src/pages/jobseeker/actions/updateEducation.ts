@@ -1,34 +1,35 @@
 import toast from "react-hot-toast";
 import { privateRequest } from "../../../lib/axios";
-import { IJobseekerBasicInfoInputs, IJobseekerEducationInputs } from "../../../types/react/types";
+import { IJobseekerEducationInputs } from "../../../types/react/types";
+import { IJobseekerEducation } from "../../../types/postgres/types";
+import { queryClient } from "../../../App";
 
-export const updateEducation = async (data: IJobseekerEducationInputs, setIsLoading: (props: any) => void, setIsEditorOpen: (props: any) => void) => {
-
-
+export const updateEducation = async (data: IJobseekerEducationInputs, profile: IJobseekerEducation | undefined, setIsLoading: (props: any) => void, setIsEditorOpen: (props: any) => void) => {
 
     try {
         setIsLoading(true)
-        let marksType = data.marksType
-
         let dataToBeSent = {
-            education: {
-                course: data.course,
-                degree: data.degree,
-                graduation_year: data.graduationYear,
-                institute_name: data.institute,
-                location: data.location,
-                marks: {
-                    [marksType]: data.marksValue
-                }
+            course: data.course,
+            degree: data.degree,
+            graduation_year: data.graduationYear,
+            institute_name: data.institute,
+            location: data.location,
+            marks: {
+                value: data.marksValue,
+                type: data.marksType
             }
         }
-
-        toast.promise(privateRequest.put('/api/v1/jobseeker/profile', dataToBeSent), {
-
+        let axiosConfig = {
+            method: profile === undefined ? 'post' : 'put',
+            url: profile === undefined ? '/api/v1/jobseeker/profile/education' : `/api/v1/jobseeker/profile/education/${profile.id}`,
+            data: dataToBeSent
+        }
+        toast.promise(privateRequest(axiosConfig), {
             loading: 'Loading',
             success: () => {
                 setIsLoading(false)
                 setIsEditorOpen(false)
+                queryClient.invalidateQueries('jobseekerProfile')
                 return 'Success'
             },
             error: (err) => {
