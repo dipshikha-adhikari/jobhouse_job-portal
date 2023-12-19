@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { QueryResult } from "pg";
-const pool = require('../../lib/db')
+const pool = require('../../../lib/db')
 
 export const getJobsByCategories = async (req: Request, res: Response) => {
   let {categoryId} = req.params // Assuming the category value is obtained from the request

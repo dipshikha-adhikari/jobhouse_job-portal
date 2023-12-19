@@ -21,6 +21,15 @@ export const createBasicInfo= (req: IUserRequest, res: Response) => {
                         if(role !== 'jobseeker'){
                             return res.status(401).send({ message: 'Only jobseeker is allowed' })
                         }
+
+                        const existsQuery = `select * from jobseekers_basic_information where user_id = $1`
+                        pool.query(existsQuery, [id], (err:Error, result:QueryResult) => {
+                    if (err) return res.status(400).send({message:err})
+if(result.rowCount > 0){
+    return res.status(400).send({message:'Basic information already exists'})
+}
+                        }) 
+
                         const query = `insert into jobseekers_basic_information (user_id,fullname, date_of_birth, phone_number, permanent_address,current_address, gender, image  ) values($1, $2, $3,$4,$5,$6,$7, $8)`
                         pool.query(query, [id, fullname, date_of_birth, phone_number, permanent_address,current_address, gender, image ], function (err: Error, result: QueryResult) {
                             if (err) return res.status(400).send({ message: err })
@@ -45,6 +54,7 @@ export const createBasicInfo= (req: IUserRequest, res: Response) => {
     if (isValidBasicInformation(req.body)) {
         pool.query('select * from jobseekers_basic_information where user_id = $1', [id], function (err: Error, result: QueryResult) {
             if (err) return res.status(400).send({ message: err })
+            console.log(result.rows)
             if (result.rowCount > 0) {
                
                 const query = `UPDATE jobseekers_basic_information

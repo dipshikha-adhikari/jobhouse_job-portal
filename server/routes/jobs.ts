@@ -8,11 +8,12 @@ import { getAllJobsByEmployerId } from "../controllers/jobs/getAllJobsByEmployer
 import { getAppliedJobs } from "../controllers/jobs/getAppliedJobs"
 import { getIndustries } from "../controllers/jobs/category/getIndustries"
 import { getJobApplications } from "../controllers/jobs/getJobApplications"
-import { getJobsByCategories } from "../controllers/jobs/getJobsByCategories"
-import { getJobsByIndustries } from "../controllers/jobs/getJobsByIndustries"
+import { getJobsByIndustries } from "../controllers/jobs/category/getJobsByIndustries"
 import { getRecentJobsByEmployerId } from "../controllers/jobs/getRecentJobsByEmployerId"
 import { getSingleJob } from "../controllers/jobs/getSingleJob"
 import { updateJob } from "../controllers/jobs/updateJob"
+import { getJobsByCategories } from "../controllers/jobs/category/getJobsByCategories"
+import { getMatchingJobs } from "../controllers/jobs/category/getMatchingJobs"
 
 const express = require('express')
 const router = express.Router()
@@ -22,6 +23,7 @@ const verifyToken = require('../middlewares/verifyToken')
 router.get('/', getAllJobs)
 router.get('/categories', getCategories)
 router.get('/industries', getIndustries)
+router.get('/matching',verifyToken, getMatchingJobs)
 router.get('/categories/jobscount', getCategoriesAndJobCount)
 router.get('/categories/:categoryId', getJobsByCategories)
 router.get('/industries/jobscount', getIndustriesAndJobCount)

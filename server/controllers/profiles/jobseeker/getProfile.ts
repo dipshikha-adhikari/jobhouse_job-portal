@@ -8,7 +8,7 @@ interface IUserRequest extends Request {
 
 export const getJobseekerProfile = async (req: IUserRequest, res: Response) => {
   const { id } = req.user
-const {query} = req.query
+  const { query } = req.query
 
   let profile: any = {
 
@@ -38,27 +38,23 @@ GROUP BY
 
 
   try {
+    if (query === 'basicInformation') {
+      const basicInformation: QueryResult = await pool.query(basicInformationQuery, [id])
+      return res.status(200).send(basicInformation.rows[0])
+    }
 
-    
-    
-  if(query === 'basicInformation'){
-    const basicInformation: QueryResult = await pool.query(basicInformationQuery, [id])
-        return res.status(200).send(basicInformation.rows[0])
-      }
-
-if(query === 'jobPreference'){
-
-  const result:QueryResult = await pool.query(jobPreferenceQuery,[id])
-        return res.status(200).send(result.rows[0])
-}
-if(query === 'education'){
-  const result:QueryResult = await pool.query(educationQuery,[id])
-  return res.status(200).send(result.rows)
-}
-if(query === 'experience'){
-  const result:QueryResult = await pool.query(experienceQuery,[id])
-  return res.status(200).send(result.rows)
-}
+    if (query === 'jobPreference') {
+      const result: QueryResult = await pool.query(jobPreferenceQuery, [id])
+      return res.status(200).send(result.rows[0])
+    }
+    if (query === 'education') {
+      const result: QueryResult = await pool.query(educationQuery, [id])
+      return res.status(200).send(result.rows)
+    }
+    if (query === 'experience') {
+      const result: QueryResult = await pool.query(experienceQuery, [id])
+      return res.status(200).send(result.rows)
+    }
 
     const basicInformation: QueryResult = await pool.query(basicInformationQuery, [id])
     profile['basic_information'] = basicInformation.rows[0]

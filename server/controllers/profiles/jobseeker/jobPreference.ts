@@ -20,19 +20,25 @@ export const createJobPreference = (req: IUserRequest, res: Response) => {
         expected_salary,
         job_location, }: IJobseekerJobPreference = req.body
 
-  
+
 
     if (isValidJobPreferences(req.body)) {
         pool.query('select * from users where user_id = $1', [id], function (err: Error, result: QueryResult) {
             if (err) return res.status(400).send({ message: err })
-           
+
             if (result.rowCount > 0) {
                 const role = result.rows[0].role
                 if (role !== 'jobseeker') {
                     return res.status(401).send({ message: 'Only jobseeker is allowed' })
                 }
+                const existsQuery = `select * from jobseekers_job_preference where user_id = $1`
+                pool.query(existsQuery, [id], (err: Error, result: QueryResult) => {
+                    if (err) return res.status(400).send({ message: err })
+                    if (result.rowCount > 0) {
+                        return res.status(400).send({ message: 'Job preference already exists' })
+                    }
+                })
 
-              
                 const query = `insert into jobseekers_job_preference (
                     user_id, 
                     summary,
@@ -117,7 +123,7 @@ export const updateJobPreference = (req: IUserRequest, res: Response) => {
                     skills,
                     expected_salary,
                     job_location], function (err: Error, result: QueryResult) {
-                       
+
                         if (err) return res.status(400).send({ message: err.message })
                         return res.status(200).send({ message: 'Success' })
                     })

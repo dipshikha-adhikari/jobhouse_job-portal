@@ -5,8 +5,8 @@ const pool = require('../../lib/db')
 
 export const getAllJobsByEmployerId = async (req: IUserRequest, res: Response) => {
     const {employerId } = req.params
+ 
     if(employerId === undefined) return res.status(400).send({message:'Please provide a valid employerId'})
-    
         const query = `
         SELECT j.*,
     i.industry_name, c.category_name
