@@ -6,7 +6,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { publicRequest } from "../../lib/axios";
 import toast from "react-hot-toast";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
  type Inputs = {
   fullName: string;
@@ -29,6 +29,10 @@ const EmployerRegister = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>({ resolver: yupResolver(registerValidationSchema) });
+
+  useEffect(() => {
+    window.scrollTo(0,0)
+      },[])
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     setIsLoading(true)

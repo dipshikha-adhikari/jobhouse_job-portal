@@ -6,7 +6,7 @@ import { FaPlus, FaUser } from "react-icons/fa";
 import RecentJobs from "./RecentJobs";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import { useProfile } from "./hooks/useProfile";
+import { useProfile } from "./hooks/useEmployerProfile";
 import AllJobs from "./AllJobs";
 import Error from "../../components/shared/Error";
 import Loader from "../../components/shared/Loader";
@@ -15,11 +15,16 @@ const Overview = () => {
   const [selected, setSelected] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const user = useCurrentUser();
+  const loading = !user
   const navigate = useNavigate();
   const { profile, error, isLoading } = useProfile();
 
+useEffect(() => {
+window.scrollTo(0,0)
+},[])
+
   const handleCreate = () => {
-    if (!profile?.basic_information) {
+    if (!profile?.basic_information.id) {
       toast.error("Update profile first");
     } else {
       navigate("/jobs/create");
@@ -27,7 +32,7 @@ const Overview = () => {
   };
 
   useEffect(() => {
-    if (profile?.basic_information) {
+    if (profile?.basic_information.id) {
       setSelected("recent");
       setIsModalOpen(false);
     } else {
@@ -35,10 +40,10 @@ const Overview = () => {
     }
   }, [profile]);
   
-  if (user.role !== 'employer') return <Error />;
-  if (isLoading) return <Loader/>;
-  if (error) return <Error/>;
+  if (isLoading || loading) return <Loader/>;
 
+  if (user.role !== 'employer') return <Error />;
+  
   return (
     <Layout>
       <div className="relative py-md grid gap-sm">
@@ -52,15 +57,17 @@ const Overview = () => {
             alt=""
             className="w-20 h-20 "
           />
-          <div className="grid place-items-center">
+          <div className="grid gap-1 place-items-center">
             <p className="font-semibold text-xl">
               {profile?.basic_information?.organization_name
                 ? profile.basic_information.organization_name
                 : user.fullName}
             </p>
             <p className="text-gray-dark">
-              {profile?.basic_information?.industry_type}
+              {profile?.basic_information?.industry_type }
             </p>
+            <p>{profile?.basic_information?.phone_number || user.phoneNumber}</p>
+            <p>{profile?.basic_information?.email || user.email}</p>
           </div>
         </header>
 
@@ -104,7 +111,9 @@ const Overview = () => {
               >
                 All
               </span>
-              <span>Applications</span>
+              <span   className={`${
+                  selected === "applications" && "border-b-2 border-blue-dark "
+                } cursor-pointer`}  onClick={() => setSelected("applications")}>Applications</span>
               <button
                 className="flex items-center gap-2 bg-orange-light text-white px-sm rounded-sm p-xs"
                 onClick={handleCreate}
@@ -123,7 +132,7 @@ const Overview = () => {
                 <div className="grid gap-sm">
                   <p>Please update your profile to post a job.</p>
                   <Link
-                    to="/employer/profile/update"
+                    to="/employer/profile/basic-info"
                     className="bg-blue-dark w-fit text-white hover:text-white p-xs px-sm rounded-sm "
                   >
                     Update now

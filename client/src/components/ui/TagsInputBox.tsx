@@ -3,15 +3,14 @@ import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 
 type TagsInputBoxProps = {
   onChange:any,
-  values:any,
+  values:string[] | undefined,
   isEditorOpen:boolean
 }
 
-const TagsInputBox = ({ onChange, values, isEditorOpen }: TagsInputBoxProps) => {
+const TagsInputBox = ({ onChange,values,  isEditorOpen }: TagsInputBoxProps) => {
   const [inputs, setInputs] = useState<string[]>([]);
   const [currentInput, setCurrentInput] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
-
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     setCurrentInput(e.target.value);
@@ -31,10 +30,11 @@ const TagsInputBox = ({ onChange, values, isEditorOpen }: TagsInputBoxProps) => 
 
   useEffect(() => {
     onChange(inputs);
+   
   }, [inputs]);
 
   useEffect(() => {
-if(values !== undefined){
+if(values !== undefined && values !== null){
   setInputs(values)
 }
   },[values])
@@ -57,7 +57,7 @@ if(values !== undefined){
         <input
           type="text"
           ref={inputRef}
-          placeholder="Add your skills"
+          placeholder='Add skills'
           onChange={(e) => handleChange(e)}
           className="outline-none  w-full input "
           disabled={!isEditorOpen} 

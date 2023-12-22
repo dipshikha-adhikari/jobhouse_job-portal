@@ -37,7 +37,7 @@ let data = [
 const EditProfile = () => {
   const params = useParams();
   const title = params.title;
-  const { isLoading } = useJobseekerProfile();
+  const { isLoading, isError } = useJobseekerProfile();
   const { role } = useCurrentUser();
   const { isAunthenticated } = useAuthStore();
 
@@ -47,7 +47,7 @@ const EditProfile = () => {
 
   if (isLoading) return <Loader />;
   if (!isAunthenticated) return <NoUser />;
-  if (role !== "jobseeker") return <Error />;
+  if (isError || role !== "jobseeker") return <Error />;
 
   return (
     <div className="grid gap-10 max-w-5xl mx-auto md:flex w-full sm:p-10 lg:p-sm">

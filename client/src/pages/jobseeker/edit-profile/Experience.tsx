@@ -16,7 +16,7 @@ const Experience = () => {
 
 
 
-  if (profile === undefined) {
+  if (profile?.length === 0) {
     return (
       <div className="grid min-h-[80vh] gap-sm">
         {!isEditorOpen && (
@@ -34,7 +34,6 @@ const Experience = () => {
         <section>
           {isEditorOpen && (
             <ExperienceForm
-              profile={profile}
               isError
               setIsEditorOpen={setIsEditorOpen}
               isEditorOpen={isEditorOpen}

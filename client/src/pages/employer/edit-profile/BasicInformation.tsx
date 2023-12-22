@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { EmployerBasicInformationSchema } from "../../../utils/validationSchema";
@@ -17,22 +17,16 @@ interface IEditProfileDetails {
   profile:IEmployerProfile | undefined
 }
 
-type Image = {
-  coverImage: string;
-  image: string;
-};
 
 const BasicInformation = ({
   isEditorOpen,
   setIsEditorOpen,
   profile
 }: IEditProfileDetails) => {
-  const [coverImagePreview, setCoverImagepreview] = useState("");
+  const [coverImagePreview, setCoverImagePreview] = useState("");
   const [imagePreview, setImagePreview] = useState("");
-  const [images, setImages] = useState<Image>({
-    coverImage: "",
-    image: "",
-  });
+  const [image, setImage] = useState<any>();
+  const[coverImage, setCoverImage] = useState<any>()
   const [isLoading, setIsLoading] = useState(false);
   const { isAunthenticated } = useAuthStore();
   const user = useCurrentUser();
@@ -46,21 +40,35 @@ const BasicInformation = ({
     control,
   } = useForm({ resolver: yupResolver(EmployerBasicInformationSchema) });
 
+
   useEffect(() => {
-    if(user.fullName){
-      setValue('organizationName', profile?.basic_information?.organization_name ? profile.basic_information.organization_name : user.fullName)
+    if(!profile?.basic_information.id && user.fullName){
+      setValue('organizationName',  user.fullName)
     }
-    if(user.phoneNumber){
-    setValue('phoneNumber', profile?.basic_information?.phone_number ?  profile?.basic_information.phone_number : user.phoneNumber )
+    if( !profile?.basic_information.id && user.phoneNumber){
+    setValue('phoneNumber',  user.phoneNumber )
     }
 
-    if (profile?.basic_information) {
+  },[user])
+
+  useEffect(() => {
+   
+    if (profile?.basic_information.id) {
+      setImagePreview(profile?.image?.url)
+      setCoverImagePreview(profile?.cover_image?.url)
+       setImage(() => ({url:profile?.image?.url, public_id:profile?.image?.public_id}))
+       setCoverImage(() => ({url:profile?.cover_image?.url, public_id:profile?.cover_image?.public_id}))
+     
+      setValue('organizationName', profile?.basic_information?.organization_name )
+      setValue('phoneNumber', Number(profile?.basic_information?.phone_number ))
+
     setValue('address', profile.basic_information.address)
       setValue("summary", profile.basic_information.summary);
       setValue("industryType", profile.basic_information.industry_id);
     }
-  }, [profile, user, isEditorOpen]);
+  }, [profile]);
 
+  console.log(profile)
   const onSubmit: SubmitHandler<IEmployerBasicInformationInputs> = async (
     data
   ) => {
@@ -68,8 +76,8 @@ const BasicInformation = ({
     let dataToUpdate = {
       email:user.email,
       organization_name: data.organizationName,
-      image: images.image,
-      cover_image: images.coverImage,
+      image,
+     cover_image: coverImage,
       summary: data.summary,
       industry_type: data.industryType,
       phone_number:data.phoneNumber,
@@ -85,23 +93,33 @@ const BasicInformation = ({
     );
   };
 
-  const handleImage = (e: React.ChangeEvent<HTMLInputElement>, type: string) => {
-    if (e.target.files && e.target.files[0]) {
-      if (type === "image") {
-        setImagePreview(URL.createObjectURL(e.target.files[0]));
-        setImages((prev: any) => ({
-          ...prev,
-          image: e.target.files && e.target.files[0],
-        }));
-      } else {
-        setCoverImagepreview(URL.createObjectURL(e.target.files[0]));
-        setImages((prev: any) => ({
-          ...prev,
-          coverImage: e.target.files && e.target.files[0],
-        }));
-      }
+ 
+
+  const handleImage = (e:ChangeEvent< HTMLInputElement>, type:string) => {
+    if(e.target.files){
+      let url = URL.createObjectURL(e.target.files[0])
+      let image = e.target.files[0]
+   const reader = new FileReader()
+   if(image){
+    reader.readAsDataURL(image)
+    reader.onloadend = () => {
+      let imageSrc = reader.result
+if(type === 'image'){
+  setImage(imageSrc)
+  setImagePreview( url)
+
+}
+if(type === 'coverImage'){
+  setCoverImage(imageSrc)
+  setCoverImagePreview(url)
+}
     }
-  };
+   }
+    }
+  }
+  
+  console.log(imagePreview,'im')
+  console.log(coverImagePreview,'coim')
 
   if (!isAunthenticated) return <NoUser />;
 
@@ -149,46 +167,27 @@ const BasicInformation = ({
         <p className="text-orange-dark">{errors.address?.message}</p>
 
       </div>
-      <div className="grid  gap-2 ">
-        <label htmlFor=""> Cover Image</label>
-        <input
-          type="file"
-          disabled={!isEditorOpen}
-          onChange={(e) => handleImage(e, "coverImage")}
-        />
-        <img
-          src={
-            profile?.basic_information?.cover_image
-              ? profile.basic_information.cover_image
-              : coverImagePreview
-              ? coverImagePreview
-              : "https://template.canva.com/EAENvp21inc/1/0/1600w-qt_TMRJF4m0.jpg"
-          }
-          alt=""
-          className="w-20 h-20"
-        />
-      </div>
+   
       <div className="grid  gap-2 ">
         <label htmlFor="">Profile Image</label>
         <input
           type="file"
           disabled={!isEditorOpen}
 
-          onChange={(e) => handleImage(e, "image")}
+          onChange={(e) => handleImage(e, 'image')}
         />
-        <img
-          src={
-            profile?.basic_information?.image
-              ? profile.basic_information.image
-              : imagePreview
-              ? imagePreview
-              : "https://media.istockphoto.com/id/1340893300/vector/technology-logo-design-template-networking-vector-logo-design.jpg?s=612x612&w=0&k=20&c=-8XBWFDRAAYe3leL4nuMnei0wWpL6-IqsPCAbWIhASk="
-          }
-          alt=""
-          className="w-20 h-20"
-        />
-      </div>
+              {imagePreview && <img src={imagePreview} className='w-20 h-20'/>}
 
+      </div>
+      <div className="grid  gap-2 ">
+        <label htmlFor=""> Cover Image</label>
+        <input
+          type="file"
+          disabled={!isEditorOpen}
+          onChange={(e) => handleImage(e, 'coverImage')}
+        />
+       {coverImagePreview && <img src={coverImagePreview} className="w-20 h-20 object-cover rounded-full"/>}
+      </div>
       <div>
         <div className=" grid gap-2 items-center">
           <span className="">* Industry Type</span>

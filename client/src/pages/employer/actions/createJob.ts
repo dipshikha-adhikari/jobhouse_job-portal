@@ -11,7 +11,7 @@ export const createJob = (data: ICreateJobInputs, setIsLoading: (props: boolean)
             data
         }
         setIsLoading(true)
-        console.log(axiosConfig)
+     
         toast.promise(privateRequest(axiosConfig), {
             loading: 'Loading',
             success: () => {
@@ -22,7 +22,7 @@ export const createJob = (data: ICreateJobInputs, setIsLoading: (props: boolean)
             error: (err) => {
                 console.log(err)
                 setIsLoading(false)
-                return 'Failed'
+                return err?.response?.data?.message || 'Failed'
             }
         })
     } catch (err) {

@@ -3,7 +3,7 @@ import BasicInformation from "./BasicInformation";
 import useAuthStore from "../../../store/auth";
 import NoUser from "../../../components/shared/NoUser";
 import Error from "../../../components/shared/Error";
-import { useProfile } from "../hooks/useProfile";
+import { useProfile } from "../hooks/useEmployerProfile";
 import Loader from "../../../components/shared/Loader";
 import { useCurrentUser } from "../../../hooks/useCurrentUser";
 import OtherInformation from "./OtherInformation";
@@ -49,7 +49,6 @@ const EditProfile = () => {
   if (isLoading) return <Loader />;
   if (!isAunthenticated) return <NoUser />;
   if(error) return <Error/>
-  if (role !== "employer") return <Error />;
 
   return (
     <div className="grid p-sm  gap-sm mx-auto md:flex max-w-3xl  md:gap-xl md:items-start">

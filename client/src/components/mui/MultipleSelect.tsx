@@ -28,16 +28,18 @@ export default function MultipleSelectChip({ values, type, field, isEditorOpen }
   const [personName, setPersonName] = React.useState<string[]>([]);
 
   React.useEffect(() => {
-    let val = String(field.value).split(',');
-    setPersonName(val);
+    if(field.value !== undefined){
+      let val = String(field.value).split(',');
+      setPersonName(val);
+    }
   }, [field]);
 
   const handleChange = (event: SelectChangeEvent<typeof personName>) => {
     const { target: { value } } = event;
-    setPersonName(typeof value === 'string' ? value.split(',') : value);
-    field.onChange(value);
+    let newVal = typeof value === 'string' ? value.split(',') : value
+    let filteredVal = newVal.filter(val => { return val !== ''})
+field.onChange(filteredVal)
   };
-  
 
   return (
     <div>
@@ -49,6 +51,9 @@ export default function MultipleSelectChip({ values, type, field, isEditorOpen }
           multiple
           value={personName}
           onChange={handleChange}
+          MenuProps={{
+            disableScrollLock:true
+          }}
           disabled={!isEditorOpen}
           input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
           renderValue={(selected) => selected.join(', ')}

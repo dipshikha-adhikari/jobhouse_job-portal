@@ -19,7 +19,7 @@ const Education = () => {
 if(isError) return <Error/>
 if(isLoading) return <Loader/>
 
-  if (profile === undefined) {
+  if (profile?.length  === 0) {
     return (
       <div className="grid min-h-[80vh] gap-sm">
         {!isEditorOpen && (
@@ -37,7 +37,6 @@ if(isLoading) return <Loader/>
         <section>
           {isEditorOpen && (
             <EducationForm
-              profile={profile}
               setIsEditorOpen={setIsEditorOpen}
               isEditorOpen={isEditorOpen}
             />

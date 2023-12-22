@@ -3,17 +3,42 @@ import { Link } from "react-router-dom";
 import useStore from "../../../store/store";
 import EmployerProfileMenu from "../../modals/EmployerProfileMenu";
 
-const NavbarForEmployer = ({ setMenuOpen, menuOpen }: any) => {
+type EmployerNav = {
+  setMenuOpen: (props: any) => void;
+  menuOpen: boolean;
+  isModalOpen: boolean;
+  setIsModalOpen: (props: any) => void;
+};
+
+const NavbarForEmployer = ({
+  setMenuOpen,
+  menuOpen,
+ isModalOpen,
+  setIsModalOpen,
+}: EmployerNav) => {
   const store = useStore();
 
   return (
-    <div className="relative flex items-center gap-20 w-full justify-end">
-      <div className=" gap-xs hidden md:flex">
-        <span className="items-center gap-1 flex ">
-          Browse jobs <FaArrowDown className="text-blue-default" />
+    <div className="relative flex items-center gap-20 w-full justify-end" >
+      <div className=" gap-xs hidden md:flex ">
+        <span
+          className="items-center gap-2 flex cursor-pointer browse-btn "
+          onClick={() => setIsModalOpen(!isModalOpen)}
+        >
+          Browse jobs <FaArrowDown className="text-green-dark browse-btn" />
         </span>
-        <span>Blog</span>
-        <span>FAQs</span>
+        <Link
+          to="/blogs"
+          className="text-black-light font-semibold hover:text-blue-dark"
+        >
+          Blogs
+        </Link>
+        <Link
+          to="/faqs"
+          className="text-black-light font-semibold hover:text-blue-dark"
+        >
+          FAQs
+        </Link>
       </div>
 
       <div className="flex items-center gap-6">
@@ -46,10 +71,10 @@ const NavbarForEmployer = ({ setMenuOpen, menuOpen }: any) => {
           {store.jobseekerProfileMenuModalOpen && <EmployerProfileMenu />}
         </div>
         <div
-          className="text-2xl cursor-pointer md:hidden"
+          className="text-2xl cursor-pointer md:hidden menu-btn"
           onClick={() => setMenuOpen(!menuOpen)}
         >
-          <FaBars />
+          <FaBars className="menu-btn" />
         </div>
       </div>
     </div>

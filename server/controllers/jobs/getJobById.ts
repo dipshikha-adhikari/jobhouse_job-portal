@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { QueryResult } from "pg";
 const pool = require('../../lib/db')
 
-export const getSingleJob = async (req: Request, res: Response) => {
+export const getJobById = async (req: Request, res: Response) => {
     const{jobId} = req.params
   const query = `SELECT 
   j.*,

@@ -10,10 +10,10 @@ import { getIndustries } from "../controllers/jobs/category/getIndustries"
 import { getJobApplications } from "../controllers/jobs/getJobApplications"
 import { getJobsByIndustries } from "../controllers/jobs/category/getJobsByIndustries"
 import { getRecentJobsByEmployerId } from "../controllers/jobs/getRecentJobsByEmployerId"
-import { getSingleJob } from "../controllers/jobs/getSingleJob"
-import { updateJob } from "../controllers/jobs/updateJob"
 import { getJobsByCategories } from "../controllers/jobs/category/getJobsByCategories"
 import { getMatchingJobs } from "../controllers/jobs/category/getMatchingJobs"
+import { getJobById } from "../controllers/jobs/getJobById"
+import { updateJob } from "../controllers/jobs/updateJob"
 
 const express = require('express')
 const router = express.Router()
@@ -32,9 +32,9 @@ router.get('/applied',verifyToken, getAppliedJobs)
 router.get('/employer/all/:employerId', getAllJobsByEmployerId)
 router.get('/employer/recent/:employerId', getRecentJobsByEmployerId)
 router.get('/applications/:jobId', verifyToken, getJobApplications)
-router.get('/:jobId', getSingleJob)
+router.get('/:jobId', getJobById)
 router.put('/update/:jobId',verifyToken, updateJob)
 router.post('/create',verifyToken, createJob)
-router.post('/apply/:jobId',verifyToken, applyForJob)
+router.post('/apply',verifyToken, applyForJob)
 
 module.exports = router

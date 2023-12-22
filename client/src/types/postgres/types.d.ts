@@ -2,29 +2,29 @@
 export interface IEmployerProfile  {
   user_id:any 
   id:any
-  basic_information: {
-    id:string
-    summary: string;
-    image: string;
-    address:string
-    email:string
-    cover_image: string;
-    industry_id: number
-    industry_type:string
-    organization_name: string
-  }
+  basic_information: IEmployerBasicInformation 
 other_information: IEmployerOtherInformation
-  
+cover_image: {
+  url:string 
+  public_id:string
+}
+image: {
+  url:string 
+  public_id:string
+}
 }
 
 export interface IEmployerBasicInformation {
-  basic_information: {
-    summary: string;
-    cover_image?: string;
-    image?: any;
-    industry_type: string;
-    organization_name: string
-  }
+  id:string
+  summary: string;
+ 
+  address:string
+  email:string
+ 
+  industry_id: number
+  industry_type:string
+  organization_name: string
+  phone_number:string
 };
 
 export interface IEmployerOtherInformation {
@@ -45,11 +45,14 @@ export interface IJob {
   location: string;
   level: string;
   type: string;
+  educationRequired:string
+  skills:string[]
   employer_details:{
   organization_name:string;
   image:string 
   cover_image:string 
   address:string
+  
   }
   employer_id: string
   industry_id :string 
@@ -63,7 +66,6 @@ export interface IJobseekerProfile {
   education: IJobseekerEducation[],
   experience: IJobseekerExperience[]
   job_preference: IJobseekerJobPreference,
-  jobseeker_id: string
   user_id: string
 }
 
@@ -97,7 +99,10 @@ duties:string
 
 export interface IJobseekerBasicInformation {
   id:string
-  image: string,
+  image: {
+    url:string 
+    public_id:string
+  }
   current_address: string
   fullname: string
   gender: string

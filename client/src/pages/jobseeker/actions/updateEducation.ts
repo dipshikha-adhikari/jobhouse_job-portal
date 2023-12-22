@@ -20,8 +20,8 @@ export const updateEducation = async (data: IJobseekerEducationInputs, profile: 
             }
         }
         let axiosConfig = {
-            method: profile === undefined ? 'post' : 'put',
-            url: profile === undefined ? '/api/v1/jobseeker/profile/education' : `/api/v1/jobseeker/profile/education/${profile.id}`,
+            method: profile?.id === undefined ? 'post' : 'put',
+            url: profile?.id === undefined ? '/api/v1/jobseeker/profile/education' : `/api/v1/jobseeker/profile/education/${profile.id}`,
             data: dataToBeSent
         }
         toast.promise(privateRequest(axiosConfig), {

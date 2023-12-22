@@ -70,6 +70,41 @@ background: rgba(0 , 0, 0, 0.1);
     border-radius: 20px;
 }
 
+
+
+
+.ant-table-wrapper{
+  width:280px;
+}
+
+
+@media screen and (min-width:370px) {
+  .ant-table-wrapper{
+  width:300px;
+}
+}
+@media screen and (min-width:480px) {
+  .ant-table-wrapper{
+  width:400px;
+}
+} 
+@media screen and (min-width:600px) {
+  .ant-table-wrapper{
+  width:500px;
+}
+} 
+@media screen and (min-width:800px) {
+  .ant-table-wrapper{
+  width:100%;
+}
+} 
+.ant-table-cell{
+min-width: 140px;
+text-overflow: clip;
+}
+
+
+
 textarea::-webkit-scrollbar{
   display:none;
 }
@@ -85,3 +120,9 @@ input[type=number]::-webkit-outer-spin-button {
 input:hover:enabled, .input:hover, textarea:hover:enabled{
   border-color: #9ca3af;
 }
+
+
+
+
+
+

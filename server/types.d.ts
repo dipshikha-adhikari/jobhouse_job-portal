@@ -26,7 +26,10 @@ duties:string
 }
 
 export interface IJobseekerBasicInformation {
-  image: string,
+  image: {
+    url?:string;
+    public_id?:string
+  },
   current_address: string
   fullname: string
   phone_number: string
@@ -61,8 +64,14 @@ export interface IJobseekerJobPreference {
 
 export interface IEmployerBasicInformation {
   summary: string;
-  cover_image?: string;
-  image?: any;
+  cover_image?: {
+    url?:string;
+    public_id?:string
+  }
+  image?: {
+    public_id:string 
+    url:string
+  }
 industry_type: string;
   organization_name: string;
   address:string

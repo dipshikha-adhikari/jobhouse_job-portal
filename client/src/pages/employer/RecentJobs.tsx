@@ -1,14 +1,18 @@
 import React from 'react'
 import { useRecentJobs } from './hooks/useRecentJobs'
 import JobCard from './JobCard';
+import { privateRequest } from '../../lib/axios';
+import { useQuery } from 'react-query';
 
 type RecentJobsProps = {
   employerId: string | undefined;
   params?:any
 }
 
+
 const RecentJobs:React.FC<RecentJobsProps> = ({employerId, params}) => {
   const{jobs} = useRecentJobs(employerId)
+
 
   if(jobs?.length === 0 || jobs === undefined){
     return <div>No recent jobs available!</div>

@@ -9,7 +9,6 @@ import { useCurrentUser } from '../../../hooks/useCurrentUser'
 import moment from 'moment'
 import { ChangeEvent } from 'react';
 import { updateBasicInfo } from '../actions/updateBasicInfo'
-import Loader from '../../../components/shared/Loader'
 import { useJobseekerProfile } from '../hooks/useJobseekerProfile'
 
 type BasicInfo = {
@@ -21,7 +20,7 @@ type BasicInfo = {
 const BasicInfo = () => {
   const[isEditorOpen, setIsEditorOpen] = useState(false)
   const[isLoading, setIsLoading] = useState(false)
-  const[image, setImage] = useState<any>()
+  const[image, setImage] = useState<any>(null)
   const[imagePreview, setImagePreview] = useState<any>()
   const {fullName, phoneNumber} = useCurrentUser()
   const{register,handleSubmit, formState:{errors}, setValue} = useForm({resolver:yupResolver(JobseekerBasicInfoSchema)})
@@ -38,7 +37,14 @@ const BasicInfo = () => {
   
   if(basicInfo ){
     let dateOfBirth:any = moment(basicInfo?.date_of_birth).format("YYYY-MM-DD")
-    let gender:any = basicInfo?.gender
+    let gender:any = basicInfo?.gender 
+
+    setImagePreview(basicInfo?.image.url)
+
+ if(basicInfo?.image.url){
+  //image is not handled by react-hook-form
+  setImage(() => ({url:basicInfo.image.url, public_id:basicInfo?.image?.public_id}))
+ }
 setValue('fullname' , basicInfo?.fullname)
 setValue('currentAddress', basicInfo?.current_address)
 setValue('dateOfBirth', dateOfBirth)
@@ -50,19 +56,26 @@ setValue('phoneNumber', basicInfo?.phone_number)
 
 const onSubmit:SubmitHandler<IJobseekerBasicInfoInputs> = (data) => {
   let dataToBeSent = {...data, image}
-updateBasicInfo(dataToBeSent, setIsLoading, setIsEditorOpen, basicInfo)
+  updateBasicInfo(dataToBeSent, setIsLoading, setIsEditorOpen, basicInfo)
+
 }
 
 const handleImage = (e:ChangeEvent< HTMLInputElement>) => {
   if(e.target.files){
     let url = URL.createObjectURL(e.target.files[0])
- setImage(e.target.files[0])
+    let image = e.target.files[0]
+ const reader = new FileReader()
+ if(image){
+  reader.readAsDataURL(image)
+  reader.onloadend = () => {
+    let imageSrc = reader.result
+setImage(imageSrc)
+  }
+ }
     setImagePreview( url)
   }
 }
 
-
-if(isLoading) return <Loader/>
   return (
     <div className='grid gap-sm '>
       <header className='text-green-dark flex justify-between  font-semibold'>
@@ -79,9 +92,9 @@ if(isLoading) return <Loader/>
        </div>
       <div className=''>
       <div className='grid sm:flex gap-xs items-center'>
-          <span>basicInfo Picture </span> <input type="file" disabled={!isEditorOpen}   onChange={(e) => handleImage(e)}  placeholder='Upload image' className='outline-none p-xs border-sm'/>
+          <span>Profile Picture </span> <input type="file"  disabled={!isEditorOpen} onChange={(e) => handleImage(e)}  placeholder='Upload image' className='outline-none p-xs border-sm'/>
         </div>
-        {basicInfo?.image || imagePreview &&  <img src={basicInfo?.image || imagePreview} alt="" className='w-20 h-20 object-cover'/>}
+        {imagePreview && <img src={imagePreview} className='w-20 h-20'/>}
        
       </div>
        <div>
@@ -126,7 +139,10 @@ if(isLoading) return <Loader/>
       </section>
     {isEditorOpen &&  <div className='flex  gap-xs'>
      <button className='bg-green-dark h-full disabled:opacity-50 text-white p-sm rounded-sm' disabled={isLoading}>Save</button>
-     <button className='border-green-dark border-sm  text-green-dark p-sm rounded-sm' onClick={() => setIsEditorOpen(false)}>Cancel</button>
+     <button className='border-green-dark border-sm  text-green-dark p-sm rounded-sm' onClick={() => {
+      setIsEditorOpen(false)
+      setIsLoading(false)
+     }}>Cancel</button>
      </div>}
      </form>
 

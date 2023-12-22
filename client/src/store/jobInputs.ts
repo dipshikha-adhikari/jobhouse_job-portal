@@ -1,4 +1,3 @@
-import { DateSchema } from "yup";
 import { create } from "zustand";
 
 interface jobInputs {
@@ -15,6 +14,8 @@ interface jobInputs {
     description: string;
     level: string;
     type: string;
+    skills?:any
+    educationRequired:string
   },
   setStepOneInputs: (props: any) => void,
   setStepTwoInputs: (props: any) => void,
@@ -35,7 +36,9 @@ const useJobInputs = create<jobInputs>((set) => ({
     noOfVacancy:1,
     description: '',
     level: '',
-    type: ''
+    type: '',
+    skills:[],
+    educationRequired:''
   },
 
   setStepOneInputs: (props) => {

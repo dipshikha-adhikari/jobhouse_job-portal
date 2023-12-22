@@ -12,7 +12,7 @@ export const useJobseekerProfile = (query?: any) => {
         return result.data
     }
 
-    const { data: profile, isLoading, isError } = useQuery(['jobseekerProfile', query], getProfile)
+    const { data: profile, isLoading, isError } = useQuery(['jobseekerProfile', query, isAunthenticated], getProfile)
 
     return { profile, isLoading, isError }
 }

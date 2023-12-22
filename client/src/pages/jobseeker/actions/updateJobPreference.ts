@@ -1,6 +1,7 @@
 import toast from "react-hot-toast";
 import { IJobseekerJobPreferenceInputs } from "../../../types/react/types";
 import { privateRequest } from "../../../lib/axios";
+import { IJobseekerJobPreference } from "../../../types/postgres/types";
 
 
 type Category = {
@@ -13,7 +14,7 @@ type Category = {
     industry_id:string
   }
 
-export const updateJobPrefetence = (data: IJobseekerJobPreferenceInputs, setIsLoading: (props: any) => void, setIsEditorOpen:(props:any) => void, industries:Industry[] | undefined, categories:Category[] | undefined) => {
+export const updateJobPrefetence = (data: IJobseekerJobPreferenceInputs, setIsLoading: (props: any) => void, setIsEditorOpen:(props:any) => void, industries:Industry[] | undefined, categories:Category[] | undefined, profile:IJobseekerJobPreference | undefined) => {
   
     const getIndustryId = (industryName:string) => {
         const industry = industries?.find(ind => ind.industry_name === industryName)
@@ -41,7 +42,13 @@ export const updateJobPrefetence = (data: IJobseekerJobPreferenceInputs, setIsLo
         }
         setIsLoading(true)
 
-        toast.promise(privateRequest.put('/api/v1/jobseeker/profile/jobPreference', dataToBeSent), {
+let axiosConfig = {
+    method : profile?.id === undefined ? 'post' : 'put',
+    url: '/api/v1/jobseeker/profile/jobPreference' ,
+    data:dataToBeSent
+
+}
+        toast.promise(privateRequest(axiosConfig), {
 
             loading: 'Loading',
             success: () => {

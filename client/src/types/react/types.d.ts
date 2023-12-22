@@ -23,6 +23,8 @@ export interface IEmployerBasicInformationInputs  {
     location: string;
     level:string;
     type:string;
+    skills?:[]
+    educationRequired:string
 }
 
 export interface IJobseekerJobPreferenceInputs  {

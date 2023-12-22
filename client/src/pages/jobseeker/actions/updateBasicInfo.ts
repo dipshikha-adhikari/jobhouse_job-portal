@@ -1,16 +1,12 @@
 import toast from "react-hot-toast";
 import { privateRequest } from "../../../lib/axios";
 import { IJobseekerBasicInfoInputs } from "../../../types/react/types";
-import { saveImageToCloudinary } from "../../../utils/saveImageToCloudinary";
 import { IJobseekerBasicInformation } from "../../../types/postgres/types";
 import { queryClient } from "../../../App";
+
 export const updateBasicInfo = async (data: IJobseekerBasicInfoInputs, setIsLoading: (props: any) => void, setIsEditorOpen: (props: any) => void, basicInfo: IJobseekerBasicInformation | undefined) => {
 
-    if (data.image !== undefined) {
-        let result = await saveImageToCloudinary(data.image)
-        if (result === undefined) throw new Error('Failed to upload image')
-        data.image = result?.url
-    }
+
 
     try {
         setIsLoading(true)
@@ -25,10 +21,11 @@ export const updateBasicInfo = async (data: IJobseekerBasicInfoInputs, setIsLoad
         }
 
         let axiosConfig = {
-            method: basicInfo === undefined ? 'post' : 'put',
+            method: basicInfo?.id === undefined ? 'post' : 'put',
             url: '/api/v1/jobseeker/profile/basicInformation',
             data: dataToBeSent
         }
+  
         toast.promise(privateRequest(axiosConfig), {
             loading: 'Loading',
             success: () => {

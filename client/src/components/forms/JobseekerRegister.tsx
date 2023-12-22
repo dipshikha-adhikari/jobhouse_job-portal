@@ -5,7 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { registerValidationSchema} from "../../utils/validationSchema";
 import { publicRequest } from "../../lib/axios";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import toast from "react-hot-toast";
 
 type Inputs = {
@@ -29,7 +29,9 @@ const Register = () => {
     formState: { errors },
   } = useForm<Inputs>({ resolver: yupResolver(registerValidationSchema) });
 
-  
+  useEffect(() => {
+    window.scrollTo(0,0)
+      },[])
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     setIsLoading(true)

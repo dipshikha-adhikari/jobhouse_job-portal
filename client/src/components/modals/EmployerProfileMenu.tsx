@@ -14,7 +14,7 @@ const navigate = useNavigate()
     document.addEventListener("click", handleClickOutside);
 
     return () => document.removeEventListener("click", handleClickOutside);
-  }, [ref, store.jobseekerProfileMenuModalOpen]);
+  }, [ store.jobseekerProfileMenuModalOpen]);
 
   const handleClickOutside = (e: MouseEvent) => {
     if ((e.target as Element).classList.contains("profile-menu-button")) return;

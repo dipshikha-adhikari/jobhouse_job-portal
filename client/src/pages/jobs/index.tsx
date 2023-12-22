@@ -9,12 +9,30 @@ import Error from "../../components/shared/Error";
 import Layout from "../../components/ui/Layout";
 import Industries from "../../components/shared/Industries";
 import Categories from "../../components/shared/Categories";
+import { useAppliedJobs } from "../jobseeker/hooks/useAppliedJobs";
+
+type AppliedJobs = {
+  jobs:IJob[]
+  isLoading:boolean 
+  isError:boolean
+}
 
 const Jobs = () => {
   let location = useLocation().search;
   const category = new URLSearchParams(location).get("category");
   const industry = new URLSearchParams(location).get("industry");
   const id = new URLSearchParams(location).get("id");
+const {jobs:appliedJobs}:AppliedJobs = useAppliedJobs()
+const [appliedIds, setAppliedIds] = useState<string[]>([])
+
+
+useEffect(() => {
+  appliedJobs?.map(item => {
+    if(!appliedIds.includes(item.job_id)){
+      setAppliedIds((prev:any) => ([...prev, item.job_id]))
+    }
+  })
+  },[appliedJobs])
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -43,10 +61,9 @@ const Jobs = () => {
 
 
 
-  // if (isLoading) return <Loader />;
+  if (isLoading) return <Loader />;
   if (isError) return <Error />;
 
- 
 
   return (
  <Layout>
@@ -65,7 +82,7 @@ const Jobs = () => {
      <main className="grid gap-sm">
      <section className="grid gap-sm   grid-cols-[repeat(auto-fit,minmax(250px,1fr))]">
         {jobs !== undefined && jobs?.length > 0 ? jobs?.map((job) => {
-          return <JobCard job={job} key={job.job_id} />;
+          return <JobCard appliedJobs={appliedIds} job={job} key={job.job_id} />;
         })  : <div className="h-[200px] grid place-items-center bg-green-50">
           <p className="text-black-light font-bold">No jobs found</p>
           <img src="https://static.merojob.com/images/search/industry/jobs_by_industry.svg" alt="" />

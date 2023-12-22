@@ -3,6 +3,7 @@ import { createEducation, updateEducation } from "../controllers/profiles/jobsee
 import { createExperience, updateExperience } from "../controllers/profiles/jobseeker/experience"
 import { getJobseekerProfile } from "../controllers/profiles/jobseeker/getProfile"
 import { createJobPreference, updateJobPreference } from "../controllers/profiles/jobseeker/jobPreference"
+import { uploadImage } from "../helpers/uploadImage"
 
 const express = require('express')
 const router = express.Router()
@@ -10,6 +11,7 @@ const verifyToken = require('../middlewares/verifyToken')
 
 router.get('/profile',verifyToken, getJobseekerProfile)
 router.post('/profile/basicInformation', verifyToken, createBasicInfo)
+router.post('/cloudinary/upload',verifyToken, uploadImage)
 router.put('/profile/basicInformation', verifyToken, updateBasicInfo)
 router.post('/profile/education', verifyToken, createEducation)
 router.put('/profile/education/:educationId', verifyToken, updateEducation)

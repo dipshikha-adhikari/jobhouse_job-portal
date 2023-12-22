@@ -63,14 +63,15 @@ if(isError) return <Error/>
            <p className='flex items-center gap-xs'><FaEnvelope className='text-blue-dark'/> {  profile?.basic_information.email || 'Not available'}</p>
            <p className='flex items-center gap-xs'><FaPhoneAlt className='text-blue-dark'/>{profile?.basic_information?.phone_number || 'Not available'}</p>
         </div>
-       </section>
-      <section className='flex-1 grid gap-sm h-fit'>
-
-       <div className='grid gap-xs'>
+        <div className='grid gap-xs'>
        <h2 className='font-semibold text-xl'>Summary</h2>
         {profile?.basic_information?.summary ? profile.basic_information.summary : <div className='grid gap-sm'>
    No summary available!
         </div>}</div>
+       </section>
+      <section className='flex-1 grid gap-sm h-fit'>
+
+      
     <div className='grid gap-sm'>
           <h2 className='font-semibold text-xl border-y-sm py-xs border-default'>Recent jobs by {profile?.basic_information?.organization_name }</h2>
           <div>

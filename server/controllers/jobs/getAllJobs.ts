@@ -21,7 +21,7 @@ LEFT JOIN employers_basic_information e ON j.employer_id = e.user_id
 LEFT JOIN categories c ON j.category_id = c.category_id
 LEFT JOIN industries i ON j.industry_id = i.industry_id
 
-AND deadline > NOW()
+where j.deadline > NOW()
 
 `
   pool.query(query, function (err: Error, result: QueryResult) {

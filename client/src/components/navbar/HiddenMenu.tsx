@@ -2,41 +2,56 @@ import { Link } from "react-router-dom";
 import useStore from "../../store/store";
 import { FaArrowDown } from "react-icons/fa";
 import useAuthStore from "../../store/auth";
-import { useCurrentUser } from "../../hooks/useCurrentUser";
+import { useEffect, useRef, useState } from "react";
+import Categories from "../shared/Categories";
 
 interface IHiddenMenu {
   setMenuOpen: (props: any) => void;
+  menuOpen:boolean
 }
-const HiddenMenu = ({ setMenuOpen }: IHiddenMenu) => {
+const HiddenMenu = ({ setMenuOpen, menuOpen }: IHiddenMenu) => {
+  const[isModalOpen, setIsModalOpen] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+
   const store = useStore();
-const{role} = useCurrentUser()
 
   const {isAunthenticated} = useAuthStore()
 
-  if (isAunthenticated && role === "jobseeker") {
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside)
+    
+    return () => document.removeEventListener('click', handleClickOutside)
+    },[])
+    
+      const handleClickOutside = (e:MouseEvent) => {
+
+    if(!menuOpen) return;
+    if((e.target as Element).classList.contains('menu-btn') || (e.target as Element).parentElement?.classList.contains('menu-btn')) return;
+    
+    if( ref.current &&  !ref.current.contains(e.target as Element)){
+      setMenuOpen(false)
+    }
+      }
+
+
+  if (isAunthenticated ) {
     return (
-      <div className="grid gap-xs py-md md:hidden shadow-sm">
-        <span className="items-center gap-2 flex">
-          Browse jobs <FaArrowDown className="text-blue-default" />
-        </span>
-        <span>Blog</span>
-        <span>FAQs</span>
-      </div>
-    );
-  } else if (isAunthenticated && role === "employer") {
-    return (
-      <div className="grid gap-xs py-md md:hidden">
-     <span className="items-center gap-2 flex">
+      <div className="grid gap-xs p-lg border-b-sm md:hidden "  ref={ref}>
+     <span className="items-center gap-2 flex relative cursor-pointer"  onClick={() => setIsModalOpen(!isModalOpen)}>
           Browse jobs <FaArrowDown className="text-blue-dark" />
+          {isModalOpen && <div className="absolute top-10 border-b-md  pb-10 h-80 overflow-y-scroll  bg-white">
+  <Categories setIsModalOpen={setIsModalOpen}/>
+   </div>}
         </span>
-        <span>Blog</span>
-        <span>FAQs</span>
-       
+        <Link to='/blogs' className="text-black-light w-fit font-normal hover:text-blue-dark">Blogs</Link>
+        <Link to='/faqs' className="text-black-light w-fit font-normal hover:text-blue-dark">FAQs</Link>
+     
       </div>
     );
   } else
     return (
-      <div className="py-md grid gap-xs md:hidden ">
+      <div className="py-md grid gap-xs md:hidden  bg-white " ref={ref}>
    
         <div className="flex gap-10 ">
         <Link
@@ -57,11 +72,15 @@ const{role} = useCurrentUser()
             Register
           </div>
         </div>
-        <span className="flex items-center gap-2">
-          Browse jobs <FaArrowDown className="text-blue-default" />
+        <span className="flex items-center gap-2 relative cursor-pointer" onClick={() => setIsModalOpen(!isModalOpen)}>
+          Browse jobs <FaArrowDown className="text-green-dark" />
+          {isModalOpen && <div className="absolute top-10 z-10 h-80 overflow-y-scroll p-sm sm:p-lg bg-white">
+  <Categories setIsModalOpen={setIsModalOpen}/>
+   </div>}
         </span>
-        <span >Blog</span>
-        <span>FAQs</span>
+        <Link to='/blogs' className="text-black-light w-fit font-normal hover:text-blue-dark">Blogs</Link>
+        <Link to='/faqs' className="text-black-light w-fit font-normal hover:text-blue-dark">FAQs</Link>
+       
       </div>
     );
 };

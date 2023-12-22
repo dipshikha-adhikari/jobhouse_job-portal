@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CreateJobStepOne from "../../components/forms/CreateJobStepOne";
 import CreateJobStepTwo from "../../components/forms/CreateJobStepTwo";
 import ProgressBar from "../../components/ui/ProgressBar";
@@ -8,14 +8,22 @@ import NoUser from "../../components/shared/NoUser";
 import Error from "../../components/shared/Error";
 import { useParams } from "react-router-dom";
 import { useCurrentUser } from "../../hooks/useCurrentUser";
+import Loader from "../../components/shared/Loader";
 
 const CreateJob = () => {
   const [step, setStep] = useState(1);
   const auth = useAuthStore();
-  const { job } = useCurrentJob();
   const params = useParams()
 const{role} = useCurrentUser()
+const loading = !role
   const jobId = params.jobId
+  const { job , isLoading} = useCurrentJob();
+
+useEffect(() => {
+window.scrollTo(0,0)
+},[])
+
+if(isLoading || loading) return <Loader/>
 
   if (job?.job_id === undefined && jobId !== undefined) return <Error />;
   if (!auth.isAunthenticated) return <NoUser />;

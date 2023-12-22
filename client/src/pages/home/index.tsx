@@ -6,10 +6,18 @@ import Loader from "../../components/shared/Loader";
 import Error from "../../components/shared/Error";
 import Industries from "../../components/shared/Industries";
 import Categories from "../../components/shared/Categories";
+import { useAppliedJobs } from "../jobseeker/hooks/useAppliedJobs";
+import { useEffect, useState } from "react";
+
+type AppliedJobs = {
+  jobs:IJob[]
+  isLoading:boolean 
+  isError:boolean
+}
 
 const Home = () => {
-
-
+const{jobs:appliedJobs}:AppliedJobs = useAppliedJobs()
+const [appliedIds, setAppliedIds] = useState<string[]>([])
   const getAllJobs = async () => {
     const res = await publicRequest.get("/api/v1/jobs");
     return res.data;
@@ -20,7 +28,13 @@ const Home = () => {
     isError,
   } = useQuery<IJob[]>("allJobs", getAllJobs);
 
-
+useEffect(() => {
+appliedJobs?.map(item => {
+  if(!appliedIds.includes(item.job_id)){
+    setAppliedIds((prev:any) => ([...prev, item.job_id]))
+  }
+})
+},[appliedJobs])
 
   if (isLoading) return <Loader />;
   if (isError) return <Error />;
@@ -54,7 +68,7 @@ const Home = () => {
           </header>
           <div className="grid gap-sm  grid-cols-[repeat(auto-fit,minmax(250px,1fr))]">
             {jobs?.map((job) => {
-              return <JobCard job={job} key={job.job_id} />;
+              return <JobCard appliedJobs={appliedIds} job={job} key={job.job_id} />;
             })}
           </div>
           <div className="grid gap-sm ">

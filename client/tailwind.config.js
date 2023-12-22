@@ -54,7 +54,7 @@ xl:'3rem'
         },
         'blue':{
           light:'#0ea5e9',
-          dark:'#0284c7'
+          dark:'#0891b2'
         },
         'green':{
           light:'#22c55e',

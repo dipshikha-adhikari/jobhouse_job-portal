@@ -6,7 +6,6 @@ import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { publicRequest, setAuthToken } from "../../lib/axios";
 import useAuthStore from "../../store/auth";
-import useStore from "../../store/store";
 
 interface Inputs {
   email: string;

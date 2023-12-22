@@ -38,7 +38,7 @@ const navigate = useNavigate()
         
   return (
     <div ref={ref} className="absolute max-w-[300px] bg-white w-full border-b-sm top-12 grid  place-items-start gap-xs text-black-default  p-md right-0">
-     <Link to='/jobseeker/profile/update' className="text-black-default hover:text-green-dark md:block hidden">Update Profile</Link>
+     <Link to='/jobseeker/profile/job-preference' className="text-black-default hover:text-green-dark md:block hidden">Update Profile</Link>
      <Link to='/jobseeker/profile' className="text-black-default hover:text-green-dark md:hidden">Profile</Link>
      <Link to='/jobseeker/overview' className="text-black-default hover:text-green-dark md:hidden">Overview</Link>
         <button className="text-black-light font-medium hover:text-green-dark" onClick={handleLogout}>Logout</button>

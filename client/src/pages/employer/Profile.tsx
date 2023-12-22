@@ -4,7 +4,7 @@ import { FaEnvelope } from "react-icons/fa6";
 import { FaPhoneAlt } from "react-icons/fa";
 import { Link, useParams } from 'react-router-dom';
 import Layout from '../../components/ui/Layout';
-import { useProfile } from './hooks/useProfile';
+import { useProfile } from './hooks/useEmployerProfile';
 import Error from '../../components/shared/Error';
 import Loader from '../../components/shared/Loader';
 import RecentJobs from './RecentJobs';
@@ -13,8 +13,6 @@ import { useEffect } from 'react';
 const Profile = () => {
     const user = useCurrentUser();
 const {profile, isLoading,error} = useProfile()
-const params = useParams()
-const id = params.id
 
 useEffect(() => {
   window.scrollTo(0,0)
@@ -43,14 +41,14 @@ if(error || user.role !== 'employer') return <Error/>
             className="h-20 w-20 rounded-sm object-contain"
           />
         </div>
-       {id === undefined &&  <Link to='/employer/profile/basic-info' className='absolute right-2 bottom-2 bg-blue-dark rounded-md text-white hover:text-white px-sm p-xs'>Edit Profile</Link>}
+ <Link to='/employer/profile/basic-info' className='absolute right-2 bottom-2 bg-blue-dark rounded-md text-white hover:text-white px-sm p-xs'>Edit Profile</Link>
        
        
       </header>
       <div className='grid gap-xs  border-b-sm border-gray-300 pb-sm place-items-center'>
-            <h2 className='font-semibold text-xl'>{profile?.basic_information?.organization_name ? profile?.basic_information?.organization_name : user.fullName}</h2>
-            <p>{profile?.basic_information?.industry_type}</p>
-            <p>{profile?.other_information?.website}</p>
+            <p className='font-semibold text-xl'>{profile?.basic_information?.organization_name ? profile?.basic_information?.organization_name : user.fullName}</p>
+          {profile?.basic_information?.industry_type && <p>{profile?.basic_information?.industry_type}</p>}
+          {profile?.other_information?.website && <p>{profile?.other_information?.website}</p>} 
         </div>
       <div className='grid gap-xs place-items-center border-b-sm border-gray-300 pb-sm'>
            <p className='flex items-center gap-xs'><MdLocationPin className='text-blue-dark'/> {profile?.basic_information?.address || 'Not available'}</p>
@@ -63,13 +61,13 @@ if(error || user.role !== 'employer') return <Error/>
        <div className='grid gap-xs'>
        <h2 className='font-semibold text-xl'>Summary</h2>
         {profile?.basic_information?.summary ? profile.basic_information.summary : <div className='grid gap-sm'>
-    {id === undefined ? '  Please update your profile to post a job.': 'No summary'}
-     {id === undefined &&  <Link to='/employer/profile/basic-info' className=' bg-blue-dark text-white hover:text-white px-sm p-xs w-fit'>Update now</Link>}
+    Please update your profile to post a job.
+   <Link to='/employer/profile/basic-info' className=' bg-blue-dark text-white hover:text-white px-sm p-xs w-fit'>Update now</Link>
         </div>}</div>
-     {id !== undefined &&    <div className='grid gap-sm'>
-          <h2 className='font-semibold text-xl border-y-sm py-xs border-default'>Recent jobs by {profile?.basic_information?.organization_name || user.fullName}</h2>
+     {   <div className='grid gap-sm'>
+          <h2 className='font-semibold text-xl border-y-sm py-xs border-default'>Recent jobs</h2>
           <div>
-          <RecentJobs employerId={profile?.user_id} params={id}/>
+          <RecentJobs employerId={profile?.user_id} />
           </div>
         </div>}
       </section>

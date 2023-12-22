@@ -7,11 +7,13 @@ export const getMatchingJobs = (req:IUserRequest, res:Response) => {
     const {id} = req.user 
 
     const query = `
-    SELECT j.*
-FROM jobs j
-JOIN jobseekers_job_preference jjp ON 
-  (j.category_id = ANY(jjp.job_categories) OR j.industry_id = ANY(jjp.job_industries))
-WHERE jjp.user_id = $1; -- Replace with the desired user_id from jobseekers_job_preference
+    SELECT j.*, u.fullname AS employer_name, e.image as employer_image
+    FROM jobs j
+    JOIN jobseekers_job_preference jjp ON 
+      (j.category_id = ANY(jjp.job_categories) OR j.industry_id = ANY(jjp.job_industries))
+    JOIN users u ON j.employer_id = u.user_id
+    join employers_basic_information e on j.employer_id = e.user_id
+    WHERE jjp.user_id = $1;
 `
 
 pool.query(query,[id], (err:Error, result:QueryResult) => {

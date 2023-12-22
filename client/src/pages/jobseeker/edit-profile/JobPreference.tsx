@@ -28,9 +28,10 @@ const {industries} = useIndustries()
 
 useEffect(() => {
 
-if(profile){
-  setValue('jobCategories', profile.category_names)
-  setValue('jobIndustries', profile.industry_names)
+if(profile?.id !== undefined){
+  setValue('jobCategories', profile?.category_names)
+ 
+  setValue('jobIndustries', profile?.industry_names )
   setValue('availableFor',profile.available_for)
   setValue('jobLevel', profile.job_level)
   setValue('expectedSalary', profile.expected_salary)
@@ -38,9 +39,11 @@ if(profile){
   setValue('jobTitle', profile.job_title)
   setValue('objective', profile.summary )
   setValue('skills', profile.skills)
+
 }
+
 },[profile])
- 
+
 function autoGrow(e:FormEvent<HTMLTextAreaElement>){
   e.currentTarget.style.height = '100px'
   e.currentTarget.style.height = e.currentTarget.scrollHeight + 'px'
@@ -48,8 +51,10 @@ function autoGrow(e:FormEvent<HTMLTextAreaElement>){
   }
 
 const submitJobPreference:SubmitHandler<IJobseekerJobPreferenceInputs> = (data) => {
-updateJobPrefetence(data, setIsLoading, setIsEditorOpen, industries, categories)
+updateJobPrefetence(data, setIsLoading, setIsEditorOpen, industries, categories, profile)
 }
+
+console.log(profile)
 
   return (
     <div className='grid gap-sm '>
@@ -79,6 +84,7 @@ updateJobPrefetence(data, setIsLoading, setIsEditorOpen, industries, categories)
          name='jobCategories'
          control={control}
          disabled={!isEditorOpen} 
+         
          render={({field}) => {
           return <MultipleSelectCheckmarks field={field} isEditorOpen={isEditorOpen} type='category'  values={categories} />
          }}
@@ -92,6 +98,7 @@ updateJobPrefetence(data, setIsLoading, setIsEditorOpen, industries, categories)
           <Controller
          name='jobIndustries'
          control={control}
+
          render={({field}) => {
           
           return <MultipleSelectCheckmarks field={field} type='industry' isEditorOpen={isEditorOpen} values={industries}  />
@@ -107,7 +114,7 @@ updateJobPrefetence(data, setIsLoading, setIsEditorOpen, industries, categories)
          name='skills'
          control={control}
          render={({field:{onChange}}) => {
-          return <TagsInputBox isEditorOpen={isEditorOpen} values={profile?.skills} onChange={onChange}/>
+          return <TagsInputBox  isEditorOpen={isEditorOpen} values={profile?.skills} onChange={onChange}/>
          }}
          />
         </div>

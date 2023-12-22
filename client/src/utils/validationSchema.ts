@@ -47,6 +47,10 @@ export const CreateJobStepTwoSchema = Yup.object().shape({
     .typeError("total vacancy must be a number type"),
   description: Yup.string().required(),
   type: Yup.string().required(),
+  skills:Yup.array()
+  .of(Yup.string()).notRequired(),
+  educationRequired:Yup.string().max(200).required('required')
+ 
 });
 
 export const JobseekerJobPreferenceSchema = Yup.object().shape({
@@ -78,9 +82,21 @@ permanentAddress:Yup.string().required('required'),
 phoneNumber:Yup.string().required('required'),
 gender:Yup.string().oneOf(['male','female','other']).required('required'),
 dateOfBirth: Yup.date()
-.max(new Date(), "deadline must be in the past")
-.required("deadline is required")
-.typeError("deadline must be a valid date"),
+.max(new Date(), "Date of birth must be in the past")
+.required("Date of birth is required")
+.typeError("Date of birth must be a valid date")
+.test('age', 'You must be at least 16 years old', function(value) {
+  const today = new Date();
+  const dob = new Date(value);
+let age = today.getFullYear() - dob.getFullYear();
+  const monthDiff = today.getMonth() - dob.getMonth();
+
+  if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
+    age--;
+  }
+
+  return age >= 16;
+}),
 })
 
 export const JobseekerEducationSchema = Yup.object().shape({

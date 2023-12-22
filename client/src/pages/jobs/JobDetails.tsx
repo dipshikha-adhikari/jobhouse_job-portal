@@ -4,19 +4,39 @@ import Error from "../../components/shared/Error";
 import { Link, useNavigate } from "react-router-dom";
 import useAuthStore from "../../store/auth";
 import Loader from "../../components/shared/Loader";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useAppliedJobs } from "../jobseeker/hooks/useAppliedJobs";
+import { IJob } from "../../types/postgres/types";
+
+
+type AppliedJobs = {
+  jobs:IJob[]
+  isLoading:boolean 
+  isError:boolean
+}
+
 
 const Job = () => {
   const { role } = useCurrentUser();
   const { job, isLoading } = useCurrentJob();
   const { isAunthenticated } = useAuthStore();
   const navigate = useNavigate();
-console.log(job)
+  const {jobs:appliedJobs}:AppliedJobs = useAppliedJobs()
+const [isApplied, setIsApplied] = useState(false)
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  // return <div>hell</div>
+  console.log(appliedJobs, job?.job_id)
+  useEffect(() => {
+appliedJobs?.length > 0 && appliedJobs?.map(item => {
+  if(item.job_id === job?.job_id){
+    setIsApplied(true)
+  }
+})
+  },[job,appliedJobs])
+
   if (isLoading) return <Loader />;
   if (job?.job_id === undefined) return <Error />;
 
@@ -117,7 +137,7 @@ console.log(job)
         <div className="p-sm grid gap-2">
           <button
             className="bg-blue-dark text-white p-xs px-sm rounded-md w-fit disabled:opacity-60"
-            disabled={role === "employer"}
+            disabled={role === 'employer' || isApplied}
             onClick={handleJobApply}
           >
             Apply
@@ -125,6 +145,7 @@ console.log(job)
           {role === "employer" && (
             <p className="text-xs">* You need a jobseeker account to apply</p>
           )}
+          {isApplied && <p className="text-gray-dark">You have already applied for this job</p>}
         </div>
       </section>
     </div>

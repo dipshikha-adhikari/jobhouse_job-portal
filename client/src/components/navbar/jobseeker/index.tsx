@@ -1,21 +1,35 @@
-import { FaArrowDown, FaArrowRight, FaBars, FaHome, FaUser } from "react-icons/fa"
+import { FaArrowDown, FaArrowRight, FaBars } from "react-icons/fa"
 import { Link } from "react-router-dom"
 import useStore from "../../../store/store"
 import JobseekerProfileMenu from "../../modals/JobseekerProfileMenu"
+import { useJobseekerProfile } from "../../../pages/jobseeker/hooks/useJobseekerProfile";
+import { IJobseekerProfile } from "../../../types/postgres/types";
 
-const NavbarForJobseeker = ({setMenuOpen, menuOpen}:any) => {
+type JobseekerNav = {
+  setMenuOpen: (props: any) => void;
+  menuOpen: boolean;
+  isModalOpen: boolean;
+  setIsModalOpen: (props: any) => void;
+};
+
+type Profile = {
+  profile: IJobseekerProfile;
+  isLoading:boolean
+};
+
+const NavbarForJobseeker = ({setMenuOpen, menuOpen, isModalOpen, setIsModalOpen}:JobseekerNav) => {
+const{profile}:Profile = useJobseekerProfile()
     const store = useStore()
-    
   return (
-    <div className="relative flex items-center gap-20 w-full justify-end">
+    <div className="relative flex items-center gap-20 w-full justify-end" >
         <div className=" gap-xs hidden md:flex">
-        <span className="items-center gap-1 flex ">
-          Browse jobs <FaArrowDown className="text-blue-default" />
+        <span className="items-center gap-2 flex  cursor-pointer browse-btn" onClick={() => setIsModalOpen(!isModalOpen)}>
+          Browse jobs <FaArrowDown className="text-green-dark browse-btn " />
         </span>
-        <span>Blog</span>
-        <span>FAQs</span>
+        <Link to='/blogs' className="text-black-light font-semibold hover:text-blue-dark">Blogs</Link>
+        <Link to='/faqs' className="text-black-light font-semibold hover:text-blue-dark">FAQs</Link>
       </div>
-
+    
       <div className="flex items-center gap-6">
         <Link
           to="/jobseeker/overview"
@@ -34,18 +48,18 @@ const NavbarForJobseeker = ({setMenuOpen, menuOpen}:any) => {
           onClick={store.toggleJobseekerProfileMenuModal}
         >
           <img
-            src="https://cdn.iconscout.com/icon/free/png-256/free-avatar-370-456322.png?f=webp"
+            src={profile?.basic_information?.image?.url || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqZYAYrmuzw5vIhNRWG2f436EKH4LqTUAFhLDWd2yRNA&s"}
             alt=""
-            className="w-10 profile-menu-button h-10 object-cover"
+            className="w-10 rounded-full profile-menu-button h-10 object-cover"
           />
           <FaArrowRight fontSize={10} className="text-blue-dark profile-menu-button " />
           {store.jobseekerProfileMenuModalOpen && <JobseekerProfileMenu />}
         </div>
         <div
-          className="text-2xl cursor-pointer md:hidden"
+          className="text-2xl cursor-pointer md:hidden menu-btn"
           onClick={() => setMenuOpen(!menuOpen)}
         >
-          <FaBars />
+          <FaBars className='menu-btn' />
         </div>
       </div>
 

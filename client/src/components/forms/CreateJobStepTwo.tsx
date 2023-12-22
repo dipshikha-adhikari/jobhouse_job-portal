@@ -6,16 +6,23 @@ import { useEffect, useState } from "react";
 import {  useNavigate, useParams } from "react-router-dom";
 import { createJob } from "../../pages/employer/actions/createJob";
 import { CreateJobStepTwoSchema } from "../../utils/validationSchema";
-import { IJob } from "../../types/postgres/types";
+// import { IJob } from "../../types/postgres/types";
 import SelectJob from "../mui/SelectJob";
-import { useProfile } from "../../pages/employer/hooks/useProfile";
+import { useProfile } from "../../pages/employer/hooks/useEmployerProfile";
+import TagsInputBox from "../ui/TagsInputBox";
+import { IJob } from "../../types/postgres/types";
 
 type StepTwoInputs = {
   noOfVacancy: number
   description: string 
   level: string
   type: string
+  educationRequired:string 
+  skills?:any
+
 };
+
+
 
 type CreateJobStepTwoProps = {
   setStep:(props:any) => void 
@@ -26,6 +33,7 @@ const CreateJobStepTwo = ({ setStep, job }:CreateJobStepTwoProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [level, setLevel] = useState('')
   const [type, setType] = useState('')
+  const[isEditorOpen, setIsEditorOpen] = useState(true)
   const navigate = useNavigate();
   const params = useParams()
   const {jobId} = params
@@ -56,6 +64,8 @@ const {profile} = useProfile()
       setType(job.type)
       setLevel(job.level)
     }
+    setValue('educationRequired', job?.educationRequired ? job.educationRequired : jobStore.stepTwo.educationRequired )
+    setValue('skills', job?.skills)
     setValue("noOfVacancy",   job?.no_of_vacancy ? job.no_of_vacancy : jobStore.stepTwo.noOfVacancy);
     setValue("level",   job?.level !== undefined ? job.level : jobStore.stepTwo.level);
     setValue("type",  job?.type !== undefined ? job.type : jobStore.stepTwo.type );
@@ -65,7 +75,36 @@ const {profile} = useProfile()
   return (
     <form className="grid   gap-sm  " onSubmit={handleSubmit(onSubmit)}>
       <section className="grid gap-xs ">
+      <div>
+      <div className='grid gap-xs  sm:flex '>
+          <span className="font-semibold">Skills </span> 
+         <Controller
+         name='skills'
+         control={control}
+         render={({field:{onChange}}) => {
+          return <TagsInputBox  isEditorOpen={isEditorOpen} values={job?.skills} onChange={onChange}/>
+         }}
+         />
+        </div>
+        <p className="text-red-600 text-sm">
+              {errors.skills?.message}
+            </p>
+      </div>
+      
         <div>
+            <div className=" grid gap-2 items-center">
+              <span className="font-semibold">Education Required</span>
+              <input
+                className="border-sm p-xs outline-none border-gray-300"
+                placeholder="Bachelor degree or equivalent"
+                {...register('educationRequired')}
+              />
+            </div>
+            <p className="text-red-600 text-sm">
+              {errors.educationRequired?.message}
+            </p>
+          </div>
+
           <div>
             <div className=" grid gap-2 items-center">
               <span className="font-semibold">No of Vacancy</span>
@@ -79,6 +118,8 @@ const {profile} = useProfile()
               {errors.noOfVacancy?.message}
             </p>
           </div>
+        <div>
+
           <div className=" grid gap-2 items-center">
             <span className="font-semibold">Job Level</span>
             <Controller

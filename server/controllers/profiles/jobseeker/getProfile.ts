@@ -14,7 +14,15 @@ export const getJobseekerProfile = async (req: IUserRequest, res: Response) => {
 
   }
 
-  const basicInformationQuery = `select * from jobseekers_basic_information where user_id = $1`
+  const basicInformationQuery = `select jbi.*, 
+  json_build_object (
+    'url', i.url,
+    'public_id', i.public_id
+  ) as image 
+  from jobseekers_basic_information jbi 
+  left join images i on jbi.user_id = i.user_id
+  where jbi.user_id = $1`
+  
   const experienceQuery = `select * from jobseekers_experience where user_id = $1`
   const educationQuery = `select * from jobseekers_education where user_id = $1`
   const jobPreferenceQuery = `SELECT
@@ -50,6 +58,7 @@ GROUP BY
     if (query === 'education') {
       const result: QueryResult = await pool.query(educationQuery, [id])
       return res.status(200).send(result.rows)
+
     }
     if (query === 'experience') {
       const result: QueryResult = await pool.query(experienceQuery, [id])
@@ -64,7 +73,6 @@ GROUP BY
     profile['education'] = education.rows
     const jobPreference: QueryResult = await pool.query(jobPreferenceQuery, [id])
     profile['job_preference'] = jobPreference.rows[0]
-
     return res.status(200).send(profile)
 
   } catch (err) {

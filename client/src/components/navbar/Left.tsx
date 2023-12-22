@@ -2,13 +2,13 @@ import { Link } from "react-router-dom";
 
 const Left = () => {
   return (
-    <div className="  flex items-center gap-10 ">
+    <div className="  flex items-center  ">
       {/* logo  */}
       <Link
         to="/"
-        className="text-2xl hover:text-green-dark text-green-dark"
+        className="text-2xl flex hover:text-green-dark text-green-dark"
       >
-        Itsmywork
+       Job <span className="text-black-light">House</span>
       </Link>
     </div>
   );

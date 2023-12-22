@@ -15,7 +15,6 @@ const res = await privateRequest.get(`/api/v1/jobs/employer/all/${employerId}`)
 return res.data
 })
 
-
 if(isLoading) return <div>Loading....</div>
 if(error) return <Error/>
 
