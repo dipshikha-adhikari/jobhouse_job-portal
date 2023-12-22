@@ -1,17 +1,15 @@
+
 const { Pool } = require('pg')
+require('dotenv').config()
+
 
 const pool = new Pool({
-    user: 'postgres',
-    host: 'localhost',
-    database: 'jobhouse',
-    password: 'akbivash',
-    port: 5432,
-    pool: {
-        max: 5,
-        min: 0,
-        acquire: 30000,
-        idle: 10000
-      }
+  connectionString: process.env.POSTGRES_URL + "?sslmode=require",
 })
- pool.connect()
-module.exports = pool
+
+ pool.connect((err:Error) => {
+if(err) throw err 
+console.log('connected to db')
+ })
+
+ module.exports = pool

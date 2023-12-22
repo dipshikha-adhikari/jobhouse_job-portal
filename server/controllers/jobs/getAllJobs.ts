@@ -11,8 +11,6 @@ export const getAllJobs = async (req: Request, res: Response) => {
     'user_id', e.user_id,
     'organization_name', e.organization_name,
     'phone_number',e.phone_number,
-    'image', e.image, 
-  'cover_image', e.cover_image,
   'address', e.address
     
 ) AS employer_details
