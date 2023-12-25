@@ -105,7 +105,7 @@ export const updateBasicInfo = (req: IUserRequest, res: Response) => {
                         if (image.url === undefined && image !== null && typeof image === 'string') {
                             const imageData = await uploadImage(image, id)
                             if (!imageData) {
-                                res.status(400).send({ message: 'Error on upload image, image must be string' })
+                             return   res.status(400).send({ message: 'Error on upload image, image must be string' })
                             }
                             public_id = imageData.public_id
                             url = imageData.secure_url

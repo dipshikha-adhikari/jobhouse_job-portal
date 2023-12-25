@@ -14,6 +14,8 @@ import { getJobsByCategories } from "../controllers/jobs/category/getJobsByCateg
 import { getMatchingJobs } from "../controllers/jobs/category/getMatchingJobs"
 import { getJobById } from "../controllers/jobs/getJobById"
 import { updateJob } from "../controllers/jobs/updateJob"
+import { getSearchSuggestion } from "../controllers/jobs/search/getSearchSuggestion"
+import { getSearchResults } from "../controllers/jobs/search/getSearchResults"
 
 const express = require('express')
 const router = express.Router()
@@ -36,5 +38,7 @@ router.get('/:jobId', getJobById)
 router.put('/update/:jobId',verifyToken, updateJob)
 router.post('/create',verifyToken, createJob)
 router.post('/apply',verifyToken, applyForJob)
+router.get('/search/suggestions', getSearchSuggestion)
+router.get('/search/results', getSearchResults)
 
 module.exports = router

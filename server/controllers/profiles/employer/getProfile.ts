@@ -91,6 +91,7 @@ WHERE users.user_id = $1
   `
   pool.query(query, [employerId], function (err: Error, result: QueryResult) {
     if (err) return res.status(400).send({ error: err });
+    console.log(employerId)
     return res.status(200).send(result.rows[0]);
   });
 };

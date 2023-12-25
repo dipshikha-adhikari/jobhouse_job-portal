@@ -9,9 +9,12 @@ export const getAllJobsByEmployerId = async (req: IUserRequest, res: Response) =
     if(employerId === undefined) return res.status(400).send({message:'Please provide a valid employerId'})
         const query = `
         SELECT j.*,
-    i.industry_name, c.category_name
+    i.industry_name, c.category_name, json_build_object(
+        'image', img.url
+            ) as employer_details
     from jobs j
     left join industries i on j.industry_id = i.industry_id
+    left join images img on img.user_id = j.employer_id
     left join categories c on j.category_id = c.category_id
     
     WHERE employer_id = $1 `

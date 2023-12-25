@@ -29,16 +29,7 @@ export const createEducation= (req: IUserRequest, res: Response) => {
                 return res.status(400).send({ message: 'wrong key provided' });
             }
         }
-    
-        if (
-            Object.keys(marks).length > 0 &&
-            (typeof marks.value !== 'string' ||
-                typeof marks.type !== 'string' ||
-                marks.type === '' ||
-                marks.value === '')
-        ) {
-            return res.status(400).send({ message: 'only string is supported, string cant be empty' });
-        }
+   
     }
     
 
@@ -89,15 +80,6 @@ export const createEducation= (req: IUserRequest, res: Response) => {
                     }
                 }
             
-                if (
-                    Object.keys(marks).length > 0 &&
-                    (typeof marks.value !== 'string' ||
-                        typeof marks.type !== 'string' ||
-                        marks.type === '' ||
-                        marks.value === '')
-                ) {
-                    return res.status(400).send({ message: 'only string is supported, string cant be empty' });
-                }
             }
             
         

@@ -10,10 +10,11 @@ export const applyForJob = async (req: IUserRequest, res: Response) => {
   try {
     const { id } = req.user
 
-    const result: QueryResult = await pool.query('select * from jobseekers_basic_information where user_id = $1', [id])
-    let profiles = result.rows
-
-    if (profiles.length > 0) {
+    const result: QueryResult = await pool.query('select * from jobseekers_education where user_id = $1', [id])
+    let educations = result.rows
+ const experienceResult:QueryResult = await pool.query('select * from jobseekers_experience where user_id = $1',[id])
+const experience = experienceResult.rows
+    if (educations.length > 0 || experience.length > 0) {
       const { employer_id, job_id } = req.body
       if (employer_id === undefined || job_id === undefined) {
         return res.status(400).send({ message: 'employer_id or job_id is undefined' })
@@ -27,7 +28,7 @@ export const applyForJob = async (req: IUserRequest, res: Response) => {
       await pool.query(query, [employer_id, job_id, id])
       res.status(200).send({ message: 'Success' })
     } else {
-      return res.status(400).send({ message: 'Only jobseeker with basic information are allowed' })
+      return res.status(400).send({ message: 'Experience or education must be updated' })
     }
   } catch (err) {
     return res.status(400).send({ message: err })
