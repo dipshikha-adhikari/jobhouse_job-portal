@@ -12,7 +12,7 @@ const Schema = Yup.object().shape({
 
 interface IOtherInformation {
   isEditorOpen: boolean;
-  setIsEditorOpen: (props: any) => void;
+  setIsEditorOpen: (props: boolean) => void;
   profile:IEmployerProfile | undefined
 }
 

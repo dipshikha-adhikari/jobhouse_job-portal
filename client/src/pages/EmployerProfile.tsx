@@ -10,7 +10,6 @@ import { publicRequest } from "../lib/axios";
 import Error from "../components/shared/Error";
 import Layout from "../components/ui/Layout";
 import { IEmployerProfile } from "../types/postgres/types";
-import RecentJobs from "./employer/RecentJobs";
 import { useRecentJobs } from "./employer/hooks/useRecentJobs";
 import JobCard from "../components/shared/JobCard";
 

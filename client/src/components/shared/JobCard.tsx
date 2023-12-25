@@ -7,11 +7,11 @@ import { CiCalendar, CiLocationOn } from "react-icons/ci"
 
 interface IJobCard{
     job:IJob,
-    appliedJobs:any[]
+    appliedJobs:string[]
 }
 
 const JobCard = ({job, appliedJobs}:IJobCard) => {
-console.log(job)
+
   return (
     <Link to={`/jobs/${job.title}/${job.job_id}`} className='grid gap-xs max-w-md border-xs border-light font-normal  '>
     <div  className='flex p-sm gap-xs items-center text-black-dark hover:text-black-dark'>

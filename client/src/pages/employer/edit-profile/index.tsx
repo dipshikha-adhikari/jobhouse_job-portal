@@ -5,19 +5,17 @@ import NoUser from "../../../components/shared/NoUser";
 import Error from "../../../components/shared/Error";
 import { useProfile } from "../hooks/useEmployerProfile";
 import Loader from "../../../components/shared/Loader";
-import { useCurrentUser } from "../../../hooks/useCurrentUser";
 import OtherInformation from "./OtherInformation";
 import { Link, useParams } from "react-router-dom";
 
 const EditProfile = () => {
   const [isEditorOpen, setIsEditorOpen] = useState<boolean>(false);
   const { isAunthenticated } = useAuthStore();
-  const { role } = useCurrentUser();
   const { profile, isLoading,error } = useProfile();
   const params = useParams();
   const title = params.title;
 
-  let data = [
+  const data = [
     {
       title: "Basic Information",
       link: "basic-info",

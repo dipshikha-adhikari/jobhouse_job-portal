@@ -4,7 +4,6 @@ import JobCard from './JobCard';
 
 type RecentJobsProps = {
   employerId: string | undefined;
-  params?:any
 }
 
 

@@ -10,19 +10,20 @@ import { useCategories } from "../../hooks/useCategories";
 
 export interface ICreateJobStepOneInputs {
   title: string;
-  categoryId: any;
+  categoryId: string 
   location: string;
   experienceRequired: string;
   salary: string;
-  deadline: Date;
+  deadline: Date | string;
 }
 
 type CreateJobStepOneProps = {
-  setStep: (props: any) => void;
+  setStep: (props:number) => void
+  step:number
   job: IJob | undefined;
 };
 
-const CreateJobStepOne = ({ setStep , job}: CreateJobStepOneProps) => {
+const CreateJobStepOne = ({ setStep ,step, job}: CreateJobStepOneProps) => {
   const {
     register,
     handleSubmit,
@@ -34,21 +35,21 @@ const {categories} = useCategories()
 
   const onSubmit: SubmitHandler<ICreateJobStepOneInputs> = (data) => {
     jobStore.setStepOneInputs(data);
-    setStep((prev: any) => prev + 1);
+    setStep(step + 1);
   };
 
   useEffect(() => {
-    let date: any;
+    let date: string | null;
     if (jobStore.stepOne.deadline) {
       date = moment(jobStore.stepOne.deadline).format("YYYY-MM-DD");
     } else {
       date = null;
     }
-    let dateFromDB: any = moment(job?.deadline).format("YYYY-MM-DD");
+    // const dateFromDB: string = moment(job?.deadline).format("YYYY-MM-DD");
     setValue("categoryId",   job?.category_id !== undefined ? job.category_id : jobStore.stepOne.categoryId);
     setValue("title",   job?.title !== undefined ? job?.title : jobStore.stepOne.title);
     setValue("salary",   job?.salary !== undefined ? job?.salary : jobStore.stepOne.salary);
-    setValue("deadline", date || dateFromDB);
+    setValue("deadline", job?.deadline || jobStore.stepOne.deadline);
     setValue("location",  job?.location !== undefined ? job?.location : jobStore.stepOne.location);
     setValue(
       "experienceRequired",

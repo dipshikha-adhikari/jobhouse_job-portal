@@ -1,35 +1,16 @@
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import { makeStyles } from "@mui/styles";
 
 interface IMuiSelect {
-  onChange: (props: any) => void;
+  onChange: (props: string) => void;
   values: string[];
   value: string;
-  setLevel?: (props: any) => void;
-  setType?: (props: any) => void;
+  setLevel?: (props: string) => void;
+  setType?: (props: string) => void;
 }
 
-const useStyles:any = makeStyles({
-  select: {
-      '&:before': {
-          borderColor: 'white',
-      },
-      '&:after': {
-          borderColor: 'white',
-      },
-      '&:not(.Mui-disabled):hover::before': {
-          borderColor: 'white',
-      },
-  },
-  icon: {
-      fill: 'white',
-  },
-  root: {
-      color: 'white',
-  },
-})
+
 
 export default function SelectJob({
   onChange,
@@ -38,7 +19,7 @@ export default function SelectJob({
   setLevel,
   setType,
 }: IMuiSelect) {
-  const classes:any = useStyles()
+ 
   function handleChange(e: SelectChangeEvent) {
     const val = e.target.value as string;
     onChange(val);
@@ -60,13 +41,7 @@ export default function SelectJob({
           MenuProps={{
             disableScrollLock:true
           }}
-          className={classes.select}
-          inputProps={{
-            classes: {
-                icon: classes.icon,
-                root: classes.root,
-            },
-        }}
+       
         >
           {values.map((val) => {
             return (

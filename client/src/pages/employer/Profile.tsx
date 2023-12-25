@@ -2,7 +2,7 @@ import { useCurrentUser } from '../../hooks/useCurrentUser';
 import { MdLocationPin} from "react-icons/md"
 import { FaEnvelope } from "react-icons/fa6";
 import { FaPhoneAlt } from "react-icons/fa";
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Layout from '../../components/ui/Layout';
 import { useProfile } from './hooks/useEmployerProfile';
 import Error from '../../components/shared/Error';

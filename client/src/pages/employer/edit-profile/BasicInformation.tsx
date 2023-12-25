@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { EmployerBasicInformationSchema } from "../../../utils/validationSchema";
@@ -13,7 +13,7 @@ import { updateBasicInformation } from "../actions/updateBasicInformation";
 
 interface IEditProfileDetails {
   isEditorOpen: boolean;
-  setIsEditorOpen: (props: any) => void;
+  setIsEditorOpen: (props: boolean) => void;
   profile:IEmployerProfile | undefined
 }
 
@@ -25,8 +25,8 @@ const BasicInformation = ({
 }: IEditProfileDetails) => {
   const [coverImagePreview, setCoverImagePreview] = useState("");
   const [imagePreview, setImagePreview] = useState("");
-  const [image, setImage] = useState<any>();
-  const[coverImage, setCoverImage] = useState<any>()
+  const [image, setImage] = useState<string | ArrayBuffer | null | object>();
+  const[coverImage, setCoverImage] = useState<string | ArrayBuffer | null | object>()
   const [isLoading, setIsLoading] = useState(false);
   const { isAunthenticated } = useAuthStore();
   const user = useCurrentUser();
@@ -73,7 +73,7 @@ const BasicInformation = ({
     data
   ) => {
 
-    let dataToUpdate = {
+    const dataToUpdate = {
       email:user.email,
       organization_name: data.organizationName,
       image,
@@ -97,13 +97,13 @@ const BasicInformation = ({
 
   const handleImage = (e:ChangeEvent< HTMLInputElement>, type:string) => {
     if(e.target.files){
-      let url = URL.createObjectURL(e.target.files[0])
-      let image = e.target.files[0]
+      const url = URL.createObjectURL(e.target.files[0])
+      const image = e.target.files[0]
    const reader = new FileReader()
    if(image){
     reader.readAsDataURL(image)
     reader.onloadend = () => {
-      let imageSrc = reader.result
+      const imageSrc = reader.result
 if(type === 'image'){
   setImage(imageSrc)
   setImagePreview( url)

@@ -2,7 +2,7 @@ import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 
 type TagsInputBoxProps = {
-  onChange:any,
+  onChange:(params:string[]) => void,
   values:string[] | undefined,
   isEditorOpen:boolean
 }

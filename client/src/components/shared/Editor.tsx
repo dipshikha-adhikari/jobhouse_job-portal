@@ -1,7 +1,7 @@
 import { Editor } from "@tinymce/tinymce-react";
 
 type EditorProps = {
-  onChange:any
+  onChange:() => void
   initialValue:string | undefined
 }
 

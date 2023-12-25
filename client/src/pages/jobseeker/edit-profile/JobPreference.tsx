@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { ChangeEvent, FormEvent, useEffect, useRef, useState } from 'react'
+import { FormEvent, useEffect, useState } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { FaEdit } from 'react-icons/fa'
 import { JobseekerJobPreferenceSchema } from '../../../utils/validationSchema'

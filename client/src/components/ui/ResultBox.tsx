@@ -1,19 +1,19 @@
-import {GoDotFill} from 'react-icons/go'
+import moment from 'moment'
+import { CiCalendar, CiLocationOn } from "react-icons/ci"
+import { FaRegCalendarCheck } from 'react-icons/fa'
+import { GiSkills } from 'react-icons/gi'
+import { GoDotFill } from 'react-icons/go'
+import { MdCastForEducation } from 'react-icons/md'
 import { Link } from 'react-router-dom'
 import { IJob } from '../../types/postgres/types'
-import moment from 'moment'
-import { MdCastForEducation, MdOutlineWorkOutline } from 'react-icons/md'
-import { FaMoneyCheckAlt, FaRegCalendarCheck } from 'react-icons/fa'
-import { CiCalendar, CiLocationOn } from "react-icons/ci"
-import { GiSkills } from 'react-icons/gi'
 
 interface IResultBox{
     job:IJob,
-    appliedJobs:any[]
+    appliedJobs:string[]
 }
 
 const ResultBox = ({job, appliedJobs}:IResultBox) => {
-console.log(job)
+
   return (
     <Link to={`/jobs/${job.title}/${job.job_id}`} className='grid  max-w-md border-xs border-light font-normal  '>
     <div  className='flex p-sm gap-xs items-center text-black-dark hover:text-black-dark'>

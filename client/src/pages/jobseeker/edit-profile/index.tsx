@@ -11,7 +11,7 @@ import useAuthStore from "../../../store/auth";
 import NoUser from "../../../components/shared/NoUser";
 import { useEffect } from "react";
 
-let data = [
+const data = [
   {
     title: "Job Preference",
     link: "job-preference",

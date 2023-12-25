@@ -50,7 +50,7 @@ const Experience = () => {
 
     <section className="grid gap-sm">
     {profile !== undefined &&
-        profile?.map((item:any) => {
+        profile?.map((item:IJobseekerExperience) => {
           return (
           <ExperienceBox item={item}/>
   )

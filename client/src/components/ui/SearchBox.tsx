@@ -1,8 +1,8 @@
-import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
-import { debounceFn } from '../../utils/debounce'
+import { useEffect, useRef, useState } from 'react'
 import { useQuery } from 'react-query'
-import { publicRequest } from '../../lib/axios'
 import { Link, useLocation } from 'react-router-dom'
+import { publicRequest } from '../../lib/axios'
+import { debounceFn } from '../../utils/debounce'
 
 type Suggestion = {
   title:string

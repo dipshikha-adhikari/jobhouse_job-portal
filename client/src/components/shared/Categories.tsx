@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 
 type CategoryProps = {
-  setIsModalOpen?:(props:any) => void
+  setIsModalOpen?:(props:boolean) => void
 }
 
 const Categories = ({setIsModalOpen}:CategoryProps) => {

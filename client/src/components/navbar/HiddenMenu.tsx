@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import Categories from "../shared/Categories";
 
 interface IHiddenMenu {
-  setMenuOpen: (props: any) => void;
+  setMenuOpen: (props: boolean) => void;
   menuOpen:boolean
 }
 const HiddenMenu = ({ setMenuOpen, menuOpen }: IHiddenMenu) => {

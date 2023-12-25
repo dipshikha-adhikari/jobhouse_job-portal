@@ -175,7 +175,7 @@ const loading = !role
                 <div className="flex gap-2 items-center">
                 <CiCircleCheck />  Job Categories :{" "}
                   <div className="flex flex-wrap gap-xs">
-                    {profile.job_preference?.category_names.map((cat: any) => {
+                    {profile.job_preference?.category_names.map((cat: string) => {
                       return <span key={cat}>{cat}</span>;
                     })}{" "}
                   </div>
@@ -198,7 +198,7 @@ const loading = !role
             <GiSkills />   Skills
             </header>
             <div className="grid gap-2">
-              {profile?.job_preference?.skills ? profile?.job_preference?.skills.map((skill: any) => {
+              {profile?.job_preference?.skills ? profile?.job_preference?.skills.map((skill: string) => {
                 return <li key={skill}>{skill}</li>;
               }) : 'Not available'}
             </div>

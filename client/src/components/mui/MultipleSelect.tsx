@@ -1,17 +1,20 @@
 
 
-import * as React from 'react';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent} from '@mui/material/Select';
 import { Checkbox, InputLabel, ListItemText } from '@mui/material';
+import FormControl from '@mui/material/FormControl';
+import MenuItem from '@mui/material/MenuItem';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import * as React from 'react';
 
 
 type Props = {
-  values: any,
+  values: [],
   type: string,
-  field: any,
+  field:{
+    value:string 
+    onChange:(props:string[]) => void
+  } ,
   isEditorOpen: boolean
 }
 type Category = {
@@ -29,15 +32,15 @@ export default function MultipleSelectChip({ values, type, field, isEditorOpen }
 
   React.useEffect(() => {
     if(field.value !== undefined){
-      let val = String(field.value).split(',');
+      const val = String(field.value).split(',');
       setPersonName(val);
     }
   }, [field]);
 
   const handleChange = (event: SelectChangeEvent<typeof personName>) => {
     const { target: { value } } = event;
-    let newVal = typeof value === 'string' ? value.split(',') : value
-    let filteredVal = newVal.filter(val => { return val !== ''})
+    const newVal = typeof value === 'string' ? value.split(',') : value
+    const filteredVal = newVal.filter(val => { return val !== ''})
 field.onChange(filteredVal)
   };
 

@@ -11,7 +11,7 @@ import { useCurrentUser } from "../../hooks/useCurrentUser";
 import Loader from "../../components/shared/Loader";
 
 const CreateJob = () => {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState<number>(1);
   const auth = useAuthStore();
   const params = useParams()
 const{role} = useCurrentUser()
@@ -37,8 +37,8 @@ return (
         </span>
         <ProgressBar step={step} />
       </div>
-      {step === 1 && <CreateJobStepOne job={job} setStep={setStep} />}
-      {step === 2 && <CreateJobStepTwo job={job} setStep={setStep} />}
+      {step === 1 && <CreateJobStepOne step={step} job={job} setStep={setStep} />}
+      {step === 2 && <CreateJobStepTwo step={step} job={job} setStep={setStep} />}
     </div>
   );
 };

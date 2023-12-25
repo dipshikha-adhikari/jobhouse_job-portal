@@ -10,13 +10,13 @@ const Register = () => {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleClickOutside = (e: any) => {
-      if (e.target.classList.contains("register-button")) return;
+    const handleClickOutside = (e: MouseEvent) => {
+      if ((e.target as Element).classList.contains("register-button")) return;
 
       if (
         store.registerModalOpen &&
         ref.current &&
-        !ref.current.contains(e.target)
+        !ref.current.contains(e.target as Element)
       ) {
         store.toggleRegisterModal();
       }

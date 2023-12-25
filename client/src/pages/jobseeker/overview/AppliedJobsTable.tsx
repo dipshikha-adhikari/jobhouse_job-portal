@@ -1,13 +1,9 @@
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { IJobseekerProfile } from "../../../types/postgres/types";
+import {  DataGrid, GridCellParams, GridColDef } from "@mui/x-data-grid";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import { privateRequest } from "../../../lib/axios";
 import { useQuery } from "react-query";
 
-type Props = {
-  profile: IJobseekerProfile | undefined;
-};
 
 const columns: GridColDef[] = [
   {
@@ -27,7 +23,7 @@ const columns: GridColDef[] = [
     hideable: false,
     disableColumnMenu: true,
     filterable: false,
-    renderCell: (params) => {
+    renderCell: (params:GridCellParams) => {
       return (
         <div className="grid gap-2">
           <img

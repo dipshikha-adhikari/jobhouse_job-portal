@@ -19,11 +19,11 @@ export interface IEmployerBasicInformationInputs  {
     deadline: Date ;
     noOfVacancy: number;
     description: string;
-    categoryId: any;
+    categoryId: string;
     location: string;
     level:string;
     type:string;
-    skills?:[]
+    skills?:Maybe<(string | undefined)[] | undefined>
     educationRequired:string
 }
 

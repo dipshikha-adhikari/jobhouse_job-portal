@@ -18,7 +18,7 @@ type AppliedJobs = {
 }
 
 const Jobs = () => {
-  let location = useLocation().search;
+  const location = useLocation().search;
   const category = new URLSearchParams(location).get("category");
   const industry = new URLSearchParams(location).get("industry");
   const id = new URLSearchParams(location).get("id");
@@ -29,7 +29,7 @@ const [appliedIds, setAppliedIds] = useState<string[]>([])
 useEffect(() => {
   appliedJobs?.map(item => {
     if(!appliedIds.includes(item.job_id)){
-      setAppliedIds((prev:any) => ([...prev, item.job_id]))
+      setAppliedIds((prev:string[]) => ([...prev, item.job_id]))
     }
   })
   },[appliedJobs])

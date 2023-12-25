@@ -23,7 +23,7 @@ type Applicaitons = {
 
 
 const JobCard: React.FC<JobCardProps> = ({ job, index}) => {
-  let time = moment(job.deadline).format("LL");
+  const time = moment(job.deadline).format("LL");
 
 
   const{data:applications, isError, isLoading}:Applicaitons = useQuery(['applications', job.job_id], async() => {

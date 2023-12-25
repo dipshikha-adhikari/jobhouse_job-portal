@@ -42,13 +42,13 @@ const Login = () => {
           loading: "Processing",
           success: (res) => {
             setIsLoading(false);
-            let data = res.data;
-            let token = data.token;
-            let role = data.user.role;
-            let fullName = data.user.fullname
-            let phoneNumber = data.user.phone_number
-            let email = data.user.email
-            let userInfo = {fullName,email,token,role,phoneNumber}
+            const data = res.data;
+            const token = data.token;
+            const role = data.user.role;
+            const fullName = data.user.fullname
+            const phoneNumber = data.user.phone_number
+            const email = data.user.email
+            const userInfo = {fullName,email,token,role,phoneNumber}
             localStorage.setItem('userInfo', JSON.stringify(userInfo))
             authStore.setAuthentication(true);
             setAuthToken(token)

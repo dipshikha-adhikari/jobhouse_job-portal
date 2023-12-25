@@ -1,11 +1,14 @@
-import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
+import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 
 interface IMuiSelect {
   values: IndustriesTypes[] | undefined;
   isEditorOpen?:boolean
-  field:any
+  field: {
+    value:string | number,
+    onChange:() => void
+  }
 }
 
 type IndustriesTypes = {

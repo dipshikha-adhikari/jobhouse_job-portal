@@ -1,11 +1,6 @@
-import * as React from 'react';
-import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import CircularProgress, {
-  circularProgressClasses,
-  CircularProgressProps,
-} from '@mui/material/CircularProgress';
 import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
+import { styled } from '@mui/material/styles';
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   height: 10,
@@ -21,8 +16,10 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 
 // Inspired by the former Facebook spinners.
 
-
-export default function ProgressBar({step}:any) {
+type Props = {
+  step: number
+}
+export default function ProgressBar({step}:Props) {
   return (
     <Box sx={{ flexGrow: 1 }} >
   

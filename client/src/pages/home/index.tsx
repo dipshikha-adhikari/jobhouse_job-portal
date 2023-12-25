@@ -29,6 +29,7 @@ user_id:string,
   job_count: string
 }
 
+
 const Home = () => {
 const{jobs:appliedJobs}:AppliedJobs = useAppliedJobs()
 const [appliedIds, setAppliedIds] = useState<string[]>([])
@@ -50,8 +51,8 @@ const {data:companies , isLoading:loadingComapnies, isError:errorComapnies} = us
 
 useEffect(() => {
 appliedJobs?.map(item => {
-  if(!appliedIds.includes(item.job_id)){
-    setAppliedIds((prev:any) => ([...prev, item.job_id]))
+  if(!appliedIds.includes(item?.job_id)){
+    setAppliedIds((prev:string[]) => ([...prev, item.job_id]))
   }
 })
 },[appliedJobs])

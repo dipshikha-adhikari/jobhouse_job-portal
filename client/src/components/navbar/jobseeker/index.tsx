@@ -6,10 +6,10 @@ import { useJobseekerProfile } from "../../../pages/jobseeker/hooks/useJobseeker
 import { IJobseekerProfile } from "../../../types/postgres/types";
 
 type JobseekerNav = {
-  setMenuOpen: (props: any) => void;
+  setMenuOpen: (props: boolean) => void;
   menuOpen: boolean;
   isModalOpen: boolean;
-  setIsModalOpen: (props: any) => void;
+  setIsModalOpen: (props: boolean) => void;
 };
 
 type Profile = {

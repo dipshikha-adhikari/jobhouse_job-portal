@@ -10,7 +10,7 @@ import moment from 'moment';
 type EducationProps = {
   profile?:IJobseekerEducation | undefined
   isEditorOpen:boolean
-  setIsEditorOpen:(props:any) => void 
+  setIsEditorOpen:(props:boolean) => void 
   }
 const EducationForm = ({profile, isEditorOpen, setIsEditorOpen}:EducationProps) => {
     const [isLoading, setIsLoading] = useState(false);
@@ -24,7 +24,8 @@ const EducationForm = ({profile, isEditorOpen, setIsEditorOpen}:EducationProps) 
   
   useEffect(() => {
 if(profile){
-  let date:any = moment(profile.graduation_year).format("YYYY-MM-DD")
+  const dateString:string = moment(profile.graduation_year).format("YYYY-MM-DD")
+  const date:Date = new Date(dateString)
   setValue('course', profile?.course)
   setValue('degree', profile?.degree)
   setValue('graduationYear', date)

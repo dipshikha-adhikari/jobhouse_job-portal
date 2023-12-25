@@ -1,8 +1,7 @@
-import { useState } from 'react';
-import { IJobseekerEducation, IJobseekerExperience } from '../../types/postgres/types';
 import moment from 'moment';
-import EducationForm from '../../pages/jobseeker/edit-profile/EducationForm';
+import { useState } from 'react';
 import ExperienceForm from '../../pages/jobseeker/edit-profile/ExperienceForm';
+import { IJobseekerExperience } from '../../types/postgres/types';
 
 type Props = {
     item:IJobseekerExperience

@@ -21,7 +21,7 @@ window.scrollTo(0,0)
 },[profile])
 
 function calculateProgress(){
-  let val = 100/4
+  const val = 100/4
   let progress = 0
  if(profile?.basic_information){
   progress += val

@@ -6,11 +6,11 @@ import { useEffect, useState } from "react";
 import {  useNavigate, useParams } from "react-router-dom";
 import { createJob } from "../../pages/employer/actions/createJob";
 import { CreateJobStepTwoSchema } from "../../utils/validationSchema";
-// import { IJob } from "../../types/postgres/types";
 import SelectJob from "../mui/SelectJob";
 import { useProfile } from "../../pages/employer/hooks/useEmployerProfile";
 import TagsInputBox from "../ui/TagsInputBox";
 import { IJob } from "../../types/postgres/types";
+import { Maybe } from "yup";
 
 type StepTwoInputs = {
   noOfVacancy: number
@@ -18,18 +18,19 @@ type StepTwoInputs = {
   level: string
   type: string
   educationRequired:string 
-  skills?:any
+  skills?:Maybe<(string | undefined)[] | undefined>
 
 };
 
 
 
 type CreateJobStepTwoProps = {
-  setStep:(props:any) => void 
+  setStep:(props:number) => void 
   job:IJob | undefined
+  step:number
 }
 
-const CreateJobStepTwo = ({ setStep, job }:CreateJobStepTwoProps) => {
+const CreateJobStepTwo = ({ setStep, job, step }:CreateJobStepTwoProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [level, setLevel] = useState('')
   const [type, setType] = useState('')
@@ -50,11 +51,11 @@ const {profile} = useProfile()
   const jobStore = useJobInputs();
 
   const onSubmit: SubmitHandler<StepTwoInputs> = (data) => {
-    let stepOneData = jobStore.stepOne;
+    const stepOneData = jobStore.stepOne;
   if(stepOneData.deadline === undefined ||stepOneData.title === undefined){
-    setStep((prev:any) => prev - 1)
+    setStep(step - 1)
   }
-    let dataToBeSent = { ...stepOneData, ...data , industryId : profile?.basic_information.industry_id};
+    const dataToBeSent = { ...stepOneData, ...data , industryId : profile?.basic_information.industry_id};
     createJob(dataToBeSent, setIsLoading, navigate, jobId);
     jobStore.setStepOneInputs('')
   };
@@ -180,7 +181,7 @@ const {profile} = useProfile()
       <div className="flex justify-around">
         <button
           className="border-blue-dark  rounded-md border-sm text-blue-dark px-sm p-xs disabled:opacity-50"
-          onClick={() => setStep((prev:any) => prev - 1)}
+          onClick={() => setStep(step - 1)}
           type="button"
         >
           Prev

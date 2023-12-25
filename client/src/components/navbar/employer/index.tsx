@@ -4,10 +4,10 @@ import useStore from "../../../store/store";
 import EmployerProfileMenu from "../../modals/EmployerProfileMenu";
 
 type EmployerNav = {
-  setMenuOpen: (props: any) => void;
+  setMenuOpen: (props: boolean) => void;
   menuOpen: boolean;
   isModalOpen: boolean;
-  setIsModalOpen: (props: any) => void;
+  setIsModalOpen: (props: boolean) => void;
 };
 
 const NavbarForEmployer = ({

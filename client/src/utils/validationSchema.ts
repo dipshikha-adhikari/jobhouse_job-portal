@@ -36,7 +36,7 @@ export const CreateJobStepOneSchema = Yup.object().shape({
     .min(new Date(), "deadline must be in the future")
     .required("deadline is required")
     .typeError("deadline must be a valid date"),
-  categoryId: Yup.mixed().required(),
+  categoryId: Yup.string().required(),
   location: Yup.string().required(""),
 });
 

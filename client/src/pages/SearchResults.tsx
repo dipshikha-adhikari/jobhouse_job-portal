@@ -6,7 +6,6 @@ import { publicRequest } from '../lib/axios';
 import Loader from '../components/shared/Loader';
 import Error from '../components/shared/Error';
 import { IJob } from '../types/postgres/types';
-import JobCard from '../components/shared/JobCard';
 import { useAppliedJobs } from './jobseeker/hooks/useAppliedJobs';
 import Categories from '../components/shared/Categories';
 import Industries from '../components/shared/Industries';

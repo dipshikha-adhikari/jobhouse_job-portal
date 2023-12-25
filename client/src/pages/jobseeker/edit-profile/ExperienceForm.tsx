@@ -13,7 +13,7 @@ import { useIndustries } from '../../../hooks/useIndustries';
 type ExperienceFormProps = {
     profile?:IJobseekerExperience | undefined
     isEditorOpen:boolean
-    setIsEditorOpen:(props:any) => void 
+    setIsEditorOpen:(props:boolean) => void 
     isError:boolean
 }
 
@@ -32,8 +32,10 @@ const ExperienceForm = ({isEditorOpen, setIsEditorOpen, profile}:ExperienceFormP
   
     useEffect(() => {
 if(profile){
-  let startDate:any = moment(profile.start_date).format('YYYY-MM-DD')
-  let endDate:any = moment(profile.end_date).format('YYYY-MM-DD')
+  const startDateStr:string = moment(profile.start_date).format('YYYY-MM-DD')
+  const endDateStr:string = moment(profile.end_date).format('YYYY-MM-DD')
+  const startDate:Date = new Date(startDateStr)
+  const endDate:Date = new Date(endDateStr)
   setValue('organizationName', profile.organization_name)
   setValue('organizationType', profile.organization_type)
   setValue('jobTitle', profile.job_title)

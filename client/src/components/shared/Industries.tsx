@@ -7,14 +7,16 @@ import { useIndustriesAndJobsCount } from "../../hooks/useIndustriesAndJobsCount
 
 
 const Industries = () => {
-    let initialLimit = 8;
-    const [limit, setLimit] = useState<any>(initialLimit);
+    const initialLimit = 8;
+    const [limit, setLimit] = useState<number>(initialLimit);
 
 const{data, isLoading, isError} = useIndustriesAndJobsCount()
 
 const handleLimit = () => {
     if (limit <= initialLimit) {
+    if(data?.length !== undefined){
       setLimit(data?.length);
+    }
     } else {
       setLimit(initialLimit);
     }
