@@ -8,7 +8,6 @@ import { privateRequest } from "../../lib/axios";
 type JobCardProps = {
   job: IJob;
   index: number;
-  params?:any
 };
 
 type Applicaitons = {
@@ -23,7 +22,7 @@ type Applicaitons = {
 }
 
 
-const JobCard: React.FC<JobCardProps> = ({ job, index, params }) => {
+const JobCard: React.FC<JobCardProps> = ({ job, index}) => {
   let time = moment(job.deadline).format("LL");
 
 
@@ -60,7 +59,7 @@ const JobCard: React.FC<JobCardProps> = ({ job, index, params }) => {
       </Link>
 <Link to={`/employer/jobs/applicaitons/${job.job_id}`} className="bg-blue-dark text-white hover:text-white px-sm w-fit rounded-sm p-xs">Applications {applications?.length} </Link>
 
-     {params === undefined &&  <div className="flex  gap-xs">
+       <div className="flex  gap-xs">
         <Link
           to={`/jobs/update/${job.job_id}`}
           className="text-green-dark hover:text-green-dark border-sm border-green-dark px-sm rounded-sm p-xs font-bold"
@@ -70,7 +69,7 @@ const JobCard: React.FC<JobCardProps> = ({ job, index, params }) => {
         <button className="text-orange-dark font-bold border-sm border-orange-dark rounded-sm px-sm">
           Delete
         </button>
-      </div>}
+      </div>
     </div>
   );
 };

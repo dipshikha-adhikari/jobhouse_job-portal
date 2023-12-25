@@ -64,7 +64,7 @@ const {profile} = useProfile()
       setType(job.type)
       setLevel(job.level)
     }
-    setValue('educationRequired', job?.educationRequired ? job.educationRequired : jobStore.stepTwo.educationRequired )
+    setValue('educationRequired', job?.education_required ? job.education_required : jobStore.stepTwo.educationRequired )
     setValue('skills', job?.skills)
     setValue("noOfVacancy",   job?.no_of_vacancy ? job.no_of_vacancy : jobStore.stepTwo.noOfVacancy);
     setValue("level",   job?.level !== undefined ? job.level : jobStore.stepTwo.level);

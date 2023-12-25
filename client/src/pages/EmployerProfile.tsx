@@ -11,10 +11,13 @@ import Error from "../components/shared/Error";
 import Layout from "../components/ui/Layout";
 import { IEmployerProfile } from "../types/postgres/types";
 import RecentJobs from "./employer/RecentJobs";
+import { useRecentJobs } from "./employer/hooks/useRecentJobs";
+import JobCard from "../components/shared/JobCard";
 
 const EmployerProfile = () => {
 const params = useParams()
 const id = params.id
+const{jobs, isLoading:loadingRecentJobs,isError:errorRecentJobs} = useRecentJobs(id)
 
 const {data:profile, isLoading, isError}:UseQueryResult<IEmployerProfile> = useQuery(['profile',id], async() => {
 const result = await publicRequest.get(`/api/v1/employer/profile/${id}`)
@@ -31,12 +34,12 @@ if(isError) return <Error/>
 
    return (
     <Layout>
-      <div className='grid gap-sm lg:flex lg:gap-md' >
+      <div className='grid gap-xl lg:flex lg:gap-md' >
        <section className='grid gap-sm flex-1 h-fit'>
        <header className="relative h-full">
         <div className='cover-image'>
         <img
-          src={profile?.basic_information?.cover_image ? profile.basic_information.cover_image : "https://template.canva.com/EAENvp21inc/1/0/1600w-qt_TMRJF4m0.jpg"}
+          src={profile?.cover_image.url ? profile?.cover_image.url : "https://template.canva.com/EAENvp21inc/1/0/1600w-qt_TMRJF4m0.jpg"}
           alt=""
           className="w-full h-full max-h-[300px] relative object-contain "
         />
@@ -44,7 +47,7 @@ if(isError) return <Error/>
 
         <div className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 flex gap-sm">
           <img
-            src={profile?.basic_information?.image ? profile.basic_information.image : "https://media.istockphoto.com/id/1340893300/vector/technology-logo-design-template-networking-vector-logo-design.jpg?s=612x612&w=0&k=20&c=-8XBWFDRAAYe3leL4nuMnei0wWpL6-IqsPCAbWIhASk="}
+            src={profile?.image.url ? profile?.image.url : "https://media.istockphoto.com/id/1340893300/vector/technology-logo-design-template-networking-vector-logo-design.jpg?s=612x612&w=0&k=20&c=-8XBWFDRAAYe3leL4nuMnei0wWpL6-IqsPCAbWIhASk="}
             alt=""
             className="h-20 w-20 rounded-sm object-contain"
           />
@@ -73,9 +76,13 @@ if(isError) return <Error/>
 
       
     <div className='grid gap-sm'>
-          <h2 className='font-semibold text-xl border-y-sm py-xs border-default'>Recent jobs by {profile?.basic_information?.organization_name }</h2>
-          <div>
-          <RecentJobs employerId={profile?.user_id} params={id}/>
+          <h2 className='font-semibold text-xl border-y-sm py-sm w-fit border-default'>Recent jobs by {profile?.basic_information?.organization_name }</h2>
+          <div className="grid gap-md grid-cols-[repeat(auto-fit,minmax(300px,1fr))] ">
+            {loadingRecentJobs && <div className="text-center">Loading...</div>}
+            {errorRecentJobs && <div className="text-center">Error!</div>}
+     {jobs?.map(item => {
+      return <JobCard job={item} appliedJobs={[]}/>
+     })}
           </div>
         </div>
       </section>

@@ -13,12 +13,12 @@ export const useRecentJobs = (id:string | undefined) => {
     const {
         data: jobs,
         isLoading,
-        error,
+        isError,
        
     }: UseQueryResult<IJob[]> = useQuery(
        [ "employerRecentJobs",id],
         getRecentJobs
     );
 
-    return {jobs, isLoading, error };
+    return {jobs, isLoading, isError };
 };

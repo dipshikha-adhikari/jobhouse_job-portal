@@ -19,9 +19,9 @@ const Overview = () => {
   const navigate = useNavigate();
   const { profile, error, isLoading } = useProfile();
 
-useEffect(() => {
-window.scrollTo(0,0)
-},[])
+// useEffect(() => {
+// window.scrollTo(0,0)
+// },[])
 
   const handleCreate = () => {
     if (!profile?.basic_information.id) {
@@ -50,8 +50,8 @@ window.scrollTo(0,0)
         <header className="relative h-full grid gap-xs place-items-center border-b-sm border-default pb-sm ">
           <img
             src={
-              profile?.basic_information?.image
-                ? profile.basic_information.image
+              profile?.image?.url
+                ? profile.image.url
                 : "https://template.canva.com/EAENvp21inc/1/0/1600w-qt_TMRJF4m0.jpg"
             }
             alt=""
@@ -94,7 +94,7 @@ window.scrollTo(0,0)
           </div>
 
           <div className="grid gap-sm  flex-1">
-            <header className="flex gap-xs sm:gap-sm flex-wrap items-center ">
+            <header className="flex gap-sm flex-wrap items-center ">
               <span
                 className={`${
                   selected === "recent" && "border-b-2 border-blue-dark"
@@ -111,9 +111,7 @@ window.scrollTo(0,0)
               >
                 All
               </span>
-              <span   className={`${
-                  selected === "applications" && "border-b-2 border-blue-dark "
-                } cursor-pointer`}  onClick={() => setSelected("applications")}>Applications</span>
+           
               <button
                 className="flex items-center gap-2 bg-orange-light text-white px-sm rounded-sm p-xs"
                 onClick={handleCreate}

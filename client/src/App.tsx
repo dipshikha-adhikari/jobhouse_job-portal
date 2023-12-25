@@ -2,7 +2,6 @@ import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import Navbar from "./components/navbar";
 import { ReactNode } from "react";
 import Home from "./pages/home";
-import JobseekerOverview from "./pages/jobseeker/Overview";
 import EmployerRegister from "./components/forms/EmployerRegister";
 import Login from "./pages/login";
 import Footer from "./components/footer";
@@ -20,6 +19,8 @@ import CreateJob from "./pages/jobs/CreateJob";
 import Jobs from "./pages/jobs";
 import ProfileReview from "./pages/jobseeker/ProfileReview";
 import EmployerProfileView from './pages/EmployerProfile'
+import JobseekerOverview from "./pages/jobseeker/overview/index";
+import SearchResults from "./pages/SearchResults";
 
 export const queryClient = new QueryClient();
 
@@ -58,7 +59,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/jobseeker/overview",
-        element: <JobseekerOverview />,
+        element: <JobseekerOverview/>,
       },
       {
         path: "/jobseeker/register",
@@ -116,6 +117,10 @@ const router = createBrowserRouter([
       {
         path: "/jobs/update/:jobId",
         element: <CreateJob />,
+      },
+      {
+        path: "/jobs/search",
+        element: <SearchResults />,
       },
       {
         path: "*",

@@ -45,7 +45,7 @@ export interface IJob {
   location: string;
   level: string;
   type: string;
-  educationRequired:string
+  education_required:string
   skills:string[]
   employer_details:{
   organization_name:string;
@@ -54,6 +54,8 @@ export interface IJob {
   address:string
   
   }
+  job_application_count:string
+
   employer_id: string
   industry_id :string 
   industry_name:string 

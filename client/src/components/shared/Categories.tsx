@@ -15,8 +15,8 @@ const handleClick = () => {
   }
 }
 
-  if(isLoading) return <div>Loading...</div>
-  if(isError) return <div>Error!</div>
+  if(isLoading) return <div className="text-center">Loading...</div>
+  if(isError) return <div className="text-center">Error!</div>
 
   return (
     <div className="grid gap-sm">

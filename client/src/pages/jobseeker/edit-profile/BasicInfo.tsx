@@ -32,7 +32,7 @@ const BasicInfo = () => {
       setValue('phoneNumber', phoneNumber!)
     }
   },[fullName, phoneNumber])
-
+console.log(basicInfo)
   useEffect(() => {
   
   if(basicInfo ){

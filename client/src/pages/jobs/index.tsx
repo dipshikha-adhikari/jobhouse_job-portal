@@ -3,7 +3,7 @@ import { UseQueryResult, useQuery } from "react-query";
 import { publicRequest } from "../../lib/axios";
 import { useLocation } from 'react-router-dom';
 import { IJob } from "../../types/postgres/types";
-import JobCard from "../../components/ui/JobCard";
+import JobCard from "../../components/shared/JobCard";
 import Loader from "../../components/shared/Loader";
 import Error from "../../components/shared/Error";
 import Layout from "../../components/ui/Layout";
@@ -63,7 +63,7 @@ useEffect(() => {
 
   if (isLoading) return <Loader />;
   if (isError) return <Error />;
-
+console.log(jobs)
 
   return (
  <Layout>

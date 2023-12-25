@@ -17,10 +17,10 @@ export const useCurrentJob = () => {
         }
         return response.data
     }
-    const { data: job, error, isLoading }:UseQueryResult<IJob> = useQuery(['jobDetails', jobId], getJobDetails, {
+    const { data: job, isError, isLoading }:UseQueryResult<IJob> = useQuery(['jobDetails', jobId], getJobDetails, {
         enabled: !!jobId
     })
 
 
-    return { job, error, isLoading }
+    return { job, isError, isLoading }
 }

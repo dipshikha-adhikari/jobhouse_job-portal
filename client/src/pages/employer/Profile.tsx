@@ -28,7 +28,7 @@ if(error || user.role !== 'employer') return <Error/>
        <header className="relative h-full">
         <div className='cover-image'>
         <img
-          src={profile?.basic_information?.cover_image ? profile.basic_information.cover_image : "https://template.canva.com/EAENvp21inc/1/0/1600w-qt_TMRJF4m0.jpg"}
+          src={profile?.cover_image.url ? profile.cover_image.url : "https://template.canva.com/EAENvp21inc/1/0/1600w-qt_TMRJF4m0.jpg"}
           alt=""
           className="w-full h-full max-h-[300px] relative object-contain "
         />
@@ -36,7 +36,7 @@ if(error || user.role !== 'employer') return <Error/>
 
         <div className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 flex gap-sm">
           <img
-            src={profile?.basic_information?.image ? profile.basic_information.image : "https://media.istockphoto.com/id/1340893300/vector/technology-logo-design-template-networking-vector-logo-design.jpg?s=612x612&w=0&k=20&c=-8XBWFDRAAYe3leL4nuMnei0wWpL6-IqsPCAbWIhASk="}
+            src={profile?.image.url ? profile.image.url : "https://media.istockphoto.com/id/1340893300/vector/technology-logo-design-template-networking-vector-logo-design.jpg?s=612x612&w=0&k=20&c=-8XBWFDRAAYe3leL4nuMnei0wWpL6-IqsPCAbWIhASk="}
             alt=""
             className="h-20 w-20 rounded-sm object-contain"
           />

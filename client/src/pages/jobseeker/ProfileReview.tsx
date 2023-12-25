@@ -44,14 +44,14 @@ window.scrollTo(0,0)
         </p>
       </div>
       <main className="grid gap-sm">
-        <header className="flex justify-between border-y-sm   py-sm border-gray-light">
+        <header className="flex justify-between border-y-sm   py-sm ">
           <p className="font-bold flex-1 ">Your Profile</p>
           <div className="w-1 border-sm h-full  grid bg-green-light"></div>
           <p className="font-bold hidden float-right text-right sm:block flex-1">
             Job requirement
           </p>
         </header>
-        <section className="flex justify-between   border-b-sm py-sm border-gray-light">
+        <section className="flex justify-between    py-sm ">
           <aside className="flex-1">
             <div>
               <img
@@ -105,7 +105,7 @@ window.scrollTo(0,0)
           </aside>
         </section>
 
-        <section className="flex justify-between items-center border-b-sm py-sm border-gray-light">
+        <section className="flex justify-between items-center  py-sm ">
           <aside className="flex-1 grid gap-xs">
             <header className="font-semibold">Work Experience</header>
             {profile?.experience.length > 0 ? (
@@ -141,7 +141,7 @@ window.scrollTo(0,0)
           </aside>
         </section>
 
-        <section className="flex items-center justify-between border-b-sm py-sm border-gray-light">
+        <section className="flex items-center justify-between py-sm ">
           <aside className="flex-1 grid gap-xs">
             <header className="font-semibold ">Education</header>
             {profile?.education.length > 0 ? (
@@ -162,7 +162,7 @@ window.scrollTo(0,0)
 
           <aside className=" hidden flex-1 sm:grid gap-xs place-content-center">
             <header className="font-semibold">Required Education</header>
-            <p>{job?.educationRequired || "Not available"}</p>
+            <p>{job?.education_required || "Not available"}</p>
           </aside>
         </section>
 
@@ -252,10 +252,10 @@ window.scrollTo(0,0)
         )}
         {profile?.education.length === 0 &&
           profile?.experience.length === 0 &&
-          profile?.job_preference?.skills === undefined &&
+       
           role === "jobseeker" && (
             <div className="text-gray-dark">
-              Please update at least 50% of your profile{" "}
+              Please update education or experience to apply  {" "}
             </div>
           )}
       </div>

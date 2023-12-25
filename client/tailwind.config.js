@@ -30,7 +30,8 @@ xl:'3rem'
         dark: "#94a3b8"
       },
       borderWidth: {
-        sm: '.5px',
+        xs:'0.2px',
+        sm: '0.5px',
         md: '1px',
         lg:'2px',
         xl:'4px'

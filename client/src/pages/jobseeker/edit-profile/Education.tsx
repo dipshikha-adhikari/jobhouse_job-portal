@@ -50,8 +50,8 @@ if(isLoading) return <Loader/>
     <div className="flex gap-sm flex-col min-h-[80vh] ">
       <section className="grid gap-sm">
         {profile !== undefined &&
-          profile?.map((item: any) => {
-            return <EducationBox item={item} />;
+          profile?.map((item) => {
+            return <EducationBox item={item}  key={item.id}/>;
           })}
       </section>
       <section>

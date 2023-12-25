@@ -27,7 +27,7 @@ if(isLoading || loading) return <Loader/>
 
   if (job?.job_id === undefined && jobId !== undefined) return <Error />;
   if (!auth.isAunthenticated) return <NoUser />;
- if(role !== 'employer') return <Error/>
+ if(role !== 'employer') return <div className="text-center min-h-[80vh] flex justify-center items-center"> You must be an employer to create or update job.</div>
 
 return (
     <div className="w-full grid gap-sm max-w-2xl mx-auto">

@@ -7,18 +7,18 @@
 .loader.one span::before{
     position: absolute;
     content: "";
-    left: -20%;
+    left: -10%;
     bottom: -50px;
     width: 100%;
-    height: 20px;
+    height: 10px;
     border-radius: 50%;
     background: radial-gradient(rgba(0,0,0,0.1),transparent);
 }
 @keyframes animate {
     0%,100%{
-        transform: translateX(-40px);
+        transform: translateX(-10px);
     }
     50%{
-        transform: translateX(40px); 
+        transform: translateX(10px); 
     }
 }
