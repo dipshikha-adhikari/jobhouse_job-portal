@@ -36,7 +36,7 @@ const Login = () => {
     try {
       const { email, password } = data;
       setIsLoading(true);
-  toast.promise(
+      toast.promise(
         publicRequest.post("/api/v1/auth/login", { email, password }),
         {
           loading: "Processing",
@@ -45,13 +45,13 @@ const Login = () => {
             const data = res.data;
             const token = data.token;
             const role = data.user.role;
-            const fullName = data.user.fullname
-            const phoneNumber = data.user.phone_number
-            const email = data.user.email
-            const userInfo = {fullName,email,token,role,phoneNumber}
-            localStorage.setItem('userInfo', JSON.stringify(userInfo))
+            const fullName = data.user.fullname;
+            const phoneNumber = data.user.phone_number;
+            const email = data.user.email;
+            const userInfo = { fullName, email, token, role, phoneNumber };
+            localStorage.setItem("userInfo", JSON.stringify(userInfo));
             authStore.setAuthentication(true);
-            setAuthToken(token)
+            setAuthToken(token);
             navigate(`/${role}/overview`);
 
             return "Success";
@@ -69,15 +69,13 @@ const Login = () => {
             }, 4000);
             return "Failed";
           },
-        }
+        },
       );
     } catch (err) {
       console.log(err);
       toast.dismiss();
     }
   };
-
-
 
   return (
     <div className="  w-full py-md grid gap-xs max-w-md mx-auto">
@@ -111,15 +109,22 @@ const Login = () => {
         <p className="text-red-600 text-sm">{errorMessage}</p>
 
         <button
-        type="submit"
+          type="submit"
           className="w-fit px-md rounded-md outline-none bg-blue-dark text-white hover:text-white p-xs disabled:opacity-50"
           disabled={isLoading}
         >
           Log in
         </button>
         <div className="">
-          <p>Dont have an account?   <Link to={'/jobseeker/register'} className="text-green-dark register-button font-bold cursor-pointer" >Register</Link> </p>
-        
+          <p>
+            Dont have an account?{" "}
+            <Link
+              to={"/jobseeker/register"}
+              className="text-green-dark register-button font-bold cursor-pointer"
+            >
+              Register
+            </Link>{" "}
+          </p>
         </div>
       </form>
     </div>

@@ -1,47 +1,50 @@
+import { Box, Chip, InputLabel, ListItemText } from "@mui/material";
+import FormControl from "@mui/material/FormControl";
+import MenuItem from "@mui/material/MenuItem";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import * as React from "react";
 
-
-import { Checkbox, InputLabel, ListItemText } from '@mui/material';
-import FormControl from '@mui/material/FormControl';
-import MenuItem from '@mui/material/MenuItem';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import * as React from 'react';
-
+type Values = {
+  industry_id?: string;
+  industry_name?: string;
+  category_name?: string;
+  category_id?: string;
+};
 
 type Props = {
-  values: [],
-  type: string,
-  field:{
-    value:string 
-    onChange:(props:string[]) => void
-  } ,
-  isEditorOpen: boolean
-}
-type Category = {
-  category_name:string
-  category_id:string
-}
+  values: Values[] | undefined;
+  type: string;
+  value: string[];
+  onChange: (params: string[]) => void;
+  isEditorOpen: boolean;
+};
 
-type Industry = {
-  industry_name:string
-  industry_id:string
-}
-
-export default function MultipleSelectChip({ values, type, field, isEditorOpen }: Props) {
+export default function MultipleSelectChip({
+  values,
+  type,
+  value,
+  onChange,
+  isEditorOpen,
+}: Props) {
   const [personName, setPersonName] = React.useState<string[]>([]);
 
   React.useEffect(() => {
-    if(field.value !== undefined){
-      const val = String(field.value).split(',');
+    if (value !== undefined) {
+      const val = String(value).split(",");
       setPersonName(val);
     }
-  }, [field]);
+  }, [value]);
 
   const handleChange = (event: SelectChangeEvent<typeof personName>) => {
-    const { target: { value } } = event;
-    const newVal = typeof value === 'string' ? value.split(',') : value
-    const filteredVal = newVal.filter(val => { return val !== ''})
-field.onChange(filteredVal)
+    const {
+      target: { value },
+    } = event;
+    const newVal = typeof value === "string" ? value.split(",") : value;
+    const filteredVal = newVal.filter((val) => {
+      return val !== "";
+    });
+    onChange(filteredVal);
   };
 
   return (
@@ -55,27 +58,42 @@ field.onChange(filteredVal)
           value={personName}
           onChange={handleChange}
           MenuProps={{
-            disableScrollLock:true
+            disableScrollLock: true,
           }}
           disabled={!isEditorOpen}
           input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
-          renderValue={(selected) => selected.join(', ')}
+          // renderValue={(selected) => selected.join(", ")}
+
+          renderValue={(selected) => (
+            <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+              {selected.map((value) => (
+                <Chip key={value} label={value} />
+              ))}
+            </Box>
+          )}
         >
-            {type === 'category' ? values?.map((val:Category) => (
+          {values?.map((val: Values | undefined) => (
             <MenuItem
-              key={ val.category_name}
-              value={ val.category_name}
+              key={
+                type === "category" ? val?.category_name : val?.industry_name
+              }
+              value={
+                type === "category" ? val?.category_name : val?.industry_name
+              }
             >
-            <Checkbox checked={personName.indexOf(val.category_name) > -1} />
-              <ListItemText primary={val.category_name} />
-            </MenuItem>
-          )) :  values?.map((val:Industry) => (
-            <MenuItem
-              key={val.industry_name }
-              value={val.industry_name }
-            >
-              <Checkbox checked={personName.indexOf(val.industry_name) > -1} />
-              <ListItemText primary={val.industry_name} />
+              {/* <Checkbox
+                checked={
+                  type === "category" && val?.category_name !== undefined
+                    ? personName.indexOf(val.category_name) > -1
+                    : val?.industry_name !== undefined &&
+                      personName.indexOf(val.industry_name) > -1
+                }
+              /> */}
+              <ListItemText
+                primary={
+                  type === "category" ? val?.category_name : val?.industry_name
+                }
+              />
             </MenuItem>
           ))}
         </Select>

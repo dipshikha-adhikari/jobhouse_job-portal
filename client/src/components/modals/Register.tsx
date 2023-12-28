@@ -27,7 +27,6 @@ const Register = () => {
     return () => {
       document.removeEventListener("click", handleClickOutside);
     };
-    
   }, [ref, store.registerModalOpen]);
 
   return (
@@ -54,7 +53,6 @@ const Register = () => {
             Employer
           </span>
         </div>{" "}
-
       </header>
 
       {selected === "jobseeker" ? (
@@ -62,10 +60,7 @@ const Register = () => {
       ) : (
         <ImOffice fontSize={60} />
       )}
-      <Link
-        to={`/${selected}/register`}
-        onClick={store.toggleRegisterModal}
-      >
+      <Link to={`/${selected}/register`} onClick={store.toggleRegisterModal}>
         Register
       </Link>
 

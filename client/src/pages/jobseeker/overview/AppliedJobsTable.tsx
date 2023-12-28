@@ -1,9 +1,8 @@
-import {  DataGrid, GridCellParams, GridColDef } from "@mui/x-data-grid";
+import { DataGrid, GridCellParams, GridColDef } from "@mui/x-data-grid";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import { privateRequest } from "../../../lib/axios";
 import { useQuery } from "react-query";
-
 
 const columns: GridColDef[] = [
   {
@@ -23,7 +22,7 @@ const columns: GridColDef[] = [
     hideable: false,
     disableColumnMenu: true,
     filterable: false,
-    renderCell: (params:GridCellParams) => {
+    renderCell: (params: GridCellParams) => {
       return (
         <div className="grid gap-2">
           <img
@@ -88,8 +87,8 @@ export default function AppliedJobsTable() {
     return result.data;
   });
 
-console.log(jobs)
- 
+  console.log(jobs);
+
   if (isLoading) return <div className="text-center">Fetching...</div>;
   if (isError) return <div className="text-center py-md">Failed to fetch!</div>;
   if (jobs.length === 0) return <div>You have not applied to any job yet!</div>;

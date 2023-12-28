@@ -1,8 +1,8 @@
 import { create } from "zustand";
 
 interface AuthState {
-  isAunthenticated: boolean,
-  setAuthentication: (props: boolean) => void,
+  isAunthenticated: boolean;
+  setAuthentication: (props: boolean) => void;
 }
 
 // let userInfo = localStorage.getItem('userInfo')
@@ -10,10 +10,10 @@ interface AuthState {
 
 const useAuthStore = create<AuthState>((set) => ({
   isAunthenticated: false,
-  setAuthentication: (props) => set({
-    isAunthenticated: props
-  }),
+  setAuthentication: (props) =>
+    set({
+      isAunthenticated: props,
+    }),
+}));
 
-}))
-
-export default useAuthStore
+export default useAuthStore;

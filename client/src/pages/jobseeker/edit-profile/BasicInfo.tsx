@@ -1,13 +1,12 @@
-import { useEffect, useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { ChangeEvent, useEffect, useState } from "react";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { FaEdit } from "react-icons/fa";
+import ResponsiveDatePicker from "../../../components/mui/DatePicker";
+import { useCurrentUser } from "../../../hooks/useCurrentUser";
+import { IJobseekerBasicInformation } from "../../../types/postgres/types";
 import { IJobseekerBasicInfoInputs } from "../../../types/react/types";
 import { JobseekerBasicInfoSchema } from "../../../utils/validationSchema";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { IJobseekerBasicInformation } from "../../../types/postgres/types";
-import { useCurrentUser } from "../../../hooks/useCurrentUser";
-import moment from "moment";
-import { ChangeEvent } from "react";
 import { updateBasicInfo } from "../actions/updateBasicInfo";
 import { useJobseekerProfile } from "../hooks/useJobseekerProfile";
 
@@ -28,6 +27,7 @@ const BasicInfo = () => {
     handleSubmit,
     formState: { errors },
     setValue,
+    control,
   } = useForm({ resolver: yupResolver(JobseekerBasicInfoSchema) });
   const { profile: basicInfo }: BasicInfo =
     useJobseekerProfile("basicInformation");
@@ -41,18 +41,11 @@ const BasicInfo = () => {
 
   useEffect(() => {
     if (basicInfo) {
-      const dateOfBirthString: string = moment(basicInfo?.date_of_birth).format(
-        "YYYY-MM-DD"
-      );
-      const dateOfBirth: Date = new Date(dateOfBirthString);
-      setValue("dateOfBirth", dateOfBirth);
-     
       const gender: "male" | "female" | "other" =
         (basicInfo?.gender as "male" | "female" | "other") || "other";
 
-      setValue("gender", gender);
-     
       setImagePreview(basicInfo?.image.url);
+
       if (basicInfo?.image.url) {
         //image is not handled by react-hook-form
         setImage(() => ({
@@ -61,6 +54,8 @@ const BasicInfo = () => {
         }));
       }
 
+      setValue("gender", gender);
+      setValue("dateOfBirth", new Date(basicInfo?.date_of_birth));
       setValue("fullname", basicInfo?.fullname);
       setValue("currentAddress", basicInfo?.current_address);
       setValue("permanentAddress", basicInfo?.permanent_address);
@@ -197,11 +192,17 @@ const BasicInfo = () => {
           <div>
             <div className="grid sm:flex gap-xs items-center">
               <span>Date of Birth</span>{" "}
-              <input
-                type="date"
-                disabled={!isEditorOpen}
-                {...register("dateOfBirth")}
-                className="outline-none p-xs border-sm"
+              <Controller
+                control={control}
+                name="dateOfBirth"
+                render={({ field }) => {
+                  return (
+                    <ResponsiveDatePicker
+                      isEditorOpen={isEditorOpen}
+                      field={field}
+                    />
+                  );
+                }}
               />
             </div>
             <p className="text-orange-dark text-sm">

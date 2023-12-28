@@ -1,14 +1,14 @@
 import { AiOutlineMail, AiOutlinePhone, AiOutlineUser } from "react-icons/ai";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import {  registerValidationSchema } from "../../utils/validationSchema";
+import { registerValidationSchema } from "../../utils/validationSchema";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { publicRequest } from "../../lib/axios";
 import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
 
- type Inputs = {
+type Inputs = {
   fullName: string;
   phoneNumber: number;
   email: string;
@@ -20,9 +20,9 @@ const EmployerRegister = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
-  const location = useLocation()
-  const splitedLocation = location.pathname.split('/')
-  const role = splitedLocation[1]
+  const location = useLocation();
+  const splitedLocation = location.pathname.split("/");
+  const role = splitedLocation[1];
 
   const {
     register,
@@ -31,23 +31,22 @@ const EmployerRegister = () => {
   } = useForm<Inputs>({ resolver: yupResolver(registerValidationSchema) });
 
   useEffect(() => {
-    window.scrollTo(0,0)
-      },[])
+    window.scrollTo(0, 0);
+  }, []);
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    setIsLoading(true)
+    setIsLoading(true);
     const { email, password, phoneNumber, fullName } = data;
     toast.promise(
-        
-     publicRequest.post("/api/v1/auth/register", {
+      publicRequest.post("/api/v1/auth/register", {
         email,
         password,
         phoneNumber,
         fullName,
-        role
+        role,
       }),
       {
-        loading: 'Processing' ,
+        loading: "Processing",
         success: () => {
           navigate("/user/login");
           setIsLoading(false);
@@ -56,18 +55,18 @@ const EmployerRegister = () => {
         error: (err) => {
           console.error(err);
           setIsLoading(false);
-          if(err.response.data.message !== undefined){
+          if (err.response.data.message !== undefined) {
             setErrorMessage(err.response.data.message);
-          }else{
-            setErrorMessage('Server Error!');
+          } else {
+            setErrorMessage("Server Error!");
           }
-         
+
           setTimeout(() => {
             setErrorMessage("");
           }, 5000);
           return "Failed";
         },
-      }
+      },
     );
   };
 
@@ -144,7 +143,10 @@ const EmployerRegister = () => {
       </form>
       <div>
         <span>Already have an account? </span>{" "}
-        <Link to="/user/login" className="text-green-dark hover:text-green-light cursor-pointer">
+        <Link
+          to="/user/login"
+          className="text-green-dark hover:text-green-light cursor-pointer"
+        >
           Log in
         </Link>
       </div>

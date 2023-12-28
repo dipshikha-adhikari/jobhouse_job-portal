@@ -11,26 +11,30 @@ type JobCardProps = {
 };
 
 type Applicaitons = {
-  data:{
-    id:string,
-  job_id:string,
-   employer_id:string,
-      jobseeker_id:string
-  }[] | undefined,
-  isLoading:boolean
-  isError:boolean,
-}
+  data:
+    | {
+        id: string;
+        job_id: string;
+        employer_id: string;
+        jobseeker_id: string;
+      }[]
+    | undefined;
+  isLoading: boolean;
+  isError: boolean;
+};
 
-
-const JobCard: React.FC<JobCardProps> = ({ job, index}) => {
+const JobCard: React.FC<JobCardProps> = ({ job, index }) => {
   const time = moment(job.deadline).format("LL");
 
-
-  const{data:applications, isError, isLoading}:Applicaitons = useQuery(['applications', job.job_id], async() => {
-    const result = await privateRequest.get(`api/v1/jobs/applications/${job.job_id}`)
-    return result.data
-})
-
+  const { data: applications }: Applicaitons = useQuery(
+    ["applications", job.job_id],
+    async () => {
+      const result = await privateRequest.get(
+        `api/v1/jobs/applications/${job.job_id}`,
+      );
+      return result.data;
+    },
+  );
 
   return (
     <div className="grid gap-sm p-md rounded-sm shadow-md max-w-xl">
@@ -45,7 +49,7 @@ const JobCard: React.FC<JobCardProps> = ({ job, index}) => {
           <span className="font-semibold">Level</span> : {job.level}
         </p>
         <p>
-          <span className="font-semibold">Salary</span> :  {job.salary}
+          <span className="font-semibold">Salary</span> : {job.salary}
         </p>
         <p>
           <span className="font-semibold">Deadline</span> : {time}
@@ -57,9 +61,14 @@ const JobCard: React.FC<JobCardProps> = ({ job, index}) => {
       >
         Show more
       </Link>
-<Link to={`/employer/jobs/applicaitons/${job.job_id}`} className="bg-blue-dark text-white hover:text-white px-sm w-fit rounded-sm p-xs">Applications {applications?.length} </Link>
+      <Link
+        to={`/employer/jobs/applicaitons/${job.job_id}`}
+        className="bg-blue-dark text-white hover:text-white px-sm w-fit rounded-sm p-xs"
+      >
+        Applications {applications?.length}{" "}
+      </Link>
 
-       <div className="flex  gap-xs">
+      <div className="flex  gap-xs">
         <Link
           to={`/jobs/update/${job.job_id}`}
           className="text-green-dark hover:text-green-dark border-sm border-green-dark px-sm rounded-sm p-xs font-bold"

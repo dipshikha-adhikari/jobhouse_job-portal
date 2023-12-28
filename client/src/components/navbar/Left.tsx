@@ -8,7 +8,7 @@ const Left = () => {
         to="/"
         className="text-2xl flex hover:text-green-dark text-green-dark"
       >
-       Job <span className="text-black-light">House</span>
+        Job <span className="text-black-light">House</span>
       </Link>
     </div>
   );

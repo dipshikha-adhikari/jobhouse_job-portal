@@ -1,7 +1,7 @@
-import { FaArrowDown, FaArrowRight, FaBars } from "react-icons/fa"
-import { Link } from "react-router-dom"
-import useStore from "../../../store/store"
-import JobseekerProfileMenu from "../../modals/JobseekerProfileMenu"
+import { FaArrowDown, FaArrowRight, FaBars } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import useStore from "../../../store/store";
+import JobseekerProfileMenu from "../../modals/JobseekerProfileMenu";
 import { useJobseekerProfile } from "../../../pages/jobseeker/hooks/useJobseekerProfile";
 import { IJobseekerProfile } from "../../../types/postgres/types";
 
@@ -14,22 +14,40 @@ type JobseekerNav = {
 
 type Profile = {
   profile: IJobseekerProfile;
-  isLoading:boolean
+  isLoading: boolean;
 };
 
-const NavbarForJobseeker = ({setMenuOpen, menuOpen, isModalOpen, setIsModalOpen}:JobseekerNav) => {
-const{profile}:Profile = useJobseekerProfile()
-    const store = useStore()
+const NavbarForJobseeker = ({
+  setMenuOpen,
+  menuOpen,
+  isModalOpen,
+  setIsModalOpen,
+}: JobseekerNav) => {
+  const { profile }: Profile = useJobseekerProfile();
+  const store = useStore();
   return (
-    <div className="relative flex items-center gap-20 w-full justify-end" >
-        <div className=" gap-xs hidden md:flex">
-        <span className="items-center gap-2 flex  cursor-pointer browse-btn" onClick={() => setIsModalOpen(!isModalOpen)}>
+    <div className="relative flex items-center gap-20 w-full justify-end">
+      <div className=" gap-xs hidden md:flex">
+        <span
+          className="items-center gap-2 flex  cursor-pointer browse-btn"
+          onClick={() => setIsModalOpen(!isModalOpen)}
+        >
           Browse jobs <FaArrowDown className="text-green-dark browse-btn " />
         </span>
-        <Link to='/blogs' className="text-black-light font-semibold hover:text-blue-dark">Blogs</Link>
-        <Link to='/faqs' className="text-black-light font-semibold hover:text-blue-dark">FAQs</Link>
+        <Link
+          to="/blogs"
+          className="text-black-light font-semibold hover:text-blue-dark"
+        >
+          Blogs
+        </Link>
+        <Link
+          to="/faqs"
+          className="text-black-light font-semibold hover:text-blue-dark"
+        >
+          FAQs
+        </Link>
       </div>
-    
+
       <div className="flex items-center gap-6">
         <Link
           to="/jobseeker/overview"
@@ -48,24 +66,28 @@ const{profile}:Profile = useJobseekerProfile()
           onClick={store.toggleJobseekerProfileMenuModal}
         >
           <img
-            src={profile?.basic_information?.image?.url || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqZYAYrmuzw5vIhNRWG2f436EKH4LqTUAFhLDWd2yRNA&s"}
+            src={
+              profile?.basic_information?.image?.url ||
+              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqZYAYrmuzw5vIhNRWG2f436EKH4LqTUAFhLDWd2yRNA&s"
+            }
             alt=""
             className="w-10 rounded-full profile-menu-button h-10 object-cover"
           />
-          <FaArrowRight fontSize={10} className="text-blue-dark profile-menu-button " />
+          <FaArrowRight
+            fontSize={10}
+            className="text-blue-dark profile-menu-button "
+          />
           {store.jobseekerProfileMenuModalOpen && <JobseekerProfileMenu />}
         </div>
         <div
           className="text-2xl cursor-pointer md:hidden menu-btn"
           onClick={() => setMenuOpen(!menuOpen)}
         >
-          <FaBars className='menu-btn' />
+          <FaBars className="menu-btn" />
         </div>
       </div>
-
-      
     </div>
-  )
-}
+  );
+};
 
-export default NavbarForJobseeker
+export default NavbarForJobseeker;

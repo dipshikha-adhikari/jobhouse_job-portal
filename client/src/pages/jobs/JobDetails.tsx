@@ -6,40 +6,43 @@ import useAuthStore from "../../store/auth";
 import Loader from "../../components/shared/Loader";
 import { useEffect, useState } from "react";
 import { useAppliedJobs } from "../jobseeker/hooks/useAppliedJobs";
-import { IJob } from "../../types/postgres/types";
+import { AppliedJobs } from "../../types/postgres/types";
 import moment from "moment";
 import { FaArrowAltCircleDown, FaCheckCircle } from "react-icons/fa";
 import { useRecentJobs } from "../employer/hooks/useRecentJobs";
 import JobCard from "../../components/shared/JobCard";
 
-
-type AppliedJobs = {
-  jobs:IJob[]
-  isLoading:boolean 
-  isError:boolean
-}
-
+type AppliedJobsType = {
+  jobs: AppliedJobs[];
+  isError: boolean;
+  isLoading: boolean;
+};
 
 const Job = () => {
   const { role } = useCurrentUser();
   const { job, isLoading, isError } = useCurrentJob();
   const { isAunthenticated } = useAuthStore();
   const navigate = useNavigate();
-  const {jobs:appliedJobs}:AppliedJobs = useAppliedJobs()
-const [isApplied, setIsApplied] = useState(false)
-const{jobs, isLoading:loadingRecentJobs,isError:errorRecentJobs} = useRecentJobs(job?.employer_id)
+  const { jobs: appliedJobs }: AppliedJobsType = useAppliedJobs();
+  const [isApplied, setIsApplied] = useState(false);
+  const {
+    jobs,
+    isLoading: loadingRecentJobs,
+    isError: errorRecentJobs,
+  } = useRecentJobs(job?.employer_id);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [job]);
 
   useEffect(() => {
-appliedJobs?.length > 0 && appliedJobs?.map(item => {
-  if(item.job_id === job?.job_id){
-    setIsApplied(true)
-  }
-})
-  },[job,appliedJobs])
+    appliedJobs?.length > 0 &&
+      appliedJobs?.map((item) => {
+        if (item.job_id === job?.job_id) {
+          setIsApplied(true);
+        }
+      });
+  }, [job, appliedJobs]);
 
   if (isLoading) return <Loader />;
   if (job?.job_id === undefined || isError) return <Error />;
@@ -54,8 +57,7 @@ appliedJobs?.length > 0 && appliedJobs?.map(item => {
 
   return (
     <div className="grid gap-sm max-w-5xl mx-auto ">
-    
-     <section className=" ">
+      <section className=" ">
         <div className="relative">
           <img
             src={
@@ -68,7 +70,7 @@ appliedJobs?.length > 0 && appliedJobs?.map(item => {
           />
           <Link
             to={`/employer/${job?.employer_details?.organization_name}/${job?.employer_id}`}
-            className="absolute border-sm bg-[rgba(0,0,0,0.3)] rounded-md border-green-dark m-2 p-sm bottom-0 left-2 flex gap-xs sm:gap-mditems-center"
+            className="absolute border-sm bg-[rgba(0,0,0,0.3)] hover:bg-[rgba(0,0,0,0.6)] rounded-md border-green-dark m-2 p-sm bottom-0 left-2 flex gap-xs sm:gap-mditems-center"
           >
             <img
               src={
@@ -83,117 +85,150 @@ appliedJobs?.length > 0 && appliedJobs?.map(item => {
               <p className="text-white">
                 {job?.employer_details?.organization_name}
               </p>
-              <p className="text-green-light">
-                {job?.industry_name}
-              </p>
+              <p className="text-green-light">{job?.industry_name}</p>
             </div>
           </Link>
         </div>
       </section>
       {/* job  */}
-     <main className="lg:flex grid  sm:px-xl gap-sm lg:justify-center items-start">
-     <aside className="sm:border-xs sm:p-xl  rounded-sm border-light">
-      <section className="grid gap-sm max-w-3xl  w-full mx-auto">
-        <header className="grid gap-xs ">
-          <h2 className="text-xl  text-green-dark font-bold">
-            {job?.title}
-          </h2>
-          <div>Apply Before : {moment(job?.deadline).fromNow()}</div>
-          <p className="flex items-center gap-2"><FaCheckCircle className='text-green-dark'/> {job.job_application_count} Applications</p>
-        </header>
-        <div className="  grid gap-xs">
-          <p className="font-semibold  text-xl">
-            Job Information
-          </p>
-          <p className="flex  gap-xs sm:gap-md">
-            Job Category <span>:</span> {job?.category_name}
-          </p>
-          <p className="flex gap-xs sm:gap-md">
-            Job Level <span>:</span> {job?.level}
-          </p>
-          <p className="flex gap-xs sm:gap-md">
-            No of Vacancy/s <span>:</span>[ {job?.no_of_vacancy}]
-          </p>
-          <p className="flex gap-xs sm:gap-md ">
-            Employment Type <span>:</span>
-            {job?.type}
-          </p>
-          <p className="flex gap-xs sm:gap-md">
-            Job Location <span>:</span>
-            {job?.location}
-          </p>
-      
-          <p className="flex gap-xs sm:gap-md">
-            Offered Salary <span>:</span>
-            {job?.salary}
-          </p>
-        </div>
-     <section>
-      <div className="grid gap-xs  border-y-sm py-lg border-default w-fit">
-        <h2 className="text-xl font-semibold">Job Specification</h2>
-      <p className="flex gap-xs sm:gap-md">
-            Experience Required <span>:</span> {job?.experience_required}
-          </p>
-        <p className="flex gap-xs sm:gap-md">
-            Education Required <span>:</span> {job?.education_required}
-          </p>
-   {job?.skills?.length > 0 &&   <div className="flex items-start gap-xs sm:gap-md">
-          <h2 className=" flex"> Key Skills </h2>
-          <span>:</span>
-          <div className="flex flex-wrap  gap-xs">
-            {job?.skills?.length > 0 ? job?.skills?.map(skill => {
-              return <span key={skill} className="bg-black-light text-white px-sm rounded-md">{skill}</span>
-            }) : 'Not available'}
-          </div>
-        </div>}
-      </div>
+      <main className="lg:flex grid  sm:px-xl gap-sm lg:justify-center items-start">
+        <aside className="sm:border-xs sm:p-xl w-full  rounded-sm border-light">
+          <section className="grid gap-sm max-w-4xl  w-full mx-auto">
+            <header className="grid gap-xs ">
+              <h2 className="text-xl  text-green-dark font-bold">
+                {job?.title}
+              </h2>
+              <div>Apply Before : {moment(job?.deadline).fromNow()}</div>
+              <p className="flex items-center gap-2">
+                <FaCheckCircle className="text-green-dark" />{" "}
+                {job.job_application_count} Applications
+              </p>
+            </header>
+            <div className="  grid gap-xs">
+              <p className="font-semibold  text-xl">Job Information</p>
+              <p className="flex  gap-xs sm:gap-md">
+                Job Category <span>:</span> {job?.category_name}
+              </p>
+              <p className="flex gap-xs sm:gap-md">
+                Job Level <span>:</span> {job?.level}
+              </p>
+              <p className="flex gap-xs sm:gap-md">
+                No of Vacancy/s <span>:</span>[ {job?.no_of_vacancy}]
+              </p>
+              <p className="flex gap-xs sm:gap-md ">
+                Employment Type <span>:</span>
+                {job?.type}
+              </p>
+              <p className="flex gap-xs sm:gap-md">
+                Job Location <span>:</span>
+                {job?.location}
+              </p>
 
-     </section>
-        <div className="grid  gap-xs">
-          <h2 className="font-semibold text-xl flex items-center gap-2">
-       Other Specification <FaArrowAltCircleDown className='text-green-dark'/>
-          </h2>
-          {job?.description && (
-            <div
-              className="prose  prose-li:marker:text-black-default"
-              dangerouslySetInnerHTML={{ __html: job?.description }}
-            />
-          )}
-        </div>
-        <div className="p-sm grid gap-2">
-          <button
-            className="bg-blue-dark text-white p-xs px-sm rounded-md w-fit disabled:opacity-60"
-            disabled={role === 'employer' || isApplied}
-            onClick={handleJobApply}
-          >
-            Apply
-          </button>
-          {role === "employer" && (
-            <p className="text-xs">* You need a jobseeker account to apply</p>
-          )}
-          {isApplied && <p className="text-gray-dark">You have already applied for this job</p>}
-        </div>
-      </section>
-
-     </aside>
-     <aside className=" w-fit border-xs py-xs border-default">
-     <div className=''>
-          <h2 className='text-xl border-light border-b-xs pb-sm font-bold text-center '>More jobs by {job.employer_details.organization_name }</h2>
-          <div className="grid p-sm gap-md grid-cols-[repeat(auto-fit,minmax(300px,1fr))] ">
-        {loadingRecentJobs && <div className="text-center">Loading...</div>}
-        {errorRecentJobs && <div className="text-center">Error!</div>}
-          {jobs !== undefined && jobs.length > 0 ? jobs?.map(item => {
-          if(item.job_id !== job.job_id){
-            return <JobCard key={job.job_id} job={item} appliedJobs={appliedJobs}/>
-          }
-          }) : 'No other jobs available'}
-          </div>
-        </div>
-     </aside>
-     </main>
+              <p className="flex gap-xs sm:gap-md">
+                Offered Salary <span>:</span>
+                {job?.salary}
+              </p>
+            </div>
+            <section>
+              <div className="grid gap-xs  border-y-sm py-lg border-default w-fit">
+                <h2 className="text-xl font-semibold">Job Specification</h2>
+                <p className="flex gap-xs sm:gap-md">
+                  Experience Required <span>:</span> {job?.experience_required}
+                </p>
+                <p className="flex gap-xs sm:gap-md">
+                  Education Required <span>:</span> {job?.education_required}
+                </p>
+                {job?.skills?.length > 0 && (
+                  <div className="flex items-start gap-xs sm:gap-md">
+                    <h2 className=" flex"> Key Skills </h2>
+                    <span>:</span>
+                    <div className="flex flex-wrap  gap-xs">
+                      {job?.skills?.length > 0
+                        ? job?.skills?.map((skill) => {
+                            return (
+                              <span
+                                key={skill}
+                                className="bg-black-light text-white px-sm rounded-md"
+                              >
+                                {skill}
+                              </span>
+                            );
+                          })
+                        : "Not available"}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </section>
+            <div className="grid  gap-xs">
+              <h2 className="font-semibold text-xl flex items-center gap-2">
+                Other Specification{" "}
+                <FaArrowAltCircleDown className="text-green-dark" />
+              </h2>
+              {job?.description && (
+                <div
+                  className="prose  prose-li:marker:text-black-default"
+                  dangerouslySetInnerHTML={{ __html: job?.description }}
+                />
+              )}
+            </div>
+            <div className="p-sm grid gap-2">
+              <button
+                className="bg-blue-dark text-white p-xs px-sm rounded-md w-fit disabled:opacity-60"
+                disabled={role === "employer" || isApplied}
+                onClick={handleJobApply}
+              >
+                Apply
+              </button>
+              {role === "employer" && (
+                <p className="text-xs">
+                  * You need a jobseeker account to apply
+                </p>
+              )}
+              {isApplied && (
+                <p className="text-gray-dark">
+                  You have already applied for this job
+                </p>
+              )}
+            </div>
+          </section>
+        </aside>
+        {jobs && jobs?.length > 1 && (
+          <aside className=" w-fit border-xs  border-default">
+            <div className="grid gap-xs">
+              <h2 className="text-xl border-light border-b-xs py-sm font-bold text-center ">
+                More jobs by {job.employer_details.organization_name}
+              </h2>
+              <div className="grid p-sm  gap-md grid-cols-[repeat(auto-fit,minmax(300px,1fr))] ">
+                {loadingRecentJobs && (
+                  <div className="text-center">Loading...</div>
+                )}
+                {errorRecentJobs && <div className="text-center">Error!</div>}
+                {jobs !== undefined && jobs.length > 1 ? (
+                  jobs?.map((item) => {
+                    if (item.job_id !== job.job_id) {
+                      return (
+                        <JobCard
+                          key={job.job_id}
+                          job={item}
+                          appliedJobs={appliedJobs}
+                        />
+                      );
+                    }
+                  })
+                ) : (
+                  <div className="text-center py-sm">
+                    {" "}
+                    No other jobs available
+                  </div>
+                )}
+              </div>
+            </div>
+          </aside>
+        )}
+      </main>
     </div>
   );
 };
 
 export default Job;
-

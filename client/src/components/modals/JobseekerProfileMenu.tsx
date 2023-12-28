@@ -7,8 +7,8 @@ import { Link, useNavigate } from "react-router-dom";
 const JobseekerProfileMenu = () => {
   const ref = useRef<HTMLDivElement>(null);
   const store = useStore();
-const authStore = useAuthStore()
-const navigate = useNavigate()
+  const authStore = useAuthStore();
+  const navigate = useNavigate();
 
   useEffect(() => {
     document.addEventListener("click", handleClickOutside);
@@ -27,21 +27,43 @@ const navigate = useNavigate()
     }
   };
 
-    //this is only client side logout 
-    const handleLogout = async() => {
-      setAuthToken(null)
-      localStorage.removeItem('userInfo')
-      authStore.setAuthentication(false)
-      navigate('/')
-        }
+  //this is only client side logout
+  const handleLogout = async () => {
+    setAuthToken(null);
+    localStorage.removeItem("userInfo");
+    authStore.setAuthentication(false);
+    navigate("/");
+  };
 
-        
   return (
-    <div ref={ref} className="absolute max-w-[300px] bg-white w-full border-b-sm top-12 grid  place-items-start gap-xs text-black-default  p-md right-0">
-     <Link to='/jobseeker/profile/job-preference' className="text-black-default hover:text-green-dark md:block hidden">Update Profile</Link>
-     <Link to='/jobseeker/profile' className="text-black-default hover:text-green-dark md:hidden">Profile</Link>
-     <Link to='/jobseeker/overview' className="text-black-default hover:text-green-dark md:hidden">Overview</Link>
-        <button className="text-black-light font-medium hover:text-green-dark" onClick={handleLogout}>Logout</button>
+    <div
+      ref={ref}
+      className="absolute max-w-[300px] bg-white w-full border-b-sm top-12 grid  place-items-start gap-xs text-black-default  p-md right-0"
+    >
+      <Link
+        to="/jobseeker/profile/job-preference"
+        className="text-black-default hover:text-green-dark md:block hidden"
+      >
+        Update Profile
+      </Link>
+      <Link
+        to="/jobseeker/profile"
+        className="text-black-default hover:text-green-dark md:hidden"
+      >
+        Profile
+      </Link>
+      <Link
+        to="/jobseeker/overview"
+        className="text-black-default hover:text-green-dark md:hidden"
+      >
+        Overview
+      </Link>
+      <button
+        className="text-black-light font-medium hover:text-green-dark"
+        onClick={handleLogout}
+      >
+        Logout
+      </button>
     </div>
   );
 };

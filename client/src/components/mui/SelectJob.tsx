@@ -10,8 +10,6 @@ interface IMuiSelect {
   setType?: (props: string) => void;
 }
 
-
-
 export default function SelectJob({
   onChange,
   values,
@@ -19,7 +17,6 @@ export default function SelectJob({
   setLevel,
   setType,
 }: IMuiSelect) {
- 
   function handleChange(e: SelectChangeEvent) {
     const val = e.target.value as string;
     onChange(val);
@@ -39,13 +36,12 @@ export default function SelectJob({
           onChange={handleChange}
           value={value}
           MenuProps={{
-            disableScrollLock:true
+            disableScrollLock: true,
           }}
-       
         >
           {values.map((val) => {
             return (
-              <MenuItem value={val} key={val} >
+              <MenuItem value={val} key={val}>
                 {val}
               </MenuItem>
             );

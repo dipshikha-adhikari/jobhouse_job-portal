@@ -1,4 +1,4 @@
-import {  useState } from "react";
+import { useState } from "react";
 import { IJobseekerExperience } from "../../../types/postgres/types";
 import { useJobseekerProfile } from "../hooks/useJobseekerProfile";
 import ExperienceForm from "./ExperienceForm";
@@ -12,9 +12,7 @@ type ExperienceProps = {
 
 const Experience = () => {
   const [isEditorOpen, setIsEditorOpen] = useState(false);
-  const{profile}:ExperienceProps = useJobseekerProfile('experience')
-
-
+  const { profile }: ExperienceProps = useJobseekerProfile("experience");
 
   if (profile?.length === 0) {
     return (
@@ -46,34 +44,32 @@ const Experience = () => {
 
   return (
     <div className="flex gap-sm flex-col min-h-[80vh] ">
-     
+      <section className="grid gap-sm">
+        {profile !== undefined &&
+          profile?.map((item: IJobseekerExperience) => {
+            return <ExperienceBox item={item} />;
+          })}
+      </section>
+      <section>
+        {!isEditorOpen && (
+          <button
+            className="w-fit border-sm h-fit  border-green-dark text-green-dark rounded-sm px-sm p-xs"
+            onClick={() => setIsEditorOpen(true)}
+          >
+            Add New
+          </button>
+        )}
 
-    <section className="grid gap-sm">
-    {profile !== undefined &&
-        profile?.map((item:IJobseekerExperience) => {
-          return (
-          <ExperienceBox item={item}/>
-  )
-          } )
-}
-    </section>
-    <section>
-      {!isEditorOpen &&   <button
-              className="w-fit border-sm h-fit  border-green-dark text-green-dark rounded-sm px-sm p-xs"
-              onClick={() => setIsEditorOpen(true)}
-            >
-              Add New
-            </button>}
-           
-          {isEditorOpen && (
-            <ExperienceForm
-              isError
-              setIsEditorOpen={setIsEditorOpen}
-              isEditorOpen={isEditorOpen}
-            />
-          )}
-        </section>
-</div>
-)}
+        {isEditorOpen && (
+          <ExperienceForm
+            isError
+            setIsEditorOpen={setIsEditorOpen}
+            isEditorOpen={isEditorOpen}
+          />
+        )}
+      </section>
+    </div>
+  );
+};
 
 export default Experience;

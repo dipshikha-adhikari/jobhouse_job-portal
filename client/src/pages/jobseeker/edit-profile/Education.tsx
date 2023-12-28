@@ -14,12 +14,13 @@ type EducationProps = {
 
 const Education = () => {
   const [isEditorOpen, setIsEditorOpen] = useState(false);
-  const { profile, isError, isLoading }: EducationProps = useJobseekerProfile("education");
+  const { profile, isError, isLoading }: EducationProps =
+    useJobseekerProfile("education");
 
-if(isError) return <Error/>
-if(isLoading) return <Loader/>
+  if (isError) return <Error />;
+  if (isLoading) return <Loader />;
 
-  if (profile?.length  === 0) {
+  if (profile?.length === 0) {
     return (
       <div className="grid min-h-[80vh] gap-sm">
         {!isEditorOpen && (
@@ -51,7 +52,7 @@ if(isLoading) return <Loader/>
       <section className="grid gap-sm">
         {profile !== undefined &&
           profile?.map((item) => {
-            return <EducationBox item={item}  key={item.id}/>;
+            return <EducationBox item={item} key={item.id} />;
           })}
       </section>
       <section>

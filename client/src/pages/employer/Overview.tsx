@@ -15,13 +15,13 @@ const Overview = () => {
   const [selected, setSelected] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const user = useCurrentUser();
-  const loading = !user
+  const loading = !user;
   const navigate = useNavigate();
-  const { profile, error, isLoading } = useProfile();
+  const { profile, isLoading } = useProfile();
 
-// useEffect(() => {
-// window.scrollTo(0,0)
-// },[])
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleCreate = () => {
     if (!profile?.basic_information.id) {
@@ -39,11 +39,11 @@ const Overview = () => {
       setIsModalOpen(true);
     }
   }, [profile]);
-  
-  if (isLoading || loading) return <Loader/>;
 
-  if (user.role !== 'employer') return <Error />;
-  
+  if (isLoading || loading) return <Loader />;
+
+  if (user.role !== "employer") return <Error />;
+
   return (
     <Layout>
       <div className="relative py-md grid gap-sm">
@@ -64,9 +64,11 @@ const Overview = () => {
                 : user.fullName}
             </p>
             <p className="text-gray-dark">
-              {profile?.basic_information?.industry_type }
+              {profile?.basic_information?.industry_type}
             </p>
-            <p>{profile?.basic_information?.phone_number || user.phoneNumber}</p>
+            <p>
+              {profile?.basic_information?.phone_number || user.phoneNumber}
+            </p>
             <p>{profile?.basic_information?.email || user.email}</p>
           </div>
         </header>
@@ -111,7 +113,7 @@ const Overview = () => {
               >
                 All
               </span>
-           
+
               <button
                 className="flex items-center gap-2 bg-orange-light text-white px-sm rounded-sm p-xs"
                 onClick={handleCreate}
@@ -123,9 +125,7 @@ const Overview = () => {
               {selected === "recent" && (
                 <RecentJobs employerId={profile?.user_id} />
               )}
-              {selected === "all" && (
-                <AllJobs employerId={profile?.user_id} />
-              )}
+              {selected === "all" && <AllJobs employerId={profile?.user_id} />}
               {isModalOpen && (
                 <div className="grid gap-sm">
                   <p>Please update your profile to post a job.</p>

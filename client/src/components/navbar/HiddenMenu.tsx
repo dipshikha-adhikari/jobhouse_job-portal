@@ -7,60 +7,74 @@ import Categories from "../shared/Categories";
 
 interface IHiddenMenu {
   setMenuOpen: (props: boolean) => void;
-  menuOpen:boolean
+  menuOpen: boolean;
 }
 const HiddenMenu = ({ setMenuOpen, menuOpen }: IHiddenMenu) => {
-  const[isModalOpen, setIsModalOpen] = useState(false)
-  const ref = useRef<HTMLDivElement>(null)
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
 
   const store = useStore();
 
-  const {isAunthenticated} = useAuthStore()
-
+  const { isAunthenticated } = useAuthStore();
 
   useEffect(() => {
-    document.addEventListener('click', handleClickOutside)
-    
-    return () => document.removeEventListener('click', handleClickOutside)
-    },[])
-    
-      const handleClickOutside = (e:MouseEvent) => {
+    document.addEventListener("click", handleClickOutside);
 
-    if(!menuOpen) return;
-    if((e.target as Element).classList.contains('menu-btn') || (e.target as Element).parentElement?.classList.contains('menu-btn')) return;
-    
-    if( ref.current &&  !ref.current.contains(e.target as Element)){
-      setMenuOpen(false)
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, []);
+
+  const handleClickOutside = (e: MouseEvent) => {
+    if (!menuOpen) return;
+    if (
+      (e.target as Element).classList.contains("menu-btn") ||
+      (e.target as Element).parentElement?.classList.contains("menu-btn")
+    )
+      return;
+
+    if (ref.current && !ref.current.contains(e.target as Element)) {
+      setMenuOpen(false);
     }
-      }
+  };
 
-
-  if (isAunthenticated ) {
+  if (isAunthenticated) {
     return (
-      <div className="grid gap-xs p-lg border-b-sm md:hidden "  ref={ref}>
-     <span className="items-center gap-2 flex relative cursor-pointer"  onClick={() => setIsModalOpen(!isModalOpen)}>
+      <div className="grid gap-xs p-lg border-b-sm md:hidden " ref={ref}>
+        <span
+          className="items-center gap-2 flex relative cursor-pointer"
+          onClick={() => setIsModalOpen(!isModalOpen)}
+        >
           Browse jobs <FaArrowDown className="text-blue-dark" />
-          {isModalOpen && <div className="absolute top-10 border-b-md  pb-10 h-80 overflow-y-scroll  bg-white">
-  <Categories setIsModalOpen={setIsModalOpen}/>
-   </div>}
+          {isModalOpen && (
+            <div className="absolute top-10 border-b-md  pb-10 h-80 overflow-y-scroll  bg-white">
+              <Categories setIsModalOpen={setIsModalOpen} />
+            </div>
+          )}
         </span>
-        <Link to='/blogs' className="text-black-light w-fit font-normal hover:text-blue-dark">Blogs</Link>
-        <Link to='/faqs' className="text-black-light w-fit font-normal hover:text-blue-dark">FAQs</Link>
-     
+        <Link
+          to="/blogs"
+          className="text-black-light w-fit font-normal hover:text-blue-dark"
+        >
+          Blogs
+        </Link>
+        <Link
+          to="/faqs"
+          className="text-black-light w-fit font-normal hover:text-blue-dark"
+        >
+          FAQs
+        </Link>
       </div>
     );
   } else
     return (
       <div className="py-md grid gap-xs md:hidden  bg-white " ref={ref}>
-   
         <div className="flex gap-10 ">
-        <Link
-        onClick={() => setMenuOpen(false)}
-                  to="/user/login"
-                  className=" font-normal  border-[1px] border-blue-dark  rounded-sm p-xs px-md "
-                >
-                  Log in
-                </Link>
+          <Link
+            onClick={() => setMenuOpen(false)}
+            to="/user/login"
+            className=" font-normal  border-[1px] border-blue-dark  rounded-sm p-xs px-md "
+          >
+            Log in
+          </Link>
           <div
             className="bg-blue-dark register-button text-white
              p-xs px-md rounded-sm cursor-pointer   "
@@ -72,15 +86,29 @@ const HiddenMenu = ({ setMenuOpen, menuOpen }: IHiddenMenu) => {
             Register
           </div>
         </div>
-        <span className="flex items-center gap-2 relative cursor-pointer" onClick={() => setIsModalOpen(!isModalOpen)}>
+        <span
+          className="flex items-center gap-2 relative cursor-pointer"
+          onClick={() => setIsModalOpen(!isModalOpen)}
+        >
           Browse jobs <FaArrowDown className="text-green-dark" />
-          {isModalOpen && <div className="absolute top-10 z-10 h-80 overflow-y-scroll p-sm sm:p-lg bg-white">
-  <Categories setIsModalOpen={setIsModalOpen}/>
-   </div>}
+          {isModalOpen && (
+            <div className="absolute top-10 z-10 h-80 overflow-y-scroll p-sm sm:p-lg bg-white">
+              <Categories setIsModalOpen={setIsModalOpen} />
+            </div>
+          )}
         </span>
-        <Link to='/blogs' className="text-black-light w-fit font-normal hover:text-blue-dark">Blogs</Link>
-        <Link to='/faqs' className="text-black-light w-fit font-normal hover:text-blue-dark">FAQs</Link>
-       
+        <Link
+          to="/blogs"
+          className="text-black-light w-fit font-normal hover:text-blue-dark"
+        >
+          Blogs
+        </Link>
+        <Link
+          to="/faqs"
+          className="text-black-light w-fit font-normal hover:text-blue-dark"
+        >
+          FAQs
+        </Link>
       </div>
     );
 };

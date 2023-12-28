@@ -13,19 +13,18 @@ import WrongRoute from "./components/shared/WrongRoute";
 import { Toaster } from "react-hot-toast";
 import { QueryClient, QueryClientProvider } from "react-query";
 import Job from "./pages/jobs/JobDetails";
-import EmployerProfile from './pages/employer/Profile'
+import EmployerProfile from "./pages/employer/Profile";
 import EditEmployerProfile from "./pages/employer/edit-profile";
 import CreateJob from "./pages/jobs/CreateJob";
 import Jobs from "./pages/jobs";
 import ProfileReview from "./pages/jobseeker/ProfileReview";
-import EmployerProfileView from './pages/EmployerProfile'
+import EmployerProfileView from "./pages/EmployerProfile";
 import JobseekerOverview from "./pages/jobseeker/overview/index";
 import SearchResults from "./pages/SearchResults";
 
 export const queryClient = new QueryClient();
 
 const App = () => {
-
   return (
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={router} />
@@ -34,7 +33,6 @@ const App = () => {
 };
 
 const Root = () => {
- 
   return (
     <>
       <Toaster position="top-center" reverseOrder={false} />
@@ -59,7 +57,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/jobseeker/overview",
-        element: <JobseekerOverview/>,
+        element: <JobseekerOverview />,
       },
       {
         path: "/jobseeker/register",

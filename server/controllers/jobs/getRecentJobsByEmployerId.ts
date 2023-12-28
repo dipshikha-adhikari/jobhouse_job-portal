@@ -18,7 +18,8 @@ export const getRecentJobsByEmployerId = async (req: IUserRequest, res: Response
     left join industries i on j.industry_id = i.industry_id
     left join categories c on j.category_id = c.category_id
     left join images img on img.user_id = j.employer_id
-    WHERE employer_id = $1 AND deadline > NOW()`;
+    WHERE employer_id = $1 AND deadline > NOW() 
+    `;
 
     pool.query(query, [employerId], function (err: Error, result: QueryResult) {
         if (err) {

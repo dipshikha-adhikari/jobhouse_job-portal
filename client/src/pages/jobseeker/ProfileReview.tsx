@@ -16,17 +16,17 @@ type Profile = {
 };
 
 const ProfileReview = () => {
-  const[isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
   const params = useParams();
   const jobId = params.jobId;
-  const { job, isLoading:loading1 } = useCurrentJob();
+  const { job, isLoading: loading1 } = useCurrentJob();
   const { profile, isLoading: loading }: Profile = useJobseekerProfile();
   const { fullName, phoneNumber, email, role } = useCurrentUser();
-const navigate = useNavigate()
+  const navigate = useNavigate();
 
-useEffect(() => {
-window.scrollTo(0,0)
-},[])
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   if (loading1 || loading) return <Loader />;
   if (role !== "jobseeker") return <Error />;
@@ -45,9 +45,11 @@ window.scrollTo(0,0)
       </div>
       <main className="grid gap-sm">
         <header className="flex justify-between border-y-sm   py-sm ">
-          <p className="font-bold flex-1 ">Your Profile</p>
+          <p className="font-bold flex-1 uppercase text-green-dark">
+            Your Profile
+          </p>
           <div className="w-1 border-sm h-full  grid bg-green-light"></div>
-          <p className="font-bold hidden float-right text-right sm:block flex-1">
+          <p className="font-bold hidden  uppercase text-green-dark float-right text-right sm:block flex-1">
             Job requirement
           </p>
         </header>
@@ -63,7 +65,7 @@ window.scrollTo(0,0)
                 <h2 className="font-semibold">
                   {profile?.basic_information?.fullname || fullName}
                 </h2>
-                <p>Address : Kathmandu</p>
+                <p>Address : {profile?.basic_information?.current_address}</p>
                 <p>
                   Phone :{" "}
                   {profile?.basic_information?.phone_number || phoneNumber}
@@ -72,7 +74,7 @@ window.scrollTo(0,0)
                 <p>
                   Date of Birth :{" "}
                   {moment(profile?.basic_information?.date_of_birth).format(
-                    "YYYY-MM-DD"
+                    "YYYY-MM-DD",
                   ) || <span>Not available</span>}
                 </p>
               </div>
@@ -105,9 +107,11 @@ window.scrollTo(0,0)
           </aside>
         </section>
 
-        <section className="flex justify-between items-center  py-sm ">
+        <section className="flex justify-between items-start  py-sm ">
           <aside className="flex-1 grid gap-xs">
-            <header className="font-semibold">Work Experience</header>
+            <header className="font-semibold uppercase text-green-dark">
+              Work Experience
+            </header>
             {profile?.experience.length > 0 ? (
               <div className="grid gap-sm">
                 {profile?.experience?.map((item) => {
@@ -120,11 +124,6 @@ window.scrollTo(0,0)
                         </span>{" "}
                         ({item.organization_type})
                       </p>
-                      <p className="font-semibold">
-                        <span className="capitalize">{item.job_level}</span>{" "}
-                        level
-                      </p>
-                      <p>{item.job_location}</p>
                     </div>
                   );
                 })}
@@ -136,20 +135,31 @@ window.scrollTo(0,0)
           <div className="w-1 border-sm h-full  grid bg-green-light"></div>
 
           <aside className=" hidden   gap-xs flex-1 place-content-center sm:grid  ">
-            <header className="font-semibold">Required Experience</header>
+            <header className="font-semibold uppercase text-green-dark">
+              Required Experience
+            </header>
             <p>{job?.experience_required}</p>
           </aside>
         </section>
 
-        <section className="flex items-center justify-between py-sm ">
+        <section className="flex items-start justify-between py-sm ">
           <aside className="flex-1 grid gap-xs">
-            <header className="font-semibold ">Education</header>
+            <header className="font-semibold uppercase text-green-dark ">
+              Education
+            </header>
             {profile?.education.length > 0 ? (
-              <div className="grid gap-xs">
+              <div className="grid gap-2">
                 {profile?.education?.map((item) => {
                   return (
-                    <div key={item.degree} className="grid gap-2">
-                      <p className="flex items-center gap-2">{item.degree}</p>
+                    <div key={item.degree} className="grid ">
+                      <p className="flex  items-center gap-2">
+                        <span className="font-semibold">
+                          {item.degree} ({item.course}){" "}
+                        </span>
+                        <span className="text-black-light ">
+                          {moment(item.graduation_year).format("YYYY")}
+                        </span>
+                      </p>
                     </div>
                   );
                 })}
@@ -161,14 +171,18 @@ window.scrollTo(0,0)
           <div className="w-1 border-sm h-full  grid bg-green-light"></div>
 
           <aside className=" hidden flex-1 sm:grid gap-xs place-content-center">
-            <header className="font-semibold">Required Education</header>
+            <header className="font-semibold uppercase text-green-dark">
+              Required Education
+            </header>
             <p>{job?.education_required || "Not available"}</p>
           </aside>
         </section>
 
         <section className="flex justify-between">
-          <aside className="grid gap-xs flex-1">
-            <header className="font-semibold ">Skills</header>
+          <aside className="grid gap-xs flex-1 h-fit">
+            <header className="font-semibold uppercase text-green-dark">
+              Skills
+            </header>
             {profile?.job_preference?.skills ? (
               profile?.job_preference?.skills?.map((skill) => {
                 return <li key={skill}>{skill}</li>;
@@ -180,7 +194,9 @@ window.scrollTo(0,0)
           <div className="w-1 border-sm h-full  grid bg-green-light"></div>
 
           <aside className="sm:grid gap-xs flex-1 place-content-center hidden ">
-            <header className="font-semibold ">Required skills</header>
+            <header className="font-semibold uppercase text-green-dark ">
+              Required skills
+            </header>
             <div className="grid gap-2">
               {job?.skills?.map((item) => {
                 return <p key={item}>{item}</p>;
@@ -236,13 +252,16 @@ window.scrollTo(0,0)
       </div>
       <div className="p-sm grid gap-2">
         <button
-        onClick={() => applyJob(job?.job_id, job?.employer_id, setIsLoading, navigate)}
+          onClick={() =>
+            applyJob(job?.job_id, job?.employer_id, setIsLoading, navigate)
+          }
           className="bg-blue-dark text-white p-xs px-sm rounded-md w-fit disabled:opacity-60"
           disabled={
             (profile?.education.length === 0 &&
               profile?.experience.length === 0 &&
               profile?.job_preference?.skills === undefined) ||
-            role !== "jobseeker" || isLoading
+            role !== "jobseeker" ||
+            isLoading
           }
         >
           Apply
@@ -252,10 +271,9 @@ window.scrollTo(0,0)
         )}
         {profile?.education.length === 0 &&
           profile?.experience.length === 0 &&
-       
           role === "jobseeker" && (
             <div className="text-gray-dark">
-              Please update education or experience to apply  {" "}
+              Please update education or experience to apply{" "}
             </div>
           )}
       </div>

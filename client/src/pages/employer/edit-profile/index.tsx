@@ -11,7 +11,7 @@ import { Link, useParams } from "react-router-dom";
 const EditProfile = () => {
   const [isEditorOpen, setIsEditorOpen] = useState<boolean>(false);
   const { isAunthenticated } = useAuthStore();
-  const { profile, isLoading,error } = useProfile();
+  const { profile, isLoading, error } = useProfile();
   const params = useParams();
   const title = params.title;
 
@@ -46,7 +46,7 @@ const EditProfile = () => {
 
   if (isLoading) return <Loader />;
   if (!isAunthenticated) return <NoUser />;
-  if(error) return <Error/>
+  if (error) return <Error />;
 
   return (
     <div className="grid p-sm  gap-sm mx-auto md:flex max-w-3xl  md:gap-xl md:items-start">

@@ -1,10 +1,14 @@
-export const debounceFn = (fn: Function, delay: number) => {
-    let timer:any = null
-    let ctx = this
-    return function (...args: any) {
-        if (timer) clearTimeout(timer)
-       timer = setTimeout(() => {
-        fn.apply(ctx, args)
-       },delay)
-    }
-}
+export const debounceFn = <T extends unknown[]>(
+  fn: (...args: T) => void,
+  delay: number,
+) => {
+  let timer: ReturnType<typeof setTimeout> | null = null;
+
+  return function (this: unknown, ...args: T) {
+    const context = this as unknown;
+    if (timer) clearTimeout(timer);
+    timer = setTimeout(() => {
+      fn.apply(context, args);
+    }, delay);
+  };
+};

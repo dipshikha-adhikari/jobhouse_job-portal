@@ -10,7 +10,7 @@ import { useCategories } from "../../hooks/useCategories";
 
 export interface ICreateJobStepOneInputs {
   title: string;
-  categoryId: string 
+  categoryId: string;
   location: string;
   experienceRequired: string;
   salary: string;
@@ -18,12 +18,12 @@ export interface ICreateJobStepOneInputs {
 }
 
 type CreateJobStepOneProps = {
-  setStep: (props:number) => void
-  step:number
+  setStep: (props: number) => void;
+  step: number;
   job: IJob | undefined;
 };
 
-const CreateJobStepOne = ({ setStep ,step, job}: CreateJobStepOneProps) => {
+const CreateJobStepOne = ({ setStep, step, job }: CreateJobStepOneProps) => {
   const {
     register,
     handleSubmit,
@@ -31,7 +31,7 @@ const CreateJobStepOne = ({ setStep ,step, job}: CreateJobStepOneProps) => {
     setValue,
   } = useForm({ resolver: yupResolver(CreateJobStepOneSchema) });
   const jobStore = useJobInputs();
-const {categories} = useCategories()
+  const { categories } = useCategories();
 
   const onSubmit: SubmitHandler<ICreateJobStepOneInputs> = (data) => {
     jobStore.setStepOneInputs(data);
@@ -39,21 +39,32 @@ const {categories} = useCategories()
   };
 
   useEffect(() => {
-    let date: string | null;
-    if (jobStore.stepOne.deadline) {
-      date = moment(jobStore.stepOne.deadline).format("YYYY-MM-DD");
-    } else {
-      date = null;
-    }
-    // const dateFromDB: string = moment(job?.deadline).format("YYYY-MM-DD");
-    setValue("categoryId",   job?.category_id !== undefined ? job.category_id : jobStore.stepOne.categoryId);
-    setValue("title",   job?.title !== undefined ? job?.title : jobStore.stepOne.title);
-    setValue("salary",   job?.salary !== undefined ? job?.salary : jobStore.stepOne.salary);
-    setValue("deadline", job?.deadline || jobStore.stepOne.deadline);
-    setValue("location",  job?.location !== undefined ? job?.location : jobStore.stepOne.location);
+    const dateFromDBString: string = moment(job?.deadline).format("YYYY-MM-DD");
+    const dateFromDB: Date = new Date(dateFromDBString);
+    setValue(
+      "categoryId",
+      job?.category_id !== undefined
+        ? job.category_id
+        : jobStore.stepOne.categoryId,
+    );
+    setValue(
+      "title",
+      job?.title !== undefined ? job?.title : jobStore.stepOne.title,
+    );
+    setValue(
+      "salary",
+      job?.salary !== undefined ? job?.salary : jobStore.stepOne.salary,
+    );
+    setValue("deadline", dateFromDB || jobStore.stepOne.deadline);
+    setValue(
+      "location",
+      job?.location !== undefined ? job?.location : jobStore.stepOne.location,
+    );
     setValue(
       "experienceRequired",
-        job?.experience_required !== undefined ? job?.experience_required : jobStore.stepOne.experienceRequired
+      job?.experience_required !== undefined
+        ? job?.experience_required
+        : jobStore.stepOne.experienceRequired,
     );
   }, [job]);
 
@@ -79,12 +90,12 @@ const {categories} = useCategories()
               placeholder="IT & Telecommunication"
               className="border-sm p-xs outline-none border-gray-300"
             >
-              <option value="" className="" >
+              <option value="" className="">
                 Select a category
               </option>
-              {categories?.map(cat => {
+              {categories?.map((cat) => {
                 return (
-                  <option key={cat.category_id} value={cat.category_id} >
+                  <option key={cat.category_id} value={cat.category_id}>
                     {cat.category_name}
                   </option>
                 );
@@ -140,22 +151,21 @@ const {categories} = useCategories()
           </div>
           <p className="text-red-600 text-sm">{errors.deadline?.message}</p>
         </div>
-       <div className="flex pt-sm gap-sm">
-      
-       <Link to={'/employer/overview'}
-          className="bg-orange-light rounded-md text-white hover:text-white px-sm p-xs w-20"
-          type="submit"
-         
-        >
-          Cancel
-        </Link>
-        <button
-          className="bg-blue-dark rounded-md text-white px-sm p-xs w-20"
-          type="submit"
-        >
-          Next
-        </button>
-       </div>
+        <div className="flex pt-sm gap-sm">
+          <Link
+            to={"/employer/overview"}
+            className="bg-orange-light rounded-md text-white hover:text-white px-sm p-xs w-20"
+            type="submit"
+          >
+            Cancel
+          </Link>
+          <button
+            className="bg-blue-dark rounded-md text-white px-sm p-xs w-20"
+            type="submit"
+          >
+            Next
+          </button>
+        </div>
       </form>
     </div>
   );
