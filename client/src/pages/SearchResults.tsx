@@ -1,15 +1,14 @@
-import React from "react";
-import { useLocation } from "react-router-dom";
-import SearchBox from "../components/ui/SearchBox";
 import { useQuery } from "react-query";
-import { publicRequest } from "../lib/axios";
-import Loader from "../components/shared/Loader";
+import { useLocation } from "react-router-dom";
+import Categories from "../components/shared/Categories";
 import Error from "../components/shared/Error";
+import Industries from "../components/shared/Industries";
+import Loader from "../components/shared/Loader";
+import ResultBox from "../components/ui/ResultBox";
+import SearchBox from "../components/ui/SearchBox";
+import { publicRequest } from "../lib/axios";
 import { IJob } from "../types/postgres/types";
 import { useAppliedJobs } from "./jobseeker/hooks/useAppliedJobs";
-import Categories from "../components/shared/Categories";
-import Industries from "../components/shared/Industries";
-import ResultBox from "../components/ui/ResultBox";
 
 type Results = {
   isLoading: boolean;
@@ -27,7 +26,7 @@ const SearchResults = () => {
     isError,
   }: Results = useQuery("results", async () => {
     const result = await publicRequest.get(
-      `/api/v1/jobs/search/results?query=${query}`,
+      `/api/v1/jobs/search/results?query=${query}`
     );
     return result.data;
   });
