@@ -6,7 +6,7 @@ export const createJob = (
   data: ICreateJobInputs,
   setIsLoading: (props: boolean) => void,
   navigate: (props: string) => void,
-  jobId: string,
+  jobId: string | undefined,
 ) => {
   try {
     const axiosConfig = {

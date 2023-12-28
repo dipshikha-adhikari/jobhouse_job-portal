@@ -1,7 +1,7 @@
 import { useQuery } from "react-query";
 import { publicRequest } from "../../lib/axios";
 import JobCard from "../../components/shared/JobCard";
-import { IJob } from "../../types/postgres/types";
+import { AppliedJobs, IJob } from "../../types/postgres/types";
 import Loader from "../../components/shared/Loader";
 import Error from "../../components/shared/Error";
 import Industries from "../../components/shared/Industries";
@@ -15,8 +15,8 @@ import { MdHomeWork } from "react-icons/md";
 import { BiCategory } from "react-icons/bi";
 import { FaIndustry } from "react-icons/fa";
 
-type AppliedJobs = {
-  jobs: IJob[];
+type AppliedJobsType = {
+  jobs: AppliedJobs[];
   isLoading: boolean;
   isError: boolean;
 };
@@ -30,8 +30,8 @@ type TopComapny = {
 };
 
 const Home = () => {
-  const { jobs: appliedJobs }: AppliedJobs = useAppliedJobs();
-  const [appliedIds, setAppliedIds] = useState<string[]>([]);
+  const { jobs: appliedJobs }: AppliedJobsType = useAppliedJobs();
+  const [appliedIds, setAppliedIds] = useState<number[]>([]);
   const getAllJobs = async () => {
     const res = await publicRequest.get("/api/v1/jobs");
     return res.data;
@@ -55,7 +55,7 @@ const Home = () => {
   useEffect(() => {
     appliedJobs?.map((item) => {
       if (!appliedIds.includes(item?.job_id)) {
-        setAppliedIds((prev: string[]) => [...prev, item.job_id]);
+        setAppliedIds((prev:number[]) => [...prev, item.job_id]);
       }
     });
   }, [appliedJobs]);
@@ -86,7 +86,7 @@ const Home = () => {
           <div className="grid gap-sm  grid-cols-[repeat(auto-fit,minmax(250px,1fr))]">
             {jobs?.map((job) => {
               return (
-                <JobCard appliedJobs={appliedIds} job={job} key={job.job_id} />
+                <JobCard appliedJobs={appliedJobs} job={job} key={job.job_id} />
               );
             })}
           </div>

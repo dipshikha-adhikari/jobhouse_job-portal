@@ -5,14 +5,26 @@ import { GiSkills } from "react-icons/gi";
 import { GoDotFill } from "react-icons/go";
 import { MdCastForEducation } from "react-icons/md";
 import { Link } from "react-router-dom";
-import { IJob } from "../../types/postgres/types";
+import { AppliedJobs, IJob } from "../../types/postgres/types";
+import { useEffect, useState } from "react";
 
 interface IResultBox {
   job: IJob;
-  appliedJobs: string[];
+  appliedJobs: AppliedJobs[];
 }
 
 const ResultBox = ({ job, appliedJobs }: IResultBox) => {
+  const [isApplied, setIsApplied] = useState(false);
+
+  useEffect(() => {
+    appliedJobs?.length > 0 &&
+      appliedJobs?.map((item) => {
+        if (item.job_id === job?.job_id) {
+          setIsApplied(true);
+        }
+      });
+  }, [job, appliedJobs]);
+
   return (
     <Link
       to={`/jobs/${job.title}/${job.job_id}`}
@@ -53,7 +65,7 @@ const ResultBox = ({ job, appliedJobs }: IResultBox) => {
           <CiCalendar fontSize="small" /> Expires in :{" "}
           {moment(job.deadline, "YYYYMMDD").fromNow()}
         </p>
-        {appliedJobs?.length > 0 && appliedJobs.includes(job.job_id) && (
+        {isApplied && (
           <span className="flex items-center gap-2 text-gray-dark text-right float-right">
             <FaRegCalendarCheck className="text-green-dark" />{" "}
           </span>

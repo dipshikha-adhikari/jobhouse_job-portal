@@ -2,11 +2,11 @@ import { create } from "zustand";
 
 type StepOne = {
   title: string;
-  categoryId: null | string;
+  categoryId:  string;
   location: string;
   experienceRequired: string;
   salary: string;
-  deadline: Date | null;
+  deadline: Date ;
 };
 
 type StepTwo = {
@@ -28,11 +28,11 @@ interface jobInputs {
 const useJobInputs = create<jobInputs>((set) => ({
   stepOne: {
     title: "",
-    categoryId: null,
+    categoryId: '',
     location: "",
     experienceRequired: "",
     salary: "",
-    deadline: null,
+    deadline: new Date(),
   },
   stepTwo: {
     noOfVacancy: 1,

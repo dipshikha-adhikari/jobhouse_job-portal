@@ -1,18 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { UseQueryResult, useQuery } from "react-query";
-import { publicRequest } from "../../lib/axios";
 import { useLocation } from "react-router-dom";
-import { IJob } from "../../types/postgres/types";
+import Categories from "../../components/shared/Categories";
+import Error from "../../components/shared/Error";
+import Industries from "../../components/shared/Industries";
 import JobCard from "../../components/shared/JobCard";
 import Loader from "../../components/shared/Loader";
-import Error from "../../components/shared/Error";
 import Layout from "../../components/ui/Layout";
-import Industries from "../../components/shared/Industries";
-import Categories from "../../components/shared/Categories";
+import { publicRequest } from "../../lib/axios";
+import { AppliedJobs, IJob } from "../../types/postgres/types";
 import { useAppliedJobs } from "../jobseeker/hooks/useAppliedJobs";
 
-type AppliedJobs = {
-  jobs: IJob[];
+type AppliedJobsType = {
+  jobs: AppliedJobs[];
   isLoading: boolean;
   isError: boolean;
 };
@@ -22,16 +22,8 @@ const Jobs = () => {
   const category = new URLSearchParams(location).get("category");
   const industry = new URLSearchParams(location).get("industry");
   const id = new URLSearchParams(location).get("id");
-  const { jobs: appliedJobs }: AppliedJobs = useAppliedJobs();
-  const [appliedIds, setAppliedIds] = useState<string[]>([]);
-
-  useEffect(() => {
-    appliedJobs?.map((item) => {
-      if (!appliedIds.includes(item.job_id)) {
-        setAppliedIds((prev: string[]) => [...prev, item.job_id]);
-      }
-    });
-  }, [appliedJobs]);
+  const { jobs: appliedJobs }: AppliedJobsType = useAppliedJobs();
+  
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -80,7 +72,7 @@ const Jobs = () => {
               jobs?.map((job) => {
                 return (
                   <JobCard
-                    appliedJobs={appliedIds}
+                    appliedJobs={appliedJobs}
                     job={job}
                     key={job.job_id}
                   />

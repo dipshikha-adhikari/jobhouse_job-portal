@@ -58,7 +58,6 @@ const CreateJobStepTwo = ({ setStep, job, step }: CreateJobStepTwoProps) => {
       industryId: profile?.basic_information.industry_id,
     };
     createJob(dataToBeSent, setIsLoading, navigate, jobId);
-    jobStore.setStepOneInputs("");
     setIsEditorOpen(false);
   };
 

@@ -10,11 +10,11 @@ import { useCategories } from "../../hooks/useCategories";
 
 export interface ICreateJobStepOneInputs {
   title: string;
-  categoryId: string;
+  categoryId: string 
   location: string;
   experienceRequired: string;
   salary: string;
-  deadline: Date | string;
+  deadline: Date 
 }
 
 type CreateJobStepOneProps = {

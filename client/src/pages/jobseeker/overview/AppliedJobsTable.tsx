@@ -87,7 +87,7 @@ export default function AppliedJobsTable() {
     return result.data;
   });
 
-  console.log(jobs);
+
 
   if (isLoading) return <div className="text-center">Fetching...</div>;
   if (isError) return <div className="text-center py-md">Failed to fetch!</div>;
