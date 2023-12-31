@@ -23,7 +23,7 @@ const Industries = () => {
   if (isError) return <div>Error!</div>;
 
   return (
-    <div className="grid gap-sm">
+    <div className="grid gap-xs ">
       <div className="grid gap-3 sm:flex flex-wrap ">
         {data?.slice(0, limit).map((item) => {
           return (
@@ -39,7 +39,7 @@ const Industries = () => {
         })}
       </div>
       <button
-        className="w-fit text-black-light flex items-center gap-1 hover:text-black-dark  font-bold uppercase"
+        className="w-fit text-black-light flex items-center gap-1 hover:text-black-dark  font-semibold uppercase"
         onClick={handleLimit}
       >
         {limit <= initialLimit ? "View more" : "View less"}{" "}

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useQuery } from "react-query";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { publicRequest } from "../../lib/axios";
 import { debounceFn } from "../../utils/debounce";
 
@@ -17,6 +17,7 @@ const SearchBox = () => {
   const optimizedFunction = debounceFn(handleChange, 500);
   const location = useLocation();
   const ref = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     document.addEventListener("click", handleClickOutside);
@@ -34,7 +35,7 @@ const SearchBox = () => {
     }
   };
 
-  const { data: suggestions }: Data = useQuery(
+  const { data: suggestions, isLoading }: Data = useQuery(
     ["suggestions", text],
     async () => {
       const result = await publicRequest.get(
@@ -53,33 +54,53 @@ const SearchBox = () => {
   function handleChange(query: string) {
     setText(query);
   }
-  console.log(isSuggestionOpen);
+
+  const handleSearchBtn = () => {
+    if (text === "") return;
+    navigate(`/jobs/search?q=${text}`);
+  };
   return (
     <div
       className={` relative max-w-xl w-full mx-auto p-sm rounded-sm grid gap-sm place-items-center    text-white  bottom-0 ${
         location.pathname === "/" && "bg-[rgba(0,0,0,0.3)]"
       }`}
     >
-      <div className="w-full border-green-dark border-sm max-w-md flex search-input">
+      <div
+        className={`${
+          location.pathname !== "/" && "border-sm border-green-light"
+        }  w-full   max-w-md flex search-input`}
+      >
         <input
           type="text"
-          className="outline-none  w-full text-black-dark border-none p-sm search-input"
+          className="outline-none rounded-none w-full text-black-dark border-none p-sm search-input"
           placeholder="Search by Job Title,  Skill or Organization"
           onFocus={() => setIsSuggestionOpen(true)}
           onChange={(e) => optimizedFunction(e.target.value)}
         />
-        <button className="bg-green-light text-white px-sm">Search</button>
+        <button
+          onClick={handleSearchBtn}
+          className="bg-green-light  text-white px-sm "
+        >
+          Search
+        </button>
       </div>
       <p className={`${location.pathname === "/" ? "block" : "hidden"}`}>
         Search, Apply & Get Jobs in Nepal - Free
       </p>
-
       {isSuggestionOpen && (
         <div
           ref={ref}
-          className=" absolute grid gap-1 text-center  bg-white w-full py-sm top-14 shadow-sm "
+          className=" absolute grid gap-1 text-center max-w-md  bg-white w-full  py-sm top-14 border-sm  "
         >
-          {/* {isLoading && <div className='text-center'> Loading... </div>} */}
+          {isLoading && (
+            <div className="text-center text-black-default ">Loading...</div>
+          )}
+          {suggestions?.length == 0 && (
+            <div className="text-center text-black-default ">
+              No results found
+            </div>
+          )}
+
           {suggestions &&
             suggestions?.map((item: Suggestion) => {
               return (

@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom";
-import useStore from "../../store/store";
-import { FaArrowDown } from "react-icons/fa";
-import useAuthStore from "../../store/auth";
 import { useEffect, useRef, useState } from "react";
+import { FaArrowDown } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import useAuthStore from "../../store/auth";
+import useStore from "../../store/store";
 import Categories from "../shared/Categories";
 
 interface IHiddenMenu {
@@ -43,7 +43,7 @@ const HiddenMenu = ({ setMenuOpen, menuOpen }: IHiddenMenu) => {
           className="items-center gap-2 flex relative cursor-pointer"
           onClick={() => setIsModalOpen(!isModalOpen)}
         >
-          Browse jobs <FaArrowDown className="text-blue-dark" />
+          Browse jobs <FaArrowDown className="text-green-dark" />
           {isModalOpen && (
             <div className="absolute top-10 border-b-md  pb-10 h-80 overflow-y-scroll  bg-white">
               <Categories setIsModalOpen={setIsModalOpen} />
@@ -52,12 +52,14 @@ const HiddenMenu = ({ setMenuOpen, menuOpen }: IHiddenMenu) => {
         </span>
         <Link
           to="/blogs"
+          onClick={() => setMenuOpen(false)}
           className="text-black-light w-fit font-normal hover:text-blue-dark"
         >
           Blogs
         </Link>
         <Link
           to="/faqs"
+          onClick={() => setMenuOpen(false)}
           className="text-black-light w-fit font-normal hover:text-blue-dark"
         >
           FAQs
@@ -71,7 +73,7 @@ const HiddenMenu = ({ setMenuOpen, menuOpen }: IHiddenMenu) => {
           <Link
             onClick={() => setMenuOpen(false)}
             to="/user/login"
-            className=" font-normal  border-[1px] border-blue-dark  rounded-sm p-xs px-md "
+            className=" font-normal text-blue-dark hover:text-blue-dark  border-[1px] border-blue-dark  rounded-sm p-xs px-md "
           >
             Log in
           </Link>
@@ -99,12 +101,14 @@ const HiddenMenu = ({ setMenuOpen, menuOpen }: IHiddenMenu) => {
         </span>
         <Link
           to="/blogs"
+          onClick={() => setMenuOpen(false)}
           className="text-black-light w-fit font-normal hover:text-blue-dark"
         >
           Blogs
         </Link>
         <Link
           to="/faqs"
+          onClick={() => setMenuOpen(false)}
           className="text-black-light w-fit font-normal hover:text-blue-dark"
         >
           FAQs

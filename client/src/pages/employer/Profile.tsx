@@ -9,6 +9,7 @@ import Error from "../../components/shared/Error";
 import Loader from "../../components/shared/Loader";
 import RecentJobs from "./RecentJobs";
 import { useEffect } from "react";
+import { CiStar } from "react-icons/ci";
 
 const Profile = () => {
   const user = useCurrentUser();
@@ -23,7 +24,7 @@ const Profile = () => {
 
   return (
     <Layout>
-      <div className="grid gap-sm lg:flex lg:gap-md">
+      <div className="grid break-all gap-sm lg:flex lg:gap-md">
         <section className="grid gap-sm flex-1 h-fit">
           <header className="relative h-full">
             <div className="cover-image">
@@ -82,10 +83,8 @@ const Profile = () => {
               {profile?.basic_information?.phone_number || user.phoneNumber}
             </p>
           </div>
-        </section>
-        <section className="flex-1 grid gap-sm h-fit">
-          <div className="grid gap-xs">
-            <h2 className="font-semibold text-xl">Summary</h2>
+          <div className="grid gap-xs ">
+            <h2 className="font-semibold text-xl ">Summary</h2>
             {profile?.basic_information?.summary ? (
               profile.basic_information.summary
             ) : (
@@ -100,11 +99,15 @@ const Profile = () => {
               </div>
             )}
           </div>
+        </section>
+        <section className="flex-1 grid gap-xl h-fit">
           {
-            <div className="grid gap-sm">
-              <h2 className="font-semibold text-xl border-y-sm py-xs border-default">
-                Recent jobs
-              </h2>
+            <div className="grid gap-sm ">
+              <p className="grid place-items-center">
+                <h2 className="flex uppercase text-green-dark items-center text-center gap-2 font-semibold text-xl border-y-sm w-fit py-xs border-default">
+                  <CiStar /> Recent jobs
+                </h2>
+              </p>
               <div>
                 <RecentJobs employerId={profile?.user_id} />
               </div>

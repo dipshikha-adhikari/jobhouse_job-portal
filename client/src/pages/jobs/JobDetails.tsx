@@ -31,9 +31,9 @@ const Job = () => {
     isError: errorRecentJobs,
   } = useRecentJobs(job?.employer_id);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [job]);
+  // useEffect(() => {
+  //   window.scrollTo(0, 0);
+  // }, [job]);
 
   useEffect(() => {
     appliedJobs?.length > 0 &&
@@ -91,14 +91,14 @@ const Job = () => {
         </div>
       </section>
       {/* job  */}
-      <main className="lg:flex grid  sm:px-xl gap-sm lg:justify-center items-start">
+      <main className="lg:flex grid  gap-sm lg:justify-between items-start">
         <aside className="sm:border-xs sm:p-xl w-full  rounded-sm border-light">
-          <section className="grid gap-sm max-w-4xl  w-full mx-auto">
+          <section className="grid gap-sm">
             <header className="grid gap-xs ">
               <h2 className="text-xl  text-green-dark font-bold">
                 {job?.title}
               </h2>
-              <div>Apply Before : {moment(job?.deadline).fromNow()}</div>
+              <div>Apply : {moment(job?.deadline).fromNow()}</div>
               <p className="flex items-center gap-2">
                 <FaCheckCircle className="text-green-dark" />{" "}
                 {job.job_application_count} Applications
@@ -194,12 +194,12 @@ const Job = () => {
           </section>
         </aside>
         {jobs && jobs?.length > 1 && (
-          <aside className=" w-fit border-xs  border-default">
-            <div className="grid gap-xs">
-              <h2 className="text-xl border-light border-b-xs py-sm font-bold text-center ">
+          <aside className="flex-1 ">
+            <div className="grid gap-md place-items-end">
+              <h2 className="text-xl border-y-sm w-fit mx-auto uppercase text-green-dark py-sm font-bold text-center ">
                 More jobs by {job.employer_details.organization_name}
               </h2>
-              <div className="grid p-sm  gap-md grid-cols-[repeat(auto-fit,minmax(300px,1fr))] ">
+              <div className="grid   gap-sm grid-cols-auto-sm w-full mx-auto">
                 {loadingRecentJobs && (
                   <div className="text-center">Loading...</div>
                 )}
@@ -209,7 +209,7 @@ const Job = () => {
                     if (item.job_id !== job.job_id) {
                       return (
                         <JobCard
-                          key={job.job_id}
+                          key={item.job_id}
                           job={item}
                           appliedJobs={appliedJobs}
                         />

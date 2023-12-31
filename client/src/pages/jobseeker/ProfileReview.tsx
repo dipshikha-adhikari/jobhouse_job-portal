@@ -33,7 +33,7 @@ const ProfileReview = () => {
   if (jobId !== undefined && job?.job_id === undefined) return <Error />;
 
   return (
-    <div className="grid gap-md p-md max-w-3xl mx-auto">
+    <div className="grid gap-md  p-md max-w-3xl mx-auto ">
       <div className="grid gap-xs">
         <p className="font-semibold">
           Review your profile before applying for this job!
@@ -53,7 +53,7 @@ const ProfileReview = () => {
             Job requirement
           </p>
         </header>
-        <section className="flex justify-between    py-sm ">
+        <section className="flex justify-between gap-sm   py-sm ">
           <aside className="flex-1">
             <div>
               <img
@@ -107,7 +107,7 @@ const ProfileReview = () => {
           </aside>
         </section>
 
-        <section className="flex justify-between items-start  py-sm ">
+        <section className="flex justify-between gap-sm items-start  py-sm ">
           <aside className="flex-1 grid gap-xs">
             <header className="font-semibold uppercase text-green-dark">
               Work Experience
@@ -142,7 +142,7 @@ const ProfileReview = () => {
           </aside>
         </section>
 
-        <section className="flex items-start justify-between py-sm ">
+        <section className="flex items-start gap-sm justify-between py-sm ">
           <aside className="flex-1 grid gap-xs">
             <header className="font-semibold uppercase text-green-dark ">
               Education
@@ -170,22 +170,28 @@ const ProfileReview = () => {
           </aside>
           <div className="w-1 border-sm h-full  grid bg-green-light"></div>
 
-          <aside className=" hidden flex-1 sm:grid gap-xs place-content-center">
-            <header className="font-semibold uppercase text-green-dark">
+          <aside className=" hidden flex-1 sm:grid gap-xs justify-center place-content-center">
+            <header className="font-semibold  text-center  uppercase text-green-dark">
               Required Education
             </header>
-            <p>{job?.education_required || "Not available"}</p>
+            <p className="text-center">
+              {job?.education_required || "Not available"}
+            </p>
           </aside>
         </section>
 
-        <section className="flex justify-between">
-          <aside className="grid gap-xs flex-1 h-fit">
+        <section className="flex justify-between gap-sm  items-start">
+          <aside className="grid gap-xs overflow-clip flex-1 h-fit">
             <header className="font-semibold uppercase text-green-dark">
               Skills
             </header>
-            {profile?.job_preference?.skills ? (
+            {profile?.job_preference?.skills.length > 0 ? (
               profile?.job_preference?.skills?.map((skill) => {
-                return <li key={skill}>{skill}</li>;
+                return (
+                  <li key={skill} className="break-all">
+                    {skill}
+                  </li>
+                );
               })
             ) : (
               <span>Not available</span>
@@ -193,14 +199,18 @@ const ProfileReview = () => {
           </aside>
           <div className="w-1 border-sm h-full  grid bg-green-light"></div>
 
-          <aside className="sm:grid gap-xs flex-1 place-content-center hidden ">
+          <aside className="sm:grid gap-xs flex-1 text-center place-content-center hidden ">
             <header className="font-semibold uppercase text-green-dark ">
               Required skills
             </header>
-            <div className="grid gap-2">
-              {job?.skills?.map((item) => {
-                return <p key={item}>{item}</p>;
-              })}
+            <div className="grid  gap-2">
+              {job !== undefined && job?.skills?.length > 0 ? (
+                job?.skills?.map((item) => {
+                  return <p key={item}>{item}</p>;
+                })
+              ) : (
+                <span>Not required</span>
+              )}
             </div>
           </aside>
         </section>

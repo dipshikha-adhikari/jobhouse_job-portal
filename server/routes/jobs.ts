@@ -41,4 +41,5 @@ router.post('/apply',verifyToken, applyForJob)
 router.get('/search/suggestions', getSearchSuggestion)
 router.get('/search/results', getSearchResults)
 
+
 module.exports = router

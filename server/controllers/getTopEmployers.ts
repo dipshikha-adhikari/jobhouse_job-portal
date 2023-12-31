@@ -16,7 +16,7 @@ LEFT JOIN
 jobs j ON ebi.user_id = j.employer_id
 LEFT JOIN
 industries i ON ebi.industry_id = i.industry_id
-left join images img on ebi.user_id = img.user_id
+left join images img on ebi.user_id = img.user_id where j.deadline > NOW()
 GROUP BY
 ebi.user_id, ebi.organization_name,  i.industry_name, img.url
 ORDER BY

@@ -1,20 +1,22 @@
-import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import useJobInputs from "../../store/jobInputs";
-import { useEffect } from "react";
 import moment from "moment";
-import { CreateJobStepOneSchema } from "../../utils/validationSchema";
-import { IJob } from "../../types/postgres/types";
+import { useEffect } from "react";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { useCategories } from "../../hooks/useCategories";
+import useJobInputs from "../../store/jobInputs";
+import { IJob } from "../../types/postgres/types";
+import { CreateJobStepOneSchema } from "../../utils/validationSchema";
+import ResponsiveDatePicker from "../mui/DatePicker";
+import SelectCategory from "../mui/SelectCategory";
 
 export interface ICreateJobStepOneInputs {
   title: string;
-  categoryId: string 
+  categoryId: string;
   location: string;
   experienceRequired: string;
   salary: string;
-  deadline: Date 
+  deadline: Date;
 }
 
 type CreateJobStepOneProps = {
@@ -29,9 +31,11 @@ const CreateJobStepOne = ({ setStep, step, job }: CreateJobStepOneProps) => {
     handleSubmit,
     formState: { errors },
     setValue,
+    control,
   } = useForm({ resolver: yupResolver(CreateJobStepOneSchema) });
   const jobStore = useJobInputs();
   const { categories } = useCategories();
+  const isEditorOpen = true;
 
   const onSubmit: SubmitHandler<ICreateJobStepOneInputs> = (data) => {
     jobStore.setStepOneInputs(data);
@@ -39,38 +43,31 @@ const CreateJobStepOne = ({ setStep, step, job }: CreateJobStepOneProps) => {
   };
 
   useEffect(() => {
-    const dateFromDBString: string = moment(job?.deadline).format("YYYY-MM-DD");
-    const dateFromDB: Date = new Date(dateFromDBString);
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    setValue("categoryId", job?.category_id || jobStore.stepOne.categoryId);
+    setValue("title", job?.title || jobStore.stepOne.title);
+    setValue("salary", job?.salary || jobStore.stepOne.salary);
     setValue(
-      "categoryId",
-      job?.category_id !== undefined
-        ? job.category_id
-        : jobStore.stepOne.categoryId,
+      "deadline",
+      new Date(moment(job?.deadline).format("YYYY-MM-DD")) ||
+        jobStore.stepOne.deadline,
     );
-    setValue(
-      "title",
-      job?.title !== undefined ? job?.title : jobStore.stepOne.title,
-    );
-    setValue(
-      "salary",
-      job?.salary !== undefined ? job?.salary : jobStore.stepOne.salary,
-    );
-    setValue("deadline", dateFromDB || jobStore.stepOne.deadline);
-    setValue(
-      "location",
-      job?.location !== undefined ? job?.location : jobStore.stepOne.location,
-    );
+    setValue("location", job?.location || jobStore.stepOne.location);
     setValue(
       "experienceRequired",
-      job?.experience_required !== undefined
-        ? job?.experience_required
-        : jobStore.stepOne.experienceRequired,
+      job?.experience_required || jobStore.stepOne.experienceRequired,
     );
   }, [job]);
 
   return (
-    <div>
-      <form className="grid gap-xs" onSubmit={handleSubmit(onSubmit)}>
+    <div className="bg-white py-sm">
+      <form
+        className="grid gap-xs p-sm sm:p-xl "
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <div>
           <div className=" grid gap-2 items-center">
             <span className="font-semibold">Job Title</span>
@@ -85,22 +82,17 @@ const CreateJobStepOne = ({ setStep, step, job }: CreateJobStepOneProps) => {
         <div>
           <div className=" grid gap-2 items-center">
             <span className="font-semibold">Job Category</span>
-            <select
-              {...register("categoryId")}
-              placeholder="IT & Telecommunication"
-              className="border-sm p-xs outline-none border-gray-300"
-            >
-              <option value="" className="">
-                Select a category
-              </option>
-              {categories?.map((cat) => {
-                return (
-                  <option key={cat.category_id} value={cat.category_id}>
-                    {cat.category_name}
-                  </option>
-                );
-              })}
-            </select>
+            <Controller
+              name="categoryId"
+              control={control}
+              render={({ field }) => (
+                <SelectCategory
+                  values={categories}
+                  field={field}
+                  type="categories"
+                />
+              )}
+            />
           </div>
           <p className="text-red-600 text-sm">{errors.categoryId?.message}</p>
         </div>
@@ -143,10 +135,17 @@ const CreateJobStepOne = ({ setStep, step, job }: CreateJobStepOneProps) => {
         <div>
           <div className=" grid gap-xs items-center">
             <span className="font-semibold">Deadline</span>
-            <input
-              type="date"
-              className="border-sm p-xs outline-none border-gray-300"
-              {...register("deadline")}
+            <Controller
+              control={control}
+              name="deadline"
+              render={({ field }) => {
+                return (
+                  <ResponsiveDatePicker
+                    isEditorOpen={isEditorOpen}
+                    field={field}
+                  />
+                );
+              }}
             />
           </div>
           <p className="text-red-600 text-sm">{errors.deadline?.message}</p>

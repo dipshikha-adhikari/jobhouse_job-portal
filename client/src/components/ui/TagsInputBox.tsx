@@ -43,22 +43,22 @@ const TagsInputBox = ({
   }, [values]);
 
   return (
-    <div className="grid w-full ">
-      <div className="border-sm flex flex-wrap gap-xs input   p-sm">
+    <div className="grid w-full    ">
+      <div className="border-sm  flex flex-wrap gap-xs input   p-sm">
         {inputs.map((inp) => {
           return (
-            <span
-              key={inp}
-              className="flex items-center font-semibold overflow-hidden whitespace-pre-line gap-2"
-            >
-              {inp}{" "}
-              {isEditorOpen && (
-                <FaTimesCircle
-                  className="text-orange-dark cursor-pointer"
-                  onClick={() => removeInput(inp)}
-                />
-              )}
-            </span>
+            <p key={inp} className=" flex  font-semibold  gap-2">
+              <span className="break-all "> {inp}</span>
+              <span>
+                {" "}
+                {isEditorOpen && (
+                  <FaTimesCircle
+                    className="text-orange-dark w-5 h-5 cursor-pointer "
+                    onClick={() => removeInput(inp)}
+                  />
+                )}
+              </span>
+            </p>
           );
         })}
         <input
@@ -66,16 +66,20 @@ const TagsInputBox = ({
           ref={inputRef}
           placeholder="Add skills"
           onChange={(e) => handleChange(e)}
-          className="outline-none  w-full input "
+          className="outline-none break-all w-full   input "
           disabled={!isEditorOpen}
         />
       </div>
       {currentInput && (
         <div
-          className="flex items-center overflow-hidden gap-sm p-sm shadow-sm cursor-pointer"
+          className="  break-all flex  gap-sm p-sm shadow-sm cursor-pointer"
           onClick={handleAddInput}
         >
-          {currentInput} <FaCheckCircle className="text-green-dark" />
+          {currentInput}
+          <span>
+            {" "}
+            <FaCheckCircle className="text-green-dark w-5 h-5" />
+          </span>
         </div>
       )}
     </div>

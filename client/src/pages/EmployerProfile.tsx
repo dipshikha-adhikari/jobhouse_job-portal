@@ -13,6 +13,7 @@ import { IEmployerProfile } from "../types/postgres/types";
 import { useRecentJobs } from "./employer/hooks/useRecentJobs";
 import JobCard from "../components/shared/JobCard";
 import { useAppliedJobs } from "./jobseeker/hooks/useAppliedJobs";
+import { CiStar } from "react-icons/ci";
 
 const EmployerProfile = () => {
   const params = useParams();
@@ -43,7 +44,7 @@ const EmployerProfile = () => {
 
   return (
     <Layout>
-      <div className="grid gap-xl lg:flex lg:gap-md">
+      <div className="grid gap-xl mx-auto lg:flex lg:gap-md">
         <section className="grid gap-sm flex-1 h-fit">
           <header className="relative h-full">
             <div className="cover-image">
@@ -108,12 +109,15 @@ const EmployerProfile = () => {
             )}
           </div>
         </section>
-        <section className="flex-1 grid gap-sm h-fit">
-          <div className="grid gap-sm">
-            <h2 className="font-semibold text-green-dark text-xl border-y-sm py-sm w-fit border-green-light">
-              Recent jobs by {profile?.basic_information?.organization_name}
-            </h2>
-            <div className="grid gap-md grid-cols-[repeat(auto-fit,minmax(300px,1fr))] ">
+        <section className="flex-1 grid  gap-sm h-fit">
+          <div className="grid  gap-sm">
+            <div className="grid py-sm place-items-center">
+              <h2 className="font-semibold gap-2 border-y-sm  uppercase flex items-center sm:px-xl text-green-dark text-xl border-gray-light py-sm ">
+                <CiStar className="text-green-dark" /> Recent jobs by{" "}
+                {profile?.basic_information?.organization_name}
+              </h2>
+            </div>
+            <div className="grid gap-md  grid-cols-auto-sm">
               {loadingRecentJobs && (
                 <div className="text-center">Loading...</div>
               )}

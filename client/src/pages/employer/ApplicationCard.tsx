@@ -1,4 +1,3 @@
-
 const ApplicationCard = () => {
   return <div>ApplicationCard</div>;
 };

@@ -1,4 +1,3 @@
-
 const Skills = () => {
   return (
     <div>

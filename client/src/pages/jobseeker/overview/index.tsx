@@ -59,15 +59,13 @@ const JobseekerOverview = () => {
             {selected === "matchingJobs" && (
               <MatchingJobsTable profile={profile} />
             )}
-            {selected === "appliedJobs" && (
-              <AppliedJobsTable  />
-            )}
+            {selected === "appliedJobs" && <AppliedJobsTable />}
           </div>
         </section>
       </div>
       <div className=" h-fit sm:hidden  ">
         {selected === "matchingJobs" && <MatchingJobsTable profile={profile} />}
-        {selected === "appliedJobs" && <AppliedJobsTable  />}
+        {selected === "appliedJobs" && <AppliedJobsTable />}
       </div>
 
       <section className="grid gap-xl">

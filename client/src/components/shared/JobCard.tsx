@@ -1,10 +1,10 @@
+import moment from "moment";
+import { useEffect, useState } from "react";
+import { CiCalendar, CiLocationOn } from "react-icons/ci";
+import { FaCheckCircle, FaRegCalendarCheck } from "react-icons/fa";
 import { GoDotFill } from "react-icons/go";
 import { Link } from "react-router-dom";
 import { AppliedJobs, IJob } from "../../types/postgres/types";
-import moment from "moment";
-import { FaCheckCircle, FaRegCalendarCheck } from "react-icons/fa";
-import { CiCalendar, CiLocationOn } from "react-icons/ci";
-import { useEffect, useState } from "react";
 
 interface IJobCard {
   job: IJob;
@@ -26,7 +26,7 @@ const JobCard = ({ job, appliedJobs }: IJobCard) => {
   return (
     <Link
       to={`/jobs/${job.title}/${job.job_id}`}
-      className="grid gap-xs max-w-md border-xs border-light font-normal  "
+      className="grid gap-xs w-full mx-auto max-w-md shadow-sm border-light font-normal  "
     >
       <div className="flex p-sm gap-xs items-center text-black-dark hover:text-black-dark">
         <img
@@ -50,17 +50,17 @@ const JobCard = ({ job, appliedJobs }: IJobCard) => {
           </p>
         </div>
       </div>
-      <div className=" border-sm p-sm">
-        <div>
+      <div className=" border-t-sm  p-sm">
+        <div className="grid gap-2">
           <p className="text-gray-dark flex items-center gap-xs">
-            <CiCalendar fontSize="small" /> Expires in :{" "}
-            {moment(job.deadline, "YYYYMMDD").fromNow()}
+            <CiCalendar fontSize="small" /> Expires :{" "}
+            {moment(job?.deadline).fromNow()}
           </p>
           {job.job_application_count && (
             <p className="text-gray-dark flex items-center gap-2 ">
               {" "}
               <FaCheckCircle className="text-green-dark" />{" "}
-              {job.job_application_count} Applications{" "}
+              {job.job_application_count} Applied{" "}
             </p>
           )}
         </div>

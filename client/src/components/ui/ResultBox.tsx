@@ -1,12 +1,11 @@
 import moment from "moment";
+import { useEffect, useState } from "react";
 import { CiCalendar, CiLocationOn } from "react-icons/ci";
 import { FaRegCalendarCheck } from "react-icons/fa";
 import { GiSkills } from "react-icons/gi";
 import { GoDotFill } from "react-icons/go";
-import { MdCastForEducation } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { AppliedJobs, IJob } from "../../types/postgres/types";
-import { useEffect, useState } from "react";
 
 interface IResultBox {
   job: IJob;
@@ -28,7 +27,7 @@ const ResultBox = ({ job, appliedJobs }: IResultBox) => {
   return (
     <Link
       to={`/jobs/${job.title}/${job.job_id}`}
-      className="grid  max-w-md border-xs border-light font-normal  "
+      className="grid w-full max-w-md border-xs mx-auto lg:mx-0  border-light font-normal  "
     >
       <div className="flex p-sm gap-xs items-center text-black-dark hover:text-black-dark">
         <img
@@ -52,18 +51,15 @@ const ResultBox = ({ job, appliedJobs }: IResultBox) => {
           </p>
           <div className="py-sm">
             <p className="flex text-gray-dark items-center gap-2">
-              <MdCastForEducation /> Education : {job.education_required}{" "}
-            </p>
-            <p className="flex text-gray-dark items-center gap-2">
               <GiSkills /> Experience : {job.experience_required}{" "}
             </p>
           </div>
         </div>
       </div>
-      <div className=" border-sm p-sm">
+      <div className=" border-t-sm p-sm">
         <p className="text-gray-dark flex items-center gap-xs">
-          <CiCalendar fontSize="small" /> Expires in :{" "}
-          {moment(job.deadline, "YYYYMMDD").fromNow()}
+          <CiCalendar fontSize="small" /> Expires :{" "}
+          {moment(job.deadline).fromNow()}
         </p>
         {isApplied && (
           <span className="flex items-center gap-2 text-gray-dark text-right float-right">

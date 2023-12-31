@@ -23,7 +23,6 @@ const Jobs = () => {
   const industry = new URLSearchParams(location).get("industry");
   const id = new URLSearchParams(location).get("id");
   const { jobs: appliedJobs }: AppliedJobsType = useAppliedJobs();
-  
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -47,11 +46,10 @@ const Jobs = () => {
 
   if (isLoading) return <Loader />;
   if (isError) return <Error />;
-  console.log(jobs);
 
   return (
     <Layout>
-      <div className="min-h-[80vh] grid gap-sm">
+      <div className="min-h-[80vh] grid gap-sm place-items-center">
         <div className="grid gap-xs bg-green-50 p-sm">
           <h2 className="text-2xl font-bold text-black-light">
             {" "}
@@ -66,8 +64,8 @@ const Jobs = () => {
             for you, Click on the apply now button to send your job application.
           </p>
         </div>
-        <main className="grid gap-sm">
-          <section className="grid gap-sm   grid-cols-[repeat(auto-fit,minmax(250px,1fr))]">
+        <main className="grid gap-xl ">
+          <section className="grid grid-cols-auto-sm  lg:flex flex-wrap gap-sm lg:justify-center  ">
             {jobs !== undefined && jobs?.length > 0 ? (
               jobs?.map((job) => {
                 return (
@@ -95,7 +93,7 @@ const Jobs = () => {
             <Categories />
           </div>
         </main>
-        <div className="grid gap-xs flex-[0.3] ">
+        <div className="grid gap-xs py-xl flex-[0.3] ">
           <header className="font-semibold border-y-sm uppercase border-default w-fit p-sm text-xl text-green-dark">
             Jobs By Industry
           </header>

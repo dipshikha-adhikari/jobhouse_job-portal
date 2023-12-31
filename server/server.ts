@@ -19,11 +19,8 @@ cloudinary.config({
     secure: true
 })
 
-
-
-app.use(cors({ origin: 'http://localhost:5173' }))
+app.use(cors({ origin: process.env.CLIENT_URL }))
 app.use(bodyParser.json());
-// parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }))
 
 app.get('/', (req: Request, res: Response) => {
@@ -34,5 +31,5 @@ app.use('/api/v1/employer', employerRoute)
 app.use('/api/v1/jobseeker', jobseekerRoute)
 app.use('/api/v1/jobs', jobsRoute)
 app.get('/api/v1/topEmployers', getTopEmployers)
-console.log(globalThis, 'thi')
+
 app.listen('3000', () => console.log('server running', this))

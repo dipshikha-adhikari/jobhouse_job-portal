@@ -66,7 +66,7 @@ const JobPreference = () => {
   };
 
   return (
-    <div className="grid gap-sm ">
+    <div className="grid gap-sm  ">
       <header className="text-green-dark flex justify-between  font-semibold">
         Job Preference
         {!isEditorOpen && (
@@ -89,7 +89,7 @@ const JobPreference = () => {
               <div className="flex-1">
                 {" "}
                 <textarea
-                  placeholder=" your objective"
+                  placeholder=" your break-all objective"
                   disabled={!isEditorOpen}
                   {...register("objective")}
                   onInput={(e) => autoGrow(e)}

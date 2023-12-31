@@ -18,7 +18,7 @@ const RecentJobs: React.FC<RecentJobsProps> = ({ employerId }) => {
   if (isError) return <div className="text-center">Error</div>;
 
   return (
-    <div className="grid gap-md grid-cols-[repeat(auto-fit,minmax(300px,1fr))]">
+    <div className="grid  gap-md grid-cols-auto-sm ">
       {jobs?.map((job, ind) => {
         return <JobCard job={job} key={job.job_id} index={ind} />;
       })}

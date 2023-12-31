@@ -1,19 +1,19 @@
+import { useEffect, useState } from "react";
+import { BiCategory } from "react-icons/bi";
+import { CiStar } from "react-icons/ci";
+import { FaIndustry } from "react-icons/fa";
+import { MdHomeWork } from "react-icons/md";
 import { useQuery } from "react-query";
-import { publicRequest } from "../../lib/axios";
-import JobCard from "../../components/shared/JobCard";
-import { AppliedJobs, IJob } from "../../types/postgres/types";
-import Loader from "../../components/shared/Loader";
+import { Link } from "react-router-dom";
+import Categories from "../../components/shared/Categories";
 import Error from "../../components/shared/Error";
 import Industries from "../../components/shared/Industries";
-import Categories from "../../components/shared/Categories";
-import { useAppliedJobs } from "../jobseeker/hooks/useAppliedJobs";
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import JobCard from "../../components/shared/JobCard";
+import Loader from "../../components/shared/Loader";
 import SearchBox from "../../components/ui/SearchBox";
-import { CiStar } from "react-icons/ci";
-import { MdHomeWork } from "react-icons/md";
-import { BiCategory } from "react-icons/bi";
-import { FaIndustry } from "react-icons/fa";
+import { publicRequest } from "../../lib/axios";
+import { AppliedJobs, IJob } from "../../types/postgres/types";
+import { useAppliedJobs } from "../jobseeker/hooks/useAppliedJobs";
 
 type AppliedJobsType = {
   jobs: AppliedJobs[];
@@ -55,16 +55,20 @@ const Home = () => {
   useEffect(() => {
     appliedJobs?.map((item) => {
       if (!appliedIds.includes(item?.job_id)) {
-        setAppliedIds((prev:number[]) => [...prev, item.job_id]);
+        setAppliedIds((prev: number[]) => [...prev, item.job_id]);
       }
     });
   }, [appliedJobs]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   if (isLoading) return <Loader />;
   if (isError) return <Error />;
 
   return (
-    <div className="grid gap-sm">
+    <div className="grid gap-sm ">
       <header className=" justify-start  relative ">
         <img
           src="https://img.freepik.com/free-photo/living-room-product-backdrop-interior-background_53876-147964.jpg?size=626&ext=jpg"
@@ -78,19 +82,19 @@ const Home = () => {
         />
         <SearchBox />
       </header>
-      <section className="grid gap-lg lg:flex">
-        <aside className="grid gap-md flex-1 h-fit">
+      <section className="grid gap-lg mx-auto lg:flex">
+        <aside className="grid gap-md flex-1 h-fit sm:px-md">
           <header className="font-semibold border-y-sm flex items-center gap-2 border-green-light w-fit p-xs text-xl uppercase text-green-dark">
             <CiStar className="text-green-dark" /> Top jobs
           </header>
-          <div className="grid gap-sm  grid-cols-[repeat(auto-fit,minmax(250px,1fr))]">
+          <div className="grid gap-sm  grid-cols-auto-sm ">
             {jobs?.map((job) => {
               return (
                 <JobCard appliedJobs={appliedJobs} job={job} key={job.job_id} />
               );
             })}
           </div>
-          <div className="grid gap-sm">
+          <div className="grid py-xl gap-md">
             <h2 className=" uppercase font-semibold text-green-dark text-xl border-y-md w-fit p-xs border-green-light flex items-center gap-2">
               {" "}
               <MdHomeWork />
@@ -104,7 +108,7 @@ const Home = () => {
                   <Link
                     key={item.user_id}
                     to={`/employer/${item.organization_name}/${item.user_id}`}
-                    className="grid  text-black-dark hover:text-black-dark gap-1 border-xs  p-sm place-content-start"
+                    className="grid  text-black-dark max-w-sm hover:text-black-dark gap-1 border-xs  p-sm place-content-start"
                   >
                     <img
                       src={item.image_url}
@@ -133,8 +137,8 @@ const Home = () => {
             <Industries />
           </div>
         </aside>
-        <aside className="grid gap-sm flex-[0.3] h-fit">
-          <div className="grid gap-xs  h-fit ">
+        <aside className="grid gap-sm flex-[0.3] h-fit mx-auto">
+          <div className="grid gap-sm sm:px-md h-fit ">
             <header className="flex items-center gap-2 font-semibold border-y-sm uppercase border-green-light w-fit p-xs text-xl text-green-dark">
               <BiCategory /> Jobs By Category
             </header>

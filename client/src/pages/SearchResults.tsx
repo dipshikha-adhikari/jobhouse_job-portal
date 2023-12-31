@@ -1,9 +1,7 @@
 import { useQuery } from "react-query";
 import { useLocation } from "react-router-dom";
 import Categories from "../components/shared/Categories";
-import Error from "../components/shared/Error";
 import Industries from "../components/shared/Industries";
-import Loader from "../components/shared/Loader";
 import ResultBox from "../components/ui/ResultBox";
 import SearchBox from "../components/ui/SearchBox";
 import { publicRequest } from "../lib/axios";
@@ -24,45 +22,49 @@ const SearchResults = () => {
     data: jobs,
     isLoading,
     isError,
-  }: Results = useQuery("results", async () => {
+  }: Results = useQuery(["results", query], async () => {
     const result = await publicRequest.get(
-      `/api/v1/jobs/search/results?query=${query}`
+      `/api/v1/jobs/search/results?query=${query}`,
     );
     return result.data;
   });
 
-  if (isLoading) return <Loader />;
-  if (isError) return <Error />;
-
   return (
-    <div className="grid gap-sm ">
-      <SearchBox />
-      <main className="grid gap-sm h-fit md:flex justify-center ">
+    <div className="grid gap-xl">
+      <section className="grid gap-xs ">
+        <SearchBox />
+        <h2 className="text-center">
+          {isLoading && "Loading..."}
+          {isError && "Error..."}
+          {!isError && !isLoading && (
+            <span className=" text-xl">
+              Below are the jobs that matches title{" "}
+              <span className="font-semibold text-green-dark"> {query}</span>
+            </span>
+          )}
+        </h2>
+        {jobs?.length === 0 && !isLoading && (
+          <p className="text-center">Oops! No results found</p>
+        )}
+        {jobs !== undefined && jobs?.length > 0 && (
+          <p className="font-semibold text-center ">( {jobs.length} results)</p>
+        )}
+        {jobs !== undefined && jobs?.length > 0 && (
+          <div className="grid pt-md grid-cols-auto-sm lg:flex lg:flex-wrap lg:justify-center gap-sm ">
+            {jobs.map((item) => {
+              return (
+                <ResultBox
+                  job={item}
+                  key={item.job_id}
+                  appliedJobs={appliedJobs}
+                />
+              );
+            })}
+          </div>
+        )}
+      </section>
+      <main className="grid gap-xl h-fit md:flex justify-center ">
         <aside className="flex-1 grid gap-xl justify-center h-fit">
-          <section className="grid gap-xs justify-center ">
-            <h2 className="font-semibold text-xl">
-              Below are the jobs that matches title {query}
-            </h2>
-            {jobs?.length === 0 && (
-              <p className="text-center">No results found</p>
-            )}
-            {jobs !== undefined && jobs?.length > 0 && (
-              <p className="font-bold text-green-dark">{jobs.length} results</p>
-            )}
-            {jobs !== undefined && jobs?.length > 0 && (
-              <div className="grid gap-xs ">
-                {jobs.map((item) => {
-                  return (
-                    <ResultBox
-                      job={item}
-                      key={item.job_id}
-                      appliedJobs={appliedJobs}
-                    />
-                  );
-                })}
-              </div>
-            )}
-          </section>
           <section className="grid  gap-sm h-fit">
             <h2 className="text-xl font-semibold  text-green-dark border-y-sm border-green-light w-fit py-sm">
               {" "}

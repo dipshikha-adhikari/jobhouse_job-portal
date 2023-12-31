@@ -6,7 +6,7 @@ import { useCurrentUser } from "../../../hooks/useCurrentUser";
 import NoUser from "../../../components/shared/NoUser";
 import useAuthStore from "../../../store/auth";
 import { IEmployerBasicInformationInputs } from "../../../types/react/types";
-import SelectIndustry from "../../../components/mui/SelectIndustry";
+import SelectIndustry from "../../../components/mui/SelectCategory";
 import { IEmployerProfile } from "../../../types/postgres/types";
 import { useIndustries } from "../../../hooks/useIndustries";
 import { updateBasicInformation } from "../actions/updateBasicInformation";

@@ -1,30 +1,34 @@
-import { FaRegCalendarAlt, FaRegEdit } from "react-icons/fa";
-import { Link } from "react-router-dom";
-import { useJobseekerProfile } from "./hooks/useJobseekerProfile";
-import useAuthStore from "../../store/auth";
-import NoUser from "../../components/shared/NoUser";
-import { useCurrentUser } from "../../hooks/useCurrentUser";
-import { SlGraduation } from "react-icons/sl";
-import {
-  MdOutlineMapsHomeWork,
-  MdOutlineRoomPreferences,
-} from "react-icons/md";
-import { GiFlagObjective, GiSkills } from "react-icons/gi";
+import moment from "moment";
+import { useEffect } from "react";
 import {
   CiCalendar,
   CiCircleCheck,
   CiLocationOn,
   CiUser,
 } from "react-icons/ci";
+import {
+  FaArrowAltCircleDown,
+  FaRegCalendarAlt,
+  FaRegEdit,
+} from "react-icons/fa";
+import { GiFlagObjective, GiSkills } from "react-icons/gi";
 import { GrCertificate } from "react-icons/gr";
+import {
+  MdOutlineMapsHomeWork,
+  MdOutlineRoomPreferences,
+} from "react-icons/md";
+import { SlGraduation } from "react-icons/sl";
+import { Link } from "react-router-dom";
 import Error from "../../components/shared/Error";
+import Loader from "../../components/shared/Loader";
+import NoUser from "../../components/shared/NoUser";
+import { useCurrentUser } from "../../hooks/useCurrentUser";
+import useAuthStore from "../../store/auth";
 import {
   IJobseekerEducation,
   IJobseekerProfile,
 } from "../../types/postgres/types";
-import moment from "moment";
-import { useEffect } from "react";
-import Loader from "../../components/shared/Loader";
+import { useJobseekerProfile } from "./hooks/useJobseekerProfile";
 
 type Profile = {
   profile: IJobseekerProfile;
@@ -47,7 +51,7 @@ const Profile = () => {
   if (role !== "jobseeker") return <Error />;
 
   return (
-    <div className="sm:px-xl lg:border-sm lg:p-xl max-w-4xl w-full mx-auto">
+    <div className="sm:px-xl  lg:border-sm lg:p-xl max-w-4xl w-full mx-auto">
       <div className="flex justify-end  ">
         <Link
           to="/jobseeker/profile/basic-info"
@@ -98,7 +102,7 @@ const Profile = () => {
           <header className="font-semibold  uppercase text-xl flex gap-xs items-center">
             <GiFlagObjective /> Objective
           </header>
-          <p className="py-md">
+          <p className="py-md break-all">
             {profile?.job_preference?.summary || "Not available"}
           </p>
         </section>
@@ -107,14 +111,14 @@ const Profile = () => {
             <MdOutlineMapsHomeWork /> Work Experience
           </header>
           {profile?.experience.length > 0 ? (
-            <div className="grid gap-xs">
+            <div className="grid break-all gap-sm">
               {profile.experience.map((exp) => {
                 return (
                   <div
                     className=" h-fit md:flex items-start grid gap-2 md:gap-md lg:gap-xl "
                     key={exp.id}
                   >
-                    <div className="grid h-fit gap-2">
+                    <div className="grid h-fit gap-2 flex-1">
                       <p className="text-black-light italic flex items-center gap-xs">
                         <FaRegCalendarAlt />{" "}
                         {moment(exp.start_date).format("MMM Do YYYY")} -{" "}
@@ -126,8 +130,8 @@ const Profile = () => {
                         {exp.job_level})
                       </p>
                     </div>
-                    <div className="grid gap-2">
-                      <p className="flex items-center gap-xs">
+                    <div className="grid flex-1 gap-2">
+                      <p className="flex font-semibold items-center gap-xs">
                         <MdOutlineMapsHomeWork /> {exp.organization_name} (
                         {exp.organization_type})
                       </p>
@@ -137,10 +141,16 @@ const Profile = () => {
                       </p>
 
                       {exp.duties !== undefined && (
-                        <div
-                          className="pl-4   prose prose-li:marker:text-black-default"
-                          dangerouslySetInnerHTML={{ __html: exp.duties }}
-                        ></div>
+                        <div className=" pl-8">
+                          <p className="flex items-center font-semibold gap-2">
+                            {" "}
+                            <FaArrowAltCircleDown /> Duties
+                          </p>
+                          <div
+                            className="   prose prose-li:marker:text-black-default"
+                            dangerouslySetInnerHTML={{ __html: exp.duties }}
+                          ></div>
+                        </div>
                       )}
                     </div>
                   </div>
@@ -157,7 +167,7 @@ const Profile = () => {
             <SlGraduation /> Education
           </header>
           {profile?.education.length > 0 ? (
-            <div className="grid gap-xs">
+            <div className="grid gap-xs break-all">
               {profile.education.map((item: IJobseekerEducation) => {
                 return (
                   <div
@@ -199,11 +209,18 @@ const Profile = () => {
                 <CiCircleCheck /> Looking for :{" "}
                 {profile?.job_preference?.job_level}
               </p>
-              <div className="flex gap-2 items-center">
+              <div className="flex gap-2 items-center ">
                 <CiCircleCheck /> Job Categories :{" "}
-                <div className="flex flex-wrap gap-xs">
+                <div className="grid gap-2 h-fit">
                   {profile.job_preference?.category_names.map((cat: string) => {
-                    return <span key={cat}>{cat}</span>;
+                    return (
+                      <span
+                        key={cat}
+                        className="bg-black-light text-white p-xs px-sm"
+                      >
+                        {cat}
+                      </span>
+                    );
                   })}{" "}
                 </div>
               </div>
@@ -229,7 +246,7 @@ const Profile = () => {
           <header className="font-semibold flex items-center gap-xs uppercase text-xl ">
             <GiSkills /> Skills
           </header>
-          <div className="grid gap-2">
+          <div className="grid gap-2 break-all">
             {profile?.job_preference?.skills
               ? profile?.job_preference?.skills.map((skill: string) => {
                   return <li key={skill}>{skill}</li>;

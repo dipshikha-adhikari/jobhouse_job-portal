@@ -115,10 +115,16 @@ input[type=number]::-webkit-outer-spin-button {
     -moz-appearance: none;
     appearance: none;
     margin: 0; 
+  
+}
+
+input, textarea{
+  border-radius: 4px;
+    padding: 10px 20px;
 }
 
 input:hover:enabled, .input:hover, textarea:hover:enabled{
-  border-color: #9ca3af;
+  border-color: #5d5d5d;
 }
 
 
