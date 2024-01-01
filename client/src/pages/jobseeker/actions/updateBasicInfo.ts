@@ -12,6 +12,7 @@ export const updateBasicInfo = async (
 ) => {
   try {
     setIsLoading(true);
+
     const dataToBeSent = {
       fullname: data.fullname,
       image: data.image,
@@ -33,6 +34,7 @@ export const updateBasicInfo = async (
       success: () => {
         setIsLoading(false);
         setIsEditorOpen(false);
+
         queryClient.invalidateQueries("jobseekerProfile");
         return "Success";
       },

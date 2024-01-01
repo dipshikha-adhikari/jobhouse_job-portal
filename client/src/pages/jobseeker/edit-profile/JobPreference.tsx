@@ -89,7 +89,7 @@ const JobPreference = () => {
               <div className="flex-1">
                 {" "}
                 <textarea
-                  placeholder=" your break-all objective"
+                  placeholder=" your objective"
                   disabled={!isEditorOpen}
                   {...register("objective")}
                   onInput={(e) => autoGrow(e)}

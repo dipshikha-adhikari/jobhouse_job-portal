@@ -43,7 +43,6 @@ const UserInfo = ({ profile }: UserInfoProps) => {
     }
   }, [progress]);
 
-  console.log(profile.job_preference.category_names);
   return (
     <section className="grid w-full md:place-content-center     gap-xs   h-fit ">
       <Link
@@ -106,7 +105,7 @@ const UserInfo = ({ profile }: UserInfoProps) => {
           Prefered Job Category{" "}
           <span className="font-semibold grid gap-1">
             {profile?.job_preference?.category_names
-              ? profile.job_preference.category_names.map((cat) => {
+              ? profile?.job_preference?.category_names.map((cat) => {
                   return <span key={cat}>{cat}</span>;
                 })
               : "Not available"}{" "}

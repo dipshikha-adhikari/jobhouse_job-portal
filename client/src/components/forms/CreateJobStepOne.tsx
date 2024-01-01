@@ -44,10 +44,18 @@ const CreateJobStepOne = ({ setStep, step, job }: CreateJobStepOneProps) => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    jobStore.setStepOneInputs({
+      title: "",
+      categoryId: "",
+      location: "",
+      experienceRequired: "",
+      deadline: new Date(),
+      salary: "",
+    });
   }, []);
 
   useEffect(() => {
-    setValue("categoryId", job?.category_id || jobStore.stepOne.categoryId);
+    setValue("categoryId", job?.category_id || jobStore.stepOne.categoryId!);
     setValue("title", job?.title || jobStore.stepOne.title);
     setValue("salary", job?.salary || jobStore.stepOne.salary);
     setValue(

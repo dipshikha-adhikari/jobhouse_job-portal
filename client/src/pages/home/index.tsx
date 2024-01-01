@@ -84,7 +84,7 @@ const Home = () => {
       </header>
       <section className="grid gap-lg mx-auto lg:flex">
         <aside className="grid gap-md flex-1 h-fit sm:px-md">
-          <header className="font-semibold border-y-sm flex items-center gap-2 border-green-light w-fit p-xs text-xl uppercase text-green-dark">
+          <header className="font-semibold border-y-sm flex items-center gap-2  w-fit p-xs text-xl uppercase text-green-dark">
             <CiStar className="text-green-dark" /> Top jobs
           </header>
           <div className="grid gap-sm  grid-cols-auto-sm ">
@@ -95,12 +95,12 @@ const Home = () => {
             })}
           </div>
           <div className="grid py-xl gap-md">
-            <h2 className=" uppercase font-semibold text-green-dark text-xl border-y-md w-fit p-xs border-green-light flex items-center gap-2">
+            <h2 className=" uppercase font-semibold text-green-dark text-xl border-y-md w-fit p-xs  flex items-center gap-2">
               {" "}
               <MdHomeWork />
               Top Companies
             </h2>
-            <div className="grid gap-sm  grid-cols-[repeat(auto-fit,minmax(150px,1fr))]">
+            <div className="grid gap-sm  grid-cols-[repeat(auto-fit,minmax(200px,1fr))]">
               {loadingComapnies && <div className="">Loading...</div>}
               {errorComapnies && <div className="">Error</div>}
               {companies?.map((item: TopComapny) => {
@@ -108,19 +108,24 @@ const Home = () => {
                   <Link
                     key={item.user_id}
                     to={`/employer/${item.organization_name}/${item.user_id}`}
-                    className="grid  text-black-dark max-w-sm hover:text-black-dark gap-1 border-xs  p-sm place-content-start"
+                    className="grid gap-2 shadow-xxl text-black-dark max-w-sm hover:text-black-dark  border-xs  p-sm place-content-start"
                   >
-                    <img
-                      src={item.image_url}
-                      alt="image"
-                      className="w-20 h-20"
-                    />
-                    <p className="grid ">
-                      <span className="font-semibold">
-                        {item.organization_name}{" "}
-                      </span>
-                      ({item.industry_name})
-                    </p>
+                    <div className="flex items-start gap-xs">
+                      <img
+                        src={item.image_url}
+                        alt="image"
+                        className="w-20 h-20"
+                      />
+                      <p className="grid gap-2">
+                        <span className="font-bold">
+                          {item.organization_name}{" "}
+                        </span>
+                        <span className=" font-normal">
+                          {" "}
+                          ({item.industry_name})
+                        </span>
+                      </p>
+                    </div>
                     <p className="text-green-dark font-semibold">
                       {" "}
                       {item.job_count} jobs
@@ -131,7 +136,7 @@ const Home = () => {
             </div>
           </div>
           <div className="grid gap-sm ">
-            <header className="flex items-center gap-2  font-semibold border-y-md border-green-light w-fit p-xs text-xl text-green-dark uppercase">
+            <header className="flex items-center gap-2  font-semibold border-y-md  w-fit p-xs text-xl text-green-dark uppercase">
               <FaIndustry /> Jobs By Industry
             </header>
             <Industries />
@@ -139,7 +144,7 @@ const Home = () => {
         </aside>
         <aside className="grid gap-sm flex-[0.3] h-fit mx-auto">
           <div className="grid gap-sm sm:px-md h-fit ">
-            <header className="flex items-center gap-2 font-semibold border-y-sm uppercase border-green-light w-fit p-xs text-xl text-green-dark">
+            <header className="flex items-center gap-2 font-semibold border-y-sm uppercase  w-fit p-xs text-xl text-green-dark">
               <BiCategory /> Jobs By Category
             </header>
             <Categories />

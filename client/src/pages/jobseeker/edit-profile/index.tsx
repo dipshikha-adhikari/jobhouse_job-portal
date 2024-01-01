@@ -39,13 +39,14 @@ const EditProfile = () => {
   const title = params.title;
   const { isLoading, isError } = useJobseekerProfile();
   const { role } = useCurrentUser();
+  const loading = !role;
   const { isAunthenticated } = useAuthStore();
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  if (isLoading) return <Loader />;
+  if (isLoading || loading) return <Loader />;
   if (!isAunthenticated) return <NoUser />;
   if (isError || role !== "jobseeker") return <Error />;
 

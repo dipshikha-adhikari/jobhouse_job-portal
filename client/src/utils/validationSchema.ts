@@ -102,9 +102,9 @@ export const JobseekerEducationSchema = Yup.object().shape({
   course: Yup.string().required("required"),
   institute: Yup.string().required("required"),
   graduationYear: Yup.date()
-    .required("deadline is required")
-    .max(new Date(), "deadline must be in the past")
-    .typeError("deadline must be a valid date"),
+    .required("valid date is required")
+    .max(new Date(), "date must be in the past")
+    .typeError("date must be a valid date"),
   location: Yup.string().required("required"),
 
   marksType: Yup.string().test({

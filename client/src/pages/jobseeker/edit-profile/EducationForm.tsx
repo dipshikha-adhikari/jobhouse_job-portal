@@ -23,6 +23,7 @@ const EducationForm = ({
     register,
     handleSubmit,
     setValue,
+
     formState: { errors },
     control,
   } = useForm({ resolver: yupResolver(JobseekerEducationSchema) });
@@ -41,10 +42,6 @@ const EducationForm = ({
 
   const onSubmit: SubmitHandler<IJobseekerEducationInputs> = (data) => {
     updateEducation(data, profile, setIsLoading, setIsEditorOpen);
-    window.scrollTo({
-      top: 0,
-      left: 0,
-    });
   };
 
   const handleCancel = () => {

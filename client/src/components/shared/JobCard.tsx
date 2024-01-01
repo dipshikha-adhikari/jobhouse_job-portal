@@ -26,7 +26,7 @@ const JobCard = ({ job, appliedJobs }: IJobCard) => {
   return (
     <Link
       to={`/jobs/${job.title}/${job.job_id}`}
-      className="grid gap-xs w-full mx-auto max-w-md shadow-sm border-light font-normal  "
+      className="grid gap-xs w-full mx-auto max-w-md shadow-xxl border-light font-normal  "
     >
       <div className="flex p-sm gap-xs items-center text-black-dark hover:text-black-dark">
         <img

@@ -38,7 +38,7 @@ const EmployerProfileMenu = () => {
   return (
     <div
       ref={ref}
-      className="absolute max-w-sm bg-white w-full border-b-sm  border-default top-12 grid  place-items-start gap-xs text-black-default  p-md right-0"
+      className="absolute max-w-sm bg-white w-full shadow-xl top-12 grid  place-items-start gap-xs text-black-default  p-md right-0"
     >
       <Link
         to="/jobs/create"

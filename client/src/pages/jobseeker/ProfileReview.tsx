@@ -268,8 +268,7 @@ const ProfileReview = () => {
           className="bg-blue-dark text-white p-xs px-sm rounded-md w-fit disabled:opacity-60"
           disabled={
             (profile?.education.length === 0 &&
-              profile?.experience.length === 0 &&
-              profile?.job_preference?.skills === undefined) ||
+              profile?.experience.length === 0) ||
             role !== "jobseeker" ||
             isLoading
           }
@@ -283,7 +282,8 @@ const ProfileReview = () => {
           profile?.experience.length === 0 &&
           role === "jobseeker" && (
             <div className="text-gray-dark">
-              Please update education or experience to apply{" "}
+              Please update atleast 50% of your profile (education or experience
+              must be included){" "}
             </div>
           )}
       </div>

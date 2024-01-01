@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {
       gridTemplateColumns: {
-        "auto-sm": "repeat(auto-fit,minmax(300px,1fr))",
+        "auto-sm": "repeat(auto-fit,minmax(280px,1fr))",
       },
       padding: {
         xs: "5px",
@@ -22,7 +22,8 @@ module.exports = {
       },
       boxShadow: {
         sm: " rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px",
-        xl: "  rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px",
+        xl: "  rgba(0, 0, 0, 0.15) 0px 5px 15px 0px",
+        xxl: "rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset",
       },
       borderColor: {
         light: "#cbd5e1",

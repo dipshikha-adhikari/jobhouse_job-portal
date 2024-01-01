@@ -11,6 +11,7 @@ import moment from "moment";
 import { FaArrowAltCircleDown, FaCheckCircle } from "react-icons/fa";
 import { useRecentJobs } from "../employer/hooks/useRecentJobs";
 import JobCard from "../../components/shared/JobCard";
+import { CiStar } from "react-icons/ci";
 
 type AppliedJobsType = {
   jobs: AppliedJobs[];
@@ -31,9 +32,9 @@ const Job = () => {
     isError: errorRecentJobs,
   } = useRecentJobs(job?.employer_id);
 
-  // useEffect(() => {
-  //   window.scrollTo(0, 0);
-  // }, [job]);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [job]);
 
   useEffect(() => {
     appliedJobs?.length > 0 &&
@@ -196,8 +197,8 @@ const Job = () => {
         {jobs && jobs?.length > 1 && (
           <aside className="flex-1 ">
             <div className="grid gap-md place-items-end">
-              <h2 className="text-xl border-y-sm w-fit mx-auto uppercase text-green-dark py-sm font-bold text-center ">
-                More jobs by {job.employer_details.organization_name}
+              <h2 className="text-xl flex items-center gap-2 border-y-sm w-fit mx-auto uppercase text-green-dark py-sm font-bold text-center  ">
+                <CiStar /> More jobs by {job.employer_details.organization_name}
               </h2>
               <div className="grid   gap-sm grid-cols-auto-sm w-full mx-auto">
                 {loadingRecentJobs && (

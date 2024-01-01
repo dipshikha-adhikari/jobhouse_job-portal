@@ -43,8 +43,8 @@ export const createBasicInfo = (req: IUserRequest, res: Response) => {
 
                         let public_id = image?.public_id 
                         let url = image?.url
-                      
-                        if (image !== null && image.url === undefined && typeof image === 'string') {
+                   
+                        if (image !== undefined &&  image?.url === undefined && image !== null && typeof image === 'string') {
                             const imageData = await uploadImage(image, id)
                             if (!imageData) {
                                 res.status(400).send({ message: 'Error on upload image, image must be string' })
@@ -101,8 +101,10 @@ export const updateBasicInfo = (req: IUserRequest, res: Response) => {
                         // if public_id and url is available , update image with the same data
                         let public_id = image?.public_id
                         let url = image?.url
+                  
+
                         // if url is anavailable , upload to the cloudinary and get url
-                        if (image.url === undefined && image !== null && typeof image === 'string') {
+                        if (image !== undefined && image?.url === undefined && image !== null && typeof image === 'string') {
                             const imageData = await uploadImage(image, id)
                             if (!imageData) {
                              return   res.status(400).send({ message: 'Error on upload image, image must be string' })
