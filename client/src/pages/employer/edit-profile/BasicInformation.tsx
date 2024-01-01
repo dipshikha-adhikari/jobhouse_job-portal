@@ -6,10 +6,10 @@ import { useCurrentUser } from "../../../hooks/useCurrentUser";
 import NoUser from "../../../components/shared/NoUser";
 import useAuthStore from "../../../store/auth";
 import { IEmployerBasicInformationInputs } from "../../../types/react/types";
-import SelectIndustry from "../../../components/mui/SelectCategory";
 import { IEmployerProfile } from "../../../types/postgres/types";
 import { useIndustries } from "../../../hooks/useIndustries";
 import { updateBasicInformation } from "../actions/updateBasicInformation";
+import SelectCategory from "../../../components/mui/SelectCategory";
 
 interface IEditProfileDetails {
   isEditorOpen: boolean;
@@ -75,7 +75,7 @@ const BasicInformation = ({
     }
   }, [profile]);
 
-  console.log(profile);
+ 
   const onSubmit: SubmitHandler<IEmployerBasicInformationInputs> = async (
     data,
   ) => {
@@ -196,8 +196,9 @@ const BasicInformation = ({
               name="industryType"
               control={control}
               render={({ field }) => (
-                <SelectIndustry
+                <SelectCategory
                   values={industries}
+                  type="industries"
                   field={field}
                   isEditorOpen={isEditorOpen}
                 />

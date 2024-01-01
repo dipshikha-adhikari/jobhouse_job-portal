@@ -15,8 +15,8 @@ interface IMuiSelect {
 type Types = {
   industry_id?: string;
   industry_name?: string;
-  category_id: string;
-  category_name: string;
+  category_id?: string;
+  category_name?: string;
 };
 
 export default function SelectCategory({

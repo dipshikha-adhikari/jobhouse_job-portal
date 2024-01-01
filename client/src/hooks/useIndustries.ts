@@ -9,7 +9,7 @@ type IndustriesTypes = {
 export const useIndustries = () => {
   const getAllIndustries = async () => {
     const result = await publicRequest.get("/api/v1/jobs/industries");
-    console.log("fuck");
+    
     return result.data;
   };
 
