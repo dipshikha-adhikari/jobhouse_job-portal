@@ -1,18 +1,18 @@
-import { MdLocationPin } from "react-icons/md";
-import { FaEnvelope } from "react-icons/fa6";
-import { FaPhoneAlt } from "react-icons/fa";
-import { Link, useParams } from "react-router-dom";
 import { useEffect } from "react";
-import Loader from "../components/shared/Loader";
+import { CiStar } from "react-icons/ci";
+import { FaPhoneAlt } from "react-icons/fa";
+import { FaEnvelope } from "react-icons/fa6";
+import { MdLocationPin } from "react-icons/md";
 import { UseQueryResult, useQuery } from "react-query";
-import { publicRequest } from "../lib/axios";
+import { useParams } from "react-router-dom";
 import Error from "../components/shared/Error";
+import JobCard from "../components/shared/JobCard";
+import Loader from "../components/shared/Loader";
 import Layout from "../components/ui/Layout";
+import { publicRequest } from "../lib/axios";
 import { IEmployerProfile } from "../types/postgres/types";
 import { useRecentJobs } from "./employer/hooks/useRecentJobs";
-import JobCard from "../components/shared/JobCard";
 import { useAppliedJobs } from "./jobseeker/hooks/useAppliedJobs";
-import { CiStar } from "react-icons/ci";
 
 const EmployerProfile = () => {
   const params = useParams();
@@ -43,8 +43,8 @@ const EmployerProfile = () => {
 
   return (
     <Layout>
-      <div className="grid gap-xl mx-auto lg:flex ">
-        <section className="grid gap-sm flex-1 h-fit">
+      <div className="grid gap-sm lg:flex ">
+        <section className="grid gap-sm flex-[1.7] h-fit">
           <header className="relative h-full">
             <div className="cover-image">
               <img
@@ -69,23 +69,16 @@ const EmployerProfile = () => {
                 className="h-20 w-20 rounded-sm object-contain"
               />
             </div>
-            {id === undefined && (
-              <Link
-                to="/employer/profile/basic-info"
-                className="absolute right-2 bottom-2 bg-blue-dark rounded-md text-white hover:text-white px-sm p-xs"
-              >
-                Edit Profile
-              </Link>
-            )}
+          
           </header>
-          <div className="grid gap-xs  border-b-sm border-gray-300 pb-sm place-items-center">
+          <div className="grid gap-xs  border-b-sm  pb-sm place-items-center">
             <h2 className="font-semibold text-xl">
               {profile?.basic_information?.organization_name}
             </h2>
             <p>{profile?.basic_information?.industry_type}</p>
             <p>{profile?.other_information?.website}</p>
           </div>
-          <div className="grid gap-xs place-items-center border-b-sm border-gray-300 pb-sm">
+          <div className="grid gap-xs place-items-center border-b-sm  pb-sm">
             <p className="flex items-center gap-xs">
               <MdLocationPin className="text-blue-dark" />{" "}
               {profile?.basic_information?.address || "Not available"}
@@ -100,7 +93,7 @@ const EmployerProfile = () => {
             </p>
           </div>
           <div className="grid gap-xs">
-            <h2 className="font-semibold text-xl">Summary</h2>
+            <h2 className="font-semibold text-xl">About</h2>
             {profile?.basic_information?.summary ? (
               profile.basic_information.summary
             ) : (
@@ -108,22 +101,20 @@ const EmployerProfile = () => {
             )}
           </div>
         </section>
-        <section className="flex-[0.8] grid  gap-sm h-fit">
-          <div className="grid  gap-sm">
-            <div className="grid py-sm ">
-              <h2 className="font-semibold gap-2 border-y-sm w-fit uppercase flex items-center sm:px-xl text-green-dark text-xl border-gray-light py-sm ">
+        <section className="  h-fit">
+          <div className=" border-sm lg:w-[350px] ">
+              <h2 className="font-bold gap-2  flex items-center p-sm border-b-sm text-green-dark text-xl  ">
                 <CiStar className="text-green-dark" /> Recent jobs by{" "}
                 {profile?.basic_information?.organization_name}
               </h2>
-            </div>
-            <div className="grid gap-md  grid-cols-auto-sm">
+            <div className="grid gap-xs p-sm grid-cols-auto-sm">
               {loadingRecentJobs && (
                 <div className="text-center">Loading...</div>
               )}
               {errorRecentJobs && jobs === undefined && (
                 <div className="text-center">Error!</div>
               )}
-              {jobs?.map((item) => {
+              {jobs?.slice(0,2)?.map((item) => {
                 return (
                   <JobCard
                     job={item}

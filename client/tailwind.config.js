@@ -4,7 +4,8 @@ module.exports = {
   theme: {
     extend: {
       gridTemplateColumns: {
-        "auto-sm": "repeat(auto-fit,minmax(280px,1fr))",
+        "auto-sm": "repeat(auto-fit,minmax(260px,1fr))",
+        "auto-md": "repeat(auto-fit,minmax(300px,1fr))",
       },
       padding: {
         xs: "5px",

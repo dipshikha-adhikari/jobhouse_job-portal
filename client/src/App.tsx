@@ -9,7 +9,7 @@ import Profile from "./pages/jobseeker/Profile";
 import EditProfile from "./pages/jobseeker/edit-profile";
 import JobseekerRegister from "./components/forms/JobseekerRegister";
 import EmployerOverview from "./pages/employer/Overview";
-import WrongRoute from "./components/shared/WrongRoute";
+import WrongRoute from "./components/shared/PageNotFound";
 import { Toaster } from "react-hot-toast";
 import { QueryClient, QueryClientProvider } from "react-query";
 import Job from "./pages/jobs/JobDetails";
@@ -25,6 +25,18 @@ import Applications from "./pages/employer/Applications";
 import JobseekerProfile from "./pages/JobseekerProfile";
 
 export const queryClient = new QueryClient();
+
+type ChildrenProps = {
+  children: ReactNode;
+};
+
+export const Layout: React.FC<ChildrenProps> = ({ children }) => {
+  return (
+    <div className=" w-full max-w-[1400px] mx-auto px-sm sm:px-md   relative">
+      {children}
+    </div>
+  );
+};
 
 const App = () => {
   return (
@@ -138,16 +150,6 @@ const router = createBrowserRouter([
   },
 ]);
 
-type ChildrenProps = {
-  children: ReactNode;
-};
 
-export const Layout: React.FC<ChildrenProps> = ({ children }) => {
-  return (
-    <div className=" w-full max-w-[1500px] mx-auto px-3 lg:px-5 relative">
-      {children}
-    </div>
-  );
-};
 
 export default App;

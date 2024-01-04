@@ -14,6 +14,7 @@ export const getJobseekerProfile = async (req: IUserRequest, res: Response) => {
 
   }
 
+
   const basicInformationQuery = `select jbi.*, 
   json_build_object (
     'url', i.url,
@@ -65,6 +66,8 @@ GROUP BY
       return res.status(200).send(result.rows)
     }
 
+    const user:QueryResult = await pool.query('select * from users where user_id = $1',[id])
+profile['user_id'] = user.rows[0].user_id
     const basicInformation: QueryResult = await pool.query(basicInformationQuery, [id])
     profile['basic_information'] = basicInformation.rows[0]
     const experience: QueryResult = await pool.query(experienceQuery, [id])

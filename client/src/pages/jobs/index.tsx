@@ -10,6 +10,8 @@ import Layout from "../../components/ui/Layout";
 import { publicRequest } from "../../lib/axios";
 import { AppliedJobs, IJob } from "../../types/postgres/types";
 import { useAppliedJobs } from "../jobseeker/hooks/useAppliedJobs";
+import { BiCategory } from "react-icons/bi";
+import { FaIndustry } from "react-icons/fa";
 
 type AppliedJobsType = {
   jobs: AppliedJobs[];
@@ -53,7 +55,7 @@ const Jobs = () => {
 
   return (
     <Layout>
-      <div className="grid gap-sm place-items-center">
+      <div className="grid gap-sm ">
         <div className="grid gap-xs bg-green-50 p-sm">
           <h2 className="text-2xl font-bold text-black-light">
             {" "}
@@ -75,7 +77,7 @@ const Jobs = () => {
           </p>
         </div>
         <main className="grid gap-xl ">
-          <section className="grid grid-cols-auto-sm place-items-center  gap-sm ">
+          <section className="grid grid-cols-auto-sm place-items-center md:grid-cols-auto-md gap-sm ">
             {jobs !== undefined && jobs?.length > 0 ? (
               jobs?.map((job) => {
                 return (
@@ -96,18 +98,18 @@ const Jobs = () => {
               </div>
             )}
           </section>
-          <div className="grid gap-xs flex-[0.3] ">
-            <header className="font-semibold border-y-sm uppercase border-default w-fit p-sm text-xl text-green-dark">
-              Jobs By Category
+          <div className=" border-sm  flex-[0.3] ">
+            <header className=" flex items-center gap-2 font-bold border-b-sm   p-sm  text-green-dark">
+            <BiCategory />   Jobs By Category
             </header>
             <Categories />
           </div>
         </main>
-        <div className="grid gap-xs py-xl flex-[0.3] ">
-          <header className="font-semibold border-y-sm uppercase border-default w-fit p-sm text-xl text-green-dark">
-            Jobs By Industry
+        <div className=" border-sm  flex-[0.3] ">
+          <header className="flex items-center font-bold gap-2 border-b-sm p-sm  text-green-dark">
+          <FaIndustry />     Jobs By Industry
           </header>
-          <Industries />
+        <Industries />
         </div>
       </div>
     </Layout>

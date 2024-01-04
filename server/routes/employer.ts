@@ -1,5 +1,4 @@
-import { getTotalApplicantsCount } from "../controllers/jobs/getTotalApplicantsCount"
-import { getTotalVacancies } from "../controllers/jobs/getTotalVacancies"
+import { getTotalApplicantsCount, getTotalVacancies } from "../controllers/jobs/count"
 import { createBasicInformation, updateBasicInformation } from "../controllers/profiles/employer/basicInformation"
 import { getEmployerProfile, getEmployerProfileById } from "../controllers/profiles/employer/getProfile"
 import { createOtherInformation, updateOtherInformation } from "../controllers/profiles/employer/otherInformation"

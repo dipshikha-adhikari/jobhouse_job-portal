@@ -1,14 +1,14 @@
-import { Link } from "react-router-dom";
-import { FaLocationPin } from "react-icons/fa6";
 import { BiPhone } from "react-icons/bi";
 import { FaEnvelope } from "react-icons/fa";
-import Layout from "../ui/Layout";
+import { FaLocationPin } from "react-icons/fa6";
+import { Link } from "react-router-dom";
+import { Layout } from "../../App";
 
 const Footer = () => {
   return (
-    <div className=" relative py-sm min-h-[200px]  text-white  bg-black-default">
+    <div className=" relative py-sm text-white  bg-black-default">
       <Layout>
-        <div className=" py-md grid gap-10 md:flex">
+        <div className=" py-sm grid gap-10 md:flex">
           <div className="flex-1">
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi
@@ -65,7 +65,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-      </Layout>
+        </Layout>
     </div>
   );
 };

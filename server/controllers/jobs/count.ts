@@ -1,5 +1,6 @@
 import { Request, Response } from "express"
 import { QueryResult } from "pg"
+import { IUserRequest } from "../../types"
 const pool = require('../../lib/db')
 
 
@@ -45,7 +46,7 @@ return res.status(200).send(result.rows)
 
 
 
-export const getJobsCountByLabel = async(req:Request, res:Response) => {
+export const getJobsCountByLevel = async(req:Request, res:Response) => {
     try{
  const query = `SELECT jl.level_id, jl.level_name, COUNT(j.job_id) AS total_jobs
  FROM job_levels jl
@@ -76,3 +77,36 @@ export const getJobsCountByLabel = async(req:Request, res:Response) => {
  
     }
  }
+
+ export const getTotalApplicantsCount = async (req: IUserRequest, res: Response) => {
+    const { id } = req.user
+    const query = `
+    SELECT ja.*
+FROM job_applications ja
+left JOIN jobs j ON ja.job_id = j.job_id
+WHERE ja.employer_id = $1 AND deadline > NOW() 
+`
+    try {
+        const result: QueryResult = await pool.query(query, [id])
+        return res.status(200).send(result.rows)
+    } catch (err) {
+        return res.status(400).send({ message: 'Can not found total applicants' })
+    }
+}
+
+
+export const getTotalVacancies = async(req:IUserRequest, res:Response) => {
+    const{id} = req.user
+      const query = `
+      SELECT j.employer_id, SUM(j.no_of_vacancy) AS total_vacancy_count
+      FROM jobs j
+      WHERE j.employer_id = $1 AND deadline > NOW()
+      GROUP BY j.employer_id 
+      `
+      try {
+          const result: QueryResult = await pool.query(query, [id])
+          return res.status(200).send(result.rows[0])
+      } catch (err) {
+          return res.status(400).send({ message: 'Can not found vacancies' })
+      }
+  }

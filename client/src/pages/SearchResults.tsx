@@ -7,6 +7,8 @@ import SearchBox from "../components/ui/SearchBox";
 import { publicRequest } from "../lib/axios";
 import { IJob } from "../types/postgres/types";
 import { useAppliedJobs } from "./jobseeker/hooks/useAppliedJobs";
+import { FaIndustry } from "react-icons/fa";
+import { BiCategory } from "react-icons/bi";
 
 type Results = {
   isLoading: boolean;
@@ -30,14 +32,16 @@ const SearchResults = () => {
   });
 
   return (
-    <div className="grid gap-xl">
+    <div className="grid gap-sm w-full ">
       <section className="grid gap-xs ">
         <SearchBox />
-        <h2 className="text-center">
+        <div className=" ">
+       <header className="p-sm py-md">
+       <h2 className="text-center">
           {isLoading && "Loading..."}
           {isError && "Error..."}
-          {!isError && !isLoading && (
-            <span className=" text-xl">
+          {!isError && !isLoading && jobs?.length !== undefined && jobs?.length > 0 && (
+            <span className=" ">
               Below are the jobs that matches title{" "}
               <span className="font-semibold text-green-dark"> {query}</span>
             </span>
@@ -49,8 +53,9 @@ const SearchResults = () => {
         {jobs !== undefined && jobs?.length > 0 && (
           <p className="font-semibold text-center ">( {jobs.length} results)</p>
         )}
+       </header>
         {jobs !== undefined && jobs?.length > 0 && (
-          <div className="grid pt-md grid-cols-auto-sm lg:flex lg:flex-wrap lg:justify-center gap-sm ">
+          <div className="grid p-sm grid-cols-auto-sm lg:flex lg:flex-wrap lg:justify-center gap-sm ">
             {jobs.map((item) => {
               return (
                 <ResultBox
@@ -62,23 +67,24 @@ const SearchResults = () => {
             })}
           </div>
         )}
+        </div>
       </section>
-      <main className="grid gap-xl h-fit md:flex justify-center ">
-        <aside className="flex-1 grid gap-xl justify-center h-fit">
-          <section className="grid  gap-sm h-fit">
-            <h2 className="text-xl font-semibold  text-green-dark border-y-sm border-green-light w-fit py-sm">
-              {" "}
-              Jobs By Industry
-            </h2>
+      <main className="grid gap-sm h-fit md:flex   ">
+        <aside className="w-full grid gap-xl   h-fit">
+        <div className=" border-sm ">
+            <header className="flex items-center gap-2 border-b-sm  font-bold   p-sm  text-green-dark ">
+              <FaIndustry /> Jobs By Industry
+            </header>
             <Industries />
-          </section>
+          </div>
         </aside>
-        <section className="grid gap-sm h-fit flex-[.4]">
-          <h2 className="text-xl font-semibold  text-green-dark border-y-sm border-green-light w-fit py-sm">
-            {" "}
-            Jobs By Category
-          </h2>
-          <Categories />
+        <section className="grid gap-sm h-fit f w-full">
+        <div className="border-sm   ">
+            <header className="flex items-center gap-2 font-bold border-b-sm p-sm    text-green-dark">
+              <BiCategory /> Jobs By Category
+            </header>
+            <Categories />
+          </div>
         </section>
       </main>
     </div>

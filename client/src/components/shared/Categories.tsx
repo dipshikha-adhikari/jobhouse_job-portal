@@ -17,15 +17,14 @@ const Categories = ({ setIsModalOpen }: CategoryProps) => {
   if (isError) return <div className="text-center">Error!</div>;
 
   return (
-    <div className="grid gap-sm">
-      <div className="grid gap-3 sm:flex flex-wrap  ">
+      <div className="grid gap-1 md:gap-3 p-sm md:flex md:flex-wrap ">
         {data?.map((item) => {
           return (
             <Link
               to={`/jobs?category=${item.category_name}&&id=${item.category_id}`}
               onClick={handleClick}
               key={item.category_name}
-              className="font-normal mx-4 flex gap-2 border-b-sm w-fit border-default text-black-light hover:text-black-dark"
+              className="font-normal  flex gap-2 border-b-sm w-fit border-default text-black-light hover:text-black-dark"
             >
               {item.category_name}{" "}
               <span className="text-green-dark">({item.job_count})</span>
@@ -33,7 +32,6 @@ const Categories = ({ setIsModalOpen }: CategoryProps) => {
           );
         })}
       </div>
-    </div>
   );
 };
 

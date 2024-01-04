@@ -1,9 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import Error from "../../../components/shared/Error";
 import Loader from "../../../components/shared/Loader";
 import NoUser from "../../../components/shared/NoUser";
-import { useCurrentUser } from "../../../hooks/useCurrentUser";
+import PageNotFound from "../../../components/shared/PageNotFound";
 import useAuthStore from "../../../store/auth";
 import { IJobseekerProfile } from "../../../types/postgres/types";
 import { useJobseekerProfile } from "../hooks/useJobseekerProfile";
@@ -11,11 +10,6 @@ import BasicInfo from "./BasicInfo";
 import Education from "./Education";
 import Experience from "./Experience";
 import JobPreference from "./JobPreference";
-
-// const BasicInfo =  lazy(() => import("./BasicInfo"));
-// const Education = lazy(() => import("./Education"));
-// const Experience = lazy(() => import("./Experience"));
-// const JobPreference = lazy(() => import("./JobPreference"));
 
 type ProfileProps = {
   profile: IJobseekerProfile;
@@ -26,11 +20,9 @@ type ProfileProps = {
 const EditProfile = () => {
   const params = useParams();
   const title = params.title;
-  const { role } = useCurrentUser();
   const { profile, isLoading, isError }: ProfileProps = useJobseekerProfile();
-
+const[error, setError] = useState(false)
   const { isAunthenticated } = useAuthStore();
-  // const loading = isAunthenticated && !role
 
   const data = [
     {
@@ -57,11 +49,16 @@ const EditProfile = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+  const isValidTitle =  data.find(item => item.link === title)
+  if(!isValidTitle){
+    setError(true)
+  }
   }, []);
 
   if (isLoading) return <Loader />;
   if (!isAunthenticated) return <NoUser />;
-  if ((!isLoading && role !== "jobseeker") || isError) return <Error />;
+  
+  if (isError || profile.user_id === undefined || error) return <PageNotFound />;
 
   return (
     <div className="grid gap-10 max-w-5xl mx-auto md:flex w-full sm:p-10 lg:p-sm">
@@ -91,6 +88,7 @@ const EditProfile = () => {
             <div key={item.link}>{title === item.link && item.component}</div>
           );
         })}
+    
       </section>
     </div>
   );

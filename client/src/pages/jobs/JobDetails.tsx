@@ -57,7 +57,7 @@ const Job = () => {
   };
 
   return (
-    <div className="grid gap-sm max-w-5xl mx-auto ">
+    <div className="grid gap-2 max-w-5xl mx-auto ">
       <section className=" ">
         <div className="relative">
           <img
@@ -93,54 +93,54 @@ const Job = () => {
       </section>
       {/* job  */}
       <main className="lg:flex grid  gap-sm lg:justify-between items-start">
-        <aside className="sm:border-xs sm:p-xl w-full rounded-sm border-light">
-          <section className="grid gap-sm">
-            <header className="grid gap-xs ">
-              <h2 className="text-xl  text-green-dark font-bold">
+        <aside className="border-xs flex-[1.8] w-full rounded-sm border-light">
+          <section className="">
+            <header className="grid border-b-sm p-sm py-md gap-xs ">
+              <h2 className="text-2xl  text-green-dark font-semibold">
                 {job?.title}
               </h2>
-              <div>Apply : {moment(job?.deadline).fromNow()}</div>
+              <div>Apply before : {moment(job?.deadline).format('MMM Do YYYY')}</div>
               <p className="flex items-center gap-2">
                 <FaCheckCircle className="text-green-dark" />{" "}
                 {job.job_application_count} Applications
               </p>
             </header>
-            <div className="  grid gap-xs">
-              <p className="font-semibold  text-xl">Job Information</p>
-              <p className="flex  gap-xs sm:gap-md">
+            <div className="    p-sm">
+              <p className="font-bold  text-black-default ">Job Information</p>
+              <p className="flex  gap-xs border-b-sm py-sm sm:gap-md">
                 Job Category <span>:</span> {job?.category_name}
               </p>
-              <p className="flex gap-xs sm:gap-md">
+              <p className="flex gap-xs border-b-sm py-sm  sm:gap-md">
                 Job Level <span>:</span> {job?.level_name}
               </p>
-              <p className="flex gap-xs sm:gap-md">
+              <p className="flex gap-xs border-b-sm py-sm  sm:gap-md">
                 No of Vacancy/s <span>:</span>[ {job?.no_of_vacancy}]
               </p>
-              <p className="flex gap-xs sm:gap-md ">
+              <p className="flex gap-xs border-b-sm py-sm  sm:gap-md ">
                 Employment Type <span>:</span>
                 {job?.type_name}
               </p>
-              <p className="flex gap-xs sm:gap-md">
+              <p className="flex gap-xs  border-b-sm py-sm sm:gap-md">
                 Job Location <span>:</span>
                 {job?.location}
               </p>
 
-              <p className="flex gap-xs sm:gap-md">
+              <p className="flex gap-xs border-b-sm py-sm  sm:gap-md">
                 Offered Salary <span>:</span>
                 {job?.salary}
               </p>
             </div>
             <section>
-              <div className="grid gap-xs  border-y-sm py-lg border-default w-fit">
-                <h2 className="text-xl font-semibold">Job Specification</h2>
-                <p className="flex gap-xs sm:gap-md">
+              <div className="  p-sm border-default w-fit">
+                <h2 className="font-bold  text-black-defaul">Job Specification</h2>
+                <p className="flex border-b-sm py-sm gap-xs sm:gap-md">
                   Experience Required <span>:</span> {job?.experience_required}
                 </p>
-                <p className="flex gap-xs sm:gap-md">
+                <p className="flex border-b-sm py-sm gap-xs sm:gap-md">
                   Education Required <span>:</span> {job?.education_required}
                 </p>
                 {job?.skills?.length > 0 && (
-                  <div className="flex items-start gap-xs sm:gap-md">
+                  <div className="flex border-b-sm py-sm items-start gap-xs sm:gap-md">
                     <h2 className=" flex"> Key Skills </h2>
                     <span>:</span>
                     <div className="flex flex-wrap  gap-xs">
@@ -161,19 +161,19 @@ const Job = () => {
                 )}
               </div>
             </section>
-            <div className="grid  gap-xs">
-              <h2 className="font-semibold text-xl flex items-center gap-2">
+            <div className="px-sm grid  gap-2 ">
+              <h2 className="font-bold  text-black-default flex items-center gap-2">
                 Other Specification{" "}
                 <FaArrowAltCircleDown className="text-green-dark" />
               </h2>
               {job?.description && (
                 <div
-                  className="prose  prose-li:marker:text-black-default"
+                  className="prose border-b-sm  prose-li:marker:text-black-default"
                   dangerouslySetInnerHTML={{ __html: job?.description }}
                 />
               )}
             </div>
-            <div className="p-sm grid gap-2">
+            <div className="p-sm  grid gap-2">
               <button
                 className="bg-blue-dark text-white p-xs px-sm rounded-md w-fit disabled:opacity-60"
                 disabled={role === "employer" || isApplied}
@@ -194,19 +194,19 @@ const Job = () => {
             </div>
           </section>
         </aside>
-        {jobs && jobs?.length > 1 && (
-          <aside className=" ">
-            <div className="grid gap-md place-items-end">
-              <h2 className="text-xl flex items-center gap-2 border-y-sm w-fit mx-auto uppercase text-green-dark py-sm font-bold text-center  ">
+       <section className="flex-1  ">
+       {jobs && jobs?.length > 1 && (
+            <div className="border-sm w-full ">
+              <h2 className="text-xl p-sm flex items-center border-b-sm gap-2   text-green-dark  font-bold  ">
                 <CiStar /> More jobs by {job.employer_details.organization_name}
               </h2>
-              <div className="grid   gap-sm grid-cols-auto-sm w-full mx-auto">
+              <div className="grid p-sm  gap-sm grid-cols-auto-sm w-full">
                 {loadingRecentJobs && (
                   <div className="text-center">Loading...</div>
                 )}
                 {errorRecentJobs && <div className="text-center">Error!</div>}
                 {jobs !== undefined && jobs.length > 1 ? (
-                  jobs?.map((item) => {
+                  jobs.slice(0,2)?.map((item) => {
                     if (item.job_id !== job.job_id) {
                       return (
                         <JobCard
@@ -225,8 +225,8 @@ const Job = () => {
                 )}
               </div>
             </div>
-          </aside>
         )}
+       </section>
       </main>
     </div>
   );

@@ -38,11 +38,11 @@ export const getJobApplications = async (req: IUserRequest, res: Response) => {
       `
 
       pool.query('select * from  employers_other_information where user_id = $1',[id], (err:Error, result:QueryResult) => {
-        if(err)       return res.status(400).send( err);
+        if(err)       return res.status(400).send( 'can not find employers_other_information');
         if(result.rowCount > 0){
           pool.query(query, [jobId, id, limit, offset], function (err: Error, result: QueryResult) {
             if (err) {
-              return res.status(400).send({ message: err });
+              return res.status(400).send({ message: 'Can not get job applications' });
             }
             return res.status(200).send(result.rows);
           });

@@ -72,7 +72,7 @@ const SearchBox = () => {
       >
         <input
           type="text"
-          className="outline-none rounded-none w-full text-black-dark border-none p-sm search-input"
+          className="outline-none h-10 rounded-none w-full text-black-dark border-none p-2 search-input"
           placeholder="Search by Job Title,  Skill or Organization"
           onFocus={() => setIsSuggestionOpen(true)}
           onChange={(e) => optimizedFunction(e.target.value)}
@@ -90,7 +90,7 @@ const SearchBox = () => {
       {isSuggestionOpen && (
         <div
           ref={ref}
-          className=" absolute grid gap-1 text-center max-w-md  bg-white w-full  py-sm top-14 border-sm  "
+          className=" absolute grid gap-1 text-center max-w-md  bg-white w-full  py-sm top-12 border-sm  "
         >
           {isLoading && (
             <div className="text-center text-black-default ">Loading...</div>
@@ -108,7 +108,7 @@ const SearchBox = () => {
                   key={item.title}
                   to={`/jobs/search?q=${item.title}`}
                   onClick={() => setIsSuggestionOpen(false)}
-                  className="text-black-default  hover:text-green-dark "
+                  className="text-black-light font-semibold hover:text-black-dark "
                 >
                   {item.title}
                 </Link>

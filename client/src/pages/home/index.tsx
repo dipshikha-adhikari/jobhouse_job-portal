@@ -89,9 +89,9 @@ const Home = () => {
     return result.data;
   });
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  // useEffect(() => {
+  //   window.scrollTo(0, 0);
+  // }, []);
 
   if (isLoading) return <Loader />;
   if (isError) return <Error />;
@@ -111,25 +111,30 @@ const Home = () => {
         />
         <SearchBox />
       </header>
-      <section className="grid gap-lg mx-auto lg:flex lg:gap-sm">
-        <aside className="grid gap-md flex-1 h-fit sm:px-md">
-          <header className="font-semibold border-y-sm flex items-center gap-2  w-fit p-xs text-xl uppercase text-green-dark">
-            <CiStar className="text-green-dark" /> Top jobs
+      <main className="grid gap-sm  lg:flex ">
+        <section className="grid gap-sm flex-1 h-fit ">
+        {/* ---------------- */}
+         <div className=" border-sm ">
+         <header className="  border-b-sm flex font-bold items-center gap-2  p-sm   text-green-dark">
+            <CiStar className="text-green-dark " /> Top jobs
           </header>
-          <div className="grid gap-sm place-items-center  grid-cols-auto-sm ">
+          <div className="grid gap-xs p-sm place-items-center  grid-cols-auto-sm md:grid-cols-auto-md">
             {jobs?.map((job) => {
               return (
                 <JobCard appliedJobs={appliedJobs} job={job} key={job.job_id} />
               );
             })}
           </div>
-          <div className="grid py-xl gap-md">
-            <h2 className=" uppercase font-semibold text-green-dark text-xl border-y-md w-fit p-xs  flex items-center gap-2">
+         </div>
+          {/* ------------------ */}
+
+          <div className="  border-sm ">
+            <header className="border-b-sm  font-bold text-green-dark xl:text-xl  p-sm  flex items-center gap-2">
               {" "}
               <MdHomeWork />
               Top Companies
-            </h2>
-            <div className="grid gap-sm  grid-cols-[repeat(auto-fit,minmax(200px,1fr))] ">
+            </header>
+            <div className="grid gap-xs p-sm grid-cols-[repeat(auto-fit,minmax(200px,1fr))] ">
               {loadingComapnies && <div className="">Loading...</div>}
               {errorComapnies && <div className="">Error</div>}
               {companies?.map((item: TopComapny) => {
@@ -137,7 +142,7 @@ const Home = () => {
                   <Link
                     key={item.user_id}
                     to={`/employer/${item.organization_name}/${item.user_id}`}
-                    className="grid gap-2 shadow-xxl w-full text-black-dark max-w-sm hover:text-black-dark  border-xs  p-sm place-content-start"
+                    className="grid gap-2 shadow-sm w-full text-black-default max-w-sm hover:text-black-dark    p-sm place-content-start"
                   >
                     <div className="flex items-start gap-xs">
                       <img
@@ -146,7 +151,7 @@ const Home = () => {
                         className="w-20 h-20"
                       />
                       <p className="grid gap-2">
-                        <span className="font-bold">
+                        <span className="font-bold text-black-light">
                           {item.organization_name}{" "}
                         </span>
                         <span className=" font-normal">
@@ -164,26 +169,30 @@ const Home = () => {
               })}
             </div>
           </div>
-          <div className="grid gap-sm ">
-            <header className="flex items-center gap-2  font-semibold border-y-md  w-fit p-xs text-xl text-green-dark uppercase">
+          {/* --------------------  */}
+          <div className=" border-sm ">
+            <header className="flex items-center gap-2 border-b-sm  font-bold   p-sm  text-green-dark ">
               <FaIndustry /> Jobs By Industry
             </header>
             <Industries />
           </div>
-        </aside>
-        <aside className="grid gap-xl flex-[0.4] h-fit ">
-          <div className="grid gap-sm sm:px-md h-fit ">
-            <header className="flex items-center gap-2 font-semibold border-y-sm uppercase  w-fit p-xs text-xl text-green-dark">
+        </section>
+        {/* ----------------  */}
+        <aside className="grid gap-sm w-fit flex-[0.4] h-fit ">
+          <div className="border-sm   ">
+            <header className="flex items-center gap-2 font-bold border-b-sm p-sm    text-green-dark">
               <BiCategory /> Jobs By Category
             </header>
             <Categories />
           </div>
-          <div className=" grid sm:px-md gap-sm h-fit ">
-            <header className="flex items-center gap-2  font-semibold border-y-md  w-fit p-xs text-xl text-green-dark uppercase">
+          {/* ---------------   */}
+         <div className="flex flex-wrap gap-sm  ">
+         <div className=" border-sm w-full max-w-sm ">
+            <header className="flex border-b-sm p-sm items-center gap-2  font-bold   text-green-dark ">
               <FaIndustry /> Jobs By Level
             </header>
 
-            <div className="grid gap-2 ">
+            <div className=" ">
               {levelsLoading && <div>Loading...</div>}
               {levelsError && <div>Error</div>}
               {levels?.map((level) => {
@@ -191,7 +200,7 @@ const Home = () => {
                   <Link
                     to={`/jobs/?level=${level.level_name}`}
                     key={level.level_id}
-                    className="text-black-light flex items-center gap-sm hover:text-black-dark border-gray-light rounded-sm px-sm p-xs border-b-sm w-40"
+                    className="text-black-light border-b-sm p-sm font-normal flex items-center gap-sm hover:text-black-dark "
                   >
                     {level.level_name}{" "}
                     <span className="text-green-dark">
@@ -202,12 +211,12 @@ const Home = () => {
               })}
             </div>
           </div>
-          <div className=" grid sm:px-md gap-sm h-fit ">
-            <header className="flex items-center gap-2  font-semibold border-y-md  w-fit p-xs text-xl text-green-dark uppercase">
+          <div className=" border-sm w-full max-w-sm">
+            <header className="flex items-center gap-2  font-semibold border-b-sm  p-sm  text-green-dark ">
               <FaIndustry /> Jobs By Employment Type
             </header>
 
-            <div className="grid gap-2 ">
+            <div className="">
               {typesLoading && <div>Loading...</div>}
               {typesError && <div>Error</div>}
               {types?.map((type) => {
@@ -215,7 +224,7 @@ const Home = () => {
                   <Link
                     to={`/jobs/?type=${type.type_name}`}
                     key={type.type_id}
-                    className="text-black-light hover:text-black-dark border-gray-light rounded-sm px-sm p-xs border-b-sm w-40 flex items-center gap-sm"
+                    className="text-black-light p-sm  hover:text-black-dark border-b-sm rounded-sm  font-normal  flex items-center gap-sm"
                   >
                     {type.type_name}{" "}
                     <span className="text-green-dark">({type.total_jobs})</span>
@@ -224,8 +233,9 @@ const Home = () => {
               })}
             </div>
           </div>
+         </div>
         </aside>
-      </section>
+      </main>
     </div>
   );
 };

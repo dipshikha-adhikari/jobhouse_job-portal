@@ -1,4 +1,3 @@
-import { Layout } from "../../App";
 import HiddenMenu from "./HiddenMenu";
 import Left from "./Left";
 import { useEffect, useRef, useState } from "react";
@@ -11,6 +10,7 @@ import { Link } from "react-router-dom";
 import useAuthStore from "../../store/auth";
 import { useCurrentUser } from "../../hooks/useCurrentUser";
 import Categories from "../shared/Categories";
+import { Layout } from '../../App';
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -116,7 +116,7 @@ const Navbar = () => {
           </div>
         )}
         {menuOpen && <HiddenMenu menuOpen setMenuOpen={setMenuOpen} />}
-      </Layout>
+        </Layout>
     </div>
   );
 };

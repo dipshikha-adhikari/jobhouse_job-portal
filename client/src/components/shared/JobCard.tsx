@@ -24,10 +24,7 @@ const JobCard = ({ job, appliedJobs }: IJobCard) => {
   }, [job, appliedJobs]);
 
   return (
-    <Link
-      to={`/jobs/${job.title}/${job.job_id}`}
-      className="grid gap-xs w-full h-full  max-w-md shadow-xxl border-light font-normal  "
-    >
+    <div className="grid  w-full h-full  max-w-md shadow-sm border-light font-normal  ">
       <div className="flex p-sm gap-xs items-center text-black-dark hover:text-black-dark">
         <img
           src={
@@ -39,15 +36,20 @@ const JobCard = ({ job, appliedJobs }: IJobCard) => {
           className="w-16 h-16 rounded-full object-cover"
         />
         <div>
-          <p className="font-semibold">
-            {job.employer_details?.organization_name}
-          </p>
-          <p className="font-semibold flex items-center">
-            <GoDotFill className="text-blue-dark" /> {job.title}
-          </p>
-          <p className="text-gray-dark flex items-center gap-xs">
-            <CiLocationOn fontSize="small" /> {job.location}
-          </p>
+          <Link
+            className="text-black-light hover:text-black-dark"
+            to={`/jobs/${job.title}/${job.job_id}`}
+          >
+            <p className="font-semibold">
+              {job.employer_details?.organization_name}
+            </p>
+            <p className="font-semibold flex items-center">
+              <GoDotFill className="text-blue-dark" /> {job.title}
+            </p>
+            <p className=" flex font-normal items-center gap-xs">
+              <CiLocationOn fontSize="small" /> {job.location}
+            </p>
+          </Link>
         </div>
       </div>
       <div className=" border-t-sm  p-sm">
@@ -70,7 +72,7 @@ const JobCard = ({ job, appliedJobs }: IJobCard) => {
           </span>
         )}
       </div>
-    </Link>
+    </div>
   );
 };
 

@@ -12,6 +12,8 @@ import UserInfo from "./UserInfo";
 import AppliedJobsTable from "./AppliedJobsTable";
 import MatchingJobsTable from "./MatchingJobsTable";
 import Loader from "../../../components/shared/Loader";
+import { BiCategory } from "react-icons/bi";
+import { FaIndustry } from "react-icons/fa";
 
 type Profile = {
   profile: IJobseekerProfile;
@@ -30,7 +32,7 @@ const JobseekerOverview = () => {
 
   return (
     <Layout>
-      <div className=" sm:flex grid md:justify-center md:gap-xs p-sm gap-sm ">
+      <div className=" sm:flex grid  md:justify-center md:gap-xs p-sm gap-sm ">
         <UserInfo profile={profile} />
 
         <section className="grid h-fit gap-xs  w-full  ">
@@ -68,20 +70,20 @@ const JobseekerOverview = () => {
         {selected === "appliedJobs" && <AppliedJobsTable />}
       </div>
 
-      <section className="grid gap-xl">
-        <div className="grid gap-xs max-w-sm sm:max-w-full  pt-xl ">
-          <header className="font-semibold border-y-md w-fit border-gray-light  py-xs text-xl">
-            JOBS BY CATEGORY
-          </header>
-          <Categories />
-        </div>
+      <section className="grid pt-sm gap-sm">
+      <div className="border-sm   ">
+            <header className="flex items-center gap-2 font-bold border-b-sm p-sm    text-green-dark">
+              <BiCategory /> Jobs By Category
+            </header>
+            <Categories />
+          </div>
 
-        <div className="grid gap-xs max-w-sm sm:max-w-full">
-          <header className="font-semibold border-y-md w-fit border-gray-light  py-xs text-xl">
-            JOBS BY INDUSTRY
-          </header>
-          <Industries />
-        </div>
+          <div className=" border-sm ">
+            <header className="flex items-center gap-2 border-b-sm  font-bold   p-sm  text-green-dark ">
+              <FaIndustry /> Jobs By Industry
+            </header>
+            <Industries />
+          </div>
       </section>
     </Layout>
   );

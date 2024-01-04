@@ -14,7 +14,7 @@ const JobCard: React.FC<JobCardProps> = ({ job }) => {
   return (
     <Link
       to={`/jobs/${job.title}/${job.job_id}`}
-      className="grid w-full text-black-default  font-normal hover:text-black-default gap-xs p-md  rounded-sm shadow-xl max-w-sm"
+      className="grid w-full text-black-default  font-normal hover:text-black-default gap-xs p-md  rounded-sm shadow-sm  max-w-sm"
     >
       <div className="grid gap-1">
         <div>

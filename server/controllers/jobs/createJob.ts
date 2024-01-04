@@ -24,7 +24,7 @@ export const createJob = async (req: IUserRequest, res: Response) => {
 
     const userQuery = 'select * from employers_basic_information where user_id = $1'
     pool.query(userQuery, [id], function (err: Error, result: QueryResult) {
-        if (err) return res.status(400).send({ error: err })
+        if (err) return res.status(400).send({ message: 'Employer account not found'})
         if (result.rowCount > 0) {
             if (isValidJobData(req.body)) {
                 const { description, deadline, title, salary, categoryId, levelId, location, typeId, noOfVacancy, experienceRequired , industryId, educationRequired, skills}: ICreateJob = req.body
