@@ -1,21 +1,21 @@
 import { applyForJob } from "../controllers/jobs/applyForJob"
 import { getCategories } from "../controllers/jobs/category/getCategories"
-import { getCategoriesAndJobCount } from "../controllers/jobs/category/getCategoriesAndJobCount"
-import { getIndustriesAndJobCount } from "../controllers/jobs/category/getIndustriesAndJobCount"
 import { createJob } from "../controllers/jobs/createJob"
 import { getAllJobs } from "../controllers/jobs/getAllJobs"
 import { getAllJobsByEmployerId } from "../controllers/jobs/getAllJobsByEmployerId"
 import { getAppliedJobs } from "../controllers/jobs/getAppliedJobs"
 import { getIndustries } from "../controllers/jobs/category/getIndustries"
 import { getJobApplications } from "../controllers/jobs/getJobApplications"
-import { getJobsByIndustries } from "../controllers/jobs/category/getJobsByIndustries"
 import { getRecentJobsByEmployerId } from "../controllers/jobs/getRecentJobsByEmployerId"
-import { getJobsByCategories } from "../controllers/jobs/category/getJobsByCategories"
 import { getMatchingJobs } from "../controllers/jobs/category/getMatchingJobs"
 import { getJobById } from "../controllers/jobs/getJobById"
 import { updateJob } from "../controllers/jobs/updateJob"
 import { getSearchSuggestion } from "../controllers/jobs/search/getSearchSuggestion"
 import { getSearchResults } from "../controllers/jobs/search/getSearchResults"
+import { getFilteredJobs } from "../controllers/jobs/category/getFilteredJobs"
+import { getJobLevels } from "../controllers/jobs/getJobLevels"
+import { getJobTypes } from "../controllers/jobs/getJobTypes"
+import { getJobsCountByCategory, getJobsCountByIndustry, getJobsCountByLabel, getJobsCountByType } from "../controllers/jobs/count"
 
 const express = require('express')
 const router = express.Router()
@@ -23,17 +23,20 @@ const verifyToken = require('../middlewares/verifyToken')
 
 
 router.get('/', getAllJobs)
+router.get('/filters', getFilteredJobs)
+router.get('/levels', getJobLevels)
+router.get('/levels/jobscount', getJobsCountByLabel)
+router.get('/types/jobscount', getJobsCountByType)
+router.get('/types', getJobTypes)
 router.get('/categories', getCategories)
 router.get('/industries', getIndustries)
 router.get('/matching',verifyToken, getMatchingJobs)
-router.get('/categories/jobscount', getCategoriesAndJobCount)
-router.get('/categories/:categoryId', getJobsByCategories)
-router.get('/industries/jobscount', getIndustriesAndJobCount)
-router.get('/industries/:industryId', getJobsByIndustries)
+router.get('/categories/jobscount', getJobsCountByCategory)
+router.get('/industries/jobscount', getJobsCountByIndustry)
 router.get('/applied',verifyToken, getAppliedJobs)
 router.get('/employer/all/:employerId', getAllJobsByEmployerId)
 router.get('/employer/recent/:employerId', getRecentJobsByEmployerId)
-router.get('/applications/:jobId', verifyToken, getJobApplications)
+router.get('/applications', verifyToken, getJobApplications)
 router.get('/:jobId', getJobById)
 router.put('/update/:jobId',verifyToken, updateJob)
 router.post('/create',verifyToken, createJob)

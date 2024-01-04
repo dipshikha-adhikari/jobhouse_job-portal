@@ -21,6 +21,8 @@ import ProfileReview from "./pages/jobseeker/ProfileReview";
 import EmployerProfileView from "./pages/EmployerProfile";
 import JobseekerOverview from "./pages/jobseeker/overview/index";
 import SearchResults from "./pages/SearchResults";
+import Applications from "./pages/employer/Applications";
+import JobseekerProfile from "./pages/JobseekerProfile";
 
 export const queryClient = new QueryClient();
 
@@ -77,6 +79,10 @@ const router = createBrowserRouter([
         element: <Profile />,
       },
       {
+        path: "/applicant/profile/:id",
+        element: <JobseekerProfile />,
+      },
+      {
         path: "/jobseeker/apply/process/:jobTitle/:jobId",
         element: <ProfileReview />,
       },
@@ -99,6 +105,10 @@ const router = createBrowserRouter([
       {
         path: "/employer/overview",
         element: <EmployerOverview />,
+      },
+      {
+        path: "/employer/jobs/applications/:jobId",
+        element: <Applications />,
       },
       {
         path: "/jobs/:jobTitle/:jobId",

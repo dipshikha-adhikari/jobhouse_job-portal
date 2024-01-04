@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import { Layout } from "../../App";
 import { FaLocationPin } from "react-icons/fa6";
 import { BiPhone } from "react-icons/bi";
 import { FaEnvelope } from "react-icons/fa";
+import Layout from "../ui/Layout";
 
 const Footer = () => {
   return (

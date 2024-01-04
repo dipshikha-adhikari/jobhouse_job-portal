@@ -12,8 +12,8 @@ type StepOne = {
 type StepTwo = {
   noOfVacancy: number;
   description: string;
-  level: string;
-  type: string;
+  levelId: string;
+  typeId: string;
   skills?: string[];
   educationRequired: string;
 };
@@ -37,8 +37,8 @@ const useJobInputs = create<jobInputs>((set) => ({
   stepTwo: {
     noOfVacancy: 1,
     description: "",
-    level: "",
-    type: "",
+    levelId: "",
+    typeId: "",
     skills: [],
     educationRequired: "",
   },

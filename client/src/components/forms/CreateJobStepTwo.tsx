@@ -11,12 +11,14 @@ import { useProfile } from "../../pages/employer/hooks/useEmployerProfile";
 import TagsInputBox from "../ui/TagsInputBox";
 import { IJob } from "../../types/postgres/types";
 import { Maybe } from "yup";
+import { useLevels } from "../../hooks/useJobLevels";
+import { useTypes } from "../../hooks/useJobTypes";
 
 type StepTwoInputs = {
   noOfVacancy: number;
   description: string;
-  level: string;
-  type: string;
+  levelId: string;
+  typeId: string;
   educationRequired: string;
   skills?: Maybe<(string | undefined)[] | undefined>;
 };
@@ -34,6 +36,8 @@ const CreateJobStepTwo = ({ setStep, job, step }: CreateJobStepTwoProps) => {
   const params = useParams();
   const { jobId } = params;
   const { profile } = useProfile();
+  const { levels } = useLevels();
+  const { types } = useTypes();
 
   const {
     register,
@@ -70,8 +74,8 @@ const CreateJobStepTwo = ({ setStep, job, step }: CreateJobStepTwoProps) => {
     );
     setValue("skills", job?.skills);
     setValue("noOfVacancy", job?.no_of_vacancy || jobStore.stepTwo.noOfVacancy);
-    setValue("level", job?.level || jobStore.stepTwo.level);
-    setValue("type", job?.type || jobStore.stepTwo.type);
+    setValue("levelId", job?.level_id || jobStore.stepTwo.levelId);
+    setValue("typeId", job?.type_id || jobStore.stepTwo.typeId);
     setValue("description", job?.description || jobStore.stepTwo.description);
   }, [job]);
 
@@ -130,34 +134,28 @@ const CreateJobStepTwo = ({ setStep, job, step }: CreateJobStepTwoProps) => {
             <div className=" grid gap-2 items-center">
               <span className="font-semibold">Job Level</span>
               <Controller
-                name="level"
+                name="levelId"
                 control={control}
                 render={({ field }) => (
-                  <SelectJob
-                    field={field}
-                    values={["Entry", "Mid", "Senior", "Top"]}
-                  />
+                  <SelectJob type="level" field={field} values={levels} />
                 )}
               />
             </div>
-            <p className="text-red-600 text-sm">{errors.level?.message}</p>
+            <p className="text-red-600 text-sm">{errors.levelId?.message}</p>
           </div>
 
           <div>
             <div className=" grid gap-2 items-center">
               <span className="font-semibold">Job Type</span>
               <Controller
-                name="type"
+                name="typeId"
                 control={control}
                 render={({ field }) => (
-                  <SelectJob
-                    field={field}
-                    values={["Full Time", "Part time", "Intern"]}
-                  />
+                  <SelectJob field={field} type="type" values={types} />
                 )}
               />
             </div>
-            <p className="text-red-600 text-sm">{errors.type?.message}</p>
+            <p className="text-red-600 text-sm">{errors.typeId?.message}</p>
           </div>
 
           <div>

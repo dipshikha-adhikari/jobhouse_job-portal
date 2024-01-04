@@ -2,21 +2,20 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { ChangeEvent, useEffect, useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { FaEdit } from "react-icons/fa";
-import ResponsiveDatePicker from "../../../components/mui/DatePicker";
+import ResponsiveDayPicker from "../../../components/mui/DayPicker";
 import { useCurrentUser } from "../../../hooks/useCurrentUser";
 import { IJobseekerBasicInformation } from "../../../types/postgres/types";
 import { IJobseekerBasicInfoInputs } from "../../../types/react/types";
 import { JobseekerBasicInfoSchema } from "../../../utils/validationSchema";
 import { updateBasicInfo } from "../actions/updateBasicInfo";
-import { useJobseekerProfile } from "../hooks/useJobseekerProfile";
 
-type BasicInfo = {
-  profile: IJobseekerBasicInformation;
-  isLoading: boolean;
-  isError: boolean;
+type basic_information = {
+  basic_information: IJobseekerBasicInformation;
+  // isLoading: boolean;
+  // isError: boolean;
 };
 
-const BasicInfo = () => {
+const basic_information = ({ basic_information }: basic_information) => {
   const [isEditorOpen, setIsEditorOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [image, setImage] = useState<string | ArrayBuffer | object | null>();
@@ -29,45 +28,50 @@ const BasicInfo = () => {
     setValue,
     control,
   } = useForm({ resolver: yupResolver(JobseekerBasicInfoSchema) });
-  const { profile: basicInfo }: BasicInfo =
-    useJobseekerProfile("basicInformation");
 
   useEffect(() => {
-    if (!basicInfo) {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    if (!basic_information) {
       setValue("fullname", fullName!);
       setValue("phoneNumber", phoneNumber!);
     }
   }, [fullName, phoneNumber]);
 
   useEffect(() => {
-    if (basicInfo) {
+    if (basic_information) {
       const gender: "male" | "female" | "other" =
-        (basicInfo?.gender as "male" | "female" | "other") || "other";
+        (basic_information?.gender as "male" | "female" | "other") || "other";
 
-      setImagePreview(basicInfo?.image.url);
+      setImagePreview(basic_information?.image.url);
 
-      if (basicInfo?.image.url) {
+      if (basic_information?.image.url) {
         //image is not handled by react-hook-form
         setImage(() => ({
-          url: basicInfo.image.url,
-          public_id: basicInfo?.image?.public_id,
+          url: basic_information.image.url,
+          public_id: basic_information?.image?.public_id,
         }));
       }
 
       setValue("gender", gender);
-      setValue("dateOfBirth", new Date(basicInfo?.date_of_birth));
-      setValue("fullname", basicInfo?.fullname);
-      setValue("currentAddress", basicInfo?.current_address);
-      setValue("permanentAddress", basicInfo?.permanent_address);
-      setValue("phoneNumber", basicInfo?.phone_number);
+      setValue("dateOfBirth", new Date(basic_information?.date_of_birth));
+      setValue("fullname", basic_information?.fullname);
+      setValue("currentAddress", basic_information?.current_address);
+      setValue("permanentAddress", basic_information?.permanent_address);
+      setValue("phoneNumber", basic_information?.phone_number);
     }
-  }, [basicInfo]);
-
+  }, [basic_information]);
   const onSubmit: SubmitHandler<IJobseekerBasicInfoInputs> = (data) => {
     const dataToBeSent = { ...data, image };
-    updateBasicInfo(dataToBeSent, setIsLoading, setIsEditorOpen, basicInfo);
+    updateBasicInfo(
+      dataToBeSent,
+      setIsLoading,
+      setIsEditorOpen,
+      basic_information,
+    );
   };
-
   const handleImage = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const url = URL.createObjectURL(e.target.files[0]);
@@ -197,7 +201,7 @@ const BasicInfo = () => {
                 name="dateOfBirth"
                 render={({ field }) => {
                   return (
-                    <ResponsiveDatePicker
+                    <ResponsiveDayPicker
                       isEditorOpen={isEditorOpen}
                       field={field}
                     />
@@ -234,4 +238,4 @@ const BasicInfo = () => {
   );
 };
 
-export default BasicInfo;
+export default basic_information;

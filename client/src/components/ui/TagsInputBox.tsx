@@ -44,7 +44,11 @@ const TagsInputBox = ({
 
   return (
     <div className="grid w-full    ">
-      <div className="border-sm  flex flex-wrap gap-xs input   p-sm">
+      <div
+        className={`${
+          isEditorOpen && "hover:border-black-default"
+        } border-sm rounded-sm flex flex-wrap gap-xs input   p-sm`}
+      >
         {inputs.map((inp) => {
           return (
             <p key={inp} className=" flex  font-semibold  gap-2">

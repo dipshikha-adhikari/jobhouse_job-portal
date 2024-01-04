@@ -1,26 +1,16 @@
 import { useState } from "react";
-import { IJobseekerEducation } from "../../../types/postgres/types";
-import { useJobseekerProfile } from "../hooks/useJobseekerProfile";
-import EducationForm from "./EducationForm";
 import EducationBox from "../../../components/ui/EducationBox";
-import Error from "../../../components/shared/Error";
-import Loader from "../../../components/shared/Loader";
+import { IJobseekerEducation } from "../../../types/postgres/types";
+import EducationForm from "./EducationForm";
 
 type EducationProps = {
-  profile: IJobseekerEducation[] | undefined;
-  isLoading: boolean;
-  isError: boolean;
+  education: IJobseekerEducation[] | undefined;
 };
 
-const Education = () => {
+const Education = ({ education }: EducationProps) => {
   const [isEditorOpen, setIsEditorOpen] = useState(false);
-  const { profile, isError, isLoading }: EducationProps =
-    useJobseekerProfile("education");
 
-  if (isError) return <Error />;
-  if (isLoading) return <Loader />;
-
-  if (profile?.length === 0) {
+  if (education?.length === 0) {
     return (
       <div className="grid min-h-[80vh] gap-sm">
         {!isEditorOpen && (
@@ -50,8 +40,8 @@ const Education = () => {
   return (
     <div className="flex gap-sm flex-col min-h-[80vh] ">
       <section className="grid gap-sm">
-        {profile !== undefined &&
-          profile?.map((item) => {
+        {education !== undefined &&
+          education?.map((item) => {
             return <EducationBox item={item} key={item.id} />;
           })}
       </section>

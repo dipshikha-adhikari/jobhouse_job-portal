@@ -9,7 +9,7 @@ type Props = {
 
 const EducationBox = ({ item }: Props) => {
   const [isEditorOpen, setIsEditorOpen] = useState(false);
-
+  console.log(item);
   return (
     <div>
       {!isEditorOpen && (
@@ -17,7 +17,7 @@ const EducationBox = ({ item }: Props) => {
           <div className="grid gap-xs">
             <p>
               <span className="font-semibold"> {item.job_title}</span> (
-              {item.job_level})
+              {item.level_name})
             </p>
 
             <p>

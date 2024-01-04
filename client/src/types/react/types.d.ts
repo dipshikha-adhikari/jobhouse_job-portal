@@ -21,8 +21,8 @@ export interface ICreateJobInputs {
   description: string;
   categoryId: string;
   location: string;
-  level: string;
-  type: string;
+  levelId: string;
+  typeId: string;
   skills?: Maybe<(string | undefined)[] | undefined>;
   educationRequired: string;
 }
@@ -32,8 +32,8 @@ export interface IJobseekerJobPreferenceInputs {
   jobTitle: string;
   jobCategories: string[];
   jobIndustries: string[];
-  availableFor: string;
-  jobLevel: string;
+  jobTypeId: string;
+  jobLevelId: string;
   jobLocation: string;
   expectedSalary: string;
   skills: string[];
@@ -62,7 +62,7 @@ export interface IJobseekerExperienceInputs {
   jobLocation: string;
   jobTitle: string;
   jobCategory: string;
-  jobLevel: string;
+  jobLevelId: string;
   startDate: Date;
   endDate: Date;
   duties: string;

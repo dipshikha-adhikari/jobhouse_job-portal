@@ -75,7 +75,6 @@ const BasicInformation = ({
     }
   }, [profile]);
 
- 
   const onSubmit: SubmitHandler<IEmployerBasicInformationInputs> = async (
     data,
   ) => {

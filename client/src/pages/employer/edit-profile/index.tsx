@@ -7,11 +7,13 @@ import { useProfile } from "../hooks/useEmployerProfile";
 import Loader from "../../../components/shared/Loader";
 import OtherInformation from "./OtherInformation";
 import { Link, useParams } from "react-router-dom";
+import { useCurrentUser } from "../../../hooks/useCurrentUser";
 
 const EditProfile = () => {
   const [isEditorOpen, setIsEditorOpen] = useState<boolean>(false);
   const { isAunthenticated } = useAuthStore();
   const { profile, isLoading, error } = useProfile();
+  const { role } = useCurrentUser();
   const params = useParams();
   const title = params.title;
 
@@ -46,7 +48,7 @@ const EditProfile = () => {
 
   if (isLoading) return <Loader />;
   if (!isAunthenticated) return <NoUser />;
-  if (error) return <Error />;
+  if (!isLoading && (error || role !== "employer")) return <Error />;
 
   return (
     <div className="grid p-sm  gap-sm mx-auto md:flex max-w-3xl  md:gap-xl md:items-start">
@@ -60,8 +62,8 @@ const EditProfile = () => {
               key={item.title}
               className={`${
                 title === item.link
-                  ? "text-blue-light hover:text-blue-light "
-                  : "text-black-default hover:text-blue-light"
+                  ? "text-green-dark hover:text-green-dark "
+                  : "text-black-default hover:text-black-dark"
               } w-fit`}
             >
               {item.title}

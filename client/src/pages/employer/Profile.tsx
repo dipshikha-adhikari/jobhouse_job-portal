@@ -10,17 +10,20 @@ import Loader from "../../components/shared/Loader";
 import RecentJobs from "./RecentJobs";
 import { useEffect } from "react";
 import { CiStar } from "react-icons/ci";
+import useAuthStore from "../../store/auth";
+import NoUser from "../../components/shared/NoUser";
 
 const Profile = () => {
   const user = useCurrentUser();
   const { profile, isLoading, error } = useProfile();
-
+  const { isAunthenticated } = useAuthStore();
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   if (isLoading) return <Loader />;
-  if (error || user.role !== "employer") return <Error />;
+  if (!isAunthenticated) return <NoUser />;
+  if (!isLoading && (error || user.role !== "employer")) return <Error />;
 
   return (
     <Layout>
@@ -103,7 +106,7 @@ const Profile = () => {
         <section className="flex-1 grid gap-xl h-fit">
           {
             <div className="grid gap-sm ">
-              <p className="grid place-items-center">
+              <p className="grid ">
                 <h2 className="flex uppercase text-green-dark items-center text-center gap-2 font-semibold text-xl border-y-sm w-fit py-xs border-default">
                   <CiStar /> Recent jobs
                 </h2>

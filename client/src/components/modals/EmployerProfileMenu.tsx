@@ -38,34 +38,34 @@ const EmployerProfileMenu = () => {
   return (
     <div
       ref={ref}
-      className="absolute max-w-sm bg-white w-full shadow-xl top-12 grid  place-items-start gap-xs text-black-default  p-md right-0"
+      className="absolute max-w-sm bg-white sm:px-xl w-full shadow-xl top-12 grid  place-items-start gap-xs text-black-default  p-md right-0"
     >
       <Link
         to="/jobs/create"
-        className="text-black-default hover:text-green-dark"
+        className="text-black-default border-b-sm border-green-dark hover:text-green-dark"
       >
         Create Job
       </Link>
       <Link
         to="/employer/profile/basic-info"
-        className="text-black-default hover:text-green-dark md:block hidden"
+        className="text-black-default border-b-sm border-green-dark hover:text-green-dark md:block hidden"
       >
         Update Profile
       </Link>
       <Link
         to="/employer/profile"
-        className="text-black-default hover:text-green-dark md:hidden"
+        className="text-black-default border-b-sm border-green-dark hover:text-green-dark md:hidden"
       >
         Profile
       </Link>
       <Link
         to="/employer/overview"
-        className="text-black-default hover:text-green-dark md:hidden"
+        className="text-black-default border-b-sm border-green-dark hover:text-green-dark md:hidden"
       >
         Overview
       </Link>
       <button
-        className="text-black-light font-medium hover:text-green-dark"
+        className="text-black-light font-medium border-b-sm border-green-dark hover:text-green-dark"
         onClick={handleLogout}
       >
         Logout

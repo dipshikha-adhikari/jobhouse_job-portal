@@ -21,6 +21,8 @@ const Jobs = () => {
   const location = useLocation().search;
   const category = new URLSearchParams(location).get("category");
   const industry = new URLSearchParams(location).get("industry");
+  const level = new URLSearchParams(location).get("level");
+  const type = new URLSearchParams(location).get("type");
   const id = new URLSearchParams(location).get("id");
   const { jobs: appliedJobs }: AppliedJobsType = useAppliedJobs();
 
@@ -29,14 +31,16 @@ const Jobs = () => {
   }, [id]);
 
   const getJobs = async () => {
-    if (category) {
-      const result = await publicRequest.get(`/api/v1/jobs/categories/${id}`);
-      return result.data;
-    }
-    if (industry) {
-      const result = await publicRequest.get(`/api/v1/jobs/industries/${id}`);
-      return result.data;
-    }
+    const queryStr = category
+      ? `categoryId=${id}`
+      : industry
+        ? `industryId=${id}`
+        : null;
+
+    const result = await publicRequest.get(
+      `/api/v1/jobs/filters?${queryStr}&level=${level}&type=${type}`,
+    );
+    return result.data;
   };
   const {
     data: jobs,
@@ -49,15 +53,21 @@ const Jobs = () => {
 
   return (
     <Layout>
-      <div className="min-h-[80vh] grid gap-sm place-items-center">
+      <div className="grid gap-sm place-items-center">
         <div className="grid gap-xs bg-green-50 p-sm">
           <h2 className="text-2xl font-bold text-black-light">
             {" "}
             {industry || category}
           </h2>
           <p>
-            This list show the latest job vacancy in {industry || category} Jobs
-            in Nepal. The brief job detail has job title, name of the
+            This list show the latest job vacancy in{" "}
+            <span className="font-semibold">
+              {industry ||
+                category ||
+                (level && level + " level") ||
+                (type && type)}
+            </span>{" "}
+            Jobs in Nepal. The brief job detail has job title, name of the
             organization, job location, required experiences, key skills and the
             deadline to apply. Most recent job are shown on first. Click on the
             job that interests you, read the job detail and if it is suitable
@@ -65,7 +75,7 @@ const Jobs = () => {
           </p>
         </div>
         <main className="grid gap-xl ">
-          <section className="grid grid-cols-auto-sm  lg:flex flex-wrap gap-sm lg:justify-center  ">
+          <section className="grid grid-cols-auto-sm place-items-center  gap-sm ">
             {jobs !== undefined && jobs?.length > 0 ? (
               jobs?.map((job) => {
                 return (

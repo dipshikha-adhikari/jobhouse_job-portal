@@ -29,11 +29,23 @@ type TopComapny = {
   job_count: string;
 };
 
+type Levels = {
+  level_id: string;
+  level_name: string;
+  total_jobs: string;
+};
+
+type Types = {
+  type_id: string;
+  type_name: string;
+  total_jobs: string;
+};
+
 const Home = () => {
   const { jobs: appliedJobs }: AppliedJobsType = useAppliedJobs();
   const [appliedIds, setAppliedIds] = useState<number[]>([]);
   const getAllJobs = async () => {
-    const res = await publicRequest.get("/api/v1/jobs");
+    const res = await publicRequest.get("/api/v1/jobs/?level=entry");
     return res.data;
   };
   const {
@@ -60,6 +72,23 @@ const Home = () => {
     });
   }, [appliedJobs]);
 
+  const {
+    data: levels,
+    isLoading: levelsLoading,
+    isError: levelsError,
+  } = useQuery<Levels[]>("levels", async () => {
+    const result = await publicRequest.get("/api/v1/jobs/levels/jobscount");
+    return result.data;
+  });
+  const {
+    data: types,
+    isLoading: typesLoading,
+    isError: typesError,
+  } = useQuery<Types[]>("types", async () => {
+    const result = await publicRequest.get("/api/v1/jobs/types/jobscount");
+    return result.data;
+  });
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -82,12 +111,12 @@ const Home = () => {
         />
         <SearchBox />
       </header>
-      <section className="grid gap-lg mx-auto lg:flex">
+      <section className="grid gap-lg mx-auto lg:flex lg:gap-sm">
         <aside className="grid gap-md flex-1 h-fit sm:px-md">
           <header className="font-semibold border-y-sm flex items-center gap-2  w-fit p-xs text-xl uppercase text-green-dark">
             <CiStar className="text-green-dark" /> Top jobs
           </header>
-          <div className="grid gap-sm  grid-cols-auto-sm ">
+          <div className="grid gap-sm place-items-center  grid-cols-auto-sm ">
             {jobs?.map((job) => {
               return (
                 <JobCard appliedJobs={appliedJobs} job={job} key={job.job_id} />
@@ -100,7 +129,7 @@ const Home = () => {
               <MdHomeWork />
               Top Companies
             </h2>
-            <div className="grid gap-sm  grid-cols-[repeat(auto-fit,minmax(200px,1fr))]">
+            <div className="grid gap-sm  grid-cols-[repeat(auto-fit,minmax(200px,1fr))] ">
               {loadingComapnies && <div className="">Loading...</div>}
               {errorComapnies && <div className="">Error</div>}
               {companies?.map((item: TopComapny) => {
@@ -108,7 +137,7 @@ const Home = () => {
                   <Link
                     key={item.user_id}
                     to={`/employer/${item.organization_name}/${item.user_id}`}
-                    className="grid gap-2 shadow-xxl text-black-dark max-w-sm hover:text-black-dark  border-xs  p-sm place-content-start"
+                    className="grid gap-2 shadow-xxl w-full text-black-dark max-w-sm hover:text-black-dark  border-xs  p-sm place-content-start"
                   >
                     <div className="flex items-start gap-xs">
                       <img
@@ -142,12 +171,58 @@ const Home = () => {
             <Industries />
           </div>
         </aside>
-        <aside className="grid gap-sm flex-[0.3] h-fit mx-auto">
+        <aside className="grid gap-xl flex-[0.4] h-fit ">
           <div className="grid gap-sm sm:px-md h-fit ">
             <header className="flex items-center gap-2 font-semibold border-y-sm uppercase  w-fit p-xs text-xl text-green-dark">
               <BiCategory /> Jobs By Category
             </header>
             <Categories />
+          </div>
+          <div className=" grid sm:px-md gap-sm h-fit ">
+            <header className="flex items-center gap-2  font-semibold border-y-md  w-fit p-xs text-xl text-green-dark uppercase">
+              <FaIndustry /> Jobs By Level
+            </header>
+
+            <div className="grid gap-2 ">
+              {levelsLoading && <div>Loading...</div>}
+              {levelsError && <div>Error</div>}
+              {levels?.map((level) => {
+                return (
+                  <Link
+                    to={`/jobs/?level=${level.level_name}`}
+                    key={level.level_id}
+                    className="text-black-light flex items-center gap-sm hover:text-black-dark border-gray-light rounded-sm px-sm p-xs border-b-sm w-40"
+                  >
+                    {level.level_name}{" "}
+                    <span className="text-green-dark">
+                      ({level.total_jobs})
+                    </span>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+          <div className=" grid sm:px-md gap-sm h-fit ">
+            <header className="flex items-center gap-2  font-semibold border-y-md  w-fit p-xs text-xl text-green-dark uppercase">
+              <FaIndustry /> Jobs By Employment Type
+            </header>
+
+            <div className="grid gap-2 ">
+              {typesLoading && <div>Loading...</div>}
+              {typesError && <div>Error</div>}
+              {types?.map((type) => {
+                return (
+                  <Link
+                    to={`/jobs/?type=${type.type_name}`}
+                    key={type.type_id}
+                    className="text-black-light hover:text-black-dark border-gray-light rounded-sm px-sm p-xs border-b-sm w-40 flex items-center gap-sm"
+                  >
+                    {type.type_name}{" "}
+                    <span className="text-green-dark">({type.total_jobs})</span>
+                  </Link>
+                );
+              })}
+            </div>
           </div>
         </aside>
       </section>

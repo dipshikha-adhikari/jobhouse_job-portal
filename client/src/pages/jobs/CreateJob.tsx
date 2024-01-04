@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import CreateJobStepOne from "../../components/forms/CreateJobStepOne";
 import CreateJobStepTwo from "../../components/forms/CreateJobStepTwo";
@@ -15,11 +15,15 @@ const CreateJob = () => {
   const auth = useAuthStore();
   const params = useParams();
   const { role } = useCurrentUser();
-  const loading = !role;
+
   const jobId = params.jobId;
   const { job, isLoading } = useCurrentJob();
 
-  if (isLoading || loading) return <Loader />;
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  if (isLoading) return <Loader />;
 
   if (job?.job_id === undefined && jobId !== undefined) return <Error />;
   if (!auth.isAunthenticated) return <NoUser />;
@@ -33,15 +37,9 @@ const CreateJob = () => {
 
   return (
     <div className="relative ">
-      <img
-        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_6l-8XL1K2qZhn06CHR3I7B29B-Oel9O8SQ&usqp=CAU"
-        className="absolute w-full h-full  object-cover left-0 top-0 -z-10"
-        alt=""
-      />
-      <div className="absolute h-full w-full left-0 top-0 bg-[rgba(0,0,0,0.6)] -z-10"></div>
-      <div className="w-full grid gap-sm max-w-2xl   mx-auto">
+      <div className="w-full grid gap-sm max-w-2xl shadow-xxl   mx-auto">
         <div className="grid p-sm gap-xs">
-          <span className="flex justify-center text-white font-semibold ">
+          <span className="flex justify-center  font-semibold ">
             Step {step} of 2
           </span>
           <ProgressBar step={step} />

@@ -9,6 +9,8 @@ import { useCategories } from "../../../hooks/useCategories";
 import { updateExperience } from "../actions/updateExperience";
 import { useIndustries } from "../../../hooks/useIndustries";
 import ResponsiveDatePicker from "../../../components/mui/DatePicker";
+import SelectJob from "../../../components/mui/SelectJob";
+import { useLevels } from "../../../hooks/useJobLevels";
 
 type ExperienceFormProps = {
   profile?: IJobseekerExperience | undefined;
@@ -26,6 +28,8 @@ const ExperienceForm = ({
   const ref = useRef<HTMLDivElement>(null);
   const { categories } = useCategories();
   const { industries } = useIndustries();
+  const { levels } = useLevels();
+
   const {
     register,
     handleSubmit,
@@ -42,7 +46,7 @@ const ExperienceForm = ({
       setValue("jobCategory", profile.job_category);
       setValue("jobLocation", profile.job_location);
       setValue("duties", profile.duties);
-      setValue("jobLevel", profile.job_level);
+      setValue("jobLevelId", profile.job_level_id);
       setValue("startDate", new Date(profile?.start_date));
       setValue("endDate", new Date(profile?.end_date));
     }
@@ -152,20 +156,21 @@ const ExperienceForm = ({
         <div>
           <div className="grid sm:flex gap-xs items-center">
             <span>Job Level</span>{" "}
-            <select
-              {...register("jobLevel")}
-              className="outline-none p-xs border-sm"
-            >
-              <option value="">Select</option>
-
-              <option value="entry">Entry Level</option>
-              <option value="intermediate">Intermediate Level</option>
-              <option value="senior"> Senior Level</option>
-              <option value="top">Top Level</option>
-            </select>
+            <Controller
+              name="jobLevelId"
+              control={control}
+              render={({ field }) => (
+                <SelectJob
+                  type="level"
+                  isEditorOpen={isEditorOpen}
+                  field={field}
+                  values={levels}
+                />
+              )}
+            />
           </div>
           <p className="text-red-600 text-sm">
-            {isEditorOpen && errors.jobLevel?.message}
+            {isEditorOpen && errors.jobLevelId?.message}
           </p>
         </div>
         <div>

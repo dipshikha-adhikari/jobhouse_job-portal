@@ -71,7 +71,7 @@ const Job = () => {
           />
           <Link
             to={`/employer/${job?.employer_details?.organization_name}/${job?.employer_id}`}
-            className="absolute border-sm bg-[rgba(0,0,0,0.3)] hover:bg-[rgba(0,0,0,0.6)] rounded-md border-green-dark m-2 p-sm bottom-0 left-2 flex gap-xs sm:gap-mditems-center"
+            className="absolute border-sm bg-[rgba(0,0,0,0.5)] hover:bg-[rgba(0,0,0,0.7)] rounded-md border-green-dark m-2 p-sm bottom-0 left-2 flex gap-xs sm:gap-mditems-center"
           >
             <img
               src={
@@ -86,14 +86,14 @@ const Job = () => {
               <p className="text-white">
                 {job?.employer_details?.organization_name}
               </p>
-              <p className="text-green-light">{job?.industry_name}</p>
+              <p className="text-white">{job?.industry_name}</p>
             </div>
           </Link>
         </div>
       </section>
       {/* job  */}
       <main className="lg:flex grid  gap-sm lg:justify-between items-start">
-        <aside className="sm:border-xs sm:p-xl w-full  rounded-sm border-light">
+        <aside className="sm:border-xs sm:p-xl w-full rounded-sm border-light">
           <section className="grid gap-sm">
             <header className="grid gap-xs ">
               <h2 className="text-xl  text-green-dark font-bold">
@@ -111,14 +111,14 @@ const Job = () => {
                 Job Category <span>:</span> {job?.category_name}
               </p>
               <p className="flex gap-xs sm:gap-md">
-                Job Level <span>:</span> {job?.level}
+                Job Level <span>:</span> {job?.level_name}
               </p>
               <p className="flex gap-xs sm:gap-md">
                 No of Vacancy/s <span>:</span>[ {job?.no_of_vacancy}]
               </p>
               <p className="flex gap-xs sm:gap-md ">
                 Employment Type <span>:</span>
-                {job?.type}
+                {job?.type_name}
               </p>
               <p className="flex gap-xs sm:gap-md">
                 Job Location <span>:</span>
@@ -195,7 +195,7 @@ const Job = () => {
           </section>
         </aside>
         {jobs && jobs?.length > 1 && (
-          <aside className="flex-1 ">
+          <aside className=" ">
             <div className="grid gap-md place-items-end">
               <h2 className="text-xl flex items-center gap-2 border-y-sm w-fit mx-auto uppercase text-green-dark py-sm font-bold text-center  ">
                 <CiStar /> More jobs by {job.employer_details.organization_name}

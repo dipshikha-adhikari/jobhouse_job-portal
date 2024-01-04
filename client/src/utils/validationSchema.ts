@@ -39,12 +39,12 @@ export const CreateJobStepOneSchema = Yup.object().shape({
 });
 
 export const CreateJobStepTwoSchema = Yup.object().shape({
-  level: Yup.string().required(),
+  levelId: Yup.string().required(),
   noOfVacancy: Yup.number()
     .required()
     .typeError("total vacancy must be a number type"),
   description: Yup.string().required(),
-  type: Yup.string().required(),
+  typeId: Yup.string().required(),
   skills: Yup.array().of(Yup.string()).notRequired(),
   educationRequired: Yup.string().max(200).required("required"),
 });
@@ -60,8 +60,8 @@ export const JobseekerJobPreferenceSchema = Yup.object().shape({
     .of(Yup.string().required())
     .min(1, "This is required")
     .required(),
-  availableFor: Yup.string().required("required"),
-  jobLevel: Yup.string().required("required"),
+  jobTypeId: Yup.string().required("required"),
+  jobLevelId: Yup.string().required("required"),
   jobLocation: Yup.string().required("required"),
   expectedSalary: Yup.string().required("required"),
   skills: Yup.array()
@@ -97,12 +97,33 @@ export const JobseekerBasicInfoSchema = Yup.object().shape({
     }),
 });
 
+// export const JobseekerExperienceSchema = Yup.object().shape({
+//   organizationName: Yup.string().required("required"),
+//   organizationType: Yup.string().required("required"),
+//   jobLocation: Yup.string().required("required"),
+//   jobTitle: Yup.string().required("required"),
+//   jobCategory: Yup.string().required("required"),
+//   jobLevelId: Yup.string().required("required"),
+//   startDate: Yup.date()
+//     .required("required")
+//     .typeError("start date must be a valid date"),
+//   endDate: Yup.date()
+//     .required("required")
+//     .typeError("end date must be a valid date")
+//     .when("startDate", (startDate, schema) => {
+//       return (
+//         startDate && schema.min(startDate, "End date must be after start date").max(new Date(), "End date must be in past")
+//       );
+//     }),
+//   duties: Yup.string().required("required"),
+// });
+
 export const JobseekerEducationSchema = Yup.object().shape({
   degree: Yup.string().required("required"),
   course: Yup.string().required("required"),
   institute: Yup.string().required("required"),
   graduationYear: Yup.date()
-    .required("valid date is required")
+    .required("date must be in the past")
     .max(new Date(), "date must be in the past")
     .typeError("date must be a valid date"),
   location: Yup.string().required("required"),
@@ -131,7 +152,7 @@ export const JobseekerExperienceSchema = Yup.object().shape({
   jobLocation: Yup.string().required("required"),
   jobTitle: Yup.string().required("required"),
   jobCategory: Yup.string().required("required"),
-  jobLevel: Yup.string().required("required"),
+  jobLevelId: Yup.string().required("required"),
   startDate: Yup.date()
     .required("required")
     .typeError("start date must be a valid date"),
@@ -140,8 +161,26 @@ export const JobseekerExperienceSchema = Yup.object().shape({
     .typeError("end date must be a valid date")
     .when("startDate", (startDate, schema) => {
       return (
-        startDate && schema.min(startDate, "End date must be after start date")
+        startDate &&
+        schema
+          .min(startDate, "End date must be after start date")
+          .max(new Date(), "End date must be in the past")
       );
-    }),
+    })
+    .test(
+      "is-one-month-difference",
+      "Difference must be at least one month",
+      function (endDate) {
+        const startDate = this.parent.startDate;
+        if (startDate && endDate) {
+          const diffInMonths =
+            (endDate.getFullYear() - startDate.getFullYear()) * 12 +
+            (endDate.getMonth() - startDate.getMonth());
+
+          return diffInMonths >= 1;
+        }
+        return true;
+      },
+    ),
   duties: Yup.string().required("required"),
 });

@@ -1,54 +1,67 @@
+import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import JobPreference from "./JobPreference";
+import Error from "../../../components/shared/Error";
+import Loader from "../../../components/shared/Loader";
+import NoUser from "../../../components/shared/NoUser";
+import { useCurrentUser } from "../../../hooks/useCurrentUser";
+import useAuthStore from "../../../store/auth";
+import { IJobseekerProfile } from "../../../types/postgres/types";
+import { useJobseekerProfile } from "../hooks/useJobseekerProfile";
 import BasicInfo from "./BasicInfo";
 import Education from "./Education";
 import Experience from "./Experience";
-import { useJobseekerProfile } from "../hooks/useJobseekerProfile";
-import { useCurrentUser } from "../../../hooks/useCurrentUser";
-import Error from "../../../components/shared/Error";
-import Loader from "../../../components/shared/Loader";
-import useAuthStore from "../../../store/auth";
-import NoUser from "../../../components/shared/NoUser";
-import { useEffect } from "react";
+import JobPreference from "./JobPreference";
 
-const data = [
-  {
-    title: "Job Preference",
-    link: "job-preference",
-    component: <JobPreference />,
-  },
-  {
-    title: "Basic Information",
-    link: "basic-info",
-    component: <BasicInfo />,
-  },
-  {
-    title: "Education",
-    link: "education",
-    component: <Education />,
-  },
-  {
-    title: "Work Experience",
-    link: "experience",
-    component: <Experience />,
-  },
-];
+// const BasicInfo =  lazy(() => import("./BasicInfo"));
+// const Education = lazy(() => import("./Education"));
+// const Experience = lazy(() => import("./Experience"));
+// const JobPreference = lazy(() => import("./JobPreference"));
+
+type ProfileProps = {
+  profile: IJobseekerProfile;
+  isLoading: boolean;
+  isError: boolean;
+};
 
 const EditProfile = () => {
   const params = useParams();
   const title = params.title;
-  const { isLoading, isError } = useJobseekerProfile();
   const { role } = useCurrentUser();
-  const loading = !role;
+  const { profile, isLoading, isError }: ProfileProps = useJobseekerProfile();
+
   const { isAunthenticated } = useAuthStore();
+  // const loading = isAunthenticated && !role
+
+  const data = [
+    {
+      title: "Job Preference",
+      link: "job-preference",
+      component: <JobPreference job_preference={profile?.job_preference} />,
+    },
+    {
+      title: "Basic Information",
+      link: "basic-info",
+      component: <BasicInfo basic_information={profile?.basic_information} />,
+    },
+    {
+      title: "Education",
+      link: "education",
+      component: <Education education={profile?.education} />,
+    },
+    {
+      title: "Work Experience",
+      link: "experience",
+      component: <Experience experience={profile?.experience} />,
+    },
+  ];
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  if (isLoading || loading) return <Loader />;
+  if (isLoading) return <Loader />;
   if (!isAunthenticated) return <NoUser />;
-  if (isError || role !== "jobseeker") return <Error />;
+  if ((!isLoading && role !== "jobseeker") || isError) return <Error />;
 
   return (
     <div className="grid gap-10 max-w-5xl mx-auto md:flex w-full sm:p-10 lg:p-sm">

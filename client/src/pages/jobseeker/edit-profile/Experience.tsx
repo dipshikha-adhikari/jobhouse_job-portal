@@ -1,20 +1,16 @@
 import { useState } from "react";
 import { IJobseekerExperience } from "../../../types/postgres/types";
-import { useJobseekerProfile } from "../hooks/useJobseekerProfile";
 import ExperienceForm from "./ExperienceForm";
 import ExperienceBox from "../../../components/ui/ExperienceBox";
 
 type ExperienceProps = {
-  profile: IJobseekerExperience[] | undefined;
-  isLoading: boolean;
-  isError: boolean;
+  experience: IJobseekerExperience[] | undefined;
 };
 
-const Experience = () => {
+const Experience = ({ experience }: ExperienceProps) => {
   const [isEditorOpen, setIsEditorOpen] = useState(false);
-  const { profile }: ExperienceProps = useJobseekerProfile("experience");
 
-  if (profile?.length === 0) {
+  if (experience?.length === 0) {
     return (
       <div className="grid min-h-[80vh] gap-sm">
         {!isEditorOpen && (
@@ -45,9 +41,9 @@ const Experience = () => {
   return (
     <div className="flex gap-sm flex-col min-h-[80vh] ">
       <section className="grid gap-sm">
-        {profile !== undefined &&
-          profile?.map((item: IJobseekerExperience) => {
-            return <ExperienceBox item={item} />;
+        {experience !== undefined &&
+          experience?.map((item: IJobseekerExperience) => {
+            return <ExperienceBox item={item} key={item.id} />;
           })}
       </section>
       <section>

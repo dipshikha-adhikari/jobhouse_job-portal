@@ -2,7 +2,6 @@ import { MdLocationPin } from "react-icons/md";
 import { FaEnvelope } from "react-icons/fa6";
 import { FaPhoneAlt } from "react-icons/fa";
 import { Link, useParams } from "react-router-dom";
-
 import { useEffect } from "react";
 import Loader from "../components/shared/Loader";
 import { UseQueryResult, useQuery } from "react-query";
@@ -40,17 +39,17 @@ const EmployerProfile = () => {
   }, []);
 
   if (isLoading) return <Loader />;
-  if (isError) return <Error />;
+  if (isError || profile?.user_id === undefined) return <Error />;
 
   return (
     <Layout>
-      <div className="grid gap-xl mx-auto lg:flex lg:gap-md">
+      <div className="grid gap-xl mx-auto lg:flex ">
         <section className="grid gap-sm flex-1 h-fit">
           <header className="relative h-full">
             <div className="cover-image">
               <img
                 src={
-                  profile?.cover_image.url
+                  profile?.cover_image?.url
                     ? profile?.cover_image.url
                     : "https://template.canva.com/EAENvp21inc/1/0/1600w-qt_TMRJF4m0.jpg"
                 }
@@ -62,7 +61,7 @@ const EmployerProfile = () => {
             <div className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 flex gap-sm">
               <img
                 src={
-                  profile?.image.url
+                  profile?.image?.url
                     ? profile?.image.url
                     : "https://media.istockphoto.com/id/1340893300/vector/technology-logo-design-template-networking-vector-logo-design.jpg?s=612x612&w=0&k=20&c=-8XBWFDRAAYe3leL4nuMnei0wWpL6-IqsPCAbWIhASk="
                 }
@@ -93,7 +92,7 @@ const EmployerProfile = () => {
             </p>
             <p className="flex items-center gap-xs">
               <FaEnvelope className="text-blue-dark" />{" "}
-              {profile?.basic_information.email || "Not available"}
+              {profile?.basic_information?.email || "Not available"}
             </p>
             <p className="flex items-center gap-xs">
               <FaPhoneAlt className="text-blue-dark" />
@@ -109,10 +108,10 @@ const EmployerProfile = () => {
             )}
           </div>
         </section>
-        <section className="flex-1 grid  gap-sm h-fit">
+        <section className="flex-[0.8] grid  gap-sm h-fit">
           <div className="grid  gap-sm">
-            <div className="grid py-sm place-items-center">
-              <h2 className="font-semibold gap-2 border-y-sm  uppercase flex items-center sm:px-xl text-green-dark text-xl border-gray-light py-sm ">
+            <div className="grid py-sm ">
+              <h2 className="font-semibold gap-2 border-y-sm w-fit uppercase flex items-center sm:px-xl text-green-dark text-xl border-gray-light py-sm ">
                 <CiStar className="text-green-dark" /> Recent jobs by{" "}
                 {profile?.basic_information?.organization_name}
               </h2>
@@ -125,7 +124,13 @@ const EmployerProfile = () => {
                 <div className="text-center">Error!</div>
               )}
               {jobs?.map((item) => {
-                return <JobCard job={item} appliedJobs={appliedJobs} />;
+                return (
+                  <JobCard
+                    job={item}
+                    key={item.job_id}
+                    appliedJobs={appliedJobs}
+                  />
+                );
               })}
             </div>
           </div>

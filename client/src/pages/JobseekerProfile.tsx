@@ -6,11 +6,7 @@ import {
   CiLocationOn,
   CiUser,
 } from "react-icons/ci";
-import {
-  FaArrowAltCircleDown,
-  FaRegCalendarAlt,
-  FaRegEdit,
-} from "react-icons/fa";
+import { FaArrowAltCircleDown, FaRegCalendarAlt } from "react-icons/fa";
 import { GiFlagObjective, GiSkills } from "react-icons/gi";
 import { GrCertificate } from "react-icons/gr";
 import {
@@ -18,75 +14,74 @@ import {
   MdOutlineRoomPreferences,
 } from "react-icons/md";
 import { SlGraduation } from "react-icons/sl";
-import { Link } from "react-router-dom";
-import Error from "../../components/shared/Error";
-import Loader from "../../components/shared/Loader";
-import NoUser from "../../components/shared/NoUser";
-import { useCurrentUser } from "../../hooks/useCurrentUser";
-import useAuthStore from "../../store/auth";
+import { UseQueryResult, useQuery } from "react-query";
+import { useParams } from "react-router-dom";
+import Error from "../components/shared/Error";
+import Loader from "../components/shared/Loader";
+import NoUser from "../components/shared/NoUser";
+import { useCurrentUser } from "../hooks/useCurrentUser";
+import { privateRequest } from "../lib/axios";
+import useAuthStore from "../store/auth";
 import {
   IJobseekerEducation,
   IJobseekerProfile,
-} from "../../types/postgres/types";
-import { useJobseekerProfile } from "./hooks/useJobseekerProfile";
+} from "../types/postgres/types";
 
-type Profile = {
-  profile: IJobseekerProfile;
-  isLoading: boolean;
-  isError: boolean;
-};
-
-const Profile = () => {
-  const { profile, isLoading, isError }: Profile = useJobseekerProfile();
-  const { fullName, phoneNumber, email, role } = useCurrentUser();
+const JobseekerProfile = () => {
+  const params = useParams();
+  const { id } = params;
   const { isAunthenticated } = useAuthStore();
+  const { role } = useCurrentUser();
+
+  const {
+    data: profile,
+    isLoading,
+    isError,
+  }: UseQueryResult<IJobseekerProfile> = useQuery(
+    ["applicant", id],
+    async () => {
+      const result = await privateRequest.get(
+        `/api/v1/jobseeker/profile/${id}`,
+      );
+      return result.data;
+    },
+  );
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   if (isLoading) return <Loader />;
-
   if (!isAunthenticated) return <NoUser />;
-  if (role !== "jobseeker" || isError) return <Error />;
+  if (!isLoading && (role !== "employer" || isError)) return <Error />;
 
   return (
     <div className="sm:px-xl  lg:border-sm lg:p-xl max-w-4xl w-full mx-auto">
-      <div className="flex justify-end  ">
-        <Link
-          to="/jobseeker/profile/basic-info"
-          className=" flex items-center gap-xs border-sm p-xs border-green-dark text-green-dark hover:text-green-light px-sm"
-        >
-          <FaRegEdit /> Edit
-        </Link>
-      </div>
       <div className="grid  gap-md  ">
-        <section>
+        <section className="grid gap-2">
           <img
             src={
-              profile.basic_information?.image?.url ||
+              profile?.basic_information?.image?.url ||
               "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqZYAYrmuzw5vIhNRWG2f436EKH4LqTUAFhLDWd2yRNA&s"
             }
             alt=""
             className="w-20 h-20 rounded-full object-cover"
           />
-          <div className="grid gap-2 ">
+          <div className="grid gap-1 ">
             <div className="font-semibold flex gap-2">
               {profile?.basic_information?.gender === "male" && <span>MR</span>}
               {profile?.basic_information?.gender === "female" && (
                 <span>MRS</span>
               )}
-              {profile?.basic_information?.fullname || fullName}
+              {profile?.basic_information?.fullname}
             </div>
             <p>
               Current Address :{" "}
               {profile?.basic_information?.current_address || "Not available"}
             </p>
 
-            <p>
-              Phone : {profile?.basic_information?.phone_number || phoneNumber}
-            </p>
-            <p>Email : {email}</p>
+            <p>Phone : {profile?.basic_information?.phone_number}</p>
+            <p>Email : {profile?.basic_information?.email}</p>
             <p>
               Date of Birth :{" "}
               {profile?.basic_information?.date_of_birth
@@ -102,7 +97,7 @@ const Profile = () => {
           <header className="font-semibold  uppercase text-xl flex gap-xs items-center">
             <GiFlagObjective /> Objective
           </header>
-          <p className="py-md break-all">
+          <p className="py-md break-words break-all">
             {profile?.job_preference?.summary || "Not available"}
           </p>
         </section>
@@ -110,9 +105,9 @@ const Profile = () => {
           <header className="font-semibold text-xl uppercase flex items-center gap-xs">
             <MdOutlineMapsHomeWork /> Work Experience
           </header>
-          {profile?.experience.length > 0 ? (
-            <div className="grid break-all gap-sm">
-              {profile.experience.map((exp) => {
+          {profile?.experience && profile?.experience?.length > 0 ? (
+            <div className="grid  break-all break-words gap-sm">
+              {profile?.experience.map((exp) => {
                 return (
                   <div
                     className=" h-fit md:flex items-start grid gap-2 md:gap-md lg:gap-xl "
@@ -166,9 +161,9 @@ const Profile = () => {
           <header className="font-semibold   w-fit  uppercase text-xl flex items-center gap-xs">
             <SlGraduation /> Education
           </header>
-          {profile?.education.length > 0 ? (
-            <div className="grid gap-xs break-all">
-              {profile.education.map((item: IJobseekerEducation) => {
+          {profile?.education && profile?.education?.length > 0 ? (
+            <div className="grid gap-xs break-words break-all">
+              {profile?.education.map((item: IJobseekerEducation) => {
                 return (
                   <div
                     key={item.degree}
@@ -186,10 +181,12 @@ const Profile = () => {
                       <MdOutlineMapsHomeWork /> {item.institute_name},{" "}
                       {item.location}, {item.education_board}
                     </p>
-                    <span className="flex items-center font-semibold gap-2">
-                      <GrCertificate /> Marks : {item.marks.value}{" "}
-                      {item.marks.type}
-                    </span>
+                    {item.marks.value && item.marks.type && (
+                      <span className="flex items-center font-semibold gap-2">
+                        <GrCertificate /> Marks : {item.marks.value}{" "}
+                        {item.marks.type}
+                      </span>
+                    )}
                   </div>
                 );
               })}
@@ -227,7 +224,7 @@ const Profile = () => {
               <p className="flex items-center gap-2">
                 {" "}
                 <CiCircleCheck /> Available for :{" "}
-                {profile.job_preference.type_name}
+                {profile.job_preference?.type_name}
               </p>
               <p className="flex items-center gap-2">
                 <CiCircleCheck /> Expected Salary : (Equals) NRs{" "}
@@ -259,4 +256,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default JobseekerProfile;

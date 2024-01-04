@@ -8,11 +8,14 @@ export const getJobById = async (req: Request, res: Response) => {
   j.*,
   c.category_name, 
   i.industry_name,
+  l.level_name, t.type_name ,
   ed.employer_details,
   COALESCE(ja.job_application_count, 0) AS job_application_count
 FROM jobs j
 LEFT JOIN categories c ON j.category_id = c.category_id
 LEFT JOIN industries i ON j.industry_id = i.industry_id
+left join job_levels l on j.level_id = l.level_id
+left join job_types t on j.type_id = t.type_id
 LEFT JOIN (
   SELECT 
     j.job_id,
@@ -27,6 +30,7 @@ LEFT JOIN (
   FROM jobs j
   LEFT JOIN employers_basic_information e ON j.employer_id = e.user_id
   LEFT JOIN cover_images cimg ON cimg.user_id = e.user_id
+
   LEFT JOIN images img ON img.user_id = e.user_id
   WHERE j.job_id = $1
 ) AS ed ON j.job_id = ed.job_id

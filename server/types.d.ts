@@ -19,7 +19,7 @@ organization_type:string
 job_location:string 
 job_title:string
 job_category:string 
-job_level:string 
+job_level_id:string 
 start_date:Date 
 end_date:Date 
 duties:string 
@@ -52,11 +52,11 @@ value:string
 
 export interface IJobseekerJobPreference {
   summary: string
-  available_for: string
+job_type_id: string
   job_categories: string[]
   job_industries: string[]
   job_title: string
-  job_level: string
+  job_level_id: string
   skills: []
   expected_salary: string
   job_location: string

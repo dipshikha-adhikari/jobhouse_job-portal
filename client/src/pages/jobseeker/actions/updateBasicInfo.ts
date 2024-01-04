@@ -3,6 +3,9 @@ import { queryClient } from "../../../App";
 import { privateRequest } from "../../../lib/axios";
 import { IJobseekerBasicInformation } from "../../../types/postgres/types";
 import { IJobseekerBasicInfoInputs } from "../../../types/react/types";
+import dayjs from "dayjs";
+import localizedFormat from "dayjs/plugin/localizedFormat";
+dayjs.extend(localizedFormat);
 
 export const updateBasicInfo = async (
   data: IJobseekerBasicInfoInputs,
@@ -20,7 +23,7 @@ export const updateBasicInfo = async (
       permanent_address: data.permanentAddress,
       phone_number: data.phoneNumber,
       gender: data.gender,
-      date_of_birth: data.dateOfBirth,
+      date_of_birth: dayjs(data.dateOfBirth).format("L"),
     };
 
     const axiosConfig = {

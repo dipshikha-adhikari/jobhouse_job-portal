@@ -42,7 +42,10 @@ export interface IJob {
   category_id: string;
   location: string;
   level: string;
-  type: string;
+  level_id: string;
+  type_id: string;
+  level_name: string;
+  type_name: string;
   education_required: string;
   skills: string[];
   employer_details: {
@@ -84,13 +87,15 @@ export interface IJobseekerProfile {
 export interface IJobseekerJobPreference {
   id: string;
   summary: string;
-  available_for: string;
+  job_type_id: string;
   job_categories: number[];
   category_names: string[];
   industry_names: string[];
   job_industries: number[];
   job_title: string;
-  job_level: string;
+  job_level_id: string;
+  level_name: string;
+  type_name: string;
   skills: [];
   expected_salary: string;
   job_location: string;
@@ -103,7 +108,8 @@ export interface IJobseekerExperience {
   job_location: string;
   job_title: string;
   job_category: string;
-  job_level: string;
+  job_level_id: string;
+  level_name: string;
   start_date: Date;
   end_date: Date;
   duties: string;
@@ -119,6 +125,7 @@ export interface IJobseekerBasicInformation {
   fullname: string;
   gender: string;
   date_of_birth: string;
+  email: string;
   permanent_address: string;
   phone_number: string;
 }

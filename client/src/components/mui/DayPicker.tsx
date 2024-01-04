@@ -7,7 +7,7 @@ import localizedFormat from "dayjs/plugin/localizedFormat";
 import { FieldValues } from "react-hook-form";
 dayjs.extend(localizedFormat);
 
-export default function ResponsiveDatePicker({
+export default function ResponsiveDayPicker({
   field,
   isEditorOpen,
 }: {
@@ -30,7 +30,6 @@ export default function ResponsiveDatePicker({
       >
         <DemoItem>
           <DatePicker
-            views={["year", "month"]}
             disabled={!isEditorOpen}
             onChange={(date) => handleChange(date?.toDate())}
             value={dayjs(field.value)}

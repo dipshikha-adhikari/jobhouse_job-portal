@@ -3,6 +3,9 @@ import { privateRequest } from "../../../lib/axios";
 import { IJobseekerExperienceInputs } from "../../../types/react/types";
 import { IJobseekerExperience } from "../../../types/postgres/types";
 import { queryClient } from "../../../App";
+import dayjs from "dayjs";
+import localizedFormat from "dayjs/plugin/localizedFormat";
+dayjs.extend(localizedFormat);
 
 export const updateExperience = async (
   data: IJobseekerExperienceInputs,
@@ -18,9 +21,9 @@ export const updateExperience = async (
       job_location: data.jobLocation,
       job_title: data.jobTitle,
       job_category: data.jobCategory,
-      job_level: data.jobLevel,
-      start_date: data.startDate,
-      end_date: data.endDate,
+      job_level_id: data.jobLevelId,
+      start_date: dayjs(data.startDate).format("L"),
+      end_date: dayjs(data.endDate).format("L"),
       duties: data.duties,
     };
     const axiosConfig = {

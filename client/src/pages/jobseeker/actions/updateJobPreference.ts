@@ -40,11 +40,11 @@ export const updateJobPrefetence = (
 
   try {
     const dataToBeSent = {
-      available_for: data.availableFor,
+      job_type_id: data.jobTypeId,
       expected_salary: data.expectedSalary,
       job_categories: preferredCategories,
       job_industries: preferredIndustries,
-      job_level: data.jobLevel,
+      job_level_id: data.jobLevelId,
       job_location: data.jobLocation,
       job_title: data.jobTitle,
       summary: data.objective,

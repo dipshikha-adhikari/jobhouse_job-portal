@@ -73,7 +73,7 @@ const HiddenMenu = ({ setMenuOpen, menuOpen }: IHiddenMenu) => {
           <Link
             onClick={() => setMenuOpen(false)}
             to="/user/login"
-            className=" font-normal text-blue-dark hover:text-blue-dark  border-[1px] border-blue-dark  rounded-sm p-xs px-md "
+            className=" font-normal text-green-dark hover:text-green-dark  border-[1px] border-green-dark  rounded-sm p-xs px-md "
           >
             Log in
           </Link>

@@ -123,7 +123,7 @@ input, textarea{
     padding: 10px 20px;
 }
 
-input:hover:enabled, .input:hover, textarea:hover:enabled{
+input:hover:enabled,  textarea:hover:enabled{
   border-color: #5d5d5d;
 }
 

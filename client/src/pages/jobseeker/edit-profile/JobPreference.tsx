@@ -10,15 +10,15 @@ import { IJobseekerJobPreference } from "../../../types/postgres/types";
 import { IJobseekerJobPreferenceInputs } from "../../../types/react/types";
 import { JobseekerJobPreferenceSchema } from "../../../utils/validationSchema";
 import { updateJobPrefetence } from "../actions/updateJobPreference";
-import { useJobseekerProfile } from "../hooks/useJobseekerProfile";
+import { useLevels } from "../../../hooks/useJobLevels";
+import { useTypes } from "../../../hooks/useJobTypes";
+import SelectJob from "../../../components/mui/SelectJob";
 
 type JobPreference = {
-  profile: IJobseekerJobPreference;
-  isLoading: boolean;
-  isError: boolean;
+  job_preference: IJobseekerJobPreference;
 };
 
-const JobPreference = () => {
+const JobPreference = ({ job_preference }: JobPreference) => {
   const [isEditorOpen, setIsEditorOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const {
@@ -28,24 +28,25 @@ const JobPreference = () => {
     setValue,
     control,
   } = useForm({ resolver: yupResolver(JobseekerJobPreferenceSchema) });
-  const { profile }: JobPreference = useJobseekerProfile("jobPreference");
   const { categories } = useCategories();
   const { industries } = useIndustries();
+  const { levels } = useLevels();
+  const { types } = useTypes();
 
   useEffect(() => {
-    if (profile?.id !== undefined) {
-      setValue("jobCategories", profile?.category_names);
+    if (job_preference?.id !== undefined) {
+      setValue("jobCategories", job_preference?.category_names);
 
-      setValue("jobIndustries", profile?.industry_names);
-      setValue("availableFor", profile.available_for);
-      setValue("jobLevel", profile.job_level);
-      setValue("expectedSalary", profile.expected_salary);
-      setValue("jobLocation", profile.job_location);
-      setValue("jobTitle", profile.job_title);
-      setValue("objective", profile.summary);
-      setValue("skills", profile.skills);
+      setValue("jobIndustries", job_preference?.industry_names);
+      setValue("jobTypeId", job_preference?.job_type_id);
+      setValue("jobLevelId", job_preference?.job_level_id);
+      setValue("expectedSalary", job_preference.expected_salary);
+      setValue("jobLocation", job_preference.job_location);
+      setValue("jobTitle", job_preference.job_title);
+      setValue("objective", job_preference.summary);
+      setValue("skills", job_preference.skills);
     }
-  }, [profile]);
+  }, [job_preference]);
 
   function autoGrow(e: FormEvent<HTMLTextAreaElement>) {
     e.currentTarget.style.height = "100px";
@@ -61,7 +62,7 @@ const JobPreference = () => {
       setIsEditorOpen,
       industries,
       categories,
-      profile,
+      job_preference,
     );
   };
 
@@ -165,7 +166,7 @@ const JobPreference = () => {
                   return (
                     <TagsInputBox
                       isEditorOpen={isEditorOpen}
-                      values={profile?.skills}
+                      values={job_preference?.skills}
                       onChange={onChange}
                     />
                   );
@@ -178,28 +179,38 @@ const JobPreference = () => {
           <div>
             <div className="grid gap-xs w-fit sm:flex items-center">
               <span>Available for </span>
-              <input
-                type="text"
-                disabled={!isEditorOpen}
-                placeholder="Full Time"
-                {...register("availableFor")}
-                className="outline-none border-sm px-sm p-xs "
+              <Controller
+                name="jobTypeId"
+                control={control}
+                render={({ field }) => (
+                  <SelectJob
+                    type="type"
+                    isEditorOpen={isEditorOpen}
+                    field={field}
+                    values={types}
+                  />
+                )}
               />
             </div>
-            <p className="text-orange-dark">{errors.availableFor?.message}</p>
+            <p className="text-orange-dark">{errors.jobTypeId?.message}</p>
           </div>
           <div>
             <div className="grid gap-xs w-fit sm:flex items-center">
               <span>Looking For </span>
-              <input
-                type="text"
-                disabled={!isEditorOpen}
-                placeholder="Mid"
-                {...register("jobLevel")}
-                className="outline-none border-sm px-sm p-xs "
+              <Controller
+                name="jobLevelId"
+                control={control}
+                render={({ field }) => (
+                  <SelectJob
+                    type="level"
+                    isEditorOpen={isEditorOpen}
+                    field={field}
+                    values={levels}
+                  />
+                )}
               />
             </div>
-            <p className="text-orange-dark">{errors.jobLevel?.message}</p>
+            <p className="text-orange-dark">{errors.jobTypeId?.message}</p>
           </div>
           <div>
             <div className="grid gap-xs w-fit sm:flex items-center">
@@ -228,15 +239,15 @@ const JobPreference = () => {
             <p className="text-orange-dark">{errors.expectedSalary?.message}</p>
           </div>
           {isEditorOpen && (
-            <div className="flex  gap-xs">
+            <div className="flex   gap-xs">
               <button
-                className="bg-green-dark h-full text-white p-sm rounded-sm disabled:opacity-50"
+                className="bg-green-dark  text-white p-sm rounded-sm disabled:opacity-50"
                 disabled={isLoading}
               >
                 Save
               </button>
               <button
-                className=" border-sm  text-green-dark p-sm rounded-sm"
+                className=" border-sm  text-green-dark border-green-dark p-sm rounded-sm"
                 onClick={() => setIsEditorOpen(false)}
               >
                 Cancel

@@ -37,7 +37,7 @@ const Overview = () => {
 
   const handleCreate = () => {
     if (!profile?.basic_information.id) {
-      toast.error("Update profile first");
+      toast.error("Update basic information first");
     } else {
       navigate("/jobs/create");
     }
@@ -58,103 +58,108 @@ const Overview = () => {
 
   return (
     <Layout>
-      <div className="relative py-md grid gap-sm">
-        <header className="relative h-full grid gap-xs  place-items-center border-b-sm border-default pb-sm ">
-          <img
-            src={
-              profile?.image?.url
-                ? profile.image.url
-                : "https://template.canva.com/EAENvp21inc/1/0/1600w-qt_TMRJF4m0.jpg"
-            }
-            alt=""
-            className="w-20 h-20 "
-          />
-          <div className="grid gap-1 place-items-center">
-            <p className="font-semibold text-xl">
-              {profile?.basic_information?.organization_name
-                ? profile.basic_information.organization_name
-                : user.fullName}
-            </p>
-            <p className="text-gray-dark">
-              {profile?.basic_information?.industry_type}
-            </p>
-            <p>
-              {profile?.basic_information?.phone_number || user.phoneNumber}
-            </p>
-            <p>{profile?.basic_information?.email || user.email}</p>
-          </div>
-        </header>
+      <div className="relative py-md grid gap-xl">
+        <header className="relative h-full grid gap-xs md:flex flex-row-reverse overflow-hidden  ">
+          <div className="flex-1 rounded-sm overflow-hidden grid place-items-center text-white py-sm relative">
+            <img
+              src="https://t3.ftcdn.net/jpg/03/44/06/44/360_F_344064489_6oeUMK2i2KwHtBQOIhmkNZO696NJmkQj.webp"
+              alt=""
+              className="absolute w-full h-full -z-20 top-0 left-0 object-cover "
+            />
 
-        <section className="grid sm:px-md gap-md md:flex items-start justify-between">
-          <div className=" grid gap-xs   sm:flex-[0.4] max-w-xs w-full ">
-            <div className="grid gap-xs  shadow-sm p-sm">
+            <img
+              src={
+                profile?.image?.url
+                  ? profile.image.url
+                  : "https://template.canva.com/EAENvp21inc/1/0/1600w-qt_TMRJF4m0.jpg"
+              }
+              alt=""
+              className="w-20 h-20  rounded-full "
+            />
+            <div className="grid gap-1 place-items-center">
+              <p className="font-semibold text-xl">
+                {profile?.basic_information?.organization_name
+                  ? profile.basic_information.organization_name
+                  : user.fullName}
+              </p>
+              <p className="">{profile?.basic_information?.industry_type}</p>
+              <p>
+                {profile?.basic_information?.phone_number || user.phoneNumber}
+              </p>
+              <p>{profile?.basic_information?.email || user.email}</p>
+            </div>
+          </div>
+
+          <div className=" grid gap-xs flex-1  w-full ">
+            <div className="grid gap-xs max-w-sm  shadow-sm p-sm">
               <p className="flex items-center gap-sm">
-                <MdWork className="text-blue-dark" /> {jobs?.length}
+                <MdWork className="text-blue-dark" /> {jobs?.length || 0}
               </p>
               <p>Current jobs</p>
             </div>
-            <div className="grid gap-xs shadow-sm p-sm">
+            <div className="grid gap-xs shadow-sm max-w-sm  p-sm">
               <p className="flex items-center gap-sm">
                 <MdWork className="text-orange-default" />{" "}
-                {vacancies?.total_vacancy_count}
+                {vacancies?.total_vacancy_count || 0}
               </p>
               <p>Total Vacancies</p>
             </div>
-            <div className="grid gap-xs shadow-sm p-sm">
+            <div className="grid gap-xs shadow-sm max-w-sm  p-sm">
               <p className="flex items-center gap-sm">
-                <FaUser className="text-blue-default" /> {applicants?.length}
+                <FaUser className="text-blue-default" />{" "}
+                {applicants?.length || 0}
               </p>
               <p>Total Applicants</p>
             </div>
           </div>
+        </header>
 
-          <div className="grid gap-sm  flex-1">
-            <header className="border-y-sm uppercase text-green-dark font-semibold py-sm w-fit">
-              About your jobs
-            </header>
-            <nav className="flex gap-sm flex-wrap items-center ">
-              <span
-                className={`${
-                  selected === "recent" && "border-b-2 border-blue-dark"
-                } cursor-pointer`}
-                onClick={() => setSelected("recent")}
-              >
-                Recent
-              </span>
-              <span
-                className={`${
-                  selected === "all" && "border-b-2 border-blue-dark "
-                } cursor-pointer`}
-                onClick={() => setSelected("all")}
-              >
-                All
-              </span>
+        <section className="grid sm:px-md gap-md ">
+          <header className="border-y-sm  text-xl uppercase text-green-dark font-semibold py-sm w-fit">
+            About your jobs
+          </header>
+          <nav className="flex gap-sm flex-wrap items-center ">
+            <span
+              className={`${
+                selected === "recent" && "border-b-2 border-blue-dark"
+              } cursor-pointer`}
+              onClick={() => setSelected("recent")}
+            >
+              Recent
+            </span>
+            <span
+              className={`${
+                selected === "all" && "border-b-2 border-blue-dark "
+              } cursor-pointer`}
+              onClick={() => setSelected("all")}
+            >
+              All
+            </span>
 
-              <button
-                className="flex items-center gap-2 bg-orange-light text-white px-sm rounded-sm p-xs"
-                onClick={handleCreate}
-              >
-                new <FaPlus />{" "}
-              </button>
-            </nav>
-            <section className="grid gap-sm">
-              {selected === "recent" && (
-                <RecentJobs employerId={profile?.user_id} />
-              )}
-              {selected === "all" && <AllJobs employerId={profile?.user_id} />}
-              {isModalOpen && (
-                <div className="grid gap-sm">
-                  <p>Please update your profile to post a job.</p>
-                  <Link
-                    to="/employer/profile/basic-info"
-                    className="bg-blue-dark w-fit text-white hover:text-white p-xs px-sm rounded-sm "
-                  >
-                    Update now
-                  </Link>
-                </div>
-              )}
-            </section>
-          </div>
+            <button
+              className="flex items-center gap-2 bg-orange-light text-white px-sm rounded-sm p-xs"
+              onClick={handleCreate}
+            >
+              new <FaPlus />{" "}
+            </button>
+          </nav>
+          <section className="grid  gap-sm">
+            {selected === "recent" && (
+              <RecentJobs employerId={profile?.user_id} />
+            )}
+            {selected === "all" && <AllJobs employerId={profile?.user_id} />}
+            {isModalOpen && (
+              <div className="grid gap-sm">
+                <p>Please update your profile to post a job.</p>
+                <Link
+                  to="/employer/profile/basic-info"
+                  className="bg-blue-dark w-fit text-white hover:text-white p-xs px-sm rounded-sm "
+                >
+                  Update now
+                </Link>
+              </div>
+            )}
+          </section>
         </section>
       </div>
     </Layout>

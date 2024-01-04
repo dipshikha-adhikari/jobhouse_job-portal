@@ -11,11 +11,11 @@ interface IUserRequest extends Request {
 export const createJobPreference = (req: IUserRequest, res: Response) => {
     const { id } = req.user
     const { summary,
-        available_for,
+       job_level_id,
         job_categories,
         job_industries,
         job_title,
-        job_level,
+    job_type_id,
         skills,
         expected_salary,
         job_location, }: IJobseekerJobPreference = req.body
@@ -42,21 +42,21 @@ export const createJobPreference = (req: IUserRequest, res: Response) => {
                 const query = `insert into jobseekers_job_preference (
                     user_id, 
                     summary,
-                    available_for,
+                    job_level_id,
                     job_categories,
                     job_industries,
                     job_title,
-                    job_level,
+                    job_type_id,
                     skills,
                     expected_salary,
                     job_location)
                      values ($1, $2, $3,$4,$5,$6,$7,$8,$9,$10)`
                 pool.query(query, [id, summary,
-                    available_for,
+                    job_level_id,
                     job_categories,
                     job_industries,
                     job_title,
-                    job_level,
+                    job_type_id,
                     skills,
                     expected_salary,
                     job_location], function (err: Error, result: QueryResult) {
@@ -70,11 +70,11 @@ export const createJobPreference = (req: IUserRequest, res: Response) => {
     } else {
         return res.status(400).send({
             message: 'Invalid preference', format: `summary
-            available_for,
+            job_level_id,
             job_categories,
             job_industries,
             job_title,
-            job_level,
+            job_type_id,
             skills,
             expected_salary,
             job_location`});
@@ -86,11 +86,11 @@ export const updateJobPreference = (req: IUserRequest, res: Response) => {
     const { id } = req.user
     const {
         summary,
-        available_for,
+      job_level_id,
         job_categories,
         job_industries,
         job_title,
-        job_level,
+        job_type_id,
         skills,
         expected_salary,
         job_location }: IJobseekerJobPreference = req.body
@@ -102,11 +102,11 @@ export const updateJobPreference = (req: IUserRequest, res: Response) => {
                 const query = `UPDATE jobseekers_job_preference
                     SET   
                     summary = $2 ,
-                    available_for = $3,
+                    job_level_id = $3,
                     job_categories = $4,
                     job_industries = $5,
                     job_title = $6,
-                    job_level = $7,
+                    job_type_id = $7,
                     skills = $8,
                     expected_salary = $9,
                     job_location = $10
@@ -115,11 +115,11 @@ export const updateJobPreference = (req: IUserRequest, res: Response) => {
                 pool.query(query, [
                     id,
                     summary,
-                    available_for,
+                    job_level_id,
                     job_categories,
                     job_industries,
                     job_title,
-                    job_level,
+                    job_type_id,
                     skills,
                     expected_salary,
                     job_location], function (err: Error, result: QueryResult) {
@@ -135,11 +135,11 @@ export const updateJobPreference = (req: IUserRequest, res: Response) => {
 
         return res.status(400).send({
             message: 'Invalid preference', format: `summary
-            available_for,
+            job_level_id,
             job_categories,
             job_industries,
             job_title,
-            job_level,
+            job_type_id,
             skills,
             expected_salary,
             job_location`});
