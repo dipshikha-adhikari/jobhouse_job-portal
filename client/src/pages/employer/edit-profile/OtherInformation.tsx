@@ -51,8 +51,8 @@ const OtherInformation = ({
           Edit
         </button>
       )}
-      <form onSubmit={handleSubmit(onSubmit)} className="w-full grid gap-sm">
-        <div className="grid gap-xs ">
+      <form onSubmit={handleSubmit(onSubmit)} className="w-full grid gap-xs">
+        <div className="grid gap-2 ">
           <span className="">Website</span>{" "}
           <input
             {...register("website")}

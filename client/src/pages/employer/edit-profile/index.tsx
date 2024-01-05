@@ -1,19 +1,17 @@
 import { useEffect, useState } from "react";
-import BasicInformation from "./BasicInformation";
-import useAuthStore from "../../../store/auth";
-import NoUser from "../../../components/shared/NoUser";
-import Error from "../../../components/shared/Error";
-import { useProfile } from "../hooks/useEmployerProfile";
-import Loader from "../../../components/shared/Loader";
-import OtherInformation from "./OtherInformation";
 import { Link, useParams } from "react-router-dom";
-import { useCurrentUser } from "../../../hooks/useCurrentUser";
+import Error from "../../../components/shared/Error";
+import Loader from "../../../components/shared/Loader";
+import NoUser from "../../../components/shared/NoUser";
+import useAuthStore from "../../../store/auth";
+import { useProfile } from "../hooks/useEmployerProfile";
+import BasicInformation from "./BasicInformation";
+import OtherInformation from "./OtherInformation";
 
 const EditProfile = () => {
   const [isEditorOpen, setIsEditorOpen] = useState<boolean>(false);
   const { isAunthenticated } = useAuthStore();
   const { profile, isLoading, error } = useProfile();
-  const { role } = useCurrentUser();
   const params = useParams();
   const title = params.title;
 
@@ -48,7 +46,7 @@ const EditProfile = () => {
 
   if (isLoading) return <Loader />;
   if (!isAunthenticated) return <NoUser />;
-  if (!isLoading && (error || role !== "employer")) return <Error />;
+  if (!isLoading && (error || profile?.user_id === undefined)) return <Error />;
 
   return (
     <div className="grid p-sm  gap-sm mx-auto md:flex max-w-3xl  md:gap-xl md:items-start">

@@ -19,7 +19,6 @@ import { useParams } from "react-router-dom";
 import Error from "../components/shared/Error";
 import Loader from "../components/shared/Loader";
 import NoUser from "../components/shared/NoUser";
-import { useCurrentUser } from "../hooks/useCurrentUser";
 import { privateRequest } from "../lib/axios";
 import useAuthStore from "../store/auth";
 import {
@@ -31,7 +30,6 @@ const JobseekerProfile = () => {
   const params = useParams();
   const { id } = params;
   const { isAunthenticated } = useAuthStore();
-  const { role } = useCurrentUser();
 
   const {
     data: profile,
@@ -53,7 +51,7 @@ const JobseekerProfile = () => {
 
   if (isLoading) return <Loader />;
   if (!isAunthenticated) return <NoUser />;
-  if (!isLoading && (role !== "employer" || isError)) return <Error />;
+  if (!isLoading &&  isError) return <Error />;
 
   return (
     <div className="sm:px-xl  lg:border-sm lg:p-xl max-w-4xl w-full mx-auto">

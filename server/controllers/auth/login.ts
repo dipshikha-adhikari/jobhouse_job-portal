@@ -19,7 +19,12 @@ export const loginUser = async (req: Request, res: Response) => {
                 const token = jwt.sign({
                     id: user.user_id
                 }, process.env.JWT_SECRET, { expiresIn: '1d' });
-
+res.cookie('jwt', token,{
+    httpOnly:true,
+    secure:process.env.NODE_ENV !== 'development',
+    sameSite:'strict',
+    maxAge: 24 * 60 * 60 * 1000
+})
                 return res.status(200).send({ message: "Login success", user, token });
             } else {
                 return res.status(401).send({ message: "Incorrect password" });

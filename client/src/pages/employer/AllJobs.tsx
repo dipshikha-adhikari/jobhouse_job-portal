@@ -21,7 +21,7 @@ const AllJobs: React.FC<AllJobsProps> = ({ employerId }) => {
     return res.data;
   });
 
-  if (isLoading) return <div>Loading....</div>;
+  if (isLoading) return <div className="text-center">Loading....</div>;
   if (error) return <Error />;
 
   if (jobs?.length === 0) {
@@ -29,7 +29,7 @@ const AllJobs: React.FC<AllJobsProps> = ({ employerId }) => {
   }
 
   return (
-    <div className="grid gap-md grid-cols-[repeat(auto-fit,minmax(300px,1fr))]">
+    <div className="grid place-items-center gap-sm grid-cols-[repeat(auto-fit,minmax(300px,1fr))]">
       {jobs?.map((job, ind) => {
         return <JobCard job={job} key={job.job_id} index={ind} />;
       })}

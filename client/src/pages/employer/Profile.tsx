@@ -23,7 +23,7 @@ const Profile = () => {
 
   if (isLoading) return <Loader />;
   if (!isAunthenticated) return <NoUser />;
-  if (!isLoading && (error || user.role !== "employer")) return <Error />;
+  if (!isLoading && (error || profile?.user_id === undefined)) return <Error />;
 
   return (
     <Layout>
@@ -87,7 +87,7 @@ const Profile = () => {
             </p>
           </div>
           <div className="grid gap-xs ">
-            <h2 className="font-semibold text-xl ">Summary</h2>
+            <h2 className="font-semibold text-xl ">About</h2>
             {profile?.basic_information?.summary ? (
               profile.basic_information.summary
             ) : (
@@ -103,20 +103,16 @@ const Profile = () => {
             )}
           </div>
         </section>
-        <section className="flex-1 grid gap-xl h-fit">
-          {
-            <div className="grid gap-sm ">
+            <div className="grid border-sm  ">
               <p className="grid ">
-                <h2 className="flex uppercase text-green-dark items-center text-center gap-2 font-semibold text-xl border-y-sm w-fit py-xs border-default">
-                  <CiStar /> Recent jobs
+                <h2 className="flex p-sm  text-green-dark items-center text-center gap-2 font-bold  border-b-sm  ">
+                  <CiStar /> Recent Jobs
                 </h2>
               </p>
-              <div>
+              <div className="p-sm">
                 <RecentJobs employerId={profile?.user_id} />
               </div>
             </div>
-          }
-        </section>
       </div>
     </Layout>
   );

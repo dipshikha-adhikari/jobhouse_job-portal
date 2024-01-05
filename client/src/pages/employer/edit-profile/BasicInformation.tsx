@@ -119,8 +119,6 @@ const BasicInformation = ({
     }
   };
 
-  console.log(imagePreview, "im");
-  console.log(coverImagePreview, "coim");
 
   if (!isAunthenticated) return <NoUser />;
 
@@ -189,11 +187,12 @@ const BasicInformation = ({
           )}
         </div>
         <div>
-          <div className=" grid gap-2 items-center">
+          <div className=" grid gap-2  items-center">
             <span className="">* Industry Type</span>
             <Controller
               name="industryType"
               control={control}
+              
               render={({ field }) => (
                 <SelectCategory
                   values={industries}
@@ -231,7 +230,7 @@ const BasicInformation = ({
               Save
             </button>
             <button
-              className="p-xs px-sm bg-orange-default text-white"
+              className="p-xs px-sm bg-orange-dark text-white"
               onClick={() => setIsEditorOpen(false)}
             >
               Cancel

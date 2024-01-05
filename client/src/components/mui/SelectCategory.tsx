@@ -32,6 +32,7 @@ export default function SelectCategory({
           labelId="demo-simple-select-required-label"
           id="demo-simple-select-required"
           onChange={field.onChange}
+          className="w-[300px] sm:w-full"
           MenuProps={{
             disableScrollLock: true,
           }}
@@ -41,13 +42,13 @@ export default function SelectCategory({
           {values?.map((val) => {
             if (type === "categories") {
               return (
-                <MenuItem value={val.category_id} key={val.category_id}>
+                <MenuItem value={val.category_id} key={val.category_id} >
                   {val.category_name}
                 </MenuItem>
               );
             } else {
               return (
-                <MenuItem value={val.industry_id} key={val.industry_name}>
+                <MenuItem value={val.industry_id} key={val.industry_name} >
                   {val.industry_name}
                 </MenuItem>
               );

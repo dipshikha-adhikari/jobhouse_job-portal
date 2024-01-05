@@ -69,11 +69,9 @@ const Jobs = () => {
                 (level && level + " level") ||
                 (type && type)}
             </span>{" "}
-            Jobs in Nepal. The brief job detail has job title, name of the
-            organization, job location, required experiences, key skills and the
-            deadline to apply. Most recent job are shown on first. Click on the
+            Jobs in Nepal. Click on the
             job that interests you, read the job detail and if it is suitable
-            for you, Click on the apply now button to send your job application.
+            for you, Click on the apply button to send your job application.
           </p>
         </div>
         <main className="grid gap-xl ">

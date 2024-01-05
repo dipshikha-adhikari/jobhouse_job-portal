@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useCurrentUser } from "../../hooks/useCurrentUser";
 import Layout from "../../components/ui/Layout";
-import { MdWork } from "react-icons/md";
+import { MdRoundaboutLeft, MdWork } from "react-icons/md";
 import { FaPlus, FaUser } from "react-icons/fa";
 import RecentJobs from "./RecentJobs";
 import { Link, useNavigate } from "react-router-dom";
@@ -13,7 +13,6 @@ import Loader from "../../components/shared/Loader";
 import { useQuery } from "react-query";
 import { privateRequest } from "../../lib/axios";
 import { useRecentJobs } from "./hooks/useRecentJobs";
-
 const Overview = () => {
   const [selected, setSelected] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -31,9 +30,9 @@ const Overview = () => {
     return result.data;
   });
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  // useEffect(() => {
+  //   window.scrollTo(0, 0);
+  // }, []);
 
   const handleCreate = () => {
     if (!profile?.basic_information.id) {
@@ -114,14 +113,14 @@ const Overview = () => {
           </div>
         </header>
 
-        <section className="grid sm:px-md gap-md ">
-          <header className="border-y-sm  text-xl uppercase text-green-dark font-semibold py-sm w-fit">
-            About your jobs
+        <section className="border-sm  ">
+          <header className="border-b-sm font-bold flex items-center gap-2 text-black-default  p-sm">
+          <MdRoundaboutLeft />    About your jobs
           </header>
-          <nav className="flex gap-sm flex-wrap items-center ">
+          <nav className="flex gap-sm p-sm border-y-sm flex-wrap items-center text-black-light ">
             <span
               className={`${
-                selected === "recent" && "border-b-2 border-blue-dark"
+                selected === "recent" && " text-green-dark"
               } cursor-pointer`}
               onClick={() => setSelected("recent")}
             >
@@ -129,7 +128,7 @@ const Overview = () => {
             </span>
             <span
               className={`${
-                selected === "all" && "border-b-2 border-blue-dark "
+                selected === "all" && " text-green-dark "
               } cursor-pointer`}
               onClick={() => setSelected("all")}
             >
@@ -143,7 +142,7 @@ const Overview = () => {
               new <FaPlus />{" "}
             </button>
           </nav>
-          <section className="grid  gap-sm">
+          <section className="grid p-sm  gap-sm">
             {selected === "recent" && (
               <RecentJobs employerId={profile?.user_id} />
             )}

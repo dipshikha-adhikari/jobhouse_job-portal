@@ -1,28 +1,28 @@
-import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
-import Navbar from "./components/navbar";
 import { ReactNode } from "react";
-import Home from "./pages/home";
-import EmployerRegister from "./components/forms/EmployerRegister";
-import Login from "./pages/login";
-import Footer from "./components/footer";
-import Profile from "./pages/jobseeker/Profile";
-import EditProfile from "./pages/jobseeker/edit-profile";
-import JobseekerRegister from "./components/forms/JobseekerRegister";
-import EmployerOverview from "./pages/employer/Overview";
-import WrongRoute from "./components/shared/PageNotFound";
 import { Toaster } from "react-hot-toast";
 import { QueryClient, QueryClientProvider } from "react-query";
-import Job from "./pages/jobs/JobDetails";
-import EmployerProfile from "./pages/employer/Profile";
-import EditEmployerProfile from "./pages/employer/edit-profile";
-import CreateJob from "./pages/jobs/CreateJob";
-import Jobs from "./pages/jobs";
-import ProfileReview from "./pages/jobseeker/ProfileReview";
-import EmployerProfileView from "./pages/EmployerProfile";
-import JobseekerOverview from "./pages/jobseeker/overview/index";
-import SearchResults from "./pages/SearchResults";
+import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+import Footer from "./components/footer";
+import EmployerRegister from "./components/forms/EmployerRegister";
+import JobseekerRegister from "./components/forms/JobseekerRegister";
+import Navbar from "./components/navbar";
+import PageNotFound from "./components/shared/PageNotFound";
 import Applications from "./pages/employer/Applications";
+import EditEmployerProfile from "./pages/employer/edit-profile";
+import EmployerOverview from "./pages/employer/Overview";
+import EmployerProfile from "./pages/employer/Profile";
+import EmployerProfileView from "./pages/EmployerProfile";
+import Home from "./pages/home";
+import Jobs from "./pages/jobs";
+import CreateJob from "./pages/jobs/CreateJob";
+import Job from "./pages/jobs/JobDetails";
+import EditProfile from "./pages/jobseeker/edit-profile";
+import JobseekerOverview from "./pages/jobseeker/overview/index";
+import Profile from "./pages/jobseeker/Profile";
+import ProfileReview from "./pages/jobseeker/ProfileReview";
 import JobseekerProfile from "./pages/JobseekerProfile";
+import Login from "./pages/login";
+import SearchResults from "./pages/SearchResults";
 
 export const queryClient = new QueryClient();
 
@@ -144,7 +144,7 @@ const router = createBrowserRouter([
       },
       {
         path: "*",
-        element: <WrongRoute />,
+        element: <PageNotFound />,
       },
     ],
   },

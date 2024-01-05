@@ -12,9 +12,9 @@ const JobCard: React.FC<JobCardProps> = ({ job }) => {
   const time = moment(job.deadline).format("LL");
 
   return (
-    <Link
-      to={`/jobs/${job.title}/${job.job_id}`}
-      className="grid w-full text-black-default  font-normal hover:text-black-default gap-xs p-md  rounded-sm shadow-sm  max-w-sm"
+    <div
+     
+      className="grid w-full  text-black-default  font-normal hover:text-black-default gap-xs p-md  rounded-sm shadow-sm  max-w-sm"
     >
       <div className="grid gap-1">
         <div>
@@ -42,8 +42,14 @@ const JobCard: React.FC<JobCardProps> = ({ job }) => {
         >
           Update
         </Link>
+        <Link
+          to={`/jobs/${job.title}/${job.job_id}`}
+          className="px-sm font-normal  bg-green-dark text-white hover:text-white border-sm  rounded-sm p-xs"
+        >
+         View
+        </Link>
       </div>
-    </Link>
+    </div>
   );
 };
 
