@@ -26,8 +26,10 @@ const CreateJob = () => {
   if (isLoading) return <Loader />;
 
   if (job?.job_id === undefined && jobId !== undefined) return <Error />;
-  if (!auth.isAunthenticated) return <NoUser />;
-  if (role !== "employer")
+  if (!role && !isLoading && !auth.isAunthenticated) return <NoUser />;
+
+  if ( role === "jobseeker")
+
     return (
       <div className="text-center min-h-[80vh] flex justify-center items-center">
         {" "}
@@ -36,8 +38,7 @@ const CreateJob = () => {
     );
 
   return (
-    <div className="relative ">
-      <div className="w-full grid gap-sm max-w-2xl shadow-xxl   mx-auto">
+      <div className="w-full grid gap-sm max-w-2xl shadow-xl  mx-auto">
         <div className="grid p-sm gap-xs">
           <span className="flex justify-center  font-semibold ">
             Step {step} of 2
@@ -51,7 +52,6 @@ const CreateJob = () => {
           <CreateJobStepTwo step={step} job={job} setStep={setStep} />
         )}
       </div>
-    </div>
   );
 };
 

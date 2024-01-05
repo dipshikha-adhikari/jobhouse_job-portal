@@ -80,9 +80,8 @@ const CreateJobStepTwo = ({ setStep, job, step }: CreateJobStepTwoProps) => {
   }, [job]);
 
   return (
-    <div className="bg-white p-sm">
-      <form className="grid  gap-sm p-sm " onSubmit={handleSubmit(onSubmit)}>
-        <section className="grid gap-xs p-sm ">
+      <form className="grid  gap-sm px-md sm:px-xl pb-md " onSubmit={handleSubmit(onSubmit)}>
+        <section className="grid gap-xs  ">
           <div>
             <div className="grid gap-xs  sm:flex ">
               <span className="font-semibold">Skills </span>
@@ -182,21 +181,20 @@ const CreateJobStepTwo = ({ setStep, job, step }: CreateJobStepTwoProps) => {
 
         <div className="flex justify-around">
           <button
-            className="border-blue-light w-20  rounded-sm border-sm text-blue-dark px-sm p-xs disabled:opacity-50"
+            className="border-blue-light w-20 font-bold rounded-sm border-sm text-blue-dark px-sm p-xs disabled:opacity-50"
             onClick={() => setStep(step - 1)}
             type="button"
           >
             Prev
           </button>
           <button
-            className="bg-blue-dark disabled:opacity-50 text-white px-sm p-xs w-20 rounded-md"
+            className="bg-blue-light disabled:opacity-50 text-white px-sm p-xs w-20 rounded-sm"
             disabled={isLoading}
           >
             {jobId !== undefined ? "Update" : "Create"}
           </button>
         </div>
       </form>
-    </div>
   );
 };
 

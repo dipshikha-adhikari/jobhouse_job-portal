@@ -71,9 +71,9 @@ const CreateJobStepOne = ({ setStep, step, job }: CreateJobStepOneProps) => {
   }, [job]);
 
   return (
-    <div className="bg-white py-sm">
+    <div className="bg-white">
       <form
-        className="grid gap-xs p-sm sm:p-xl "
+        className="grid gap-xs px-md pb-md sm:px-xl "
         onSubmit={handleSubmit(onSubmit)}
       >
         <div>
@@ -161,13 +161,13 @@ const CreateJobStepOne = ({ setStep, step, job }: CreateJobStepOneProps) => {
         <div className="flex pt-sm gap-sm">
           <Link
             to={"/employer/overview"}
-            className="bg-orange-light rounded-md text-white hover:text-white px-sm p-xs w-20"
+            className="bg-orange-light rounded-sm text-white hover:text-white px-sm p-xs w-20"
             type="submit"
           >
             Cancel
           </Link>
           <button
-            className="bg-blue-dark rounded-md text-white px-sm p-xs w-20"
+            className="bg-blue-light rounded-sm text-white px-sm p-xs w-20"
             type="submit"
           >
             Next

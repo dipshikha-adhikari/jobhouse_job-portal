@@ -1,14 +1,12 @@
-import { useRef, useEffect } from "react";
+import { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import useStore from "../../store/store";
-import { setAuthToken } from "../../lib/axios";
-import useAuthStore from "../../store/auth";
-import { Link, useNavigate } from "react-router-dom";
+import { useLogout } from "../../hooks/useLogout";
 
 const JobseekerProfileMenu = () => {
   const ref = useRef<HTMLDivElement>(null);
   const store = useStore();
-  const authStore = useAuthStore();
-  const navigate = useNavigate();
+const {handleLogout} = useLogout()
 
   useEffect(() => {
     document.addEventListener("click", handleClickOutside);
@@ -27,13 +25,7 @@ const JobseekerProfileMenu = () => {
     }
   };
 
-  //this is only client side logout
-  const handleLogout = async () => {
-    setAuthToken(null);
-    localStorage.removeItem("userInfo");
-    authStore.setAuthentication(false);
-    navigate("/");
-  };
+
 
   return (
     <div

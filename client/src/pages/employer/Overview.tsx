@@ -30,9 +30,9 @@ const Overview = () => {
     return result.data;
   });
 
-  // useEffect(() => {
-  //   window.scrollTo(0, 0);
-  // }, []);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleCreate = () => {
     if (!profile?.basic_information.id) {
@@ -57,9 +57,9 @@ const Overview = () => {
 
   return (
     <Layout>
-      <div className="relative py-md grid gap-xl">
+      <div className="relative py-md grid gap-sm">
         <header className="relative h-full grid gap-xs md:flex flex-row-reverse overflow-hidden  ">
-          <div className="flex-1 rounded-sm overflow-hidden grid place-items-center text-white py-sm relative">
+          <div className=" flex-1 rounded-sm overflow-hidden grid place-items-center text-white py-sm relative">
             <img
               src="https://t3.ftcdn.net/jpg/03/44/06/44/360_F_344064489_6oeUMK2i2KwHtBQOIhmkNZO696NJmkQj.webp"
               alt=""
@@ -89,21 +89,21 @@ const Overview = () => {
             </div>
           </div>
 
-          <div className=" grid gap-xs flex-1  w-full ">
-            <div className="grid gap-xs max-w-sm  shadow-sm p-sm">
+          <div className=" grid gap-xs flex-[0.5] place-items-center">
+            <div className="grid gap-xs border-sm  max-w-sm  w-full p-sm">
               <p className="flex items-center gap-sm">
                 <MdWork className="text-blue-dark" /> {jobs?.length || 0}
               </p>
               <p>Current jobs</p>
             </div>
-            <div className="grid gap-xs shadow-sm max-w-sm  p-sm">
+            <div className="grid gap-xs border-sm  max-w-sm w-full  p-sm">
               <p className="flex items-center gap-sm">
                 <MdWork className="text-orange-default" />{" "}
                 {vacancies?.total_vacancy_count || 0}
               </p>
               <p>Total Vacancies</p>
             </div>
-            <div className="grid gap-xs shadow-sm max-w-sm  p-sm">
+            <div className="grid gap-xs border-sm max-w-sm w-full p-sm">
               <p className="flex items-center gap-sm">
                 <FaUser className="text-blue-default" />{" "}
                 {applicants?.length || 0}
@@ -114,10 +114,10 @@ const Overview = () => {
         </header>
 
         <section className="border-sm  ">
-          <header className="border-b-sm font-bold flex items-center gap-2 text-black-default  p-sm">
-          <MdRoundaboutLeft />    About your jobs
+          <header className="border-b-sm text-green-dark font-bold flex items-center gap-2 py-md  p-sm">
+          <MdRoundaboutLeft />   Your jobs
           </header>
-          <nav className="flex gap-sm p-sm border-y-sm flex-wrap items-center text-black-light ">
+          <nav className="flex gap-sm p-sm py-md border-b-sm flex-wrap items-center text-black-light ">
             <span
               className={`${
                 selected === "recent" && " text-green-dark"
@@ -142,7 +142,7 @@ const Overview = () => {
               new <FaPlus />{" "}
             </button>
           </nav>
-          <section className="grid p-sm  gap-sm">
+          <section className="grid p-md  gap-sm">
             {selected === "recent" && (
               <RecentJobs employerId={profile?.user_id} />
             )}

@@ -60,7 +60,7 @@ const Profile = () => {
               Edit Profile
             </Link>
           </header>
-          <div className="grid gap-xs  border-b-sm border-gray-300 pb-sm place-items-center">
+          <div className="grid gap-xs  border-b-sm  pb-sm place-items-center">
             <p className="font-semibold text-xl">
               {profile?.basic_information?.organization_name
                 ? profile?.basic_information?.organization_name
@@ -73,7 +73,7 @@ const Profile = () => {
               <p>{profile?.other_information?.website}</p>
             )}
           </div>
-          <div className="grid gap-xs place-items-center border-b-sm border-gray-300 pb-sm">
+          <div className="grid gap-xs place-items-center border-b-sm  pb-sm">
             <p className="flex items-center gap-xs">
               <MdLocationPin className="text-blue-dark" />{" "}
               {profile?.basic_information?.address || "Not available"}
@@ -103,7 +103,7 @@ const Profile = () => {
             )}
           </div>
         </section>
-            <div className="grid border-sm  ">
+            <div className="grid border-sm flex-[0.6] ">
               <p className="grid ">
                 <h2 className="flex p-sm  text-green-dark items-center text-center gap-2 font-bold  border-b-sm  ">
                   <CiStar /> Recent Jobs

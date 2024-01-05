@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import { IJob } from "../../types/postgres/types";
+import { FaHandPointRight } from "react-icons/fa";
 
 type JobCardProps = {
   job: IJob;
@@ -30,9 +31,9 @@ const JobCard: React.FC<JobCardProps> = ({ job }) => {
 
       <Link
         to={`/employer/jobs/applications/${job.job_id}`}
-        className=" text-green-dark border-sm border-green-dark px-sm p-xs w-fit font-normal hover:text-green-light rounded-sm"
+        className=" text-green-dark  w-fit font-bold flex items-center gap-2 hover:text-green-light rounded-sm"
       >
-        {job.job_application_count} Applications
+        {job.job_application_count} Applications <FaHandPointRight />
       </Link>
 
       <div className="flex  gap-xs">
@@ -44,7 +45,7 @@ const JobCard: React.FC<JobCardProps> = ({ job }) => {
         </Link>
         <Link
           to={`/jobs/${job.title}/${job.job_id}`}
-          className="px-sm font-normal  bg-green-dark text-white hover:text-white border-sm  rounded-sm p-xs"
+          className="px-sm font-normal  border-green-dark text-green-dark hover:text-green-dark border-sm  rounded-sm p-xs"
         >
          View
         </Link>

@@ -19,6 +19,15 @@ export const useCurrentUser = () => {
     const userInfo = localStorage.getItem("userInfo");
     const parsedInfo = userInfo ? JSON.parse(userInfo) : null;
 
+    function removeUserInfo(){
+      setAuthToken(null);
+      authStore.setAuthentication(false);
+      setFullName(null);
+      setRole(null);
+      setEmail(null);
+      setPhoneNumber(null);
+    }
+
     if (parsedInfo) {
       const decodedToken = jwtDecode<DecodedToken>(parsedInfo.token);
       const currentTimestamp = Math.floor(Date.now() / 1000); // Get current timestamp in seconds
@@ -31,12 +40,7 @@ export const useCurrentUser = () => {
         setEmail(parsedInfo.email);
         setPhoneNumber(parsedInfo.phoneNumber);
       } else {
-        setAuthToken(null);
-        authStore.setAuthentication(false);
-        setFullName(null);
-        setRole(null);
-        setEmail(null);
-        setPhoneNumber(null);
+      removeUserInfo()
       }
     }
   }, [authStore.isAunthenticated]);

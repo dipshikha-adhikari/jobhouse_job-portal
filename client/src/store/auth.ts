@@ -5,8 +5,6 @@ interface AuthState {
   setAuthentication: (props: boolean) => void;
 }
 
-// let userInfo = localStorage.getItem('userInfo')
-// let parsedInfo = userInfo ? JSON.parse(userInfo) : null
 
 const useAuthStore = create<AuthState>((set) => ({
   isAunthenticated: false,
