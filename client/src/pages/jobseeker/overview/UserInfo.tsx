@@ -124,7 +124,7 @@ const UserInfo = ({ profile }: UserInfoProps) => {
       <div className="py-md">
         <Link
           to="/jobseeker/profile/basic-info"
-          className="rounded-sm  text-green-dark border-sm border-green-dark hover:text-green-dark p-xs px-sm rousm  w-fit"
+          className="rounded-sm  text-white  bg-green-dark hover:text-white p-xs px-sm  w-fit"
         >
           Update profile
         </Link>

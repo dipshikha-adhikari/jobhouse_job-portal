@@ -181,7 +181,7 @@ const CreateJobStepTwo = ({ setStep, job, step }: CreateJobStepTwoProps) => {
 
         <div className="flex justify-around">
           <button
-            className="border-blue-light w-20 font-bold rounded-sm border-sm text-blue-dark px-sm p-xs disabled:opacity-50"
+            className="border-blue-light font-semibold rounded-sm border-sm text-blue-dark px-sm p-xs disabled:opacity-50"
             onClick={() => setStep(step - 1)}
             type="button"
           >

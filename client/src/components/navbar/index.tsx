@@ -41,7 +41,7 @@ const Navbar = () => {
   return (
     <div className="bg-white fixed top-0 left-0 z-50 w-full">
       <Layout>
-        <div className="flex justify-between  h-[10vh] items-center">
+        <div className="flex justify-between  h-[8vh] sm:h-[10vh] items-center">
           <Left />
           {user.role === "jobseeker" && authStore.isAunthenticated && (
             <NavbarForJobseeker
@@ -62,7 +62,7 @@ const Navbar = () => {
           {!authStore.isAunthenticated && (
             <div className="flex gap-10 items-center">
               <span
-                className="items-center gap-2 hidden md:flex cursor-pointer browse-btn"
+                className="items-center gap-2 font-semibold text-black-light hidden md:flex cursor-pointer browse-btn"
                 onClick={() => setIsModalOpen(!isModalOpen)}
               >
                 Browse jobs{" "}

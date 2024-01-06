@@ -14,7 +14,7 @@ export const getMatchingJobs = (req:IUserRequest, res:Response) => {
     JOIN users u ON j.employer_id = u.user_id
     join images img on j.employer_id = img.user_id
     join employers_basic_information e on j.employer_id = e.user_id
-    WHERE jjp.user_id = $1;
+    WHERE jjp.user_id = $1 and deadline > now();
 `
 
 pool.query(query,[id], (err:Error, result:QueryResult) => {

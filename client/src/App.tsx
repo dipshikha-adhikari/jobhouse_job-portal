@@ -32,7 +32,7 @@ type ChildrenProps = {
 
 export const Layout: React.FC<ChildrenProps> = ({ children }) => {
   return (
-    <div className=" w-full max-w-[1400px] mx-auto px-sm sm:px-md   relative">
+    <div className=" w-full max-w-[1400px] mx-auto  px-sm sm:px-md   relative">
       {children}
     </div>
   );
@@ -52,7 +52,7 @@ const Root = () => {
       <Toaster position="top-center" reverseOrder={false} />
       <Navbar />
       <Layout>
-        <div className="py-[12vh] relative">
+        <div className=" py-[10vh] relative">
           <Outlet />
         </div>
       </Layout>

@@ -38,14 +38,14 @@ const HiddenMenu = ({ setMenuOpen, menuOpen }: IHiddenMenu) => {
 
   if (isAunthenticated) {
     return (
-      <div className="grid gap-xs p-lg border-b-sm md:hidden " ref={ref}>
+      <div className="grid gap-xs p-sm border-b-sm md:hidden " ref={ref}>
         <span
           className="items-center gap-2 flex relative cursor-pointer"
           onClick={() => setIsModalOpen(!isModalOpen)}
         >
           Browse jobs <FaArrowDown className="text-green-dark" />
           {isModalOpen && (
-            <div className="absolute top-10 border-b-md  pb-10 h-80 overflow-y-scroll  bg-white">
+            <div className="absolute top-7 border-b-md  p-sm  h-80 overflow-y-scroll  bg-white">
               <Categories setIsModalOpen={setIsModalOpen} />
             </div>
           )}

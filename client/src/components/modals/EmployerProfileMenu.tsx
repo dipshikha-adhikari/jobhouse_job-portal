@@ -32,7 +32,7 @@ const{handleLogout} = useLogout()
   return (
     <div
       ref={ref}
-      className="absolute max-w-sm bg-white sm:px-xl w-full shadow-xl top-12 grid  place-items-start gap-xs text-black-default  p-md right-0"
+      className="absolute max-w-sm bg-white sm:px-xl w-full shadow-xl top-10 sm:top-12 grid  place-items-start gap-xs text-black-default  p-md right-0"
     >
       <Link
         to="/jobs/create"

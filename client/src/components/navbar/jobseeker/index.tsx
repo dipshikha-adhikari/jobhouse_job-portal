@@ -29,7 +29,7 @@ const NavbarForJobseeker = ({
     <div className="relative flex items-center gap-20 w-full justify-end">
       <div className=" gap-xs hidden md:flex">
         <span
-          className="items-center gap-2 flex  cursor-pointer browse-btn"
+          className="items-center font-semibold text-black-light gap-2 flex  cursor-pointer browse-btn"
           onClick={() => setIsModalOpen(!isModalOpen)}
         >
           Browse jobs <FaArrowDown className="text-green-dark browse-btn " />
@@ -71,7 +71,7 @@ const NavbarForJobseeker = ({
               "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqZYAYrmuzw5vIhNRWG2f436EKH4LqTUAFhLDWd2yRNA&s"
             }
             alt=""
-            className="w-10 rounded-full profile-menu-button h-10 object-cover"
+            className="w-8 h-8 sm:w-10 sm:h-10 rounded-full profile-menu-button  object-cover"
           />
           <FaArrowRight
             fontSize={10}

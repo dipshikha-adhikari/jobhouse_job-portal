@@ -89,9 +89,9 @@ const Home = () => {
     return result.data;
   });
 
-  // useEffect(() => {
-  //   window.scrollTo(0, 0);
-  // }, []);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   if (isLoading) return <Loader />;
   if (isError) return <Error />;
@@ -200,7 +200,7 @@ const Home = () => {
                   <Link
                     to={`/jobs/?level=${level.level_name}`}
                     key={level.level_id}
-                    className="text-black-light border-b-sm px-sm pb-xs font-normal flex items-center gap-sm hover:text-black-dark "
+                    className="text-black-light border-b-sm p-sm pb-xs font-normal flex items-center gap-sm hover:text-black-dark "
                   >
                     {level.level_name}{" "}
                     <span className="text-green-dark">
@@ -224,7 +224,7 @@ const Home = () => {
                   <Link
                     to={`/jobs/?type=${type.type_name}`}
                     key={type.type_id}
-                    className="text-black-light  px-sm pb-xs hover:text-black-dark border-b-sm rounded-sm  font-normal  flex items-center gap-sm"
+                    className="text-black-light  p-sm pb-xs hover:text-black-dark border-b-sm rounded-sm  font-normal  flex items-center gap-sm"
                   >
                     {type.type_name}{" "}
                     <span className="text-green-dark">({type.total_jobs})</span>

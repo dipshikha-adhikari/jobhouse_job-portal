@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useJobseekerProfile } from ".././hooks/useJobseekerProfile";
 import Layout from "../../../components/ui/Layout";
 import NoUser from "../../../components/shared/NoUser";
@@ -25,7 +25,11 @@ const JobseekerOverview = () => {
   const [selected, setSelected] = useState("matchingJobs");
   const { profile, isLoading, isError }: Profile = useJobseekerProfile();
   const { isAunthenticated } = useAuthStore();
-
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
   if (!isAunthenticated) return <NoUser />;
   if (isLoading) return <Loader />;
   if (isError) return <Error />;

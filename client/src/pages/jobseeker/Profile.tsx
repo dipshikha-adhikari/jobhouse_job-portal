@@ -48,10 +48,10 @@ const Profile = () => {
   if (isLoading) return <Loader />;
 
   if (!isAunthenticated) return <NoUser />;
-  if (profile.user_id === undefined || isError) return <Error />;
+  if (profile?.user_id === undefined || isError) return <Error />;
 
   return (
-    <div className="sm:px-xl  lg:border-sm lg:p-xl max-w-4xl w-full mx-auto">
+    <div className="sm:px-xl p-sm  lg:border-sm lg:p-xl max-w-4xl w-full mx-auto">
       <div className="flex justify-end  ">
         <Link
           to="/jobseeker/profile/basic-info"
@@ -112,7 +112,7 @@ const Profile = () => {
           </header>
           {profile?.experience.length > 0 ? (
             <div className="grid break-all gap-sm">
-              {profile.experience.map((exp) => {
+              {profile?.experience.map((exp) => {
                 return (
                   <div
                     className=" h-fit md:flex items-start grid gap-2 md:gap-md lg:gap-xl "
