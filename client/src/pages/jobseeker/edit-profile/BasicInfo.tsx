@@ -11,8 +11,6 @@ import { updateBasicInfo } from "../actions/updateBasicInfo";
 
 type basic_information = {
   basic_information: IJobseekerBasicInformation;
-  // isLoading: boolean;
-  // isError: boolean;
 };
 
 const basic_information = ({ basic_information }: basic_information) => {
@@ -24,8 +22,9 @@ const basic_information = ({ basic_information }: basic_information) => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: {  errors },
     setValue,
+    clearErrors,
     control,
   } = useForm({ resolver: yupResolver(JobseekerBasicInfoSchema) });
 
@@ -62,7 +61,7 @@ const basic_information = ({ basic_information }: basic_information) => {
       setValue("permanentAddress", basic_information?.permanent_address);
       setValue("phoneNumber", basic_information?.phone_number);
     }
-  }, [basic_information]);
+  }, [basic_information, isEditorOpen]);
   const onSubmit: SubmitHandler<IJobseekerBasicInfoInputs> = (data) => {
     const dataToBeSent = { ...data, image };
     updateBasicInfo(
@@ -94,7 +93,7 @@ const basic_information = ({ basic_information }: basic_information) => {
         Basic Information
         {!isEditorOpen && (
           <span
-            className="border-sm border-green-dark px-sm flex items-center cursor-pointer gap-xs rounded-sm"
+            className="border-sm border-green-dark px-sm py-1 flex items-center cursor-pointer gap-xs rounded-sm"
             onClick={() => setIsEditorOpen(true)}
           >
             <FaEdit /> Edit
@@ -191,7 +190,7 @@ const basic_information = ({ basic_information }: basic_information) => {
                 <option value="other">other</option>
               </select>
             </div>
-            <p className="text-orange-dark text-sm">{errors.gender?.message}</p>
+            <p className="text-orange-dark text-sm">{ errors.gender?.message}</p>
           </div>
           <div>
             <div className="grid sm:flex gap-xs items-center">
@@ -227,6 +226,7 @@ const basic_information = ({ basic_information }: basic_information) => {
               onClick={() => {
                 setIsEditorOpen(false);
                 setIsLoading(false);
+                clearErrors()
               }}
             >
               Cancel

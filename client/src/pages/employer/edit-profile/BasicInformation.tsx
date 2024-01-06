@@ -38,6 +38,7 @@ const BasicInformation = ({
     handleSubmit,
     formState: { errors },
     setValue,
+    clearErrors,
     control,
   } = useForm({ resolver: yupResolver(EmployerBasicInformationSchema) });
 
@@ -67,13 +68,13 @@ const BasicInformation = ({
         "organizationName",
         profile?.basic_information?.organization_name,
       );
-      setValue("phoneNumber", Number(profile?.basic_information?.phone_number));
-
+      setValue("phoneNumber", profile?.basic_information?.phone_number);
+console.log('val')
       setValue("address", profile.basic_information.address);
       setValue("summary", profile.basic_information.summary);
       setValue("industryType", profile.basic_information.industry_id);
     }
-  }, [profile]);
+  }, [profile, isEditorOpen]);
 
   const onSubmit: SubmitHandler<IEmployerBasicInformationInputs> = async (
     data,
@@ -231,7 +232,10 @@ const BasicInformation = ({
             </button>
             <button
               className="p-xs px-sm bg-orange-dark text-white"
-              onClick={() => setIsEditorOpen(false)}
+              onClick={() => {
+                setIsEditorOpen(false)
+                clearErrors()
+              }}
             >
               Cancel
             </button>

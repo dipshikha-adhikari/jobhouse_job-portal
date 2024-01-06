@@ -61,8 +61,8 @@ const[error, setError] = useState(false)
   if (isError || profile.user_id === undefined || error) return <PageNotFound />;
 
   return (
-    <div className="grid gap-10 max-w-5xl mx-auto md:flex w-full sm:p-10 lg:p-sm">
-      <section className="w-full grid    gap-10 h-fit flex-[0.5]">
+    <div className="grid gap-sm max-w-5xl mx-auto md:flex w-full p-sm">
+      <section className="w-full grid    gap-10 h-fit flex-[0.3]">
         <h2 className="font-semibold text-xl text-green-dark pt-md  ">
           EDIT PROFILE
         </h2>
@@ -82,7 +82,7 @@ const[error, setError] = useState(false)
           })}
         </ul>
       </section>
-      <section className=" md:p-xl  flex-1  ">
+      <section className=" md:p-xl  flex-1 ">
         {data.map((item) => {
           return (
             <div key={item.link}>{title === item.link && item.component}</div>

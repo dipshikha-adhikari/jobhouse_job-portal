@@ -5,7 +5,7 @@ export interface IEmployerBasicInformationInputs {
   industryType: number;
   organizationName: string;
   address: string;
-  phoneNumber: number;
+  phoneNumber: string;
 }
 
 export interface IEmployerOtherInformationInputs {

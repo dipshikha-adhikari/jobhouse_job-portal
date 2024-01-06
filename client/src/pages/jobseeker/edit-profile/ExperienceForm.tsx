@@ -35,6 +35,7 @@ const ExperienceForm = ({
     handleSubmit,
     control,
     setValue,
+    clearErrors,
     formState: { errors },
   } = useForm({ resolver: yupResolver(JobseekerExperienceSchema) });
 
@@ -50,7 +51,7 @@ const ExperienceForm = ({
       setValue("startDate", new Date(profile?.start_date));
       setValue("endDate", new Date(profile?.end_date));
     }
-  }, [profile]);
+  }, [profile, isEditorOpen]);
 
   const onSubmit: SubmitHandler<IJobseekerExperienceInputs> = (data) => {
     updateExperience(data, profile, setIsLoading, setIsEditorOpen);
@@ -64,6 +65,7 @@ const ExperienceForm = ({
       });
     }
     setIsEditorOpen(false);
+    clearErrors()
   };
 
   return (
@@ -80,7 +82,7 @@ const ExperienceForm = ({
             />
           </div>
           <p className="text-red-600 text-sm">
-            {isEditorOpen && errors.organizationName?.message}
+            {errors.organizationName?.message}
           </p>
         </div>
         <div>
@@ -101,7 +103,7 @@ const ExperienceForm = ({
             </select>
           </div>
           <p className="text-red-600 text-sm">
-            {isEditorOpen && errors.organizationType?.message}
+            {errors.organizationType?.message}
           </p>
         </div>
         <div>
@@ -115,7 +117,7 @@ const ExperienceForm = ({
             />
           </div>
           <p className="text-red-600 text-sm">
-            {isEditorOpen && errors.jobLocation?.message}
+            {errors.jobLocation?.message}
           </p>
         </div>
         <div>
@@ -129,7 +131,7 @@ const ExperienceForm = ({
             />
           </div>
           <p className="text-red-600 text-sm">
-            {isEditorOpen && errors.jobTitle?.message}
+            {errors.jobTitle?.message}
           </p>
         </div>
         <div>
@@ -150,7 +152,7 @@ const ExperienceForm = ({
             </select>
           </div>
           <p className="text-red-600 text-sm">
-            {isEditorOpen && errors.jobCategory?.message}
+            {errors.jobCategory?.message}
           </p>
         </div>
         <div>
@@ -170,7 +172,7 @@ const ExperienceForm = ({
             />
           </div>
           <p className="text-red-600 text-sm">
-            {isEditorOpen && errors.jobLevelId?.message}
+            {errors.jobLevelId?.message}
           </p>
         </div>
         <div>
@@ -190,7 +192,7 @@ const ExperienceForm = ({
             />
           </div>
           <p className="text-red-600 text-sm">
-            {isEditorOpen && errors.startDate?.message}
+            {errors.startDate?.message}
           </p>
         </div>
         <div>
@@ -210,7 +212,7 @@ const ExperienceForm = ({
             />
           </div>
           <p className="text-red-600 text-sm">
-            {isEditorOpen && errors.endDate?.message}
+            {errors.endDate?.message}
           </p>
         </div>
         <div>
@@ -225,7 +227,7 @@ const ExperienceForm = ({
             />
           </div>
           <p className="text-red-600 text-sm">
-            {isEditorOpen && errors.duties?.message}
+            {errors.duties?.message}
           </p>
         </div>
         {isEditorOpen && (

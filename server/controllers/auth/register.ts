@@ -20,7 +20,11 @@ export const createUser = (req: Request, res: Response) => {
         if (result.rows.length > 0) {
             return res.status(409).json({ message: 'User with this email already exists' });
         }
-        // Hash password
+if(!validateEmail(email)){
+    return res.status(409).json({ message: 'Invalid email' });
+}
+
+
         if (role === undefined) {
             return res.status(409).json({ message: 'Please provide a role' });
         }
@@ -42,3 +46,20 @@ export const createUser = (req: Request, res: Response) => {
     }
     )
 };
+
+
+function validateEmail(email:string) {
+    // Check if the email contains uppercase letters
+    const containsUppercase = /[A-Z]/.test(email);
+    
+    // Regular expression for validating email addresses with specific TLD (enforcing lowercase)
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/;
+  
+    // Return invalid if uppercase letters are found
+    if (containsUppercase) {
+      return false;
+    }
+  
+    return emailRegex.test(email);
+  }
+  

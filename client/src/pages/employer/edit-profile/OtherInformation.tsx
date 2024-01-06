@@ -25,15 +25,19 @@ const OtherInformation = ({
   const {
     register,
     handleSubmit,
+    clearErrors,
     formState: { errors },
+    
     setValue,
   } = useForm({ resolver: yupResolver(Schema) });
+
 
   useEffect(() => {
     if (profile?.other_information.website) {
       setValue("website", profile.other_information.website);
+      console.log('set')
     }
-  }, [profile]);
+  }, [profile, isEditorOpen]);
 
   const onSubmit: SubmitHandler<IEmployerOtherInformationInputs> = async (
     data,
@@ -59,7 +63,7 @@ const OtherInformation = ({
             className="p-xs outline-none border-sm border-default "
             disabled={!isEditorOpen}
           />
-          <p className="text-orange-dark">{errors.website?.message}</p>
+          <p className="text-orange-dark">{ errors.website?.message}</p>
         </div>
         {isEditorOpen && (
           <div className="flex gap-sm">
@@ -72,7 +76,10 @@ const OtherInformation = ({
             </button>
             <button
               className="p-xs px-sm bg-orange-dark text-white"
-              onClick={() => setIsEditorOpen(false)}
+              onClick={() => {
+                setIsEditorOpen(false)
+                clearErrors()
+              }}
             >
               Cancel
             </button>

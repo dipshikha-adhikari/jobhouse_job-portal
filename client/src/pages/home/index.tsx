@@ -187,7 +187,7 @@ const Home = () => {
           </div>
           {/* ---------------   */}
          <div className="flex flex-wrap gap-sm  ">
-         <div className=" border-sm w-full max-w-sm ">
+         <div className=" border-x-sm border-t-sm w-full max-w-sm ">
             <header className="flex border-b-sm p-sm items-center gap-2  font-bold   text-green-dark ">
               <FaIndustry /> Jobs By Level
             </header>
@@ -211,7 +211,7 @@ const Home = () => {
               })}
             </div>
           </div>
-          <div className=" border-sm w-full max-w-sm">
+          <div className=" border-x-sm border-t-sm w-full max-w-sm">
             <header className="flex items-center gap-2  font-semibold border-b-sm  p-sm  text-green-dark ">
               <FaIndustry /> Jobs By Employment Type
             </header>

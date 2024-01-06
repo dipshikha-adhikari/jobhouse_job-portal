@@ -38,7 +38,7 @@ const Education = ({ education }: EducationProps) => {
   }
 
   return (
-    <div className="flex gap-sm flex-col min-h-[80vh] ">
+    <div className="flex gap-sm flex-col  min-h-[80vh] ">
       <section className="grid gap-sm">
         {education !== undefined &&
           education?.map((item) => {

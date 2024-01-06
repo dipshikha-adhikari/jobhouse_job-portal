@@ -11,9 +11,9 @@ const EducationBox = ({ item }: Props) => {
   const [isEditorOpen, setIsEditorOpen] = useState(false);
 
   return (
-    <div>
+    <div className="">
       {!isEditorOpen && (
-        <div className="border-sm h-fit flex justify-between border-gray-light p-sm rounded-sm">
+        <div className="border-sm h-fit max-w-sm flex justify-between  gap-sm p-md rounded-sm">
           <div className="grid gap-xs">
             <span className="font-semibold">
               {item.degree} - {item.course}
@@ -30,12 +30,12 @@ const EducationBox = ({ item }: Props) => {
           </div>
           <div className="grid justify-end h-fit gap-xs ">
             <button
-              className="bg-green-dark text-white  rounded-sm px-sm"
+              className="bg-green-dark text-white  rounded-sm p-sm"
               onClick={() => setIsEditorOpen(true)}
             >
               Edit
             </button>
-            <button className="bg-orange-light text-white  rounded-sm px-sm">
+            <button className="bg-orange-light text-white  rounded-sm p-sm">
               Delete
             </button>
           </div>

@@ -26,6 +26,7 @@ const JobPreference = ({ job_preference }: JobPreference) => {
     handleSubmit,
     formState: { errors },
     setValue,
+    clearErrors,
     control,
   } = useForm({ resolver: yupResolver(JobseekerJobPreferenceSchema) });
   const { categories } = useCategories();
@@ -46,7 +47,7 @@ const JobPreference = ({ job_preference }: JobPreference) => {
       setValue("objective", job_preference.summary);
       setValue("skills", job_preference.skills);
     }
-  }, [job_preference]);
+  }, [job_preference, isEditorOpen]);
 
   function autoGrow(e: FormEvent<HTMLTextAreaElement>) {
     e.currentTarget.style.height = "100px";
@@ -72,7 +73,7 @@ const JobPreference = ({ job_preference }: JobPreference) => {
         Job Preference
         {!isEditorOpen && (
           <span
-            className="border-sm  px-sm flex items-center cursor-pointer gap-xs rounded-sm"
+            className="border-sm border-green-dark  px-sm py-1 flex items-center cursor-pointer gap-xs rounded-sm"
             onClick={() => setIsEditorOpen(true)}
           >
             <FaEdit /> Edit
@@ -248,7 +249,10 @@ const JobPreference = ({ job_preference }: JobPreference) => {
               </button>
               <button
                 className=" border-sm  text-green-dark border-green-dark p-sm rounded-sm"
-                onClick={() => setIsEditorOpen(false)}
+                onClick={() => {
+                  setIsEditorOpen(false)
+                  clearErrors()
+                }}
               >
                 Cancel
               </button>
