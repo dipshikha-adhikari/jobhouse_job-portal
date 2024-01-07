@@ -69,7 +69,6 @@ const BasicInformation = ({
         profile?.basic_information?.organization_name,
       );
       setValue("phoneNumber", profile?.basic_information?.phone_number);
-console.log('val')
       setValue("address", profile.basic_information.address);
       setValue("summary", profile.basic_information.summary);
       setValue("industryType", profile.basic_information.industry_id);
@@ -226,12 +225,12 @@ console.log('val')
             <button
               type="submit"
               disabled={isLoading}
-              className="p-xs px-sm disabled:opacity-50 bg-blue-dark text-white"
+              className="p-xs px-sm disabled:opacity-50 rounded-sm bg-blue-dark text-white"
             >
               Save
             </button>
             <button
-              className="p-xs px-sm bg-orange-dark text-white"
+              className="p-xs px-sm bg-orange-light rounded-sm text-white"
               onClick={() => {
                 setIsEditorOpen(false)
                 clearErrors()

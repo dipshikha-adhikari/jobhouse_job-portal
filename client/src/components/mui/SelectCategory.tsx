@@ -32,7 +32,7 @@ export default function SelectCategory({
           labelId="demo-simple-select-required-label"
           id="demo-simple-select-required"
           onChange={field.onChange}
-          className="w-[300px] sm:w-full"
+          className="w-[250px] sm:w-full"
           MenuProps={{
             disableScrollLock: true,
           }}

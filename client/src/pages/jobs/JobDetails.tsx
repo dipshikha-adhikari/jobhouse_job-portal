@@ -57,7 +57,7 @@ const Job = () => {
   };
 
   return (
-    <div className="grid gap-2 max-w-5xl mx-auto ">
+    <div className="grid gap-2 overflow-auto max-w-5xl mx-auto ">
       <section className=" ">
         <div className="relative">
           <img
@@ -71,7 +71,7 @@ const Job = () => {
           />
           <Link
             to={`/employer/${job?.employer_details?.organization_name}/${job?.employer_id}`}
-            className="absolute border-sm bg-[rgba(0,0,0,0.5)] hover:bg-[rgba(0,0,0,0.7)] rounded-md border-green-dark m-2 p-sm bottom-0 left-2 flex gap-xs sm:gap-mditems-center"
+            className="absolute border-sm bg-[rgba(0,0,0,0.5)] hover:bg-[rgba(0,0,0,0.7)] rounded-md border-green-dark  p-sm bottom-0 left-0 m-2 flex gap-xs sm:gap-md items-center"
           >
             <img
               src={
@@ -96,7 +96,7 @@ const Job = () => {
         <aside className="border-xs flex-[1.8] w-full rounded-sm border-light">
           <section className="">
             <header className="grid border-b-sm p-sm py-md gap-xs ">
-              <h2 className="text-2xl  text-green-dark font-semibold">
+              <h2 className="text-2xl  text-green-dark ">
                 {job?.title}
               </h2>
               <div>Apply before : {moment(job?.deadline).format('MMM Do YYYY')}</div>
@@ -197,7 +197,7 @@ const Job = () => {
        <section className="flex-1  ">
        {jobs && jobs?.length > 1 && (
             <div className="border-sm w-full ">
-              <h2 className="text-xl p-sm flex items-center border-b-sm gap-2   text-green-dark  font-bold  ">
+              <h2 className="sm:text-xl p-sm flex items-center border-b-sm gap-2   text-green-dark  font-bold  ">
                 <CiStar /> More jobs by {job.employer_details.organization_name}
               </h2>
               <div className="grid p-sm  gap-sm grid-cols-auto-sm w-full">

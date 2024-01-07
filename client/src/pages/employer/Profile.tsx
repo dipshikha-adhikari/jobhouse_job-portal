@@ -28,7 +28,7 @@ const Profile = () => {
   return (
     <Layout>
       <div className="grid break-all gap-sm lg:flex lg:gap-md">
-        <section className="grid gap-sm flex-1 h-fit">
+        <section className="grid gap-2 flex-1 h-fit">
           <header className="relative h-full">
             <div className="cover-image">
               <img
@@ -55,12 +55,12 @@ const Profile = () => {
             </div>
             <Link
               to="/employer/profile/basic-info"
-              className="absolute right-2 bottom-2 bg-blue-dark rounded-md text-white hover:text-white px-sm p-xs"
+              className="absolute right-2 bottom-2 bg-blue-light rounded-sm text-white hover:text-white px-sm p-xs"
             >
               Edit Profile
             </Link>
           </header>
-          <div className="grid gap-xs  border-b-sm  pb-sm place-items-center">
+          <div className="grid gap-2  border-b-sm  pb-sm place-items-center">
             <p className="font-semibold text-xl">
               {profile?.basic_information?.organization_name
                 ? profile?.basic_information?.organization_name
@@ -73,7 +73,7 @@ const Profile = () => {
               <p>{profile?.other_information?.website}</p>
             )}
           </div>
-          <div className="grid gap-xs place-items-center border-b-sm  pb-sm">
+          <div className="grid gap-2 place-items-center border-b-sm  pb-sm">
             <p className="flex items-center gap-xs">
               <MdLocationPin className="text-blue-dark" />{" "}
               {profile?.basic_information?.address || "Not available"}

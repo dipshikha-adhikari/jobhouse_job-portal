@@ -43,9 +43,9 @@ const EmployerProfile = () => {
 
   return (
     <Layout>
-      <div className="grid gap-sm lg:flex ">
-        <section className="grid gap-sm flex-[1.7] h-fit">
-          <header className="relative h-full">
+      <div className="grid overflow-auto gap-sm lg:flex ">
+        <section className="grid gap-xs  flex-[1.7] h-fit">
+          <header className="relative  h-full">
             <div className="cover-image">
               <img
                 src={
@@ -54,11 +54,11 @@ const EmployerProfile = () => {
                     : "https://template.canva.com/EAENvp21inc/1/0/1600w-qt_TMRJF4m0.jpg"
                 }
                 alt=""
-                className="w-full h-full max-h-[300px] relative object-contain "
+                className="w-full h-full max-h-[300px] relative  "
               />
             </div>
 
-            <div className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 flex gap-sm">
+            <div className="absolute top-1/2 left-1/2  -translate-y-1/2 -translate-x-1/2 flex gap-sm">
               <img
                 src={
                   profile?.image?.url
@@ -71,14 +71,14 @@ const EmployerProfile = () => {
             </div>
           
           </header>
-          <div className="grid gap-xs  border-b-sm  pb-sm place-items-center">
+          <div className="grid gap-2 border-b-sm pb-sm   place-items-center">
             <h2 className="font-semibold text-xl">
               {profile?.basic_information?.organization_name}
             </h2>
             <p>{profile?.basic_information?.industry_type}</p>
             <p>{profile?.other_information?.website}</p>
           </div>
-          <div className="grid gap-xs place-items-center border-b-sm  pb-sm">
+          <div className="grid gap-2 place-items-center border-b-sm  pb-sm">
             <p className="flex items-center gap-xs">
               <MdLocationPin className="text-blue-dark" />{" "}
               {profile?.basic_information?.address || "Not available"}
@@ -103,7 +103,7 @@ const EmployerProfile = () => {
         </section>
         <section className="  h-fit">
           <div className=" border-sm lg:w-[350px] ">
-              <h2 className="font-bold gap-2  flex items-center p-sm border-b-sm text-green-dark text-xl  ">
+              <h2 className="font-bold gap-2  flex items-center p-sm border-b-sm text-green-dark   ">
                 <CiStar className="text-green-dark" /> Recent jobs by{" "}
                 {profile?.basic_information?.organization_name}
               </h2>

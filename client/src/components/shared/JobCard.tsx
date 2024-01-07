@@ -24,7 +24,7 @@ const JobCard = ({ job, appliedJobs }: IJobCard) => {
   }, [job, appliedJobs]);
 
   return (
-    <div className="grid  w-full h-full  max-w-md shadow-sm border-light font-normal  ">
+    <div className="grid  w-full h-full  max-w-md shadow-sm  font-normal  ">
       <div className="flex p-sm gap-xs items-center text-black-dark hover:text-black-dark">
         <img
           src={

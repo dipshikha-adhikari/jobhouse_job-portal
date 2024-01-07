@@ -69,13 +69,13 @@ const OtherInformation = ({
           <div className="flex gap-sm">
             <button
               type="submit"
-              className="p-xs px-sm bg-blue-dark text-white disabled:opacity-50"
+              className="p-xs px-sm bg-blue-dark rounded-sm text-white disabled:opacity-50"
               disabled={isLoading}
             >
               Save
             </button>
             <button
-              className="p-xs px-sm bg-orange-dark text-white"
+              className="p-xs px-sm bg-orange-light rounded-sm text-white"
               onClick={() => {
                 setIsEditorOpen(false)
                 clearErrors()
