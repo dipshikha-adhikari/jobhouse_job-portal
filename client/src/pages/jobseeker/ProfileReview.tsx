@@ -86,7 +86,7 @@ const ProfileReview = () => {
             <div className="grid gap-xs place-content-center ">
               <div className=" h-fit">
                 <img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqZYAYrmuzw5vIhNRWG2f436EKH4LqTUAFhLDWd2yRNA&s"
+                  src={job?.employer_details.image}
                   alt=""
                   className="w-20 h-20 rounded-full object-cover"
                 />

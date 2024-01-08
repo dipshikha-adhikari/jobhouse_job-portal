@@ -22,7 +22,7 @@ const BasicInformation = ({
   setIsEditorOpen,
   profile,
 }: IEditProfileDetails) => {
-  const [coverImagePreview, setCoverImagePreview] = useState("");
+  // const [coverImagePreview, setCoverImagePreview] = useState("");
   const [imagePreview, setImagePreview] = useState("");
   const [image, setImage] = useState<string | ArrayBuffer | null | object>();
   const [coverImage, setCoverImage] = useState<
@@ -54,15 +54,15 @@ const BasicInformation = ({
   useEffect(() => {
     if (profile?.basic_information.id) {
       setImagePreview(profile?.image?.url);
-      setCoverImagePreview(profile?.cover_image?.url);
+      // setCoverImagePreview(profile?.cover_image?.url);
       setImage(() => ({
         url: profile?.image?.url,
         public_id: profile?.image?.public_id,
       }));
-      setCoverImage(() => ({
-        url: profile?.cover_image?.url,
-        public_id: profile?.cover_image?.public_id,
-      }));
+      // setCoverImage(() => ({
+      //   url: profile?.cover_image?.url,
+      //   public_id: profile?.cover_image?.public_id,
+      // }));
 
       setValue(
         "organizationName",
@@ -112,7 +112,7 @@ const BasicInformation = ({
           }
           if (type === "coverImage") {
             setCoverImage(imageSrc);
-            setCoverImagePreview(url);
+            // setCoverImagePreview(url);
           }
         };
       }
@@ -172,7 +172,7 @@ const BasicInformation = ({
           />
           {imagePreview && <img src={imagePreview} className="w-20 h-20" />}
         </div>
-        <div className="grid  gap-2 ">
+        {/* <div className="grid  gap-2 ">
           <label htmlFor=""> Cover Image</label>
           <input
             type="file"
@@ -185,7 +185,7 @@ const BasicInformation = ({
               className="w-20 h-20 object-cover rounded-full"
             />
           )}
-        </div>
+        </div> */}
         <div>
           <div className=" grid gap-2  items-center">
             <span className="">* Industry Type</span>

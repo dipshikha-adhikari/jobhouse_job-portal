@@ -35,11 +35,12 @@ const Profile = () => {
                 src={
                   profile?.cover_image.url
                     ? profile.cover_image.url
-                    : "https://template.canva.com/EAENvp21inc/1/0/1600w-qt_TMRJF4m0.jpg"
+                    : "https://w0.peakpx.com/wallpaper/718/147/HD-wallpaper-beautiful-really-cool-unique-blue-thumbnail.jpg"
                 }
                 alt=""
-                className="w-full h-full max-h-[300px] relative object-contain "
+                className="min-w-full h-full max-h-[300px] object-cover relative "
               />
+              
             </div>
 
             <div className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 flex gap-sm">
@@ -50,7 +51,7 @@ const Profile = () => {
                     : "https://media.istockphoto.com/id/1340893300/vector/technology-logo-design-template-networking-vector-logo-design.jpg?s=612x612&w=0&k=20&c=-8XBWFDRAAYe3leL4nuMnei0wWpL6-IqsPCAbWIhASk="
                 }
                 alt=""
-                className="h-20 w-20 rounded-sm object-contain"
+                className="h-20 w-20 sm:w-[100px] sm:h-[100px] rounded-full object-cover"
               />
             </div>
             <Link
@@ -103,12 +104,12 @@ const Profile = () => {
             )}
           </div>
         </section>
-            <div className="grid border-sm flex-[0.6] ">
-              <p className="grid ">
+            <div className="grid border-sm h-fit flex-[0.6] ">
+              <div className="grid ">
                 <h2 className="flex p-sm  text-green-dark items-center text-center gap-2 font-bold  border-b-sm  ">
                   <CiStar /> Recent Jobs
                 </h2>
-              </p>
+              </div>
               <div className="p-sm">
                 <RecentJobs employerId={profile?.user_id} />
               </div>

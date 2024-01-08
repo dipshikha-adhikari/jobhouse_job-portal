@@ -7,7 +7,7 @@ import { useCategories } from "../../hooks/useCategories";
 import useJobInputs from "../../store/jobInputs";
 import { IJob } from "../../types/postgres/types";
 import { CreateJobStepOneSchema } from "../../utils/validationSchema";
-import ResponsiveDatePicker from "../mui/DatePicker";
+import ResponsiveDayPicker from "../mui/DayPicker";
 import SelectCategory from "../mui/SelectCategory";
 
 export interface ICreateJobStepOneInputs {
@@ -148,7 +148,7 @@ const CreateJobStepOne = ({ setStep, step, job }: CreateJobStepOneProps) => {
               name="deadline"
               render={({ field }) => {
                 return (
-                  <ResponsiveDatePicker
+                  <ResponsiveDayPicker
                     isEditorOpen={isEditorOpen}
                     field={field}
                   />

@@ -39,7 +39,7 @@ const JobCard: React.FC<JobCardProps> = ({ job }) => {
       <div className="flex  gap-xs">
         <Link
           to={`/jobs/update/${job.job_id}`}
-          className="px-sm font-normal  bg-blue-dark  text-white hover:text-white border-sm  rounded-sm p-xs"
+          className="px-sm font-normal  bg-blue-light  text-white hover:text-white border-sm  rounded-sm p-xs"
         >
           Update
         </Link>

@@ -120,7 +120,7 @@ const Overview = () => {
           <nav className="flex gap-sm p-sm py-md border-b-sm flex-wrap items-center text-black-light ">
             <span
               className={`${
-                selected === "recent" && " text-green-dark"
+                selected === "recent" && "font-semibold text-green-dark"
               } cursor-pointer`}
               onClick={() => setSelected("recent")}
             >
@@ -128,7 +128,7 @@ const Overview = () => {
             </span>
             <span
               className={`${
-                selected === "all" && " text-green-dark "
+                selected === "all" && "font-semibold text-green-dark "
               } cursor-pointer`}
               onClick={() => setSelected("all")}
             >
@@ -142,7 +142,7 @@ const Overview = () => {
               new <FaPlus />{" "}
             </button>
           </nav>
-          <section className="grid p-md  gap-sm">
+          <section className="grid p-md h-fit  gap-sm">
             {selected === "recent" && (
               <RecentJobs employerId={profile?.user_id} />
             )}
