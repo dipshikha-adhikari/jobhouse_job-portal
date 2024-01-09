@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Error from "../../../components/shared/Error";
 import Loader from "../../../components/shared/Loader";
@@ -40,9 +40,7 @@ const EditProfile = () => {
     },
   ];
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+
 
   if (isLoading) return <Loader />;
   if (!isAunthenticated) return <NoUser />;

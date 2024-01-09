@@ -15,7 +15,7 @@ import { getSearchResults } from "../controllers/jobs/search/getSearchResults"
 import { getFilteredJobs } from "../controllers/jobs/category/getFilteredJobs"
 import { getJobLevels } from "../controllers/jobs/getJobLevels"
 import { getJobTypes } from "../controllers/jobs/getJobTypes"
-import { getJobsCountByCategory, getJobsCountByIndustry, getJobsCountByLevel, getJobsCountByType } from "../controllers/jobs/count"
+import { getJobsCountByCategory, getJobsCountByIndustry, getJobsCountByLevel, getJobsCountByType, getTotalJobsCount } from "../controllers/jobs/count"
 
 const express = require('express')
 const router = express.Router()
@@ -23,6 +23,7 @@ const verifyToken = require('../middlewares/verifyToken')
 
 
 router.get('/', getAllJobs)
+router.get('/count', getTotalJobsCount)
 router.get('/filters', getFilteredJobs)
 router.get('/levels', getJobLevels)
 router.get('/levels/jobscount', getJobsCountByLevel)

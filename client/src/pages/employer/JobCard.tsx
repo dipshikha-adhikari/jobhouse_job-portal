@@ -6,7 +6,7 @@ import { FaHandPointRight } from "react-icons/fa";
 
 type JobCardProps = {
   job: IJob;
-  index: number;
+  // index: number;
 };
 
 const JobCard: React.FC<JobCardProps> = ({ job }) => {

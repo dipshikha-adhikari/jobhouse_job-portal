@@ -31,11 +31,14 @@ const OtherInformation = ({
     setValue,
   } = useForm({ resolver: yupResolver(Schema) });
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     if (profile?.other_information.website) {
       setValue("website", profile.other_information.website);
-      console.log('set')
+    
     }
   }, [profile, isEditorOpen]);
 

@@ -51,10 +51,10 @@ const EmployerProfile = () => {
                 src={
                   profile?.cover_image?.url
                     ? profile?.cover_image.url
-                    : "https://template.canva.com/EAENvp21inc/1/0/1600w-qt_TMRJF4m0.jpg"
+                    : "https://w0.peakpx.com/wallpaper/718/147/HD-wallpaper-beautiful-really-cool-unique-blue-thumbnail.jpg"
                 }
                 alt=""
-                className="w-full h-full max-h-[300px] relative  "
+                className="w-full h-full max-h-[250px] object-cover relative  "
               />
             </div>
 

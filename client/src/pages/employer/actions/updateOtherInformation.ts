@@ -2,6 +2,7 @@ import toast from "react-hot-toast";
 import { privateRequest } from "../../../lib/axios";
 import { IEmployerOtherInformationInputs } from "../../../types/react/types";
 import { IEmployerProfile } from "../../../types/postgres/types";
+import { queryClient } from "../../../App";
 
 export const updateOtherInformation = async (
   data: IEmployerOtherInformationInputs,
@@ -27,6 +28,7 @@ export const updateOtherInformation = async (
         return err.name || err.response.data.message;
       },
       success: () => {
+        queryClient.invalidateQueries("employerProfile");
         setIsLoading(false);
         setIsEditorOpen(false);
         return "Success";

@@ -2,6 +2,7 @@ import { FaArrowDown, FaArrowRight, FaBars } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import useStore from "../../../store/store";
 import EmployerProfileMenu from "../../modals/EmployerProfileMenu";
+import { useProfile } from "../../../pages/employer/hooks/useEmployerProfile";
 
 type EmployerNav = {
   setMenuOpen: (props: boolean) => void;
@@ -17,7 +18,7 @@ const NavbarForEmployer = ({
   setIsModalOpen,
 }: EmployerNav) => {
   const store = useStore();
-
+const {profile} = useProfile()
   return (
     <div className="relative flex items-center gap-20 w-full justify-end">
       <div className=" gap-xs hidden md:flex ">
@@ -60,7 +61,7 @@ const NavbarForEmployer = ({
           onClick={store.toggleJobseekerProfileMenuModal}
         >
           <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiupIgqp_vhCZWGAh5yeL3uF_Ke8-MGO5uBonmKjWMMFpKgX7kw6p34IDYpdSVZQTpH4M&usqp=CAU"
+            src={profile?.image.url}
             alt=""
             className="w-8 h-8 sm:w-10 sm:h-10 rounded-full profile-menu-button  object-cover"
           />

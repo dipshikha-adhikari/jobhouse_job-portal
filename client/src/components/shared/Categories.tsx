@@ -13,8 +13,8 @@ const Categories = ({ setIsModalOpen }: CategoryProps) => {
     }
   };
 
-  if (isLoading) return <div className="text-center">Loading...</div>;
-  if (isError) return <div className="text-center">Error!</div>;
+  if (isLoading) return <div className="p-sm">Loading...</div>;
+  if (isError && !data) return <div className="p-sm">Error!</div>;
 
   return (
       <div className="grid gap-1 md:gap-3 p-sm md:flex md:flex-wrap ">

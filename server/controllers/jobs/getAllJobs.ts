@@ -32,6 +32,7 @@ GROUP BY j.job_id, e.user_id, c.category_name,l.level_name, t.type_name, i.indus
 limit $1 offset $2
 
 `
+
   pool.query(query,[limit,offset], function (err: Error, result: QueryResult) {
     if (err) {
       return res.status(400).send({ error: err });

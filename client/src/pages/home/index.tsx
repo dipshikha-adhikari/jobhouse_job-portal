@@ -1,25 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BiCategory } from "react-icons/bi";
-import { CiStar } from "react-icons/ci";
 import { FaIndustry } from "react-icons/fa";
 import { MdHomeWork } from "react-icons/md";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import Categories from "../../components/shared/Categories";
-import Error from "../../components/shared/Error";
 import Industries from "../../components/shared/Industries";
-import JobCard from "../../components/shared/JobCard";
-import Loader from "../../components/shared/Loader";
 import SearchBox from "../../components/ui/SearchBox";
 import { publicRequest } from "../../lib/axios";
-import { AppliedJobs, IJob } from "../../types/postgres/types";
-import { useAppliedJobs } from "../jobseeker/hooks/useAppliedJobs";
+import AllJobs from "./AllJobs";
 
-type AppliedJobsType = {
-  jobs: AppliedJobs[];
-  isLoading: boolean;
-  isError: boolean;
-};
 
 type TopComapny = {
   user_id: string;
@@ -42,17 +32,8 @@ type Types = {
 };
 
 const Home = () => {
-  const { jobs: appliedJobs }: AppliedJobsType = useAppliedJobs();
-  const [appliedIds, setAppliedIds] = useState<number[]>([]);
-  const getAllJobs = async () => {
-    const res = await publicRequest.get("/api/v1/jobs/?level=entry");
-    return res.data;
-  };
-  const {
-    data: jobs,
-    isLoading,
-    isError,
-  } = useQuery<IJob[]>("allJobs", getAllJobs);
+const  headerRef = useRef<HTMLDivElement>(null)  
+const [headerHeight, setHeaderHeight] = useState(0)
 
   const getTopCompanies = async () => {
     const result = await publicRequest.get("/api/v1/topEmployers");
@@ -64,14 +45,6 @@ const Home = () => {
     isError: errorComapnies,
   } = useQuery("topComapnies", getTopCompanies);
 
-  useEffect(() => {
-    appliedJobs?.map((item) => {
-      if (!appliedIds.includes(item?.job_id)) {
-        setAppliedIds((prev: number[]) => [...prev, item.job_id]);
-      }
-    });
-  }, [appliedJobs]);
-
   const {
     data: levels,
     isLoading: levelsLoading,
@@ -80,6 +53,7 @@ const Home = () => {
     const result = await publicRequest.get("/api/v1/jobs/levels/jobscount");
     return result.data;
   });
+
   const {
     data: types,
     isLoading: typesLoading,
@@ -90,15 +64,15 @@ const Home = () => {
   });
 
   useEffect(() => {
+  if(headerRef.current){
+    setHeaderHeight(headerRef.current.offsetHeight)
+  }
     window.scrollTo(0, 0);
-  }, []);
-
-  if (isLoading) return <Loader />;
-  if (isError) return <Error />;
+  }, [headerRef]);
 
   return (
     <div className="grid gap-sm ">
-      <header className=" justify-start  relative ">
+      <header className=" justify-start  relative " ref={headerRef}>
         <img
           src="https://img.freepik.com/free-photo/living-room-product-backdrop-interior-background_53876-147964.jpg?size=626&ext=jpg"
           alt=""
@@ -114,18 +88,8 @@ const Home = () => {
       <main className="grid gap-sm  lg:flex ">
         <section className="grid gap-sm flex-1 h-fit ">
         {/* ---------------- */}
-         <div className=" border-sm ">
-         <header className="  border-b-sm flex font-bold items-center gap-2  p-sm   text-green-dark">
-            <CiStar className="text-green-dark " /> Top jobs
-          </header>
-          <div className="grid gap-xs p-sm place-items-center  grid-cols-auto-sm md:grid-cols-auto-md">
-            {jobs?.map((job) => {
-              return (
-                <JobCard appliedJobs={appliedJobs} job={job} key={job.job_id} />
-              );
-            })}
-          </div>
-         </div>
+       <AllJobs height={headerHeight} />
+
           {/* ------------------ */}
 
           <div className="  border-sm ">
@@ -136,7 +100,7 @@ const Home = () => {
             </header>
             <div className="grid gap-xs p-sm grid-cols-[repeat(auto-fit,minmax(200px,1fr))] ">
               {loadingComapnies && <div className="">Loading...</div>}
-              {errorComapnies && <div className="">Error</div>}
+              {(errorComapnies && !companies) && <div className="">Error</div>}
               {companies?.map((item: TopComapny) => {
                 return (
                   <Link
@@ -193,8 +157,8 @@ const Home = () => {
             </header>
 
             <div className=" ">
-              {levelsLoading && <div>Loading...</div>}
-              {levelsError && <div>Error</div>}
+              {levelsLoading && <div className="p-sm">Loading...</div>}
+              {(levelsError && !levels) && <div className="p-sm">Error</div>}
               {levels?.map((level) => {
                 return (
                   <Link
@@ -217,8 +181,8 @@ const Home = () => {
             </header>
 
             <div className="">
-              {typesLoading && <div>Loading...</div>}
-              {typesError && <div>Error</div>}
+              {typesLoading && <div className="p-sm">Loading...</div>}
+              {(typesError && !types) && <div className="p-sm">Error</div>}
               {types?.map((type) => {
                 return (
                   <Link

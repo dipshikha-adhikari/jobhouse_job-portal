@@ -43,6 +43,10 @@ const BasicInformation = ({
   } = useForm({ resolver: yupResolver(EmployerBasicInformationSchema) });
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
+  useEffect(() => {
     if (!profile?.basic_information.id && user.fullName) {
       setValue("organizationName", user.fullName);
     }
