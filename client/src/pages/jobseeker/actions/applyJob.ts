@@ -6,7 +6,7 @@ export const applyJob = (
   jobId: number | undefined,
   employerid: string | undefined,
   setIsLoading: (props: boolean) => void,
-  navigate: NavigateFunction,
+  navigate: NavigateFunction
 ) => {
   try {
     setIsLoading(true);
@@ -27,7 +27,7 @@ export const applyJob = (
           navigate("/jobseeker/overview");
           return "Success";
         },
-      },
+      }
     );
   } catch (err) {
     setIsLoading(false);

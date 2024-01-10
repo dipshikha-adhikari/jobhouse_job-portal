@@ -22,7 +22,7 @@ const basic_information = ({ basic_information }: basic_information) => {
   const {
     register,
     handleSubmit,
-    formState: {  errors },
+    formState: { errors },
     setValue,
     clearErrors,
     control,
@@ -190,7 +190,7 @@ const basic_information = ({ basic_information }: basic_information) => {
                 <option value="other">other</option>
               </select>
             </div>
-            <p className="text-orange-dark text-sm">{ errors.gender?.message}</p>
+            <p className="text-orange-dark text-sm">{errors.gender?.message}</p>
           </div>
           <div>
             <div className="grid sm:flex gap-xs items-center">
@@ -226,7 +226,7 @@ const basic_information = ({ basic_information }: basic_information) => {
               onClick={() => {
                 setIsEditorOpen(false);
                 setIsLoading(false);
-                clearErrors()
+                clearErrors();
               }}
             >
               Cancel

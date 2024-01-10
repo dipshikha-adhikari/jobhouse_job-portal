@@ -13,6 +13,7 @@ import Loader from "../../components/shared/Loader";
 import { useQuery } from "react-query";
 import { privateRequest } from "../../lib/axios";
 import { useRecentJobs } from "./hooks/useRecentJobs";
+
 const Overview = () => {
   const [selected, setSelected] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -52,7 +53,6 @@ const Overview = () => {
   }, [profile]);
 
   if (isLoading || loading) return <Loader />;
-
   if (user.role !== "employer") return <Error />;
 
   return (
@@ -115,7 +115,7 @@ const Overview = () => {
 
         <section className="border-sm  ">
           <header className="border-b-sm text-green-dark font-bold flex items-center gap-2 py-md  p-sm">
-          <MdRoundaboutLeft />   Your jobs
+            <MdRoundaboutLeft /> Your jobs
           </header>
           <nav className="flex gap-sm p-sm py-md border-b-sm flex-wrap items-center text-black-light ">
             <span

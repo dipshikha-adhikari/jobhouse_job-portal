@@ -15,7 +15,6 @@ export const updateBasicInfo = async (
 ) => {
   try {
     setIsLoading(true);
-
     const dataToBeSent = {
       fullname: data.fullname,
       image: data.image,
@@ -25,19 +24,16 @@ export const updateBasicInfo = async (
       gender: data.gender,
       date_of_birth: dayjs(data.dateOfBirth).format("L"),
     };
-
     const axiosConfig = {
       method: basicInfo?.id === undefined ? "post" : "put",
       url: "/api/v1/jobseeker/profile/basicInformation",
       data: dataToBeSent,
     };
-
     toast.promise(privateRequest(axiosConfig), {
       loading: "Loading",
       success: () => {
         setIsLoading(false);
         setIsEditorOpen(false);
-
         queryClient.invalidateQueries("jobseekerProfile");
         return "Success";
       },

@@ -5,7 +5,6 @@ interface AuthState {
   setAuthentication: (props: boolean) => void;
 }
 
-
 const useAuthStore = create<AuthState>((set) => ({
   isAunthenticated: false,
   setAuthentication: (props) =>

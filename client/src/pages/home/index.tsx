@@ -10,7 +10,6 @@ import SearchBox from "../../components/ui/SearchBox";
 import { publicRequest } from "../../lib/axios";
 import AllJobs from "./AllJobs";
 
-
 type TopComapny = {
   user_id: string;
   organization_name: string;
@@ -32,13 +31,14 @@ type Types = {
 };
 
 const Home = () => {
-const  headerRef = useRef<HTMLDivElement>(null)  
-const [headerHeight, setHeaderHeight] = useState(0)
+  const headerRef = useRef<HTMLDivElement>(null);
+  const [headerHeight, setHeaderHeight] = useState(0);
 
   const getTopCompanies = async () => {
     const result = await publicRequest.get("/api/v1/topEmployers");
     return result.data;
   };
+
   const {
     data: companies,
     isLoading: loadingComapnies,
@@ -64,9 +64,9 @@ const [headerHeight, setHeaderHeight] = useState(0)
   });
 
   useEffect(() => {
-  if(headerRef.current){
-    setHeaderHeight(headerRef.current.offsetHeight)
-  }
+    if (headerRef.current) {
+      setHeaderHeight(headerRef.current.offsetHeight);
+    }
     window.scrollTo(0, 0);
   }, [headerRef]);
 
@@ -87,11 +87,9 @@ const [headerHeight, setHeaderHeight] = useState(0)
       </header>
       <main className="grid gap-sm  lg:flex ">
         <section className="grid gap-sm flex-1 h-fit ">
-        {/* ---------------- */}
-       <AllJobs height={headerHeight} />
-
+          {/* ---------------- */}
+          <AllJobs height={headerHeight} />
           {/* ------------------ */}
-
           <div className="  border-sm ">
             <header className="border-b-sm  font-bold text-green-dark xl:text-xl  p-sm  flex items-center gap-2">
               {" "}
@@ -100,7 +98,7 @@ const [headerHeight, setHeaderHeight] = useState(0)
             </header>
             <div className="grid gap-xs p-sm grid-cols-[repeat(auto-fit,minmax(200px,1fr))] ">
               {loadingComapnies && <div className="">Loading...</div>}
-              {(errorComapnies && !companies) && <div className="">Error</div>}
+              {errorComapnies && !companies && <div className="">Error</div>}
               {companies?.map((item: TopComapny) => {
                 return (
                   <Link
@@ -150,54 +148,56 @@ const [headerHeight, setHeaderHeight] = useState(0)
             <Categories />
           </div>
           {/* ---------------   */}
-         <div className="flex flex-wrap gap-sm  ">
-         <div className=" border-x-sm border-t-sm w-full max-w-sm ">
-            <header className="flex border-b-sm p-sm items-center gap-2  font-bold   text-green-dark ">
-              <FaIndustry /> Jobs By Level
-            </header>
+          <div className="flex flex-wrap gap-sm  ">
+            <div className=" border-x-sm border-t-sm w-full max-w-sm ">
+              <header className="flex border-b-sm p-sm items-center gap-2  font-bold   text-green-dark ">
+                <FaIndustry /> Jobs By Level
+              </header>
 
-            <div className=" ">
-              {levelsLoading && <div className="p-sm">Loading...</div>}
-              {(levelsError && !levels) && <div className="p-sm">Error</div>}
-              {levels?.map((level) => {
-                return (
-                  <Link
-                    to={`/jobs/?level=${level.level_name}`}
-                    key={level.level_id}
-                    className="text-black-light border-b-sm p-sm pb-xs font-normal flex items-center gap-sm hover:text-black-dark "
-                  >
-                    {level.level_name}{" "}
-                    <span className="text-green-dark">
-                      ({level.total_jobs})
-                    </span>
-                  </Link>
-                );
-              })}
+              <div className=" ">
+                {levelsLoading && <div className="p-sm">Loading...</div>}
+                {levelsError && !levels && <div className="p-sm">Error</div>}
+                {levels?.map((level) => {
+                  return (
+                    <Link
+                      to={`/jobs/?level=${level.level_name}`}
+                      key={level.level_id}
+                      className="text-black-light border-b-sm p-sm pb-xs font-normal flex items-center gap-sm hover:text-black-dark "
+                    >
+                      {level.level_name}{" "}
+                      <span className="text-green-dark">
+                        ({level.total_jobs})
+                      </span>
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+            <div className=" border-x-sm border-t-sm w-full max-w-sm">
+              <header className="flex items-center gap-2  font-semibold border-b-sm  p-sm  text-green-dark ">
+                <FaIndustry /> Jobs By Employment Type
+              </header>
+
+              <div className="">
+                {typesLoading && <div className="p-sm">Loading...</div>}
+                {typesError && !types && <div className="p-sm">Error</div>}
+                {types?.map((type) => {
+                  return (
+                    <Link
+                      to={`/jobs/?type=${type.type_name}`}
+                      key={type.type_id}
+                      className="text-black-light  p-sm pb-xs hover:text-black-dark border-b-sm rounded-sm  font-normal  flex items-center gap-sm"
+                    >
+                      {type.type_name}{" "}
+                      <span className="text-green-dark">
+                        ({type.total_jobs})
+                      </span>
+                    </Link>
+                  );
+                })}
+              </div>
             </div>
           </div>
-          <div className=" border-x-sm border-t-sm w-full max-w-sm">
-            <header className="flex items-center gap-2  font-semibold border-b-sm  p-sm  text-green-dark ">
-              <FaIndustry /> Jobs By Employment Type
-            </header>
-
-            <div className="">
-              {typesLoading && <div className="p-sm">Loading...</div>}
-              {(typesError && !types) && <div className="p-sm">Error</div>}
-              {types?.map((type) => {
-                return (
-                  <Link
-                    to={`/jobs/?type=${type.type_name}`}
-                    key={type.type_id}
-                    className="text-black-light  p-sm pb-xs hover:text-black-dark border-b-sm rounded-sm  font-normal  flex items-center gap-sm"
-                  >
-                    {type.type_name}{" "}
-                    <span className="text-green-dark">({type.total_jobs})</span>
-                  </Link>
-                );
-              })}
-            </div>
-          </div>
-         </div>
         </aside>
       </main>
     </div>

@@ -45,7 +45,7 @@ const BasicInformation = ({
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  
+
   useEffect(() => {
     if (!profile?.basic_information.id && user.fullName) {
       setValue("organizationName", user.fullName);
@@ -123,7 +123,6 @@ const BasicInformation = ({
     }
   };
 
-
   if (!isAunthenticated) return <NoUser />;
 
   return (
@@ -196,7 +195,6 @@ const BasicInformation = ({
             <Controller
               name="industryType"
               control={control}
-              
               render={({ field }) => (
                 <SelectCategory
                   values={industries}
@@ -236,8 +234,8 @@ const BasicInformation = ({
             <button
               className="p-xs px-sm bg-orange-light rounded-sm text-white"
               onClick={() => {
-                setIsEditorOpen(false)
-                clearErrors()
+                setIsEditorOpen(false);
+                clearErrors();
               }}
             >
               Cancel

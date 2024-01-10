@@ -65,7 +65,7 @@ const ExperienceForm = ({
       });
     }
     setIsEditorOpen(false);
-    clearErrors()
+    clearErrors();
   };
 
   return (
@@ -116,9 +116,7 @@ const ExperienceForm = ({
               className="outline-none p-xs border-sm"
             />
           </div>
-          <p className="text-red-600 text-sm">
-            {errors.jobLocation?.message}
-          </p>
+          <p className="text-red-600 text-sm">{errors.jobLocation?.message}</p>
         </div>
         <div>
           <div className="grid sm:flex gap-xs items-center">
@@ -130,9 +128,7 @@ const ExperienceForm = ({
               className="outline-none p-xs border-sm"
             />
           </div>
-          <p className="text-red-600 text-sm">
-            {errors.jobTitle?.message}
-          </p>
+          <p className="text-red-600 text-sm">{errors.jobTitle?.message}</p>
         </div>
         <div>
           <div className="grid sm:flex gap-xs items-center">
@@ -151,9 +147,7 @@ const ExperienceForm = ({
               })}
             </select>
           </div>
-          <p className="text-red-600 text-sm">
-            {errors.jobCategory?.message}
-          </p>
+          <p className="text-red-600 text-sm">{errors.jobCategory?.message}</p>
         </div>
         <div>
           <div className="grid sm:flex gap-xs items-center">
@@ -171,9 +165,7 @@ const ExperienceForm = ({
               )}
             />
           </div>
-          <p className="text-red-600 text-sm">
-            {errors.jobLevelId?.message}
-          </p>
+          <p className="text-red-600 text-sm">{errors.jobLevelId?.message}</p>
         </div>
         <div>
           <div className="grid sm:flex gap-xs items-center">
@@ -191,9 +183,7 @@ const ExperienceForm = ({
               }}
             />
           </div>
-          <p className="text-red-600 text-sm">
-            {errors.startDate?.message}
-          </p>
+          <p className="text-red-600 text-sm">{errors.startDate?.message}</p>
         </div>
         <div>
           <div className="grid sm:flex gap-xs items-center">
@@ -211,9 +201,7 @@ const ExperienceForm = ({
               }}
             />
           </div>
-          <p className="text-red-600 text-sm">
-            {errors.endDate?.message}
-          </p>
+          <p className="text-red-600 text-sm">{errors.endDate?.message}</p>
         </div>
         <div>
           <div className="grid sm:flex gap-xs h-fit ">
@@ -226,9 +214,7 @@ const ExperienceForm = ({
               )}
             />
           </div>
-          <p className="text-red-600 text-sm">
-            {errors.duties?.message}
-          </p>
+          <p className="text-red-600 text-sm">{errors.duties?.message}</p>
         </div>
         {isEditorOpen && (
           <div className="flex  gap-xs">

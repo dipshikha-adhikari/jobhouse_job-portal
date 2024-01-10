@@ -6,7 +6,7 @@ import { useLogout } from "../../hooks/useLogout";
 const JobseekerProfileMenu = () => {
   const ref = useRef<HTMLDivElement>(null);
   const store = useStore();
-const {handleLogout} = useLogout()
+  const { handleLogout } = useLogout();
 
   useEffect(() => {
     document.addEventListener("click", handleClickOutside);
@@ -24,8 +24,6 @@ const {handleLogout} = useLogout()
       store.toggleJobseekerProfileMenuModal();
     }
   };
-
-
 
   return (
     <div

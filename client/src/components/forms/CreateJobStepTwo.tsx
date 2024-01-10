@@ -80,121 +80,120 @@ const CreateJobStepTwo = ({ setStep, job, step }: CreateJobStepTwoProps) => {
   }, [job]);
 
   return (
-      <form className="grid  gap-sm px-md sm:px-xl pb-md " onSubmit={handleSubmit(onSubmit)}>
-        <section className="grid gap-xs  ">
-          <div>
-            <div className="grid gap-xs  sm:flex ">
-              <span className="font-semibold">Skills </span>
-              <Controller
-                name="skills"
-                control={control}
-                render={({ field: { onChange } }) => {
-                  return (
-                    <TagsInputBox
-                      isEditorOpen={isEditorOpen}
-                      values={job?.skills}
-                      onChange={onChange}
-                    />
-                  );
-                }}
-              />
-            </div>
-            <p className="text-red-600 text-sm">{errors.skills?.message}</p>
+    <form
+      className="grid  gap-sm px-md sm:px-xl pb-md "
+      onSubmit={handleSubmit(onSubmit)}
+    >
+      <section className="grid gap-xs  ">
+        <div>
+          <div className="grid gap-xs  sm:flex ">
+            <span className="font-semibold">Skills </span>
+            <Controller
+              name="skills"
+              control={control}
+              render={({ field: { onChange } }) => {
+                return (
+                  <TagsInputBox
+                    isEditorOpen={isEditorOpen}
+                    values={job?.skills}
+                    onChange={onChange}
+                  />
+                );
+              }}
+            />
           </div>
-
-          <div>
-            <div className=" grid gap-2 items-center">
-              <span className="font-semibold">Education Required</span>
-              <input
-                className="border-sm p-xs outline-none border-gray-300"
-                placeholder="Bachelor degree or equivalent"
-                {...register("educationRequired")}
-              />
-            </div>
-            <p className="text-red-600 text-sm">
-              {errors.educationRequired?.message}
-            </p>
-          </div>
-
-          <div>
-            <div className=" grid gap-2 items-center">
-              <span className="font-semibold">No of Vacancy</span>
-              <input
-                className="border-sm p-sm  outline-none border-gray-300"
-                placeholder="4"
-                {...register("noOfVacancy")}
-              />
-            </div>
-            <p className="text-red-600 text-sm">
-              {errors.noOfVacancy?.message}
-            </p>
-          </div>
-          <div>
-            <div className=" grid gap-2 items-center">
-              <span className="font-semibold">Job Level</span>
-              <Controller
-                name="levelId"
-                control={control}
-                render={({ field }) => (
-                  <SelectJob type="level" field={field} values={levels} />
-                )}
-              />
-            </div>
-            <p className="text-red-600 text-sm">{errors.levelId?.message}</p>
-          </div>
-
-          <div>
-            <div className=" grid gap-2 items-center">
-              <span className="font-semibold">Job Type</span>
-              <Controller
-                name="typeId"
-                control={control}
-                render={({ field }) => (
-                  <SelectJob field={field} type="type" values={types} />
-                )}
-              />
-            </div>
-            <p className="text-red-600 text-sm">{errors.typeId?.message}</p>
-          </div>
-
-          <div>
-            <div className=" grid gap-2 ">
-              <div>
-                <span className="font-semibold">Job Description</span>
-                <p className="text-xs text-gray-dark">
-                  Enter job requirement and description
-                </p>
-              </div>
-              <Controller
-                name="description"
-                control={control}
-                render={({ field: { onChange } }) => (
-                  <Editor onChange={onChange} initialValue={job?.description} />
-                )}
-              />
-            </div>
-            <p className="text-red-600 text-sm">
-              {errors.description?.message}
-            </p>
-          </div>
-        </section>
-
-        <div className="flex justify-around">
-          <button
-            className="border-blue-light font-semibold rounded-sm border-sm text-blue-dark px-sm p-xs disabled:opacity-50"
-            onClick={() => setStep(step - 1)}
-            type="button"
-          >
-            Prev
-          </button>
-          <button
-            className="bg-blue-light disabled:opacity-50 text-white px-sm p-xs w-20 rounded-sm"
-            disabled={isLoading}
-          >
-            {jobId !== undefined ? "Update" : "Create"}
-          </button>
+          <p className="text-red-600 text-sm">{errors.skills?.message}</p>
         </div>
-      </form>
+
+        <div>
+          <div className=" grid gap-2 items-center">
+            <span className="font-semibold">Education Required</span>
+            <input
+              className="border-sm p-xs outline-none border-gray-300"
+              placeholder="Bachelor degree or equivalent"
+              {...register("educationRequired")}
+            />
+          </div>
+          <p className="text-red-600 text-sm">
+            {errors.educationRequired?.message}
+          </p>
+        </div>
+
+        <div>
+          <div className=" grid gap-2 items-center">
+            <span className="font-semibold">No of Vacancy</span>
+            <input
+              className="border-sm p-sm  outline-none border-gray-300"
+              placeholder="4"
+              {...register("noOfVacancy")}
+            />
+          </div>
+          <p className="text-red-600 text-sm">{errors.noOfVacancy?.message}</p>
+        </div>
+        <div>
+          <div className=" grid gap-2 items-center">
+            <span className="font-semibold">Job Level</span>
+            <Controller
+              name="levelId"
+              control={control}
+              render={({ field }) => (
+                <SelectJob type="level" field={field} values={levels} />
+              )}
+            />
+          </div>
+          <p className="text-red-600 text-sm">{errors.levelId?.message}</p>
+        </div>
+
+        <div>
+          <div className=" grid gap-2 items-center">
+            <span className="font-semibold">Job Type</span>
+            <Controller
+              name="typeId"
+              control={control}
+              render={({ field }) => (
+                <SelectJob field={field} type="type" values={types} />
+              )}
+            />
+          </div>
+          <p className="text-red-600 text-sm">{errors.typeId?.message}</p>
+        </div>
+
+        <div>
+          <div className=" grid gap-2 ">
+            <div>
+              <span className="font-semibold">Job Description</span>
+              <p className="text-xs text-gray-dark">
+                Enter job requirement and description
+              </p>
+            </div>
+            <Controller
+              name="description"
+              control={control}
+              render={({ field: { onChange } }) => (
+                <Editor onChange={onChange} initialValue={job?.description} />
+              )}
+            />
+          </div>
+          <p className="text-red-600 text-sm">{errors.description?.message}</p>
+        </div>
+      </section>
+
+      <div className="flex justify-around">
+        <button
+          className="border-blue-light font-semibold rounded-sm border-sm text-blue-dark px-sm p-xs disabled:opacity-50"
+          onClick={() => setStep(step - 1)}
+          type="button"
+        >
+          Prev
+        </button>
+        <button
+          className="bg-blue-light disabled:opacity-50 text-white px-sm p-xs w-20 rounded-sm"
+          disabled={isLoading}
+        >
+          {jobId !== undefined ? "Update" : "Create"}
+        </button>
+      </div>
+    </form>
   );
 };
 

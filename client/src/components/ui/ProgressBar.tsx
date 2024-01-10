@@ -17,11 +17,10 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   },
 }));
 
-// Inspired by the former Facebook spinners.
-
 type Props = {
   step: number;
 };
+
 export default function ProgressBar({ step }: Props) {
   return (
     <Box sx={{ flexGrow: 1 }}>

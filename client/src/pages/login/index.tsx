@@ -53,7 +53,6 @@ const Login = () => {
             authStore.setAuthentication(true);
             setAuthToken(token);
             navigate(`/${role}/overview`);
-
             return "Success";
           },
           error: (err) => {

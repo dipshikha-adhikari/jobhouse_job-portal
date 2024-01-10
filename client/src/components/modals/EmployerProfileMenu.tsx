@@ -3,11 +3,10 @@ import { Link } from "react-router-dom";
 import useStore from "../../store/store";
 import { useLogout } from "../../hooks/useLogout";
 
-
 const EmployerProfileMenu = () => {
   const ref = useRef<HTMLDivElement>(null);
   const store = useStore();
-const{handleLogout} = useLogout()
+  const { handleLogout } = useLogout();
 
   useEffect(() => {
     document.addEventListener("click", handleClickOutside);
@@ -27,7 +26,6 @@ const{handleLogout} = useLogout()
   };
 
   //this is only client side logout
-  
 
   return (
     <div

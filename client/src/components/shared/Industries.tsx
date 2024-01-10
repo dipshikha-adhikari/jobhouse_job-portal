@@ -19,7 +19,7 @@ const Industries = () => {
   };
 
   if (isLoading) return <div className="p-sm">Loading...</div>;
-  if (isError && !data )  return <div className="p-sm">Error!</div>;
+  if (isError && !data) return <div className="p-sm">Error!</div>;
 
   return (
     <div className="grid gap-xs p-sm">

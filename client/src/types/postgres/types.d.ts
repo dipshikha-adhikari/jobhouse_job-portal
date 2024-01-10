@@ -55,7 +55,6 @@ export interface IJob {
     address: string;
   };
   job_application_count: string;
-
   employer_id: string;
   industry_id: string;
   industry_name: string;

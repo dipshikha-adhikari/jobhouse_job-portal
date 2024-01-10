@@ -21,7 +21,6 @@ const SearchBox = () => {
 
   useEffect(() => {
     document.addEventListener("click", handleClickOutside);
-
     return () => document.removeEventListener("click", handleClickOutside);
   }, [ref, isSuggestionOpen]);
 
@@ -59,6 +58,7 @@ const SearchBox = () => {
     if (text === "") return;
     navigate(`/jobs/search?q=${text}`);
   };
+  
   return (
     <div
       className={` relative max-w-xl w-full mx-auto p-sm rounded-sm grid gap-sm place-items-center    text-white  bottom-0 ${

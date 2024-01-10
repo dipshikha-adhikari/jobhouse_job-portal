@@ -5,6 +5,7 @@ type JobTypes = {
   type_name: string;
   type_id: string;
 };
+
 export const useTypes = () => {
   const getAllTypes = async () => {
     const result = await publicRequest.get("/api/v1/jobs/types");

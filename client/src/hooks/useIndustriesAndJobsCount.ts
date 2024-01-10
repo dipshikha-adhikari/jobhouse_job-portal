@@ -6,6 +6,7 @@ type IndustriesType = {
   industry_id: string;
   job_count: string;
 };
+
 export const useIndustriesAndJobsCount = () => {
   const getData = async () => {
     const result = await publicRequest.get("/api/v1/jobs/industries/jobscount");

@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const PageNotFound = () => {
+  
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);

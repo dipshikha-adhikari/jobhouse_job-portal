@@ -53,6 +53,7 @@ const Applications = () => {
         No one applied for this job yet!
       </div>
     );
+    
   return (
     <Layout>
       <div className=" w-full grid gap-sm  ">

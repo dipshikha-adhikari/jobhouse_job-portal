@@ -15,6 +15,7 @@ type Results = {
   isError: boolean;
   data: IJob[] | undefined;
 };
+
 const SearchResults = () => {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
@@ -36,42 +37,50 @@ const SearchResults = () => {
       <section className="grid gap-xs ">
         <SearchBox />
         <div className=" ">
-       <header className="p-sm py-md">
-       <h2 className="text-center">
-          {isLoading && "Loading..."}
-          {isError && "Error..."}
-          {!isError && !isLoading && jobs?.length !== undefined && jobs?.length > 0 && (
-            <span className=" ">
-              Below are the jobs that matches title{" "}
-              <span className="font-semibold text-green-dark"> {query}</span>
-            </span>
+          <header className="p-sm py-md">
+            <h2 className="text-center">
+              {isLoading && "Loading..."}
+              {isError && "Error..."}
+              {!isError &&
+                !isLoading &&
+                jobs?.length !== undefined &&
+                jobs?.length > 0 && (
+                  <span className=" ">
+                    Below are the jobs that matches title{" "}
+                    <span className="font-semibold text-green-dark">
+                      {" "}
+                      {query}
+                    </span>
+                  </span>
+                )}
+            </h2>
+            {jobs?.length === 0 && !isLoading && (
+              <p className="text-center">Oops! No results found</p>
+            )}
+            {jobs !== undefined && jobs?.length > 0 && (
+              <p className="font-semibold text-center ">
+                ( {jobs.length} results)
+              </p>
+            )}
+          </header>
+          {jobs !== undefined && jobs?.length > 0 && (
+            <div className="grid p-sm grid-cols-auto-sm lg:flex lg:flex-wrap lg:justify-center gap-sm ">
+              {jobs.map((item) => {
+                return (
+                  <ResultBox
+                    job={item}
+                    key={item.job_id}
+                    appliedJobs={appliedJobs}
+                  />
+                );
+              })}
+            </div>
           )}
-        </h2>
-        {jobs?.length === 0 && !isLoading && (
-          <p className="text-center">Oops! No results found</p>
-        )}
-        {jobs !== undefined && jobs?.length > 0 && (
-          <p className="font-semibold text-center ">( {jobs.length} results)</p>
-        )}
-       </header>
-        {jobs !== undefined && jobs?.length > 0 && (
-          <div className="grid p-sm grid-cols-auto-sm lg:flex lg:flex-wrap lg:justify-center gap-sm ">
-            {jobs.map((item) => {
-              return (
-                <ResultBox
-                  job={item}
-                  key={item.job_id}
-                  appliedJobs={appliedJobs}
-                />
-              );
-            })}
-          </div>
-        )}
         </div>
       </section>
       <main className="grid gap-sm h-fit md:flex   ">
         <aside className="w-full grid gap-xl   h-fit">
-        <div className=" border-sm ">
+          <div className=" border-sm ">
             <header className="flex items-center gap-2 border-b-sm  font-bold   p-sm  text-green-dark ">
               <FaIndustry /> Jobs By Industry
             </header>
@@ -79,7 +88,7 @@ const SearchResults = () => {
           </div>
         </aside>
         <section className="grid gap-sm h-fit f w-full">
-        <div className="border-sm   ">
+          <div className="border-sm   ">
             <header className="flex items-center gap-2 font-bold border-b-sm p-sm    text-green-dark">
               <BiCategory /> Jobs By Category
             </header>

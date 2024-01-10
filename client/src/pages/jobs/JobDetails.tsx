@@ -96,10 +96,10 @@ const Job = () => {
         <aside className="border-xs flex-[1.8] w-full rounded-sm border-light">
           <section className="">
             <header className="grid border-b-sm p-sm py-md gap-xs ">
-              <h2 className="text-2xl  text-green-dark ">
-                {job?.title}
-              </h2>
-              <div>Apply before : {moment(job?.deadline).format('MMM Do YYYY')}</div>
+              <h2 className="text-2xl  text-green-dark ">{job?.title}</h2>
+              <div>
+                Apply before : {moment(job?.deadline).format("MMM Do YYYY")}
+              </div>
               <p className="flex items-center gap-2">
                 <FaCheckCircle className="text-green-dark" />{" "}
                 {job.job_application_count} Applications
@@ -132,7 +132,9 @@ const Job = () => {
             </div>
             <section>
               <div className="  p-sm border-default w-fit">
-                <h2 className="font-bold  text-black-defaul">Job Specification</h2>
+                <h2 className="font-bold  text-black-defaul">
+                  Job Specification
+                </h2>
                 <p className="flex border-b-sm py-sm gap-xs sm:gap-md">
                   Experience Required <span>:</span> {job?.experience_required}
                 </p>
@@ -194,8 +196,8 @@ const Job = () => {
             </div>
           </section>
         </aside>
-       <section className="flex-1  ">
-       {jobs && jobs?.length > 1 && (
+        <section className="flex-1  ">
+          {jobs && jobs?.length > 1 && (
             <div className="border-sm w-full ">
               <h2 className="sm:text-xl p-sm flex items-center border-b-sm gap-2   text-green-dark  font-bold  ">
                 <CiStar /> More jobs by {job.employer_details.organization_name}
@@ -206,7 +208,7 @@ const Job = () => {
                 )}
                 {errorRecentJobs && <div className="text-center">Error!</div>}
                 {jobs !== undefined && jobs.length > 1 ? (
-                  jobs.slice(0,2)?.map((item) => {
+                  jobs.slice(0, 2)?.map((item) => {
                     if (item.job_id !== job.job_id) {
                       return (
                         <JobCard
@@ -225,8 +227,8 @@ const Job = () => {
                 )}
               </div>
             </div>
-        )}
-       </section>
+          )}
+        </section>
       </main>
     </div>
   );

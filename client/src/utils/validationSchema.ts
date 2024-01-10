@@ -4,10 +4,15 @@ export const registerValidationSchema = Yup.object().shape({
   fullName: Yup.string()
     .required("Name is required")
     .min(5, "Name can not be less than 5 character"),
-  phoneNumber: Yup.number().required("required")
+  phoneNumber: Yup.number()
+    .required("required")
     .typeError("Phone number must be valid")
     .min(10, "Must be 10 digit"),
-  email: Yup.string().lowercase('Email must be lowercase').strict().required("").email("Email is invalid"),
+  email: Yup.string()
+    .lowercase("Email must be lowercase")
+    .strict()
+    .required("")
+    .email("Email is invalid"),
   password: Yup.string()
     .required("")
     .min(6, "Password must be at least 6 characters")
@@ -17,14 +22,18 @@ export const registerValidationSchema = Yup.object().shape({
     .oneOf([Yup.ref("password")], "Confirm Password does not match"),
 });
 
-const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
+const phoneRegExp =
+  /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
 export const EmployerBasicInformationSchema = Yup.object().shape({
   summary: Yup.string().required(),
   industryType: Yup.number().required(),
   organizationName: Yup.string().required(),
   address: Yup.string().required(),
-  phoneNumber: Yup.string().required('Phone number is required').min(10,'Phone number must be at least 10 characters').matches(phoneRegExp, 'Phone number is not valid')
+  phoneNumber: Yup.string()
+    .required("Phone number is required")
+    .min(10, "Phone number must be at least 10 characters")
+    .matches(phoneRegExp, "Phone number is not valid"),
 });
 
 export const CreateJobStepOneSchema = Yup.object().shape({
@@ -76,7 +85,10 @@ export const JobseekerBasicInfoSchema = Yup.object().shape({
   image: Yup.string(),
   currentAddress: Yup.string().required("required"),
   permanentAddress: Yup.string().required("required"),
-  phoneNumber: Yup.string().required('Phone number is required').min(10,'Phone number must be at least 10 characters').matches(phoneRegExp, 'Phone number is not valid'),
+  phoneNumber: Yup.string()
+    .required("Phone number is required")
+    .min(10, "Phone number must be at least 10 characters")
+    .matches(phoneRegExp, "Phone number is not valid"),
   gender: Yup.string().oneOf(["male", "female", "other"]).required("required"),
   dateOfBirth: Yup.date()
     .max(new Date(), "Date of birth must be in the past")
@@ -98,27 +110,6 @@ export const JobseekerBasicInfoSchema = Yup.object().shape({
       return age >= 16;
     }),
 });
-
-// export const JobseekerExperienceSchema = Yup.object().shape({
-//   organizationName: Yup.string().required("required"),
-//   organizationType: Yup.string().required("required"),
-//   jobLocation: Yup.string().required("required"),
-//   jobTitle: Yup.string().required("required"),
-//   jobCategory: Yup.string().required("required"),
-//   jobLevelId: Yup.string().required("required"),
-//   startDate: Yup.date()
-//     .required("required")
-//     .typeError("start date must be a valid date"),
-//   endDate: Yup.date()
-//     .required("required")
-//     .typeError("end date must be a valid date")
-//     .when("startDate", (startDate, schema) => {
-//       return (
-//         startDate && schema.min(startDate, "End date must be after start date").max(new Date(), "End date must be in past")
-//       );
-//     }),
-//   duties: Yup.string().required("required"),
-// });
 
 export const JobseekerEducationSchema = Yup.object().shape({
   degree: Yup.string().required("required"),

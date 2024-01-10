@@ -5,6 +5,7 @@ type LevelsType = {
   level_name: string;
   level_id: string;
 };
+
 export const useLevels = () => {
   const getAllLevels = async () => {
     const result = await publicRequest.get("/api/v1/jobs/levels");

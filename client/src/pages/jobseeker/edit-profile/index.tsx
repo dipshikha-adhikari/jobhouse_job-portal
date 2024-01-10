@@ -21,7 +21,7 @@ const EditProfile = () => {
   const params = useParams();
   const title = params.title;
   const { profile, isLoading, isError }: ProfileProps = useJobseekerProfile();
-const[error, setError] = useState(false)
+  const [error, setError] = useState(false);
   const { isAunthenticated } = useAuthStore();
 
   const data = [
@@ -49,16 +49,17 @@ const[error, setError] = useState(false)
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  const isValidTitle =  data.find(item => item.link === title)
-  if(!isValidTitle){
-    setError(true)
-  }
+    const isValidTitle = data.find((item) => item.link === title);
+    if (!isValidTitle) {
+      setError(true);
+    }
   }, []);
 
   if (isLoading) return <Loader />;
   if (!isAunthenticated) return <NoUser />;
-  
-  if (isError || profile.user_id === undefined || error) return <PageNotFound />;
+
+  if (isError || profile.user_id === undefined || error)
+    return <PageNotFound />;
 
   return (
     <div className="grid gap-sm max-w-5xl mx-auto md:flex w-full p-sm">
@@ -88,7 +89,6 @@ const[error, setError] = useState(false)
             <div key={item.link}>{title === item.link && item.component}</div>
           );
         })}
-    
       </section>
     </div>
   );

@@ -38,6 +38,7 @@ export interface IJobseekerJobPreferenceInputs {
   expectedSalary: string;
   skills: string[];
 }
+
 export interface IJobseekerBasicInfoInputs {
   fullname: string;
   image?: string | object | ArrayBuffer | null;
@@ -47,6 +48,7 @@ export interface IJobseekerBasicInfoInputs {
   gender: string;
   dateOfBirth: Date | string;
 }
+
 export interface IJobseekerEducationInputs {
   degree: string;
   course: string;
@@ -56,6 +58,7 @@ export interface IJobseekerEducationInputs {
   marksValue?: string | number;
   marksType?: string;
 }
+
 export interface IJobseekerExperienceInputs {
   organizationName: string;
   organizationType: string;

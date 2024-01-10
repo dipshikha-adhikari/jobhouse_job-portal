@@ -27,7 +27,7 @@ const OtherInformation = ({
     handleSubmit,
     clearErrors,
     formState: { errors },
-    
+
     setValue,
   } = useForm({ resolver: yupResolver(Schema) });
 
@@ -38,7 +38,6 @@ const OtherInformation = ({
   useEffect(() => {
     if (profile?.other_information.website) {
       setValue("website", profile.other_information.website);
-    
     }
   }, [profile, isEditorOpen]);
 
@@ -66,7 +65,7 @@ const OtherInformation = ({
             className="p-xs outline-none border-sm border-default "
             disabled={!isEditorOpen}
           />
-          <p className="text-orange-dark">{ errors.website?.message}</p>
+          <p className="text-orange-dark">{errors.website?.message}</p>
         </div>
         {isEditorOpen && (
           <div className="flex gap-sm">
@@ -80,8 +79,8 @@ const OtherInformation = ({
             <button
               className="p-xs px-sm bg-orange-light rounded-sm text-white"
               onClick={() => {
-                setIsEditorOpen(false)
-                clearErrors()
+                setIsEditorOpen(false);
+                clearErrors();
               }}
             >
               Cancel

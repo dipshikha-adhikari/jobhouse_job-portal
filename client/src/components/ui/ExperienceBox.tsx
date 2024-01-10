@@ -9,7 +9,7 @@ type Props = {
 
 const EducationBox = ({ item }: Props) => {
   const [isEditorOpen, setIsEditorOpen] = useState(false);
-  
+
   return (
     <div>
       {!isEditorOpen && (

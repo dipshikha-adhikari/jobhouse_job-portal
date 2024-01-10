@@ -38,7 +38,7 @@ type Profile = {
 
 const Profile = () => {
   const { profile, isLoading, isError }: Profile = useJobseekerProfile();
-  const { fullName, phoneNumber, email} = useCurrentUser();
+  const { fullName, phoneNumber, email } = useCurrentUser();
   const { isAunthenticated } = useAuthStore();
 
   useEffect(() => {
@@ -46,7 +46,6 @@ const Profile = () => {
   }, []);
 
   if (isLoading) return <Loader />;
-
   if (!isAunthenticated) return <NoUser />;
   if (profile?.user_id === undefined || isError) return <Error />;
 

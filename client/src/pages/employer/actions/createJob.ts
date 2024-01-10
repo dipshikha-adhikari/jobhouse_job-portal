@@ -18,7 +18,6 @@ export const createJob = (
       data,
     };
     setIsLoading(true);
-
     toast.promise(privateRequest(axiosConfig), {
       loading: "Loading",
       success: () => {

@@ -69,9 +69,9 @@ const Jobs = () => {
                 (level && level + " level") ||
                 (type && type)}
             </span>{" "}
-            Jobs in Nepal. Click on the
-            job that interests you, read the job detail and if it is suitable
-            for you, Click on the apply button to send your job application.
+            Jobs in Nepal. Click on the job that interests you, read the job
+            detail and if it is suitable for you, Click on the apply button to
+            send your job application.
           </p>
         </div>
         <main className="grid gap-xl ">
@@ -98,16 +98,16 @@ const Jobs = () => {
           </section>
           <div className=" border-sm  flex-[0.3] ">
             <header className=" flex items-center gap-2 font-bold border-b-sm   p-sm  text-green-dark">
-            <BiCategory />   Jobs By Category
+              <BiCategory /> Jobs By Category
             </header>
             <Categories />
           </div>
         </main>
         <div className=" border-sm  flex-[0.3] ">
           <header className="flex items-center font-bold gap-2 border-b-sm p-sm  text-green-dark">
-          <FaIndustry />     Jobs By Industry
+            <FaIndustry /> Jobs By Industry
           </header>
-        <Industries />
+          <Industries />
         </div>
       </div>
     </Layout>

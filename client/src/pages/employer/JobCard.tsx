@@ -6,17 +6,13 @@ import { FaHandPointRight } from "react-icons/fa";
 
 type JobCardProps = {
   job: IJob;
-  // index: number;
 };
 
 const JobCard: React.FC<JobCardProps> = ({ job }) => {
   const time = moment(job.deadline).format("LL");
 
   return (
-    <div
-     
-      className="grid w-full  text-black-default  font-normal hover:text-black-default gap-xs p-md  rounded-sm shadow-sm  max-w-sm"
-    >
+    <div className="grid w-full  text-black-default  font-normal hover:text-black-default gap-xs p-md  rounded-sm shadow-sm  max-w-sm">
       <div className="grid gap-1">
         <div>
           <span>Title</span> : {job.title}
@@ -47,7 +43,7 @@ const JobCard: React.FC<JobCardProps> = ({ job }) => {
           to={`/jobs/${job.title}/${job.job_id}`}
           className="px-sm font-normal  border-green-dark text-green-dark hover:text-green-dark border-sm  rounded-sm p-xs"
         >
-         View
+          View
         </Link>
       </div>
     </div>

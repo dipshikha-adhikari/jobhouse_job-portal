@@ -250,8 +250,8 @@ const JobPreference = ({ job_preference }: JobPreference) => {
               <button
                 className=" border-sm  text-green-dark border-green-dark p-sm rounded-sm"
                 onClick={() => {
-                  setIsEditorOpen(false)
-                  clearErrors()
+                  setIsEditorOpen(false);
+                  clearErrors();
                 }}
               >
                 Cancel

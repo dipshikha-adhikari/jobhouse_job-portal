@@ -40,8 +40,6 @@ const EditProfile = () => {
     },
   ];
 
-
-
   if (isLoading) return <Loader />;
   if (!isAunthenticated) return <NoUser />;
   if (!isLoading && (error || profile?.user_id === undefined)) return <Error />;

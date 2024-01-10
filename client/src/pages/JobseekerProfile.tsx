@@ -51,7 +51,7 @@ const JobseekerProfile = () => {
 
   if (isLoading) return <Loader />;
   if (!isAunthenticated) return <NoUser />;
-  if (!isLoading &&  isError) return <Error />;
+  if (!isLoading && isError) return <Error />;
 
   return (
     <div className="sm:px-xl  lg:border-sm lg:p-xl max-w-4xl w-full mx-auto">

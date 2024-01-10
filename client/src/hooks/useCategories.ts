@@ -5,6 +5,7 @@ type CategoriesType = {
   category_name: string;
   category_id: string;
 };
+
 export const useCategories = () => {
   const getAllCategories = async () => {
     const result = await publicRequest.get("/api/v1/jobs/categories");

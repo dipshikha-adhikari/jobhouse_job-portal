@@ -15,7 +15,6 @@ const CreateJob = () => {
   const auth = useAuthStore();
   const params = useParams();
   const { role } = useCurrentUser();
-
   const jobId = params.jobId;
   const { job, isLoading } = useCurrentJob();
 
@@ -28,8 +27,7 @@ const CreateJob = () => {
   if (job?.job_id === undefined && jobId !== undefined) return <Error />;
   if (!role && !isLoading && !auth.isAunthenticated) return <NoUser />;
 
-  if ( role === "jobseeker")
-
+  if (role === "jobseeker")
     return (
       <div className="text-center min-h-[80vh] flex justify-center items-center">
         {" "}
@@ -38,20 +36,20 @@ const CreateJob = () => {
     );
 
   return (
-      <div className="w-full grid gap-sm max-w-2xl shadow-xl  mx-auto">
-        <div className="grid p-sm gap-xs">
-          <span className="flex justify-center  font-semibold ">
-            Step {step} of 2
-          </span>
-          <ProgressBar step={step} />
-        </div>
-        {step === 1 && (
-          <CreateJobStepOne step={step} job={job} setStep={setStep} />
-        )}
-        {step === 2 && (
-          <CreateJobStepTwo step={step} job={job} setStep={setStep} />
-        )}
+    <div className="w-full grid gap-sm max-w-2xl shadow-xl  mx-auto">
+      <div className="grid p-sm gap-xs">
+        <span className="flex justify-center  font-semibold ">
+          Step {step} of 2
+        </span>
+        <ProgressBar step={step} />
       </div>
+      {step === 1 && (
+        <CreateJobStepOne step={step} job={job} setStep={setStep} />
+      )}
+      {step === 2 && (
+        <CreateJobStepTwo step={step} job={job} setStep={setStep} />
+      )}
+    </div>
   );
 };
 

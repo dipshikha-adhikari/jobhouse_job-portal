@@ -42,35 +42,32 @@ const ApplicationCard = ({ item }: Data) => {
   }, [item]);
 
   return (
-    <div
- 
-      className="shadow-sm grid gap-2 p-sm font-normal break-all mx-auto max-w-sm  h-fit w-full  "
-    >
-      <Link   to={`/applicant/profile/${item.jobseeker_id}`} className="flex  items-center  gap-xs flex-wrap  text-black-light hover:text-black-dark">
+    <div className="shadow-sm grid gap-2 p-sm font-normal break-all mx-auto max-w-sm  h-fit w-full  ">
+      <Link
+        to={`/applicant/profile/${item.jobseeker_id}`}
+        className="flex  items-center  gap-xs flex-wrap  text-black-light hover:text-black-dark"
+      >
         <img
           src={item?.image?.url}
           alt=""
           className="w-20 h-20 rounded-full object-cover"
         />
-        <div   
-       
-        >
+        <div>
           <p className="font-semibold">{item?.fullname}</p>
           <p>{item?.job_title}</p>
         </div>
       </Link>
 
-        <div className="grid  gap-2">
-          <p>{item?.summary}</p>
-          <p>
-            Experience :{" "}
-            <span className="font-semibold">{totalExperience}</span>
-          </p>
-          <p>
-            Expected salary :{" "}
-            <span className="font-semibold">Rs {item?.expected_salary}</span>
-          </p>
-        </div>
+      <div className="grid  gap-2">
+        <p>{item?.summary}</p>
+        <p>
+          Experience : <span className="font-semibold">{totalExperience}</span>
+        </p>
+        <p>
+          Expected salary :{" "}
+          <span className="font-semibold">Rs {item?.expected_salary}</span>
+        </p>
+      </div>
     </div>
   );
 };

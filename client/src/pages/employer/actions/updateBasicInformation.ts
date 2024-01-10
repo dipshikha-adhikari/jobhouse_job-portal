@@ -23,7 +23,6 @@ export const updateBasicInformation = async (
       url,
       data,
     };
-
     toast.promise(privateRequest(axiosConfig), {
       loading: "loading",
       error: (err) => {

@@ -33,12 +33,12 @@ const AllJobs = ({ height }: Props) => {
     async () => {
       const result = await publicRequest.get("/api/v1/jobs/count");
       return result.data;
-    }
+    },
   );
 
   const getAllJobs = async () => {
     const res = await publicRequest.get(
-      `/api/v1/jobs/?limit=${limit}&offset=${offset}`
+      `/api/v1/jobs/?limit=${limit}&offset=${offset}`,
     );
     return res.data;
   };

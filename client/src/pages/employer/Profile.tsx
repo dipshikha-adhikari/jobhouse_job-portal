@@ -17,6 +17,7 @@ const Profile = () => {
   const user = useCurrentUser();
   const { profile, isLoading, error } = useProfile();
   const { isAunthenticated } = useAuthStore();
+  
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -40,7 +41,6 @@ const Profile = () => {
                 alt=""
                 className="min-w-full h-full max-h-[300px] object-cover relative "
               />
-              
             </div>
 
             <div className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 flex gap-sm">
@@ -104,16 +104,16 @@ const Profile = () => {
             )}
           </div>
         </section>
-            <div className="grid border-sm h-fit flex-[0.6] ">
-              <div className="grid ">
-                <h2 className="flex p-sm  text-green-dark items-center text-center gap-2 font-bold  border-b-sm  ">
-                  <CiStar /> Recent Jobs
-                </h2>
-              </div>
-              <div className="p-sm">
-                <RecentJobs employerId={profile?.user_id} />
-              </div>
-            </div>
+        <div className="grid border-sm h-fit flex-[0.6] ">
+          <div className="grid ">
+            <h2 className="flex p-sm  text-green-dark items-center text-center gap-2 font-bold  border-b-sm  ">
+              <CiStar /> Recent Jobs
+            </h2>
+          </div>
+          <div className="p-sm">
+            <RecentJobs employerId={profile?.user_id} />
+          </div>
+        </div>
       </div>
     </Layout>
   );

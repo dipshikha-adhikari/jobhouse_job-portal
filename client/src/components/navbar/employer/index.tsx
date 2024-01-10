@@ -18,7 +18,7 @@ const NavbarForEmployer = ({
   setIsModalOpen,
 }: EmployerNav) => {
   const store = useStore();
-const {profile} = useProfile()
+  const { profile } = useProfile();
   return (
     <div className="relative flex items-center gap-20 w-full justify-end">
       <div className=" gap-xs hidden md:flex ">

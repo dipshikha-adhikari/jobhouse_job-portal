@@ -69,7 +69,6 @@ const EmployerProfile = () => {
                 className="h-20 w-20 rounded-sm object-contain"
               />
             </div>
-          
           </header>
           <div className="grid gap-2 border-b-sm pb-sm   place-items-center">
             <h2 className="font-semibold text-xl">
@@ -103,10 +102,10 @@ const EmployerProfile = () => {
         </section>
         <section className="  h-fit">
           <div className=" border-sm lg:w-[350px] ">
-              <h2 className="font-bold gap-2  flex items-center p-sm border-b-sm text-green-dark   ">
-                <CiStar className="text-green-dark" /> Recent jobs by{" "}
-                {profile?.basic_information?.organization_name}
-              </h2>
+            <h2 className="font-bold gap-2  flex items-center p-sm border-b-sm text-green-dark   ">
+              <CiStar className="text-green-dark" /> Recent jobs by{" "}
+              {profile?.basic_information?.organization_name}
+            </h2>
             <div className="grid gap-xs p-sm grid-cols-auto-sm">
               {loadingRecentJobs && (
                 <div className="text-center">Loading...</div>
@@ -114,7 +113,7 @@ const EmployerProfile = () => {
               {errorRecentJobs && jobs === undefined && (
                 <div className="text-center">Error!</div>
               )}
-              {jobs?.slice(0,2)?.map((item) => {
+              {jobs?.slice(0, 2)?.map((item) => {
                 return (
                   <JobCard
                     job={item}

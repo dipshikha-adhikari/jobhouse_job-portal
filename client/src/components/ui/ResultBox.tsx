@@ -25,9 +25,7 @@ const ResultBox = ({ job, appliedJobs }: IResultBox) => {
   }, [job, appliedJobs]);
 
   return (
-   
-    
-      <div  className="grid w-full max-w-md border-xs mx-auto lg:mx-0  border-light font-normal  ">
+    <div className="grid w-full max-w-md border-xs mx-auto lg:mx-0  border-light font-normal  ">
       <div className="flex p-sm gap-xs items-center text-black-dark hover:text-black-dark">
         <img
           src={
@@ -38,19 +36,20 @@ const ResultBox = ({ job, appliedJobs }: IResultBox) => {
           alt=""
           className="w-16 h-16 rounded-full object-cover"
         />
-        <div >
-        <Link
-        className="text-black-light hover:text-black-dark"
-      to={`/jobs/${job.title}/${job.job_id}`}>
-          <p className="font-semibold">
-            {job.employer_details?.organization_name}
-          </p>
-          <p className="font-semibold flex items-center">
-            <GoDotFill className="text-blue-dark" /> {job.title}
-          </p>
-          <p className="font-normal flex items-center gap-xs">
-            <CiLocationOn fontSize="small" /> {job.location}
-          </p>
+        <div>
+          <Link
+            className="text-black-light hover:text-black-dark"
+            to={`/jobs/${job.title}/${job.job_id}`}
+          >
+            <p className="font-semibold">
+              {job.employer_details?.organization_name}
+            </p>
+            <p className="font-semibold flex items-center">
+              <GoDotFill className="text-blue-dark" /> {job.title}
+            </p>
+            <p className="font-normal flex items-center gap-xs">
+              <CiLocationOn fontSize="small" /> {job.location}
+            </p>
           </Link>
           <div className="py-sm">
             <p className="flex text-gray-dark items-center gap-2">

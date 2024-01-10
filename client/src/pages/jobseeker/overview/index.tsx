@@ -25,11 +25,11 @@ const JobseekerOverview = () => {
   const [selected, setSelected] = useState("matchingJobs");
   const { profile, isLoading, isError }: Profile = useJobseekerProfile();
   const { isAunthenticated } = useAuthStore();
-  
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  
+
   if (!isAunthenticated) return <NoUser />;
   if (isLoading) return <Loader />;
   if (isError) return <Error />;
@@ -75,19 +75,19 @@ const JobseekerOverview = () => {
       </div>
 
       <section className="grid pt-sm gap-sm">
-      <div className="border-sm   ">
-            <header className="flex items-center gap-2 font-bold border-b-sm p-sm    text-green-dark">
-              <BiCategory /> Jobs By Category
-            </header>
-            <Categories />
-          </div>
+        <div className="border-sm   ">
+          <header className="flex items-center gap-2 font-bold border-b-sm p-sm    text-green-dark">
+            <BiCategory /> Jobs By Category
+          </header>
+          <Categories />
+        </div>
 
-          <div className=" border-sm ">
-            <header className="flex items-center gap-2 border-b-sm  font-bold   p-sm  text-green-dark ">
-              <FaIndustry /> Jobs By Industry
-            </header>
-            <Industries />
-          </div>
+        <div className=" border-sm ">
+          <header className="flex items-center gap-2 border-b-sm  font-bold   p-sm  text-green-dark ">
+            <FaIndustry /> Jobs By Industry
+          </header>
+          <Industries />
+        </div>
       </section>
     </Layout>
   );
