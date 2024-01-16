@@ -9,7 +9,7 @@ const Pagination = ({ limit, totalLength, offset, setOffset }: Pagination) => {
   const index = offset / limit;
 
   const pages = Math.ceil(totalLength / limit);
-  const array = new Array(pages).fill(0).map((i, ind) => ind + "x");
+  const array = new Array(pages).fill(0).map((_, ind) => ind + "x");
 
   const handleNext = () => {
     if (offset < totalLength - limit) {

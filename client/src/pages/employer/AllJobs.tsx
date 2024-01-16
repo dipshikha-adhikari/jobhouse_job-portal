@@ -30,8 +30,8 @@ const AllJobs: React.FC<AllJobsProps> = ({ employerId }) => {
 
   return (
     <div className="grid place-items-center gap-sm grid-cols-[repeat(auto-fit,minmax(300px,1fr))]">
-      {jobs?.map((job, ind) => {
-        return <JobCard job={job} key={job.job_id} index={ind} />;
+      {jobs?.map((job) => {
+        return <JobCard job={job} key={job.job_id} />;
       })}
     </div>
   );
