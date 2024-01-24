@@ -71,7 +71,7 @@ const NavbarForJobseeker = ({
               "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqZYAYrmuzw5vIhNRWG2f436EKH4LqTUAFhLDWd2yRNA&s"
             }
             alt=""
-            className="w-8 h-8 sm:w-10 sm:h-10 rounded-full profile-menu-button  object-cover"
+            className="w-8 aspect-auto h-8 sm:w-10 sm:h-10 rounded-full profile-menu-button  object-cover"
           />
           <FaArrowRight
             fontSize={10}

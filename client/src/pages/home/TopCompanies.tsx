@@ -27,7 +27,7 @@ const TopCompanies = () => {
      
       
   return (
-    <div className="  border-sm ">
+    <div className="  border-sm grid gap-sm ">
     <header className="border-b-sm  font-bold text-green-dark xl:text-xl  p-sm  flex items-center gap-2">
       {" "}
       <MdHomeWork />
@@ -42,7 +42,7 @@ const TopCompanies = () => {
           <Link
             key={item.user_id}
             to={`/employer/${item.organization_name}/${item.user_id}`}
-            className="grid gap-2 shadow-sm w-full text-black-default max-w-sm hover:text-black-dark    p-sm place-content-start"
+            className="grid gap-2 shadow-sm w-full text-black-default max-w-sm hover:text-black-dark  p-sm place-content-start"
           >
             <div className="flex items-start gap-xs">
               <img
@@ -69,10 +69,11 @@ const TopCompanies = () => {
       })}
     </div>
     <div>
-      <img src="https://cdn.pixabay.com/photo/2019/01/19/19/22/recruitment-3942378_640.jpg" alt="" className="w-full  max-h-[300px] object-cover"/>
+      <img src="https://cdn.pixabay.com/photo/2019/01/19/19/22/recruitment-3942378_640.jpg"  alt="image" className="w-full  h-[200px] object-cover"/>
     </div>
   </div>
   )
 }
 
 export default TopCompanies
+

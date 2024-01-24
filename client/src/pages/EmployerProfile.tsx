@@ -66,7 +66,7 @@ const EmployerProfile = () => {
                     : "https://media.istockphoto.com/id/1340893300/vector/technology-logo-design-template-networking-vector-logo-design.jpg?s=612x612&w=0&k=20&c=-8XBWFDRAAYe3leL4nuMnei0wWpL6-IqsPCAbWIhASk="
                 }
                 alt=""
-                className="h-20 w-20 rounded-sm object-contain"
+                className="h-20  w-20 rounded-sm object-contain"
               />
             </div>
           </header>

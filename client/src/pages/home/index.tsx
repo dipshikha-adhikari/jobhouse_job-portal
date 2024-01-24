@@ -57,14 +57,15 @@ const Home = () => {
     <div className="grid gap-sm ">
       <header className=" justify-start  relative " ref={headerRef}>
         <img
+        rel="preload"
           src="https://img.freepik.com/free-photo/living-room-product-backdrop-interior-background_53876-147964.jpg?size=626&ext=jpg"
           alt=""
-          className=" absolute z-[-10] top-0 left-auto w-full h-full  object-cover"
+          className="h-full absolute z-[-10] top-0 left-auto w-full  object-cover"
         />
         <img
           src="https://static.merojob.com/images/default_pp/header-image.png"
           alt=""
-          className=" max-h-[200px] mx-auto  object-cover"
+          className=" h-[120px] mx-auto  object-cover"
         />
         <SearchBox />
       </header>
