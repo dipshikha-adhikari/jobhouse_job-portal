@@ -9,6 +9,7 @@ import { IJob } from "../types/postgres/types";
 import { useAppliedJobs } from "./jobseeker/hooks/useAppliedJobs";
 import { FaIndustry } from "react-icons/fa";
 import { BiCategory } from "react-icons/bi";
+import { useEffect } from "react";
 
 type Results = {
   isLoading: boolean;
@@ -31,6 +32,10 @@ const SearchResults = () => {
     );
     return result.data;
   });
+
+  useEffect(() => {
+window.scrollTo(0,0)
+  },[])
 
   return (
     <div className="grid gap-sm w-full ">

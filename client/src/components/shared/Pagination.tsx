@@ -39,15 +39,15 @@ const Pagination = ({ limit, totalLength, offset, setOffset }: Pagination) => {
 
       {array.map((a, ind) => {
         return (
-          <span
+          <button
             key={a}
             className={`${
               index === ind && "bg-green-dark text-white"
-            } border-sm cursor-pointer border-gray-default rounded-sm p-sm `}
+            } border-sm cursor-pointer border-gray-default rounded-sm p-sm px-md `}
             onClick={() => handlePageNumber(ind)}
           >
             {ind + 1}
-          </span>
+          </button>
         );
       })}
       <button

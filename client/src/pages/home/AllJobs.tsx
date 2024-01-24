@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { CiStar } from "react-icons/ci";
 import { useQuery } from "react-query";
 import JobCard from "../../components/shared/JobCard";
-import Loader from "../../components/shared/Loader";
 import Pagination from "../../components/shared/Pagination";
 import { publicRequest } from "../../lib/axios";
 import { AppliedJobs, IJob } from "../../types/postgres/types";
@@ -20,7 +19,7 @@ type Props = {
 const AllJobs = ({ height }: Props) => {
   const { jobs: appliedJobs }: AppliedJobsType = useAppliedJobs();
   const [offset, setOffset] = useState(0);
-  const limit = 4;
+  const limit = 6;
 
   useEffect(() => {
     if (height) {
@@ -48,14 +47,14 @@ const AllJobs = ({ height }: Props) => {
     isError,
   } = useQuery<IJob[]>(["allJobs", offset], getAllJobs);
 
-  if (isLoading) return <Loader />;
-  if (isError) return <div className="text-center">Error!</div>;
 
   return (
     <div className=" border-sm ">
       <header className="  border-b-sm flex font-bold items-center gap-2  p-sm   text-green-dark">
         <CiStar className="text-green-dark " /> Top jobs
       </header>
+      {isLoading && <div className="p-sm">Loading...</div>}
+      {isError && <div className="p-sm">Error!</div>}
       <div className="grid gap-xs p-sm place-items-center  grid-cols-auto-sm md:grid-cols-auto-md">
         {jobs?.map((job) => {
           return (

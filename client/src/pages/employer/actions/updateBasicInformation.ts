@@ -34,6 +34,7 @@ export const updateBasicInformation = async (
         queryClient.invalidateQueries("employerProfile");
         setIsLoading(false);
         setIsEditorOpen(false);
+        window.scrollTo(0,0)
         return "Success";
       },
     });

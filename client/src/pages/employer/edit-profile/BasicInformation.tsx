@@ -58,15 +58,10 @@ const BasicInformation = ({
   useEffect(() => {
     if (profile?.basic_information.id) {
       setImagePreview(profile?.image?.url);
-      // setCoverImagePreview(profile?.cover_image?.url);
       setImage(() => ({
         url: profile?.image?.url,
         public_id: profile?.image?.public_id,
       }));
-      // setCoverImage(() => ({
-      //   url: profile?.cover_image?.url,
-      //   public_id: profile?.cover_image?.public_id,
-      // }));
 
       setValue(
         "organizationName",

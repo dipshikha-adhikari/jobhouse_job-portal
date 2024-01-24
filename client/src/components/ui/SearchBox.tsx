@@ -90,7 +90,7 @@ const SearchBox = () => {
       {isSuggestionOpen && (
         <div
           ref={ref}
-          className=" absolute grid gap-1 text-center max-w-md  bg-white w-full  py-sm top-12 border-sm  "
+          className=" absolute grid gap-1 text-center max-w-md  bg-white w-full  py-sm top-12 border-sm "
         >
           {isLoading && (
             <div className="text-center text-black-default ">Loading...</div>
@@ -102,7 +102,7 @@ const SearchBox = () => {
           )}
 
           {suggestions &&
-            suggestions?.map((item: Suggestion) => {
+            suggestions?.slice(0,10).map((item: Suggestion) => {
               return (
                 <Link
                   key={item.title}
