@@ -27,7 +27,7 @@ const TopCompanies = () => {
      
       
   return (
-    <div className="  border-sm grid gap-sm ">
+    <div className=" border-sm grid gap-sm ">
     <header className="border-b-sm  font-bold text-green-dark xl:text-xl  p-sm  flex items-center gap-2">
       {" "}
       <MdHomeWork />
@@ -69,7 +69,7 @@ const TopCompanies = () => {
       })}
     </div>
     <div>
-      <img src="https://cdn.pixabay.com/photo/2019/01/19/19/22/recruitment-3942378_640.jpg"  alt="image" className="w-full  h-[200px] object-cover"/>
+      <img src="https://storage.googleapis.com/interactapp-202211.appspot.com/cfB7YHEC863JJOB-POSTING-1024x576.png"  alt="image" className="w-full  h-[240px] object-cover"/>
     </div>
   </div>
   )

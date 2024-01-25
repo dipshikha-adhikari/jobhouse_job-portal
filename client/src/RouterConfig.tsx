@@ -33,8 +33,8 @@ const Root = () => {
         <Toaster position="top-center" reverseOrder={false} />
         <Navbar />
         <Layout>
-          <div className=" py-[10vh] relative">
-      <Suspense fallback={<div>Loading...</div>}>
+          <div className=" py-[10vh]  min-h-screen relative">
+      <Suspense fallback={<div></div>}>
       <Outlet />
       </Suspense>
           </div>
