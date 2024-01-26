@@ -22,7 +22,7 @@ const AllJobs: React.FC<AllJobsProps> = ({ employerId }) => {
   });
 
   if (isLoading) return <div className="text-center">Loading....</div>;
-  if (error) return <Error />;
+  if (error ) return <Error />;
 
   if (jobs?.length === 0) {
     return <div>You have not posted any job yet!</div>;

@@ -27,14 +27,6 @@ const AllJobs = ({ height }: Props) => {
     }
   }, [offset]);
 
-  const { data: allJobsCount } = useQuery(
-    ["allJobsCount", offset],
-    async () => {
-      const result = await publicRequest.get("/api/v1/jobs/count");
-      return result.data;
-    },
-  );
-
   const getAllJobs = async () => {
     const res = await publicRequest.get(
       `/api/v1/jobs/?limit=${limit}&offset=${offset}`,
@@ -47,6 +39,16 @@ const AllJobs = ({ height }: Props) => {
     isError,
   } = useQuery<IJob[]>(["allJobs", offset], getAllJobs);
 
+  const { data: allJobsCount } = useQuery(
+    ["allJobsCount", offset],
+    async () => {
+      const result = await publicRequest.get("/api/v1/jobs/count");
+      return result.data;
+    },
+  );
+
+
+
 
   return (
     <div className=" border-sm ">
@@ -54,7 +56,7 @@ const AllJobs = ({ height }: Props) => {
         <CiStar className="text-green-dark " /> Top jobs
       </header>
       {isLoading && <div className="p-sm">Loading...</div>}
-      {isError && <div className="p-sm">Error!</div>}
+      {(isError && !jobs) && <div className="p-sm">Error!</div>}
       <div className="grid gap-xs p-sm place-items-center  grid-cols-auto-sm md:grid-cols-auto-md">
         {jobs?.map((job) => {
           return (
@@ -62,7 +64,7 @@ const AllJobs = ({ height }: Props) => {
           );
         })}
       </div>
-      {allJobsCount?.count && (
+      {(allJobsCount?.count && jobs) && (
         <Pagination
           offset={offset}
           setOffset={setOffset}

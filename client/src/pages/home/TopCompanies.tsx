@@ -69,7 +69,7 @@ const TopCompanies = () => {
       })}
     </div>
     <div>
-      <img src="https://storage.googleapis.com/interactapp-202211.appspot.com/cfB7YHEC863JJOB-POSTING-1024x576.png"  alt="image" className="w-full  h-[240px] object-cover"/>
+      <img src="https://storage.googleapis.com/interactapp-202211.appspot.com/cfB7YHEC863JJOB-POSTING-1024x576.png"  alt="image" className="w-full  h-[240px] sm:object-cover"/>
     </div>
   </div>
   )

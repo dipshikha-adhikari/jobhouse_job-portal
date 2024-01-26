@@ -4,6 +4,7 @@ import { Toaster } from "react-hot-toast";
 import { Outlet, createBrowserRouter } from "react-router-dom";
 import { Layout } from "./App";
 import Footer from "./components/footer";
+import Loader from './components/shared/Loader';
 
 const EmployerRegister = lazy(( ) =>import("./components/forms/EmployerRegister"))
 const JobseekerRegister = lazy(( ) =>import("./components/forms/JobseekerRegister"))
@@ -34,7 +35,7 @@ const Root = () => {
         <Navbar />
         <Layout>
           <div className=" py-[10vh]  min-h-screen relative">
-      <Suspense fallback={<div></div>}>
+      <Suspense fallback={<Loader/>}>
       <Outlet />
       </Suspense>
           </div>
