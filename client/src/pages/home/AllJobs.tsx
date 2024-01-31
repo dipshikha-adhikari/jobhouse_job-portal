@@ -47,17 +47,14 @@ const AllJobs = ({ height }: Props) => {
     },
   );
 
-
-
-
   return (
-    <div className=" border-sm ">
+    <div className=" border-sm  min-h-[300px]">
       <header className="  border-b-sm flex font-bold items-center gap-2  p-sm   text-green-dark">
         <CiStar className="text-green-dark " /> Top jobs
       </header>
-      {isLoading && <div className="p-sm">Loading...</div>}
+      {isLoading && <div className="p-sm ">Loading...</div>}
       {(isError && !jobs) && <div className="p-sm">Error!</div>}
-      <div className="grid gap-xs p-sm place-items-center  grid-cols-auto-sm md:grid-cols-auto-md">
+      <div className="grid gap-xs p-sm place-items-center  sm:grid-cols-auto-sm md:grid-cols-auto-md">
         {jobs?.map((job) => {
           return (
             <JobCard appliedJobs={appliedJobs} job={job} key={job.job_id} />

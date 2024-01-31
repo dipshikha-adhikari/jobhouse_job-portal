@@ -3,7 +3,13 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./RouterConfig";
 
-export const queryClient = new QueryClient();
+export const queryClient = new QueryClient({
+  defaultOptions:{
+    queries:{
+      refetchOnWindowFocus:false
+    }
+  }
+});
 
 type ChildrenProps = {
   children: ReactNode;

@@ -1,14 +1,14 @@
 import { Suspense, lazy } from "react"
-
 import { Toaster } from "react-hot-toast";
 import { Outlet, createBrowserRouter } from "react-router-dom";
 import { Layout } from "./App";
 import Footer from "./components/footer";
 import Loader from './components/shared/Loader';
+import Navbar from "./components/navbar";
+import Home from "./pages/home";
 
 const EmployerRegister = lazy(( ) =>import("./components/forms/EmployerRegister"))
 const JobseekerRegister = lazy(( ) =>import("./components/forms/JobseekerRegister"))
-const Navbar = lazy(( ) =>import("./components/navbar"))
 const PageNotFound = lazy(( ) =>import("./components/shared/PageNotFound"))
 const EmployerProfileView = lazy(( ) =>import("./pages/EmployerProfile"))
 const JobseekerProfileView = lazy(( ) =>import("./pages/JobseekerProfile"))
@@ -17,7 +17,6 @@ const Applications = lazy(( ) =>import("./pages/employer/Applications"))
 const EmployerOverview = lazy(( ) =>import("./pages/employer/Overview"))
 const EmployerProfile = lazy(( ) =>import("./pages/employer/Profile"))
 const EditEmployerProfile = lazy(( ) =>import("./pages/employer/edit-profile"))
-const Home = lazy(( ) =>import("./pages/home"))
 const Jobs = lazy(( ) =>import("./pages/jobs"))
 const CreateJob = lazy(( ) =>import("./pages/jobs/CreateJob"))
 const Job = lazy(( ) =>import("./pages/jobs/JobDetails"))
@@ -26,7 +25,6 @@ const ProfileReview = lazy(( ) =>import("./pages/jobseeker/ProfileReview"))
 const EditProfile = lazy(( ) =>import("./pages/jobseeker/edit-profile"))
 const JobseekerOverview = lazy(( ) =>import("./pages/jobseeker/overview/index"))
 const Login = lazy(( ) =>import("./pages/login"))
-
 
 const Root = () => {
     return (

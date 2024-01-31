@@ -30,7 +30,7 @@ const Pagination = ({ limit, totalLength, offset, setOffset }: Pagination) => {
   return (
     <div className="flex flex-wrap justify-end gap-xs p-md">
       <button
-        className="border-sm  text-green-dark cursor-pointer border-green-dark rounded-sm p-sm disabled:opacity-60 "
+        className="border-sm  text-green-dark cursor-pointer disabled:cursor-default border-green-dark rounded-sm p-sm disabled:opacity-60 "
         disabled={offset < limit}
         onClick={handlePrev}
       >
@@ -51,7 +51,7 @@ const Pagination = ({ limit, totalLength, offset, setOffset }: Pagination) => {
         );
       })}
       <button
-        className="border-sm text-green-dark border-green-dark rounded-sm p-sm cursor-pointer disabled:opacity-60"
+        className="border-sm text-green-dark border-green-dark rounded-sm p-sm cursor-pointer disabled:cursor-default disabled:opacity-60"
         disabled={offset >= totalLength - limit}
         onClick={handleNext}
       >

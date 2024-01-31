@@ -3,13 +3,13 @@ import { BiCategory } from "react-icons/bi";
 import { FaIndustry } from "react-icons/fa";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
+import livingroom from '../../asstes/livingroom.avif';
 import Categories from "../../components/shared/Categories";
 import Industries from "../../components/shared/Industries";
 import SearchBox from "../../components/ui/SearchBox";
 import { publicRequest } from "../../lib/axios";
 import AllJobs from "./AllJobs";
 import TopCompanies from "./TopCompanies";
-
 
 type Levels = {
   level_id: string;
@@ -26,8 +26,7 @@ type Types = {
 const Home = () => {
   const headerRef = useRef<HTMLDivElement>(null);
   const [headerHeight, setHeaderHeight] = useState(0);
-
-
+ 
   const {
     data: levels,
     isLoading: levelsLoading,
@@ -57,8 +56,7 @@ const Home = () => {
     <div className="grid gap-sm ">
       <header className=" justify-start  relative " ref={headerRef}>
         <img
-        rel="preload"
-          src="https://img.freepik.com/free-photo/living-room-product-backdrop-interior-background_53876-147964.jpg?size=626&ext=jpg"
+          src={livingroom}
           alt=""
           className="h-full absolute z-[-10] top-0 left-auto w-full  object-cover"
         />
@@ -93,6 +91,10 @@ const Home = () => {
                   </header>
                   <Industries />
                 </div>
+
+                <div>
+                  <img src="https://eslteacherrecruitment.com/wp-content/uploads/2017/04/free-job-posting.jpg" alt=""  className="object-contain h-[300px]"/>
+                </div>
           {/* ---------------   */}
           <div className="flex flex-wrap gap-sm  ">
             <div className=" border-x-sm border-t-sm w-full max-w-sm ">
@@ -119,7 +121,7 @@ const Home = () => {
                 })}
               </div>
             </div>
-            <div className=" border-x-sm border-t-sm w-full max-w-sm">
+            <div  className=" border-x-sm border-t-sm w-full max-w-sm">
               <header className="flex items-center gap-2  font-semibold border-b-sm  p-sm  text-green-dark ">
                 <FaIndustry /> Jobs By Employment Type
               </header>
@@ -145,7 +147,9 @@ const Home = () => {
             </div>
           </div>
         </aside>
+       
       </main>
+      
     </div>
   );
 };

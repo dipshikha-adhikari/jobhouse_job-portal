@@ -34,21 +34,26 @@ const SearchBox = () => {
     }
   };
 
+  const getSearchSuggestions =  async() => {
+   if(text === '') return;
+   const result = await publicRequest.get(
+    `/api/v1/jobs/search/suggestions?query=${text}`,
+  );
+  return result.data
+  }
+
   const { data: suggestions, isLoading }: Data = useQuery(
     ["suggestions", text],
-    async () => {
-      const result = await publicRequest.get(
-        `/api/v1/jobs/search/suggestions?query=${text}`,
-      );
-      return result.data;
-    },
+  getSearchSuggestions
   );
 
   useEffect(() => {
     if (text !== "") {
       setIsSuggestionOpen(true);
+    }else{
+      setIsSuggestionOpen(false)
     }
-  }, [suggestions]);
+  }, [suggestions, text]);
 
   function handleChange(query: string) {
     setText(query);
@@ -58,6 +63,12 @@ const SearchBox = () => {
     if (text === "") return;
     navigate(`/jobs/search?q=${text}`);
   };
+
+  const handleFocus = () => {
+    if(text ){
+      setIsSuggestionOpen(true)
+    }
+  }
   
   return (
     <div
@@ -74,7 +85,7 @@ const SearchBox = () => {
           type="text"
           className="outline-none h-10 rounded-none w-full text-black-dark border-none p-2 search-input"
           placeholder="Search by Job Title,  Skill or Organization"
-          onFocus={() => setIsSuggestionOpen(true)}
+          onFocus={handleFocus}
           onChange={(e) => optimizedFunction(e.target.value)}
         />
         <button
