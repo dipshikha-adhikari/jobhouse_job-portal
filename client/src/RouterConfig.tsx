@@ -1,11 +1,9 @@
 import { Suspense, lazy } from "react"
-
 import { Toaster } from "react-hot-toast";
 import { Outlet, createBrowserRouter } from "react-router-dom";
 import { Layout } from "./App";
 import Footer from "./components/footer";
 import Loader from './components/shared/Loader';
-
 const EmployerRegister = lazy(( ) =>import("./components/forms/EmployerRegister"))
 const JobseekerRegister = lazy(( ) =>import("./components/forms/JobseekerRegister"))
 const Navbar = lazy(( ) =>import("./components/navbar"))
@@ -27,7 +25,6 @@ const EditProfile = lazy(( ) =>import("./pages/jobseeker/edit-profile"))
 const JobseekerOverview = lazy(( ) =>import("./pages/jobseeker/overview/index"))
 const Login = lazy(( ) =>import("./pages/login"))
 
-
 const Root = () => {
     return (
       <>
@@ -44,7 +41,6 @@ const Root = () => {
       </>
     )
   }
-
   
 export const router = createBrowserRouter([
     {
