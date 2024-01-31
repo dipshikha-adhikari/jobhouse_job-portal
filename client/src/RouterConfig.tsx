@@ -6,7 +6,6 @@ import Footer from "./components/footer";
 import Loader from './components/shared/Loader';
 import Navbar from "./components/navbar";
 import Home from "./pages/home";
-
 const EmployerRegister = lazy(( ) =>import("./components/forms/EmployerRegister"))
 const JobseekerRegister = lazy(( ) =>import("./components/forms/JobseekerRegister"))
 const PageNotFound = lazy(( ) =>import("./components/shared/PageNotFound"))
@@ -42,7 +41,6 @@ const Root = () => {
       </>
     )
   }
-
   
 export const router = createBrowserRouter([
     {
