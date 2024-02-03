@@ -5,13 +5,13 @@ import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { useCategories } from "../../hooks/useCategories";
 import useJobInputs from "../../store/jobInputs";
-import { IJob } from "../../types/postgres/types";
 import { CreateJobStepOneSchema } from "../../utils/validationSchema";
 import ResponsiveDayPicker from "../mui/DayPicker";
 import SelectCategory from "../mui/SelectCategory";
+import { useCurrentJob } from "../../pages/jobs/hooks/useCurrentJobs";
 
 export interface ICreateJobStepOneInputs {
-  title: string;
+  title: string 
   categoryId: string;
   location: string;
   experienceRequired: string;
@@ -22,10 +22,10 @@ export interface ICreateJobStepOneInputs {
 type CreateJobStepOneProps = {
   setStep: (props: number) => void;
   step: number;
-  job: IJob | undefined;
 };
 
-const CreateJobStepOne = ({ setStep, step, job }: CreateJobStepOneProps) => {
+const CreateJobStepOne = ({ setStep, step }: CreateJobStepOneProps) => {
+
   const {
     register,
     handleSubmit,
@@ -33,12 +33,14 @@ const CreateJobStepOne = ({ setStep, step, job }: CreateJobStepOneProps) => {
     setValue,
     control,
   } = useForm({ resolver: yupResolver(CreateJobStepOneSchema) });
+  const { job } = useCurrentJob();
   const jobStore = useJobInputs();
   const { categories } = useCategories();
   const isEditorOpen = true;
 
   const onSubmit: SubmitHandler<ICreateJobStepOneInputs> = (data) => {
     jobStore.setStepOneInputs(data);
+    jobStore.setStepOneCompleted(true)
     setStep(step + 1);
   };
 
@@ -54,21 +56,28 @@ const CreateJobStepOne = ({ setStep, step, job }: CreateJobStepOneProps) => {
     });
   }, []);
 
+  
+
   useEffect(() => {
-    setValue("categoryId", job?.category_id || jobStore.stepOne.categoryId!);
-    setValue("title", job?.title || jobStore.stepOne.title);
-    setValue("salary", job?.salary || jobStore.stepOne.salary);
+    setValue("categoryId",  jobStore.stepOne.categoryId || job?.category_id || "");
+    setValue("title",  jobStore.stepOne.title || job?.title || "");
+    setValue("salary",jobStore.stepOne.salary || job?.salary || "");
     setValue(
       "deadline",
-      new Date(moment(job?.deadline).format("YYYY-MM-DD")) ||
-        jobStore.stepOne.deadline,
+    new Date(moment(job?.deadline).format("YYYY-MM-DD")) || jobStore.stepOne.deadline ,
     );
-    setValue("location", job?.location || jobStore.stepOne.location);
+    setValue("location",  jobStore.stepOne.location ||job?.location || "");
     setValue(
       "experienceRequired",
-      job?.experience_required || jobStore.stepOne.experienceRequired,
+      jobStore.stepOne.experienceRequired ||  job?.experience_required || "",
     );
   }, [job]);
+
+  useEffect(() => {
+   if(jobStore.isStepOneCompleted){
+    setValue('deadline', jobStore.stepOne.deadline)
+   }
+      },[jobStore.isStepOneCompleted])
 
   return (
     <div className="bg-white">

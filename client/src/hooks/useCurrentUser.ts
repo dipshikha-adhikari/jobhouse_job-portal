@@ -11,6 +11,7 @@ interface DecodedToken {
 export const useCurrentUser = () => {
   const [fullName, setFullName] = useState(null);
   const [role, setRole] = useState(null);
+  const [id, setId] = useState(null);
   const [email, setEmail] = useState(null);
   const [phoneNumber, setPhoneNumber] = useState(null);
   const authStore = useAuthStore();
@@ -26,6 +27,7 @@ export const useCurrentUser = () => {
       setRole(null);
       setEmail(null);
       setPhoneNumber(null);
+      setId(null)
     }
 
     if (parsedInfo) {
@@ -37,6 +39,8 @@ export const useCurrentUser = () => {
         setFullName(parsedInfo.fullName);
         setRole(parsedInfo.role);
         setEmail(parsedInfo.email);
+      setId(parsedInfo.id)
+
         setPhoneNumber(parsedInfo.phoneNumber);
       } else {
         removeUserInfo();
@@ -49,5 +53,6 @@ export const useCurrentUser = () => {
     role,
     email,
     phoneNumber,
+    id
   };
 };

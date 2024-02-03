@@ -1,13 +1,15 @@
 import { create } from "zustand";
 
 type StepOne = {
-  title: string;
+  title: string ;
   categoryId: string;
   location: string;
   experienceRequired: string;
   salary: string;
   deadline: Date;
 };
+
+
 
 type StepTwo = {
   noOfVacancy: number;
@@ -21,8 +23,11 @@ type StepTwo = {
 interface jobInputs {
   stepOne: StepOne;
   stepTwo: StepTwo;
+  isStepOneCompleted:boolean
   setStepOneInputs: (props: StepOne) => void;
   setStepTwoInputs: (props: StepTwo) => void;
+  setStepOneCompleted:(props:boolean) => void
+
 }
 
 const useJobInputs = create<jobInputs>((set) => ({
@@ -33,6 +38,7 @@ const useJobInputs = create<jobInputs>((set) => ({
     experienceRequired: "",
     salary: "",
     deadline: new Date(),
+    updated:false
   },
   stepTwo: {
     noOfVacancy: 1,
@@ -42,7 +48,8 @@ const useJobInputs = create<jobInputs>((set) => ({
     skills: [],
     educationRequired: "",
   },
-
+  isStepOneCompleted:false,
+setStepOneCompleted:(props) => {set((state) => ({...state,isStepOneCompleted:props}))},
   setStepOneInputs: (props) => {
     set((state) => ({
       ...state,

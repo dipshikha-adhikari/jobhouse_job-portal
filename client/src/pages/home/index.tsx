@@ -56,7 +56,7 @@ const Home = () => {
     return (
       <div>
         <Header ref={headerRef}/>
-        <img src={running} alt="" className="w-10 h-10 mx-auto p-sm" />
+        <img src={running} alt="" className="w-12 h-12 mx-auto p-sm" />
       </div>
     );
 

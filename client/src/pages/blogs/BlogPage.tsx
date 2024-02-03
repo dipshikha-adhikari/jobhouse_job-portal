@@ -8,8 +8,8 @@ const BlogPage = () => {
 
   return (
     <div className='min-h-screen text-center py-md'>
-        Sorry blog is not available!
-        It will be available soon. 😉
+        Sorry! blog is not available right now.
+        It will be available soon.
     </div>
   )
 }

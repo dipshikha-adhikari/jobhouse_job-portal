@@ -44,11 +44,12 @@ const Login = () => {
             setIsLoading(false);
             const data = res.data;
             const token = data.token;
+            const id = data.user_id;
             const role = data.user.role;
             const fullName = data.user.fullname;
             const phoneNumber = data.user.phone_number;
             const email = data.user.email;
-            const userInfo = { fullName, email, token, role, phoneNumber };
+            const userInfo = { fullName, email, token, role, phoneNumber,id };
             localStorage.setItem("userInfo", JSON.stringify(userInfo));
             authStore.setAuthentication(true);
             setAuthToken(token);

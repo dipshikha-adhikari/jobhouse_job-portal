@@ -44,7 +44,7 @@ const CreateJob = () => {
         <ProgressBar step={step} />
       </div>
       {step === 1 && (
-        <CreateJobStepOne step={step} job={job} setStep={setStep} />
+        <CreateJobStepOne step={step}  setStep={setStep} />
       )}
       {step === 2 && (
         <CreateJobStepTwo step={step} job={job} setStep={setStep} />
