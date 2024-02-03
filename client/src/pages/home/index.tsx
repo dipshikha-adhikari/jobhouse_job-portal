@@ -103,6 +103,7 @@ const Home = () => {
 export default Home;
 
 const Header = forwardRef<HTMLDivElement>((props,ref) => {
+  console.log(props)
   return (
     <header className=" justify-start  relative " ref={ref}>
       <img
