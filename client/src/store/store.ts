@@ -7,12 +7,16 @@ interface AppState {
   toggleLoginModal: () => void;
   toggleRegisterModal: () => void;
   toggleJobseekerProfileMenuModal: () => void;
+  isJobsFetched:boolean;
+  setIsJobsFetched:(props:boolean) => void
 }
 
 const useStore = create<AppState>((set) => ({
   loginModalOpen: false,
   registerModalOpen: false,
   jobseekerProfileMenuModalOpen: false,
+  isJobsFetched:false,
+  setIsJobsFetched:(props) => set((state) => ({...state, isJobsFetched:props})),
   toggleLoginModal: () =>
     set((state) => ({ ...state, loginModalOpen: !state.loginModalOpen })),
   toggleRegisterModal: () =>

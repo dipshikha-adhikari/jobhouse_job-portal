@@ -1,51 +1,43 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { CiStar } from "react-icons/ci";
 import { useQuery } from "react-query";
 import JobCard from "../../components/shared/JobCard";
 import Pagination from "../../components/shared/Pagination";
 import { publicRequest } from "../../lib/axios";
-import { AppliedJobs, IJob } from "../../types/postgres/types";
-import { useAppliedJobs } from "../jobseeker/hooks/useAppliedJobs";
+import useStore from '../../store/store';
+import { AppliedJobs, IJob } from '../../types/postgres/types';
 
-type AppliedJobsType = {
-  jobs: AppliedJobs[];
-  isLoading: boolean;
-  isError: boolean;
-};
+
 type Props = {
   height?: number;
+  jobs:IJob[] | undefined,
+  offset:number,
+  appliedJobs:AppliedJobs[],
+  limit:number,
+  setOffset:(props:number) => void ,
+  isLoading:boolean,
+  isError:boolean
 };
 
-const AllJobs = ({ height }: Props) => {
-  const { jobs: appliedJobs }: AppliedJobsType = useAppliedJobs();
-  const [offset, setOffset] = useState(0);
-  const limit = 6;
-
-  useEffect(() => {
-    if (height) {
-      window.scrollTo(0, height);
-    }
-  }, [offset]);
-
-  const getAllJobs = async () => {
-    const res = await publicRequest.get(
-      `/api/v1/jobs/?limit=${limit}&offset=${offset}`,
-    );
-    return res.data;
-  };
-  const {
-    data: jobs,
-    isLoading,
-    isError,
-  } = useQuery<IJob[]>(["allJobs", offset], getAllJobs);
-
-  const { data: allJobsCount } = useQuery(
+const AllJobs = ({ height,isError,isLoading,jobs,offset,appliedJobs ,limit,setOffset}: Props) => {
+  const {setIsJobsFetched} = useStore()
+    const { data: allJobsCount } = useQuery(
     ["allJobsCount", offset],
     async () => {
       const result = await publicRequest.get("/api/v1/jobs/count");
       return result.data;
     },
   );
+
+  useEffect(() => {
+    if (height) {
+      window.scrollTo(0, height);
+    }
+  }, [offset]);
+  
+  useEffect(() => {
+if(jobs && jobs.length) setIsJobsFetched(true)
+  },[jobs])
 
   return (
     <div className=" border-sm  min-h-[300px]">

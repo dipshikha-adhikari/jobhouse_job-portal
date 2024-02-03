@@ -94,11 +94,11 @@ if (isLoading) return <AlmostLoaded/>;
         </div>
       </section>
       {/* job  */}
-      <main className="lg:flex grid  gap-sm lg:justify-between items-start">
+      <main className="lg:flex grid  overflow-x-scroll job-details gap-sm lg:justify-between items-start">
         <aside className="border-xs flex-[1.8] w-full rounded-sm border-light">
           <section className="">
             <header className="grid border-b-sm p-sm py-md gap-xs ">
-              <h2 className="text-2xl  text-green-dark ">{job?.title}</h2>
+              <h2 className="text-xl font-bold  text-green-dark ">{job?.title}</h2>
               <div>
                 Apply before : {moment(job?.deadline).format("MMM Do YYYY")}
               </div>

@@ -127,6 +127,9 @@ input:hover:enabled,  textarea:hover:enabled{
   border-color: #5d5d5d;
 }
 
+.job-details::-webkit-scrollbar{
+  display: none;
+}
 
 
 

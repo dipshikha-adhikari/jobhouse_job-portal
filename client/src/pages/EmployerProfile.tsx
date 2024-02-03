@@ -102,7 +102,7 @@ const EmployerProfile = () => {
         </section>
         <section className="  h-fit">
           <div className=" border-sm lg:w-[350px] ">
-            <h2 className="font-bold gap-2  flex items-center p-sm border-b-sm text-green-dark   ">
+            <h2 className=" gap-2  flex items-center p-sm border-b-sm uppercase font-bold">
               <CiStar className="text-green-dark" /> Recent jobs by{" "}
               {profile?.basic_information?.organization_name}
             </h2>
