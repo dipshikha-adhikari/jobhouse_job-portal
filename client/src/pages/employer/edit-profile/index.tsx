@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import AlmostLoaded from "../../../components/shared/AlmostLoaded";
 import Error from "../../../components/shared/Error";
-import Loader from "../../../components/shared/Loader";
 import NoUser from "../../../components/shared/NoUser";
 import useAuthStore from "../../../store/auth";
 import { useProfile } from "../hooks/useEmployerProfile";
@@ -40,7 +40,7 @@ const EditProfile = () => {
     },
   ];
 
-  if (isLoading) return <Loader />;
+  if (isLoading) return <AlmostLoaded/>
   if (!isAunthenticated) return <NoUser />;
   if (!isLoading && (error || profile?.user_id === undefined)) return <Error />;
 

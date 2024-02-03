@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import CreateJobStepOne from "../../components/forms/CreateJobStepOne";
 import CreateJobStepTwo from "../../components/forms/CreateJobStepTwo";
+import AlmostLoaded from "../../components/shared/AlmostLoaded";
 import Error from "../../components/shared/Error";
-import Loader from "../../components/shared/Loader";
 import NoUser from "../../components/shared/NoUser";
 import ProgressBar from "../../components/ui/ProgressBar";
 import { useCurrentJob } from "../../hooks/useCurrentJob";
@@ -22,7 +22,7 @@ const CreateJob = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  if (isLoading) return <Loader />;
+  if (isLoading) return <AlmostLoaded/>
 
   if (job?.job_id === undefined && jobId !== undefined) return <Error />;
   if (!role && !isLoading && !auth.isAunthenticated) return <NoUser />;

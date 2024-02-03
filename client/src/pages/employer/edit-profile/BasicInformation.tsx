@@ -22,7 +22,6 @@ const BasicInformation = ({
   setIsEditorOpen,
   profile,
 }: IEditProfileDetails) => {
-  // const [coverImagePreview, setCoverImagePreview] = useState("");
   const [imagePreview, setImagePreview] = useState("");
   const [image, setImage] = useState<string | ArrayBuffer | null | object>();
   const [coverImage, setCoverImage] = useState<
@@ -111,7 +110,6 @@ const BasicInformation = ({
           }
           if (type === "coverImage") {
             setCoverImage(imageSrc);
-            // setCoverImagePreview(url);
           }
         };
       }

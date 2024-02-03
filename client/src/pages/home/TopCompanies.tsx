@@ -27,9 +27,9 @@ const TopCompanies = () => {
 
   return (
     <div className=" border-sm grid gap-xs ">
-      <header className="border-b-sm  font-bold text-green-dark xl:text-xl  p-sm  flex items-center gap-2">
+      <header className="border-b-sm  font-bold uppercase  p-sm  flex items-center gap-2">
         {" "}
-        <MdHomeWork />
+        <MdHomeWork className='text-green-dark ' />
         Top Companies
       </header>
 

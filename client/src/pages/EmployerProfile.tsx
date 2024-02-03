@@ -5,9 +5,9 @@ import { FaEnvelope } from "react-icons/fa6";
 import { MdLocationPin } from "react-icons/md";
 import { UseQueryResult, useQuery } from "react-query";
 import { useParams } from "react-router-dom";
+import AlmostLoaded from "../components/shared/AlmostLoaded";
 import Error from "../components/shared/Error";
 import JobCard from "../components/shared/JobCard";
-import Loader from "../components/shared/Loader";
 import Layout from "../components/ui/Layout";
 import { publicRequest } from "../lib/axios";
 import { IEmployerProfile } from "../types/postgres/types";
@@ -38,7 +38,7 @@ const EmployerProfile = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  if (isLoading) return <Loader />;
+  if (isLoading) return <AlmostLoaded/>
   if (isError || profile?.user_id === undefined) return <Error />;
 
   return (

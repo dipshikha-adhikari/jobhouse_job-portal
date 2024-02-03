@@ -1,14 +1,14 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { useCurrentJob } from "../../hooks/useCurrentJob";
-import Error from "../../components/shared/Error";
-import { useJobseekerProfile } from "./hooks/useJobseekerProfile";
-import { useCurrentUser } from "../../hooks/useCurrentUser";
 import moment from "moment";
-import { CiCalendar, CiLocationOn } from "react-icons/ci";
 import { useEffect, useState } from "react";
+import { CiCalendar, CiLocationOn } from "react-icons/ci";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import AlmostLoaded from "../../components/shared/AlmostLoaded";
+import Error from "../../components/shared/Error";
+import { useCurrentJob } from "../../hooks/useCurrentJob";
+import { useCurrentUser } from "../../hooks/useCurrentUser";
 import { IJobseekerProfile } from "../../types/postgres/types";
-import Loader from "../../components/shared/Loader";
 import { applyJob } from "./actions/applyJob";
+import { useJobseekerProfile } from "./hooks/useJobseekerProfile";
 
 type Profile = {
   profile: IJobseekerProfile;
@@ -28,7 +28,7 @@ const ProfileReview = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  if (loading1 || loading) return <Loader />;
+  if (loading1 || loading) return <AlmostLoaded/>
   if (role !== "jobseeker") return <Error />;
   if (jobId !== undefined && job?.job_id === undefined) return <Error />;
 

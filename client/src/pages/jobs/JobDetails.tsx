@@ -1,17 +1,18 @@
-import { useCurrentUser } from "../../hooks/useCurrentUser";
-import { useCurrentJob } from "../../hooks/useCurrentJob";
-import Error from "../../components/shared/Error";
-import { Link, useNavigate } from "react-router-dom";
-import useAuthStore from "../../store/auth";
-import Loader from "../../components/shared/Loader";
-import { useEffect, useState } from "react";
-import { useAppliedJobs } from "../jobseeker/hooks/useAppliedJobs";
-import { AppliedJobs } from "../../types/postgres/types";
 import moment from "moment";
-import { FaArrowAltCircleDown, FaCheckCircle } from "react-icons/fa";
-import { useRecentJobs } from "../employer/hooks/useRecentJobs";
-import JobCard from "../../components/shared/JobCard";
+import { useEffect, useState } from "react";
 import { CiStar } from "react-icons/ci";
+import { FaArrowAltCircleDown, FaCheckCircle } from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
+import AlmostLoaded from "../../components/shared/AlmostLoaded";
+import Blogs from "../../components/shared/Blogs";
+import Error from "../../components/shared/Error";
+import JobCard from "../../components/shared/JobCard";
+import { useCurrentJob } from "../../hooks/useCurrentJob";
+import { useCurrentUser } from "../../hooks/useCurrentUser";
+import useAuthStore from "../../store/auth";
+import { AppliedJobs } from "../../types/postgres/types";
+import { useRecentJobs } from "../employer/hooks/useRecentJobs";
+import { useAppliedJobs } from "../jobseeker/hooks/useAppliedJobs";
 
 type AppliedJobsType = {
   jobs: AppliedJobs[];
@@ -45,7 +46,8 @@ const Job = () => {
       });
   }, [job, appliedJobs]);
 
-  if (isLoading) return <Loader />;
+if (isLoading) return <AlmostLoaded/>;
+
   if (job?.job_id === undefined || isError) return <Error />;
 
   const handleJobApply = async () => {
@@ -57,7 +59,7 @@ const Job = () => {
   };
 
   return (
-    <div className="grid gap-2 overflow-auto max-w-5xl mx-auto ">
+    <div className="grid gap-sm overflow-auto max-w-5xl mx-auto ">
       <section className=" ">
         <div className="relative">
           <img
@@ -199,8 +201,8 @@ const Job = () => {
         <section className="flex-1  ">
           {jobs && jobs?.length > 1 && (
             <div className="border-sm w-full ">
-              <h2 className="sm:text-xl p-sm flex items-center border-b-sm gap-2   text-green-dark  font-bold  ">
-                <CiStar /> More jobs by {job.employer_details.organization_name}
+              <h2 className=" p-sm flex items-center border-b-sm gap-2   uppercase font-bold  ">
+                <CiStar  className='text-green-dark '/> More jobs by {job.employer_details.organization_name}
               </h2>
               <div className="grid p-sm  gap-sm grid-cols-auto-sm w-full">
                 {loadingRecentJobs && (
@@ -230,6 +232,7 @@ const Job = () => {
           )}
         </section>
       </main>
+      <Blogs/>
     </div>
   );
 };

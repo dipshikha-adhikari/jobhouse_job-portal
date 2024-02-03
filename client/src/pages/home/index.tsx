@@ -10,6 +10,7 @@ import SearchBox from "../../components/ui/SearchBox";
 import { publicRequest } from "../../lib/axios";
 import AllJobs from "./AllJobs";
 import TopCompanies from "./TopCompanies";
+import Blogs from "../../components/shared/Blogs";
 
 type Levels = {
   level_id: string;
@@ -76,8 +77,8 @@ const Home = () => {
           {/* --------------------  */}
        
                 <div className="border-sm   ">
-                  <header className="flex items-center gap-2 font-bold border-b-sm p-sm    text-green-dark">
-                    <BiCategory /> Jobs By Category
+                  <header className="flex items-center gap-2 font-bold border-b-sm p-sm  uppercase">
+                    <BiCategory  className='text-green-dark '/> Jobs By Category
                   </header>
                   <Categories />
                 </div>
@@ -86,20 +87,18 @@ const Home = () => {
         <aside className="grid gap-sm w-fit flex-[0.4] h-fit ">
          
                 <div className=" border-sm ">
-                  <header className="flex items-center gap-2 border-b-sm  font-bold   p-sm  text-green-dark ">
-                    <FaIndustry /> Jobs By Industry
+                  <header className="flex items-center gap-2 border-b-sm  font-bold uppercase  p-sm  ">
+                    <FaIndustry  className='text-green-dark '/> Jobs By Industry
                   </header>
                   <Industries />
                 </div>
 
-                <div>
-                  <img src="https://eslteacherrecruitment.com/wp-content/uploads/2017/04/free-job-posting.jpg" alt=""  className="object-contain h-[300px]"/>
-                </div>
+               
           {/* ---------------   */}
           <div className="flex flex-wrap gap-sm  ">
             <div className=" border-x-sm border-t-sm w-full max-w-sm ">
-              <header className="flex border-b-sm p-sm items-center gap-2  font-bold   text-green-dark ">
-                <FaIndustry /> Jobs By Level
+              <header className="flex border-b-sm p-sm items-center gap-2 uppercase  font-bold   ">
+                <FaIndustry className='text-green-dark ' /> Jobs By Level
               </header>
 
               <div className=" ">
@@ -122,11 +121,11 @@ const Home = () => {
               </div>
             </div>
             <div  className=" border-x-sm border-t-sm w-full max-w-sm">
-              <header className="flex items-center gap-2  font-semibold border-b-sm  p-sm  text-green-dark ">
-                <FaIndustry /> Jobs By Employment Type
+              <header className="flex items-center gap-2 uppercase  font-bold border-b-sm  p-sm  ">
+                <FaIndustry className='text-green-dark '/> Jobs By Employment Type
               </header>
 
-              <div className="">
+              <div className=" ">
                 {typesLoading && <div className="p-sm">Loading...</div>}
                 {typesError && !types && <div className="p-sm">Error</div>}
                 {types?.map((type) => {
@@ -143,12 +142,16 @@ const Home = () => {
                     </Link>
                   );
                 })}
+                  <div className="py-sm">
+                {(!typesLoading &&  !typesError) &&  <img src="https://eslteacherrecruitment.com/wp-content/uploads/2017/04/free-job-posting.jpg" alt=""  className="object-contain max-h-[300px]"/>}
+                </div>
               </div>
             </div>
           </div>
         </aside>
-       
+     
       </main>
+      <Blogs/>
       
     </div>
   );

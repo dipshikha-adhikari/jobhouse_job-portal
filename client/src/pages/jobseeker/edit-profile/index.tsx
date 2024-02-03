@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import Loader from "../../../components/shared/Loader";
+import AlmostLoaded from "../../../components/shared/AlmostLoaded";
 import NoUser from "../../../components/shared/NoUser";
 import PageNotFound from "../../../components/shared/PageNotFound";
 import useAuthStore from "../../../store/auth";
@@ -55,7 +55,7 @@ const EditProfile = () => {
     }
   }, []);
 
-  if (isLoading) return <Loader />;
+  if (isLoading) return <AlmostLoaded/>
   if (!isAunthenticated) return <NoUser />;
 
   if (isError || profile.user_id === undefined || error)

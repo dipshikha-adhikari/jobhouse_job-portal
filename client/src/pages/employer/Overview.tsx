@@ -1,17 +1,17 @@
-import { useState, useEffect } from "react";
-import { useCurrentUser } from "../../hooks/useCurrentUser";
-import Layout from "../../components/ui/Layout";
-import { MdRoundaboutLeft, MdWork } from "react-icons/md";
-import { FaPlus, FaUser } from "react-icons/fa";
-import RecentJobs from "./RecentJobs";
-import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { useProfile } from "./hooks/useEmployerProfile";
-import AllJobs from "./AllJobs";
-import Error from "../../components/shared/Error";
-import Loader from "../../components/shared/Loader";
+import { FaPlus, FaUser } from "react-icons/fa";
+import { MdRoundaboutLeft, MdWork } from "react-icons/md";
 import { useQuery } from "react-query";
+import { Link, useNavigate } from "react-router-dom";
+import AlmostLoaded from "../../components/shared/AlmostLoaded";
+import Error from "../../components/shared/Error";
+import Layout from "../../components/ui/Layout";
+import { useCurrentUser } from "../../hooks/useCurrentUser";
 import { privateRequest } from "../../lib/axios";
+import AllJobs from "./AllJobs";
+import RecentJobs from "./RecentJobs";
+import { useProfile } from "./hooks/useEmployerProfile";
 import { useRecentJobs } from "./hooks/useRecentJobs";
 
 const Overview = () => {
@@ -52,7 +52,7 @@ const Overview = () => {
     }
   }, [profile]);
 
-  if (isLoading || loading) return <Loader />;
+  if (isLoading || loading) return <AlmostLoaded/>
   if (user.role !== "employer") return <Error />;
 
   return (

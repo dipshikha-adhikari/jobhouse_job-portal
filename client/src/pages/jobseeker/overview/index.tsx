@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
-import { useJobseekerProfile } from ".././hooks/useJobseekerProfile";
-import Layout from "../../../components/ui/Layout";
-import NoUser from "../../../components/shared/NoUser";
-import useAuthStore from "../../../store/auth";
-import Error from "../../../components/shared/Error";
 import Categories from "../../../components/shared/Categories";
+import Error from "../../../components/shared/Error";
+import NoUser from "../../../components/shared/NoUser";
+import Layout from "../../../components/ui/Layout";
+import useAuthStore from "../../../store/auth";
 import { IJobseekerProfile } from "../../../types/postgres/types";
+import { useJobseekerProfile } from ".././hooks/useJobseekerProfile";
 
-import Industries from "../../../components/shared/Industries";
-import UserInfo from "./UserInfo";
-import AppliedJobsTable from "./AppliedJobsTable";
-import MatchingJobsTable from "./MatchingJobsTable";
-import Loader from "../../../components/shared/Loader";
 import { BiCategory } from "react-icons/bi";
 import { FaIndustry } from "react-icons/fa";
+import AlmostLoaded from "../../../components/shared/AlmostLoaded";
+import Industries from "../../../components/shared/Industries";
+import AppliedJobsTable from "./AppliedJobsTable";
+import MatchingJobsTable from "./MatchingJobsTable";
+import UserInfo from "./UserInfo";
 
 type Profile = {
   profile: IJobseekerProfile;
@@ -31,7 +31,7 @@ const JobseekerOverview = () => {
   }, []);
 
   if (!isAunthenticated) return <NoUser />;
-  if (isLoading) return <Loader />;
+  if (isLoading) return <AlmostLoaded/>
   if (isError) return <Error />;
 
   return (

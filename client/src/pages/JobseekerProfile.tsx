@@ -16,8 +16,8 @@ import {
 import { SlGraduation } from "react-icons/sl";
 import { UseQueryResult, useQuery } from "react-query";
 import { useParams } from "react-router-dom";
+import AlmostLoaded from "../components/shared/AlmostLoaded";
 import Error from "../components/shared/Error";
-import Loader from "../components/shared/Loader";
 import NoUser from "../components/shared/NoUser";
 import { privateRequest } from "../lib/axios";
 import useAuthStore from "../store/auth";
@@ -49,7 +49,7 @@ const JobseekerProfile = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  if (isLoading) return <Loader />;
+  if (isLoading) return <AlmostLoaded/>
   if (!isAunthenticated) return <NoUser />;
   if (!isLoading && isError) return <Error />;
 

@@ -49,7 +49,7 @@ const AllJobs = ({ height }: Props) => {
 
   return (
     <div className=" border-sm  min-h-[300px]">
-      <header className="  border-b-sm flex font-bold items-center gap-2  p-sm   text-green-dark">
+      <header className="  border-b-sm flex font-bold items-center gap-2  p-sm  uppercase">
         <CiStar className="text-green-dark " /> Top jobs
       </header>
       {isLoading && <div className="p-sm ">Loading...</div>}

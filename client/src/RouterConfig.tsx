@@ -6,6 +6,7 @@ import Footer from "./components/footer";
 import Loader from './components/shared/Loader';
 import Navbar from "./components/navbar";
 import Home from "./pages/home";
+import BlogPage from "./pages/blogs/BlogPage";
 const EmployerRegister = lazy(( ) =>import("./components/forms/EmployerRegister"))
 const JobseekerRegister = lazy(( ) =>import("./components/forms/JobseekerRegister"))
 const PageNotFound = lazy(( ) =>import("./components/shared/PageNotFound"))
@@ -32,7 +33,7 @@ const Root = () => {
         <Navbar />
         <Layout>
           <div className=" py-[10vh]  min-h-screen relative">
-      <Suspense fallback={<Loader/>}>
+      <Suspense fallback={<div className="min-h-[88vh]"><Loader/></div>}>
       <Outlet />
       </Suspense>
           </div>
@@ -123,6 +124,10 @@ export const router = createBrowserRouter([
         {
           path: "/jobs/search",
           element: <SearchResults />,
+        },
+        {
+          path: "/blogs/:title",
+          element: <BlogPage />,
         },
         {
           path: "*",

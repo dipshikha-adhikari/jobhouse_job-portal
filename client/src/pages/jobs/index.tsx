@@ -1,17 +1,17 @@
 import { useEffect } from "react";
+import { BiCategory } from "react-icons/bi";
+import { FaIndustry } from "react-icons/fa";
 import { UseQueryResult, useQuery } from "react-query";
 import { useLocation } from "react-router-dom";
+import AlmostLoaded from "../../components/shared/AlmostLoaded";
 import Categories from "../../components/shared/Categories";
 import Error from "../../components/shared/Error";
 import Industries from "../../components/shared/Industries";
 import JobCard from "../../components/shared/JobCard";
-import Loader from "../../components/shared/Loader";
 import Layout from "../../components/ui/Layout";
 import { publicRequest } from "../../lib/axios";
 import { AppliedJobs, IJob } from "../../types/postgres/types";
 import { useAppliedJobs } from "../jobseeker/hooks/useAppliedJobs";
-import { BiCategory } from "react-icons/bi";
-import { FaIndustry } from "react-icons/fa";
 
 type AppliedJobsType = {
   jobs: AppliedJobs[];
@@ -50,7 +50,7 @@ const Jobs = () => {
     isError,
   }: UseQueryResult<IJob[]> = useQuery(["jobs", id], getJobs);
 
-  if (isLoading) return <Loader />;
+  if (isLoading) return <AlmostLoaded/>
   if (isError) return <Error />;
 
   return (

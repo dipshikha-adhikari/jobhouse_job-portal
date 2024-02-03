@@ -25,7 +25,6 @@ const EmployerProfileMenu = () => {
     }
   };
 
-  //this is only client side logout
 
   return (
     <div

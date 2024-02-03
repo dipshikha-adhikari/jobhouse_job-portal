@@ -68,9 +68,6 @@ const columns: GridColDef[] = [
           >
             View
           </Link>
-          {/* <button className="bg-orange-light text-white rounded-md p-xs px-sm">
-            Delete
-          </button> */}
         </div>
       );
     },

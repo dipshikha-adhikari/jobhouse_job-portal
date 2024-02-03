@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
+import AlmostLoaded from "../../components/shared/AlmostLoaded";
 import Error from "../../components/shared/Error";
-import Loader from "../../components/shared/Loader";
 import Layout from "../../components/ui/Layout";
 import { privateRequest } from "../../lib/axios";
 import ApplicationCard from "./ApplicationCard";
@@ -45,7 +45,7 @@ const Applications = () => {
     return result.data;
   });
 
-  if (isLoading) return <Loader />;
+  if (isLoading) return <AlmostLoaded/>
   if (isError) return <Error />;
   if (applications?.length === 0)
     return (

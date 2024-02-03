@@ -19,8 +19,8 @@ import {
 } from "react-icons/md";
 import { SlGraduation } from "react-icons/sl";
 import { Link } from "react-router-dom";
+import AlmostLoaded from "../../components/shared/AlmostLoaded";
 import Error from "../../components/shared/Error";
-import Loader from "../../components/shared/Loader";
 import NoUser from "../../components/shared/NoUser";
 import { useCurrentUser } from "../../hooks/useCurrentUser";
 import useAuthStore from "../../store/auth";
@@ -45,7 +45,7 @@ const Profile = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  if (isLoading) return <Loader />;
+  if (isLoading) return <AlmostLoaded/>
   if (!isAunthenticated) return <NoUser />;
   if (profile?.user_id === undefined || isError) return <Error />;
 

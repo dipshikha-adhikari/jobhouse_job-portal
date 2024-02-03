@@ -6,12 +6,12 @@ import { Link } from "react-router-dom";
 import Layout from "../../components/ui/Layout";
 import { useProfile } from "./hooks/useEmployerProfile";
 import Error from "../../components/shared/Error";
-import Loader from "../../components/shared/Loader";
 import RecentJobs from "./RecentJobs";
 import { useEffect } from "react";
 import { CiStar } from "react-icons/ci";
 import useAuthStore from "../../store/auth";
 import NoUser from "../../components/shared/NoUser";
+import AlmostLoaded from "../../components/shared/AlmostLoaded";
 
 const Profile = () => {
   const user = useCurrentUser();
@@ -22,7 +22,7 @@ const Profile = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  if (isLoading) return <Loader />;
+  if (isLoading) return <AlmostLoaded/>;
   if (!isAunthenticated) return <NoUser />;
   if (!isLoading && (error || profile?.user_id === undefined)) return <Error />;
 
