@@ -12,9 +12,6 @@ export const useCurrentJob = () => {
     const response: AxiosResponse = await publicRequest.get(
       `/api/v1/jobs/${jobId}`,
     );
-    if (response.status !== 200) {
-      throw new Error("Failed to fetch job details");
-    }
     return response.data;
   };
   

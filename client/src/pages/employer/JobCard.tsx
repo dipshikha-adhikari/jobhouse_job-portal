@@ -27,7 +27,7 @@ const JobCard: React.FC<JobCardProps> = ({ job }) => {
 
       <Link
         to={`/employer/jobs/applications/${job.job_id}`}
-        className=" text-green-dark  w-fit font-bold flex items-center gap-2 hover:text-green-light rounded-sm"
+        className=" text-black-default  w-fit font-bold flex items-center gap-2 hover:text-green-dark rounded-sm"
       >
         {job.job_application_count} Applications <FaHandPointRight />
       </Link>
@@ -41,7 +41,7 @@ const JobCard: React.FC<JobCardProps> = ({ job }) => {
         </Link>
         <Link
           to={`/jobs/${job.title}/${job.job_id}`}
-          className="px-sm font-normal  border-green-dark text-green-dark hover:text-green-dark border-sm  rounded-sm p-xs"
+          className="px-sm font-normal  border-blue-light text-blue-dark hover:text-blue-light border-sm  rounded-sm p-xs"
         >
           View
         </Link>

@@ -123,7 +123,7 @@ const CreateJobStepTwo = ({ setStep, job, step }: CreateJobStepTwoProps) => {
           <div className=" grid gap-2 items-center">
             <span className="font-semibold">No of Vacancy</span>
             <input
-              className="border-sm p-sm  outline-none border-gray-300"
+              className="border-sm p-sm w-40 xs:w-full outline-none border-gray-300"
               placeholder="4"
               {...register("noOfVacancy")}
             />

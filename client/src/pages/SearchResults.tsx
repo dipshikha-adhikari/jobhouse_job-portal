@@ -69,7 +69,7 @@ window.scrollTo(0,0)
             )}
           </header>
           {jobs !== undefined && jobs?.length > 0 && (
-            <div className="grid p-sm grid-cols-auto-sm lg:flex lg:flex-wrap lg:justify-center gap-sm ">
+            <div className="grid p-sm sm:grid-cols-auto-sm lg:flex lg:flex-wrap lg:justify-center gap-sm ">
               {jobs.map((item) => {
                 return (
                   <ResultBox

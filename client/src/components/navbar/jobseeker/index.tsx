@@ -1,9 +1,10 @@
-import { FaArrowDown, FaArrowRight, FaBars } from "react-icons/fa";
+import { FaArrowDown, FaArrowRight } from "react-icons/fa";
+import { LiaBarsSolid } from "react-icons/lia";
 import { Link } from "react-router-dom";
-import useStore from "../../../store/store";
-import JobseekerProfileMenu from "../../modals/JobseekerProfileMenu";
 import { useJobseekerProfile } from "../../../pages/jobseeker/hooks/useJobseekerProfile";
+import useStore from "../../../store/store";
 import { IJobseekerProfile } from "../../../types/postgres/types";
+import JobseekerProfileMenu from "../../modals/JobseekerProfileMenu";
 
 type JobseekerNav = {
   setMenuOpen: (props: boolean) => void;
@@ -68,7 +69,7 @@ const NavbarForJobseeker = ({
           <img
             src={
               profile?.basic_information?.image?.url ||
-              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqZYAYrmuzw5vIhNRWG2f436EKH4LqTUAFhLDWd2yRNA&s"
+              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNL_ZnOTpXSvhf1UaK7beHey2BX42U6solRA&usqp=CAU"
             }
             alt=""
             className="w-8 aspect-auto h-8 sm:w-10 sm:h-10 rounded-full profile-menu-button  object-cover"
@@ -83,7 +84,7 @@ const NavbarForJobseeker = ({
           className="text-2xl cursor-pointer md:hidden menu-btn"
           onClick={() => setMenuOpen(!menuOpen)}
         >
-          <FaBars className="menu-btn" />
+          <LiaBarsSolid className="menu-btn" />
         </div>
       </div>
     </div>

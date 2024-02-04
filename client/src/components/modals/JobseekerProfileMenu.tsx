@@ -28,7 +28,7 @@ const JobseekerProfileMenu = () => {
   return (
     <div
       ref={ref}
-      className="absolute max-w-[350px] bg-white w-full shadow-sm top-10 sm:top-12 grid  place-items-start gap-xs text-black-default  p-md sm:px-xl right-0"
+      className="absolute max-w-[350px] bg-white w-full shadow-sm top-9 sm:top-12 grid  place-items-start gap-xs text-black-default  p-md sm:px-xl right-0"
     >
       <Link
         to="/jobseeker/profile/job-preference"

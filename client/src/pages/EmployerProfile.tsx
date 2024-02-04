@@ -106,7 +106,7 @@ const EmployerProfile = () => {
               <CiStar className="text-green-dark" /> Recent jobs by{" "}
               {profile?.basic_information?.organization_name}
             </h2>
-            <div className="grid gap-xs p-sm grid-cols-auto-sm">
+            <div className="grid gap-xs p-sm sm:grid-cols-auto-sm">
               {loadingRecentJobs && (
                 <div className="text-center">Loading...</div>
               )}

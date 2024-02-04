@@ -60,11 +60,11 @@ const Profile = () => {
         </Link>
       </div>
       <div className="grid  gap-md  ">
-        <section>
+        <section className="grid gap-2">
           <img
             src={
               profile.basic_information?.image?.url ||
-              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqZYAYrmuzw5vIhNRWG2f436EKH4LqTUAFhLDWd2yRNA&s"
+              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNL_ZnOTpXSvhf1UaK7beHey2BX42U6solRA&usqp=CAU"
             }
             alt=""
             className="w-20 h-20 rounded-full object-cover"

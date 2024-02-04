@@ -61,6 +61,9 @@ const JobsByTypeAndLevel = () => {
                   );
                 })}
               </div>
+              <div className="py-sm">
+                {(!levelsLoading &&  !levelsError) &&  <img src="https://eslteacherrecruitment.com/wp-content/uploads/2017/04/free-job-posting.jpg" alt=""  className="object-contain max-h-[300px]"/>}
+                </div>
             </div>
             <div  className=" border-x-sm border-t-sm w-full max-w-sm">
               <header className="flex items-center gap-2 uppercase  font-bold border-b-sm  p-sm  ">
@@ -84,9 +87,7 @@ const JobsByTypeAndLevel = () => {
                     </Link>
                   );
                 })}
-                  <div className="py-sm">
-                {(!typesLoading &&  !typesError) &&  <img src="https://eslteacherrecruitment.com/wp-content/uploads/2017/04/free-job-posting.jpg" alt=""  className="object-contain max-h-[300px]"/>}
-                </div>
+                 
               </div>
             </div>
           </div>

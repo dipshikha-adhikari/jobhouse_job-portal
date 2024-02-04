@@ -45,6 +45,7 @@ WHERE j.job_id = $1;
 
   pool.query(query,[jobId], function (err: Error, result: QueryResult) {
     if (err) {
+      console.log(err)
       return res.status(400).send({ error: err });
     }
     return res.status(200).send(result.rows[0]);

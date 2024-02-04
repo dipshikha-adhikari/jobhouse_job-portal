@@ -44,12 +44,13 @@ const Login = () => {
             setIsLoading(false);
             const data = res.data;
             const token = data.token;
-            const id = data.user_id;
+            const id = data.user.user_id;
             const role = data.user.role;
             const fullName = data.user.fullname;
             const phoneNumber = data.user.phone_number;
             const email = data.user.email;
             const userInfo = { fullName, email, token, role, phoneNumber,id };
+
             localStorage.setItem("userInfo", JSON.stringify(userInfo));
             authStore.setAuthentication(true);
             setAuthToken(token);
@@ -110,7 +111,7 @@ const Login = () => {
 
         <button
           type="submit"
-          className="w-fit px-md rounded-md outline-none bg-blue-dark text-white hover:text-white p-xs disabled:opacity-50"
+          className="w-fit px-md rounded-sm outline-none bg-blue-light text-white hover:text-white p-xs disabled:opacity-50"
           disabled={isLoading}
         >
           Log in

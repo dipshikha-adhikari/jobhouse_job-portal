@@ -74,17 +74,17 @@ const JobseekerOverview = () => {
         {selected === "appliedJobs" && <AppliedJobsTable />}
       </div>
 
-      <section className="grid pt-sm gap-sm">
+      <section className="grid pt-xl  gap-sm">
         <div className="border-sm   ">
-          <header className="flex items-center gap-2 font-bold border-b-sm p-sm    text-green-dark">
-            <BiCategory /> Jobs By Category
+          <header className="flex items-center gap-2 font-bold border-b-sm p-sm  uppercase text-black-default">
+            <BiCategory className='text-green-dark'/> Jobs By Category
           </header>
           <Categories />
         </div>
 
         <div className=" border-sm ">
-          <header className="flex items-center gap-2 border-b-sm  font-bold   p-sm  text-green-dark ">
-            <FaIndustry /> Jobs By Industry
+          <header className="flex items-center gap-2 border-b-sm  font-bold   p-sm  uppercase text-black-default">
+            <FaIndustry className='text-green-dark' /> Jobs By Industry
           </header>
           <Industries />
         </div>

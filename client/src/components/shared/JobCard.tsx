@@ -38,7 +38,7 @@ const JobCard = ({ job, appliedJobs }: IJobCard) => {
         />
         <div>
           <Link
-            className="text-black-light hover:text-black-dark"
+            className="text-black-dark hover:text-black-dark"
             to={`/jobs/${job.title}/${job.job_id}`}
           >
             <p className="font-semibold">

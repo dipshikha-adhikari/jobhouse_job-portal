@@ -14,7 +14,7 @@ const CreateJob = () => {
   const [step, setStep] = useState<number>(1);
   const auth = useAuthStore();
   const params = useParams();
-  const { role } = useCurrentUser();
+  const { role,id } = useCurrentUser();
   const jobId = params.jobId;
   const { job, isLoading } = useCurrentJob();
 
@@ -24,6 +24,7 @@ const CreateJob = () => {
 
   if (isLoading) return <AlmostLoaded/>
 
+  if(job && !isLoading && (job?.employer_id !== id)) return <Error/>
   if (job?.job_id === undefined && jobId !== undefined) return <Error />;
   if (!role && !isLoading && !auth.isAunthenticated) return <NoUser />;
 
@@ -44,7 +45,7 @@ const CreateJob = () => {
         <ProgressBar step={step} />
       </div>
       {step === 1 && (
-        <CreateJobStepOne step={step}  setStep={setStep} />
+        <CreateJobStepOne step={step} job={job} setStep={setStep} />
       )}
       {step === 2 && (
         <CreateJobStepTwo step={step} job={job} setStep={setStep} />

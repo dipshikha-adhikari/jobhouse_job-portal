@@ -64,7 +64,7 @@ const EditProfile = () => {
   return (
     <div className="grid gap-sm max-w-5xl mx-auto md:flex w-full p-sm">
       <section className="w-full grid    gap-10 h-fit flex-[0.3]">
-        <h2 className="font-semibold text-xl text-green-dark pt-md  ">
+        <h2 className="font-bold text-xl  pt-md  ">
           EDIT PROFILE
         </h2>
         <ul className="grid gap-xs  ">

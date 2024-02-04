@@ -12,7 +12,7 @@ type ChildrenProps = {
 
 export const Layout: React.FC<ChildrenProps> = ({ children }) => {
   return (
-    <div className=" w-full max-w-[1400px] mx-auto px-md   relative">
+    <div className=" w-full max-w-[1400px] mx-auto px-sm xs:px-md   relative">
       {children}
     </div>
   );

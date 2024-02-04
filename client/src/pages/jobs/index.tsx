@@ -75,7 +75,7 @@ const Jobs = () => {
           </p>
         </div>
         <main className="grid gap-xl ">
-          <section className="grid grid-cols-auto-sm place-items-center md:grid-cols-auto-md gap-sm ">
+          <section className="grid sm:grid-cols-auto-sm place-items-center md:grid-cols-auto-md gap-sm ">
             {jobs !== undefined && jobs?.length > 0 ? (
               jobs?.map((job) => {
                 return (

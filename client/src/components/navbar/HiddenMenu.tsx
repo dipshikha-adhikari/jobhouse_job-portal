@@ -40,10 +40,10 @@ const HiddenMenu = ({ setMenuOpen, menuOpen }: IHiddenMenu) => {
     return (
       <div className="grid gap-xs p-sm border-b-sm md:hidden " ref={ref}>
         <span
-          className="items-center gap-2 flex relative cursor-pointer"
+          className="items-center gap-2 flex relative hover:text-blue-dark cursor-pointer"
           onClick={() => setIsModalOpen(!isModalOpen)}
         >
-          Browse jobs <FaArrowDown className="text-green-dark" />
+          Browse jobs <FaArrowDown className="text-blue-dark" />
           {isModalOpen && (
             <div className="absolute top-7 border-b-md  p-sm  h-80 overflow-y-scroll  bg-white">
               <Categories setIsModalOpen={setIsModalOpen} />
@@ -73,12 +73,12 @@ const HiddenMenu = ({ setMenuOpen, menuOpen }: IHiddenMenu) => {
           <Link
             onClick={() => setMenuOpen(false)}
             to="/user/login"
-            className=" font-normal text-green-dark hover:text-green-dark  border-[1px] border-green-dark  rounded-sm p-xs px-md "
+            className=" font-normal text-blue-dark hover:text-blue-light  border-[1px] border-blue-dark  rounded-sm p-xs px-md "
           >
             Log in
           </Link>
           <div
-            className="bg-blue-dark register-button text-white
+            className="bg-blue-light register-button text-white
              p-xs px-md rounded-sm cursor-pointer   "
             onClick={() => {
               store.toggleRegisterModal();
@@ -89,10 +89,10 @@ const HiddenMenu = ({ setMenuOpen, menuOpen }: IHiddenMenu) => {
           </div>
         </div>
         <span
-          className="flex items-center gap-2 relative cursor-pointer"
+          className="flex items-center gap-2 hover:text-blue-dark relative cursor-pointer"
           onClick={() => setIsModalOpen(!isModalOpen)}
         >
-          Browse jobs <FaArrowDown className="text-green-dark" />
+          Browse jobs <FaArrowDown className="text-blue-dark" />
           {isModalOpen && (
             <div className="absolute top-10 z-10 h-80 overflow-y-scroll p-sm sm:p-lg bg-white">
               <Categories setIsModalOpen={setIsModalOpen} />

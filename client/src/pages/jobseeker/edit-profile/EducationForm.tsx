@@ -135,11 +135,11 @@ const EducationForm = ({
                 placeholder="Marks"
                 {...register("marksValue")}
                 disabled={!isEditorOpen}
-                className="outline-none p-xs max-w-[100px] border-sm"
+                className="outline-none p-xs w-20 xs:w-40 border-sm"
               />
               <select
                 disabled={!isEditorOpen}
-                className="outline-none border-sm p-xs"
+                className="outline-none border-sm w-20 xs:w-40  p-xs"
                 {...register("marksType")}
               >
                 <option value="">Select</option>

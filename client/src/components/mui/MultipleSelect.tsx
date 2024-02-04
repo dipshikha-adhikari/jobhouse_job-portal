@@ -49,9 +49,10 @@ export default function MultipleSelectChip({
 
   return (
     <div>
-      <FormControl sx={{ m: 1, width: 300 }}>
+      <FormControl sx={{ m: 1, minWidth: 150 }}>
         <InputLabel>Select</InputLabel>
         <Select
+        className=" w-full"
           labelId="demo-multiple-chip-label"
           id="demo-multiple-chip"
           multiple
@@ -62,7 +63,6 @@ export default function MultipleSelectChip({
           }}
           disabled={!isEditorOpen}
           input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
-          // renderValue={(selected) => selected.join(", ")}
 
           renderValue={(selected) => (
             <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
@@ -81,14 +81,7 @@ export default function MultipleSelectChip({
                 type === "category" ? val?.category_name : val?.industry_name
               }
             >
-              {/* <Checkbox
-                checked={
-                  type === "category" && val?.category_name !== undefined
-                    ? personName.indexOf(val.category_name) > -1
-                    : val?.industry_name !== undefined &&
-                      personName.indexOf(val.industry_name) > -1
-                }
-              /> */}
+             
               <ListItemText
                 primary={
                   type === "category" ? val?.category_name : val?.industry_name

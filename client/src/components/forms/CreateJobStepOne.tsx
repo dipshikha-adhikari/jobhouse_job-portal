@@ -5,10 +5,10 @@ import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { useCategories } from "../../hooks/useCategories";
 import useJobInputs from "../../store/jobInputs";
+import { IJob } from "../../types/postgres/types";
 import { CreateJobStepOneSchema } from "../../utils/validationSchema";
 import ResponsiveDayPicker from "../mui/DayPicker";
 import SelectCategory from "../mui/SelectCategory";
-import { useCurrentJob } from "../../pages/jobs/hooks/useCurrentJobs";
 
 export interface ICreateJobStepOneInputs {
   title: string 
@@ -22,9 +22,10 @@ export interface ICreateJobStepOneInputs {
 type CreateJobStepOneProps = {
   setStep: (props: number) => void;
   step: number;
+  job:IJob | undefined
 };
 
-const CreateJobStepOne = ({ setStep, step }: CreateJobStepOneProps) => {
+const CreateJobStepOne = ({ setStep, step,job }: CreateJobStepOneProps) => {
 
   const {
     register,
@@ -33,7 +34,6 @@ const CreateJobStepOne = ({ setStep, step }: CreateJobStepOneProps) => {
     setValue,
     control,
   } = useForm({ resolver: yupResolver(CreateJobStepOneSchema) });
-  const { job } = useCurrentJob();
   const jobStore = useJobInputs();
   const { categories } = useCategories();
   const isEditorOpen = true;
@@ -44,6 +44,7 @@ const CreateJobStepOne = ({ setStep, step }: CreateJobStepOneProps) => {
     setStep(step + 1);
   };
 
+  
   useEffect(() => {
     window.scrollTo(0, 0);
     jobStore.setStepOneInputs({

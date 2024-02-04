@@ -14,10 +14,13 @@ export const useCurrentJob = () => {
     const response: AxiosResponse = await publicRequest.get(
       `/api/v1/jobs/${jobId}`,
     );
-    if (response.status !== 200) {
-      throw new Error("Failed to fetch job details");
+   
+    if( response.data.employer_id !== id)  {
+      throw new Error('Not allowed')  
+     
+    }else{
+      return response.data
     }
-    if( response.data.employer_id !== id)      return  null;
 
   };
   
@@ -25,9 +28,9 @@ export const useCurrentJob = () => {
     data: job,
     isError,
     isLoading,
-  }: UseQueryResult<IJob> = useQuery(["jobDetails", jobId], getJobDetails, {
+  }: UseQueryResult<IJob> = useQuery(["privateJobDetails", [jobId,id]], getJobDetails, {
     enabled: !!jobId,
   });
-console.log(job)
+
   return { job, isError, isLoading };
 };

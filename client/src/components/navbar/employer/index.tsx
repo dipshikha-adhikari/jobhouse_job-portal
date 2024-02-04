@@ -1,8 +1,9 @@
-import { FaArrowDown, FaArrowRight, FaBars } from "react-icons/fa";
+import { FaArrowDown, FaArrowRight} from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useProfile } from "../../../pages/employer/hooks/useEmployerProfile";
 import useStore from "../../../store/store";
 import EmployerProfileMenu from "../../modals/EmployerProfileMenu";
-import { useProfile } from "../../../pages/employer/hooks/useEmployerProfile";
+import { LiaBarsSolid } from "react-icons/lia";
 
 type EmployerNav = {
   setMenuOpen: (props: boolean) => void;
@@ -20,13 +21,13 @@ const NavbarForEmployer = ({
   const store = useStore();
   const { profile } = useProfile();
   return (
-    <div className="relative flex items-center gap-20 w-full justify-end">
+    <div className="relative flex items-center gap-10 xs:gap-20 w-full justify-end">
       <div className=" gap-xs hidden md:flex ">
         <span
-          className="items-center gap-2 font-semibold text-black-light flex cursor-pointer browse-btn "
+          className="items-center gap-2 font-semibold text-black-light hover:text-blue-dark flex cursor-pointer browse-btn "
           onClick={() => setIsModalOpen(!isModalOpen)}
         >
-          Browse jobs <FaArrowDown className="text-green-dark browse-btn" />
+          Browse jobs <FaArrowDown className="text-blue-dark browse-btn" />
         </span>
         <Link
           to="/blogs"
@@ -57,11 +58,11 @@ const NavbarForEmployer = ({
         </Link>
 
         <div
-          className="flex profile-menu-button items-center gap-1  w-full cursor-pointer"
+          className="flex profile-menu-button  items-center gap-1  w-full cursor-pointer"
           onClick={store.toggleJobseekerProfileMenuModal}
         >
-          <img
-            src={profile?.image.url}
+       <img
+            src={profile?.image.url || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNL_ZnOTpXSvhf1UaK7beHey2BX42U6solRA&usqp=CAU"}
             alt=""
             className="w-8 h-8 sm:w-10 sm:h-10 rounded-full profile-menu-button  object-cover"
           />
@@ -75,7 +76,7 @@ const NavbarForEmployer = ({
           className="text-2xl cursor-pointer md:hidden menu-btn"
           onClick={() => setMenuOpen(!menuOpen)}
         >
-          <FaBars className="menu-btn" />
+          <LiaBarsSolid className="menu-btn" />
         </div>
       </div>
     </div>

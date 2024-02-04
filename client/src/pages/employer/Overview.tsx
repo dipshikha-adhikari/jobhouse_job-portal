@@ -31,9 +31,9 @@ const Overview = () => {
     return result.data;
   });
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  // useEffect(() => {
+  //   window.scrollTo(0, 0);
+  // }, []);
 
   const handleCreate = () => {
     if (!profile?.basic_information.id) {
@@ -75,7 +75,7 @@ const Overview = () => {
               alt=""
               className="w-20 h-20  rounded-full "
             />
-            <div className="grid gap-1 place-items-center">
+            <div className="grid gap-1 p-xs place-items-center">
               <p className="font-semibold text-xl">
                 {profile?.basic_information?.organization_name
                   ? profile.basic_information.organization_name
@@ -98,14 +98,14 @@ const Overview = () => {
             </div>
             <div className="grid gap-xs border-sm  max-w-sm w-full  p-sm">
               <p className="flex items-center gap-sm">
-                <MdWork className="text-orange-default" />{" "}
+                <MdWork className="text-green-dark" />{" "}
                 {vacancies?.total_vacancy_count || 0}
               </p>
               <p>Total Vacancies</p>
             </div>
             <div className="grid gap-xs border-sm max-w-sm w-full p-sm">
               <p className="flex items-center gap-sm">
-                <FaUser className="text-blue-default" />{" "}
+                <FaUser className="text-blue-light" />{" "}
                 {applicants?.length || 0}
               </p>
               <p>Total Applicants</p>
@@ -114,13 +114,13 @@ const Overview = () => {
         </header>
 
         <section className="border-sm  ">
-          <header className="border-b-sm text-green-dark font-bold flex items-center gap-2 py-md  p-sm">
-            <MdRoundaboutLeft /> Your jobs
+          <header className="border-b-sm uppercase font-bold text-black-default flex items-center gap-2 py-md  p-sm">
+            <MdRoundaboutLeft  className='text-green-light'/> Your jobs
           </header>
           <nav className="flex gap-sm p-sm py-md border-b-sm flex-wrap items-center text-black-light ">
             <span
               className={`${
-                selected === "recent" && "font-semibold text-green-dark"
+                selected === "recent" && "font-semibold text-black-dark"
               } cursor-pointer`}
               onClick={() => setSelected("recent")}
             >
@@ -128,7 +128,7 @@ const Overview = () => {
             </span>
             <span
               className={`${
-                selected === "all" && "font-semibold text-green-dark "
+                selected === "all" && "font-semibold text-black-dark "
               } cursor-pointer`}
               onClick={() => setSelected("all")}
             >

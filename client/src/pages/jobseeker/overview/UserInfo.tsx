@@ -55,7 +55,7 @@ const UserInfo = ({ profile }: UserInfoProps) => {
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDwmG52pVI5JZfn04j9gdtsd8pAGbqjjLswg&usqp=CAU"
           }`}
           alt=""
-          className="w-16 h-16 object-cover rounded-full"
+          className="w-10 h-10 xs:w-16 xs:h-16 object-cover rounded-full"
         />
         <div>
           <h2 className="font-semibold">

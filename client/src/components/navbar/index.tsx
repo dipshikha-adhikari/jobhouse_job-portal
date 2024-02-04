@@ -1,16 +1,17 @@
+import { useEffect, useRef, useState } from "react";
+import { FaArrowDown } from "react-icons/fa";
+import { LiaBarsSolid } from "react-icons/lia";
+import { Link } from "react-router-dom";
+import { Layout } from "../../App";
+import { useCurrentUser } from "../../hooks/useCurrentUser";
+import useAuthStore from "../../store/auth";
+import useStore from "../../store/store";
+import Register from "../modals/Register";
+import Categories from "../shared/Categories";
 import HiddenMenu from "./HiddenMenu";
 import Left from "./Left";
-import { useEffect, useRef, useState } from "react";
-import NavbarForJobseeker from "./jobseeker";
 import NavbarForEmployer from "./employer";
-import { FaArrowDown, FaBars } from "react-icons/fa";
-import Register from "../modals/Register";
-import useStore from "../../store/store";
-import { Link } from "react-router-dom";
-import useAuthStore from "../../store/auth";
-import { useCurrentUser } from "../../hooks/useCurrentUser";
-import Categories from "../shared/Categories";
-import { Layout } from "../../App";
+import NavbarForJobseeker from "./jobseeker";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -83,14 +84,14 @@ const Navbar = () => {
               <div className="relative ">
                 <Link
                   to="/user/login"
-                  className="bg-blue-dark font-normal text-white border-[1px] border-blue-default hover:text-white rounded-sm p-xs px-md hidden sm:block"
+                  className="bg-blue-light font-normal text-white border-[1px] border-blue-default hover:text-white rounded-sm p-xs px-md hidden sm:block"
                 >
                   Log in
                 </Link>
               </div>
               <div className="relative">
                 <div
-                  className="bg-blue-dark rounded-sm register-button text-white
+                  className="bg-blue-light rounded-sm register-button text-white
              p-xs px-md cursor-pointer  hidden sm:block "
                   onClick={store.toggleRegisterModal}
                 >
@@ -102,7 +103,7 @@ const Navbar = () => {
                 className="text-2xl md:hidden cursor-pointer  menu-btn"
                 onClick={() => setMenuOpen(!menuOpen)}
               >
-                <FaBars className="menu-btn" />
+                <LiaBarsSolid className="menu-btn" />
               </div>
             </div>
           )}

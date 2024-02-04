@@ -12,6 +12,7 @@ import { CiStar } from "react-icons/ci";
 import useAuthStore from "../../store/auth";
 import NoUser from "../../components/shared/NoUser";
 import AlmostLoaded from "../../components/shared/AlmostLoaded";
+import { CgWebsite } from "react-icons/cg";
 
 const Profile = () => {
   const user = useCurrentUser();
@@ -68,19 +69,19 @@ const Profile = () => {
                 : user.fullName}
             </p>
             {profile?.basic_information?.industry_type && (
-              <p>{profile?.basic_information?.industry_type}</p>
+              <p className="">({profile?.basic_information?.industry_type})</p>
             )}
             {profile?.other_information?.website && (
-              <p>{profile?.other_information?.website}</p>
+              <p className="flex items-center gap-xs"><CgWebsite className='text-green-dark'/> {profile?.other_information?.website}</p>
             )}
           </div>
           <div className="grid gap-2 place-items-center border-b-sm  pb-sm">
             <p className="flex items-center gap-xs">
-              <MdLocationPin className="text-blue-dark" />{" "}
+              <MdLocationPin className="text-blue-light" />{" "}
               {profile?.basic_information?.address || "Not available"}
             </p>
             <p className="flex items-center gap-xs">
-              <FaEnvelope className="text-blue-dark" /> {user.email}
+              <FaEnvelope className="text-green-light" /> {user.email}
             </p>
             <p className="flex items-center gap-xs">
               <FaPhoneAlt className="text-blue-dark" />
@@ -106,8 +107,8 @@ const Profile = () => {
         </section>
         <div className="grid border-sm h-fit flex-[0.6] ">
           <div className="grid ">
-            <h2 className="flex p-sm  text-green-dark items-center text-center gap-2 font-bold  border-b-sm  ">
-              <CiStar /> Recent Jobs
+            <h2 className="flex p-sm   items-center text-center gap-2 uppercase font-bold  border-b-sm  ">
+              <CiStar className='text-green-dark' /> Recent Jobs
             </h2>
           </div>
           <div className="p-sm">

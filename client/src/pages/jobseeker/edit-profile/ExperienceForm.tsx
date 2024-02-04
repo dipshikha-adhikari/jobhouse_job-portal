@@ -90,7 +90,7 @@ const ExperienceForm = ({
             <span>Nature of Organization </span>{" "}
             <select
               {...register("organizationType")}
-              className="outline-none p-xs border-sm"
+              className="outline-none w-40 sm:w-full p-xs border-sm"
             >
               <option value="">Select</option>
               {industries?.map((item) => {
@@ -131,11 +131,11 @@ const ExperienceForm = ({
           <p className="text-red-600 text-sm">{errors.jobTitle?.message}</p>
         </div>
         <div>
-          <div className="grid sm:flex gap-xs items-center">
+          <div className="grid sm:flex gap-xs  items-center">
             <span>Job Category </span>{" "}
             <select
               {...register("jobCategory")}
-              className="outline-none p-xs border-sm"
+              className="outline-none w-40 sm:w-full p-xs border-sm"
             >
               <option value="">Select</option>
               {categories?.map((cat) => {
@@ -219,13 +219,13 @@ const ExperienceForm = ({
         {isEditorOpen && (
           <div className="flex  gap-xs">
             <button
-              className="bg-green-dark h-full text-white p-sm rounded-sm"
+              className="bg-green-dark h-full  px-sm p-xs text-white rounded-sm"
               disabled={isLoading}
             >
               Save
             </button>
             <button
-              className="border-green-dark border-sm  text-green-dark p-sm rounded-sm"
+              className="border-green-dark border-sm  text-green-dark px-sm p-xs rounded-sm"
               onClick={handleCancel}
             >
               Cancel

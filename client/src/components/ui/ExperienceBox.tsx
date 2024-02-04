@@ -39,12 +39,12 @@ const EducationBox = ({ item }: Props) => {
           </div>
           <div className="grid justify-end h-fit gap-xs ">
             <button
-              className="bg-green-dark text-white  rounded-sm p-sm"
+              className="bg-green-dark text-white  rounded-sm p-xs px-sm"
               onClick={() => setIsEditorOpen(true)}
             >
               Edit
             </button>
-            <button className="bg-orange-light text-white  rounded-sm p-sm">
+            <button className="bg-orange-light text-white  rounded-sm p-xs px-sm">
               Delete
             </button>
           </div>
