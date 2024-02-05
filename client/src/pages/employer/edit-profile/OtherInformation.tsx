@@ -51,7 +51,7 @@ const OtherInformation = ({
     <div className="grid gap-sm">
       {!isEditorOpen && (
         <button
-          className="p-xs px-sm bg-blue-dark h-fit rounded-sm text-white w-fit"
+          className="p-xs px-sm bg-blue-light h-fit rounded-sm text-white w-fit"
           onClick={() => setIsEditorOpen(true)}
         >
           Edit

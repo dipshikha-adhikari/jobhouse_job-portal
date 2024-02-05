@@ -159,7 +159,7 @@ const BasicInformation = ({
           <p className="text-orange-dark">{errors.address?.message}</p>
         </div>
 
-        <div className="grid  gap-2 ">
+        <div className="grid  gap-2 w-40 sm:w-fit ">
           <label htmlFor="">Profile Image</label>
           <input
             type="file"

@@ -60,10 +60,10 @@ const EducationForm = ({
         Education
       </header>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <section className="grid gap-sm">
+        <section className="grid gap-xs">
           <div>
-            <div className="grid sm:flex gap-xs items-center">
-              <span>Degree</span>{" "}
+            <div className="grid sm:flex gap-2 items-center">
+              <span className="font-semibold ">Degree</span>{" "}
               <input
                 type="text"
                 {...register("degree")}
@@ -77,8 +77,8 @@ const EducationForm = ({
             </p>
           </div>
           <div>
-            <div className="grid sm:flex gap-xs items-center">
-              <span>Course/Program</span>{" "}
+            <div className="grid sm:flex gap-2 items-center">
+              <span className="font-semibold ">Course/Program</span>{" "}
               <input
                 type="text"
                 {...register("course")}
@@ -93,8 +93,8 @@ const EducationForm = ({
           </div>
 
           <div>
-            <div className="grid sm:flex gap-xs items-center">
-              <span>School / College / Institute</span>{" "}
+            <div className="grid sm:flex gap-2 items-center">
+              <span className="font-semibold ">School / College / Institute</span>{" "}
               <input
                 type="text"
                 disabled={!isEditorOpen}
@@ -108,8 +108,8 @@ const EducationForm = ({
             </p>
           </div>
           <div>
-            <div className="grid sm:flex gap-xs items-center">
-              <span>Graduation Year</span>{" "}
+            <div className="grid sm:flex gap-2 items-center">
+              <span className="font-semibold ">Graduation Year</span>{" "}
               <Controller
                 control={control}
                 name="graduationYear"
@@ -127,8 +127,8 @@ const EducationForm = ({
               {isEditorOpen && errors.graduationYear?.message}
             </p>
           </div>
-          <div className="grid sm:flex gap-xs items-center">
-            <span>Marks</span>{" "}
+          <div className="grid sm:flex gap-2 items-center">
+            <span className="font-semibold ">Marks</span>{" "}
             <div className="flex gap-xs">
               <input
                 type="text"
@@ -155,8 +155,8 @@ const EducationForm = ({
           </div>
 
           <div>
-            <div className="grid sm:flex gap-xs items-center">
-              <span>Location</span>{" "}
+            <div className="grid sm:flex gap-2 items-center">
+              <span className="font-semibold ">Location</span>{" "}
               <input
                 disabled={!isEditorOpen}
                 placeholder="kathmandu"
@@ -168,8 +168,7 @@ const EducationForm = ({
               {isEditorOpen && errors.location?.message}
             </p>
           </div>
-          {/* {isEditorOpen && ( */}
-          <div className="flex  gap-xs items-center">
+          <div className="flex  gap-2 items-center">
             <button
               type="submit"
               className="bg-green-dark h-full text-white p-sm rounded-sm disabled:opacity-50"

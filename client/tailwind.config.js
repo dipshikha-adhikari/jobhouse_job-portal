@@ -40,9 +40,9 @@ module.exports = {
       },
       borderWidth: {
         xs: "0.2px",
-        sm: "0.5px",
-        md: "1px",
-        lg: "2px",
+        sm: "1px",
+        md: "2px",
+        lg: "3px",
         xl: "4px",
       },
       colors: {

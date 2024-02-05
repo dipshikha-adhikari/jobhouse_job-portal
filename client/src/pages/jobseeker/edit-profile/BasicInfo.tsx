@@ -118,7 +118,7 @@ const basic_information = ({ basic_information }: basic_information) => {
             </p>
           </div>
           <div className="">
-            <div className="grid w-fit sm:flex gap-xs items-center">
+            <div className="grid w-40 sm:w-full sm:flex gap-xs items-center">
               <span>Profile Picture </span>{" "}
               <input
                 type="file"
