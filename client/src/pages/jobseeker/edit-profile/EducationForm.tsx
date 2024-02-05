@@ -69,7 +69,7 @@ const EducationForm = ({
                 {...register("degree")}
                 disabled={!isEditorOpen}
                 placeholder="Bachelor, Masters or Higher Secondary"
-                className="outline-none p-xs border-sm"
+                className="outline-none p-xs border-sm border-gray-light"
               />
             </div>
             <p className="text-red-600 text-sm">
@@ -84,7 +84,7 @@ const EducationForm = ({
                 {...register("course")}
                 disabled={!isEditorOpen}
                 placeholder="Bachelor Of Science"
-                className="outline-none p-xs border-sm"
+                className="outline-none p-xs border-sm border-gray-light"
               />
             </div>
             <p className="text-red-600 text-sm">
@@ -100,7 +100,7 @@ const EducationForm = ({
                 disabled={!isEditorOpen}
                 {...register("institute")}
                 placeholder="Your College/Institute Name"
-                className="outline-none p-xs border-sm"
+                className="outline-none p-xs border-sm border-gray-light"
               />
             </div>
             <p className="text-red-600 text-sm">
@@ -135,11 +135,11 @@ const EducationForm = ({
                 placeholder="Marks"
                 {...register("marksValue")}
                 disabled={!isEditorOpen}
-                className="outline-none p-xs w-20 xs:w-40 border-sm"
+                className="outline-none p-xs w-20 xs:w-40 border-sm border-gray-light"
               />
               <select
                 disabled={!isEditorOpen}
-                className="outline-none border-sm w-20 xs:w-40  p-xs"
+                className="outline-none border-sm border-gray-light w-20 xs:w-40  p-xs"
                 {...register("marksType")}
               >
                 <option value="">Select</option>
@@ -161,7 +161,7 @@ const EducationForm = ({
                 disabled={!isEditorOpen}
                 placeholder="kathmandu"
                 {...register("location")}
-                className="outline-none p-xs border-sm"
+                className="outline-none p-xs border-gray-light border-sm"
               />
             </div>
             <p className="text-red-600 text-sm">
