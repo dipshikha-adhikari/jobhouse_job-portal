@@ -41,7 +41,7 @@ const JobCard: React.FC<JobCardProps> = ({ job }) => {
         </Link>
         <Link
           to={`/jobs/${job.title}/${job.job_id}`}
-          className="px-sm font-normal  border-blue-light text-blue-dark hover:text-blue-light border-sm  rounded-sm p-xs"
+          className="px-sm font-semibold border-blue-dark text-blue-dark hover:text-blue-light border-sm  rounded-sm p-xs"
         >
           View
         </Link>

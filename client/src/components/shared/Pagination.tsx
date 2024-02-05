@@ -28,9 +28,9 @@ const Pagination = ({ limit, totalLength, offset, setOffset }: Pagination) => {
   };
 
   return (
-    <div className="flex flex-wrap justify-end gap-xs p-md">
+    <div className="flex flex-wrap justify-end items-center gap-xs p-md">
       <button
-        className="border-sm  text-green-dark cursor-pointer disabled:cursor-default border-green-dark rounded-sm p-sm disabled:opacity-60 "
+        className="border-sm  h-10 flex font-semibold items-center text-green-dark cursor-pointer disabled:cursor-default border-green-dark rounded-sm p-sm disabled:opacity-60 "
         disabled={offset < limit}
         onClick={handlePrev}
       >
@@ -43,7 +43,7 @@ const Pagination = ({ limit, totalLength, offset, setOffset }: Pagination) => {
             key={a}
             className={`${
               index === ind && "bg-green-dark text-white"
-            } border-sm cursor-pointer border-gray-default rounded-sm p-sm px-md `}
+            } border-sm cursor-pointer w-10 h-10 flex items-center font-bold text-green-dark border-green-dark rounded-sm p-sm px-md `}
             onClick={() => handlePageNumber(ind)}
           >
             {ind + 1}
@@ -51,7 +51,7 @@ const Pagination = ({ limit, totalLength, offset, setOffset }: Pagination) => {
         );
       })}
       <button
-        className="border-sm text-green-dark border-green-dark rounded-sm p-sm cursor-pointer disabled:cursor-default disabled:opacity-60"
+        className="border-sm font-semibold h-10 text-green-dark flex items-center border-green-dark rounded-sm p-sm cursor-pointer disabled:cursor-default disabled:opacity-60"
         disabled={offset >= totalLength - limit}
         onClick={handleNext}
       >

@@ -89,7 +89,7 @@ const Profile = () => {
             </p>
           </div>
           <div className="grid gap-xs ">
-            <h2 className="font-semibold text-xl ">About</h2>
+            <h2 className="font-semibold uppercase text-xl ">About</h2>
             {profile?.basic_information?.summary ? (
               profile.basic_information.summary
             ) : (

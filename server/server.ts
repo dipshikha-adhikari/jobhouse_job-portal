@@ -32,4 +32,4 @@ app.use('/api/v1/jobseeker', jobseekerRoute)
 app.use('/api/v1/jobs', jobsRoute)
 app.get('/api/v1/topEmployers', getTopEmployers)
 
-app.listen('3000', () => console.log('server running', this))
+app.listen('5000', () => console.log('server running', this))

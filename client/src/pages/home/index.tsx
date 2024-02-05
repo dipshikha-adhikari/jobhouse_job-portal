@@ -27,7 +27,6 @@ const Home = () => {
   const headerRef = useRef<HTMLDivElement>(null);
   const [headerHeight, setHeaderHeight] = useState(0);
   const { isJobsFetched } = useStore();
-
   const { jobs: appliedJobs }: AppliedJobsType = useAppliedJobs();
   const [offset, setOffset] = useState(0);
   const limit = 6;
@@ -55,7 +54,7 @@ const Home = () => {
   if (isLoading && !isJobsFetched)
     return (
       <div>
-        <Header ref={headerRef}/>
+        <Header ref={headerRef} />
         <img src={running} alt="" className="w-12 h-12 mx-auto p-sm" />
       </div>
     );
@@ -102,21 +101,36 @@ const Home = () => {
 
 export default Home;
 
-const Header = forwardRef<HTMLDivElement>((props,ref) => {
-  console.log(props)
+const Header = forwardRef<HTMLDivElement>((props, ref) => {
+  const imageRef = useRef<HTMLImageElement>(null);
+
+  useEffect(() => {
+    const img = new Image();
+    img.src = "https://static.merojob.com/images/default_pp/header-image.png";
+    img.onload = function () {
+      if (imageRef.current) {
+        imageRef.current.setAttribute("src", img.src);
+      }
+    };
+  }, []);
+
+  console.log(props);
   return (
     <header className=" justify-start  relative " ref={ref}>
       <img
         src={livingroom}
         alt=""
+        loading="eager"
         className="h-full absolute z-[-10] top-0 left-auto w-full  object-cover"
       />
       <img
-        src="https://static.merojob.com/images/default_pp/header-image.png"
+        src=""
         alt=""
+        ref={imageRef}
+        loading="eager"
         className=" h-[120px] mx-auto  object-cover"
       />
       <SearchBox />
     </header>
   );
-})
+});

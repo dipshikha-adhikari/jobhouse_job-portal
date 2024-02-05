@@ -1,5 +1,11 @@
+import { useEffect } from 'react';
 import errorImage from '../../asstes/error.avif';
 const Error = () => {
+
+  useEffect(() => {
+window.scrollTo(0,0)
+  },[])
+
   return (
     <div className="grid place-items-center h-[80vh]">
       <img

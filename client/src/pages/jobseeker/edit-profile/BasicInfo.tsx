@@ -182,7 +182,7 @@ const basic_information = ({ basic_information }: basic_information) => {
               <select
                 disabled={!isEditorOpen}
                 {...register("gender")}
-                className="outline-none p-xs border-sm"
+                className="outline-none p-xs w-fit border-sm"
               >
                 <option value={undefined}>Select</option>
                 <option value="male">Male</option>
@@ -193,7 +193,7 @@ const basic_information = ({ basic_information }: basic_information) => {
             <p className="text-orange-dark text-sm">{errors.gender?.message}</p>
           </div>
           <div>
-            <div className="grid sm:flex gap-xs items-center">
+            <div className="grid sm:flex gap-xs w-40 xs:w-60 sm:w-full items-center">
               <span>Date of Birth</span>{" "}
               <Controller
                 control={control}
