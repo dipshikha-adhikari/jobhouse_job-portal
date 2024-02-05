@@ -47,7 +47,7 @@ const TagsInputBox = ({
       <div
         className={`${
           isEditorOpen && "hover:border-black-default"
-        } border-sm rounded-sm flex flex-wrap gap-xs input   p-sm`}
+        } border-sm border-gray-light  rounded-sm flex flex-wrap gap-xs input   p-sm`}
       >
         {inputs.map((inp) => {
           return (

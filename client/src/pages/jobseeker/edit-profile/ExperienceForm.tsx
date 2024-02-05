@@ -70,15 +70,15 @@ const ExperienceForm = ({
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <section className="grid gap-sm" ref={ref}>
+      <section className="grid gap-xs" ref={ref}>
         <div>
-          <div className="grid sm:flex gap-xs items-center">
-            <span>Organization Name </span>{" "}
+          <div className="grid sm:flex gap-2 items-center">
+            <span className="font-semibold">Organization Name </span>{" "}
             <input
               type="text"
               {...register("organizationName")}
               placeholder="ABC company"
-              className="outline-none p-xs border-sm"
+              className="outline-none p-xs border-sm border-gray-light"
             />
           </div>
           <p className="text-red-600 text-sm">
@@ -86,11 +86,11 @@ const ExperienceForm = ({
           </p>
         </div>
         <div>
-          <div className="grid sm:flex gap-xs items-center">
-            <span>Nature of Organization </span>{" "}
+          <div className="grid sm:flex gap-2 items-center">
+            <span className="font-semibold">Nature of Organization </span>{" "}
             <select
               {...register("organizationType")}
-              className="outline-none w-40 sm:w-full p-xs border-sm"
+              className="outline-none w-40 sm:w-full p-xs border-sm border-gray-light"
             >
               <option value="">Select</option>
               {industries?.map((item) => {
@@ -107,35 +107,35 @@ const ExperienceForm = ({
           </p>
         </div>
         <div>
-          <div className="grid sm:flex gap-xs items-center">
-            <span>Job Location </span>{" "}
+          <div className="grid sm:flex gap-2 items-center">
+            <span className="font-semibold">Job Location </span>{" "}
             <input
               type="text"
               {...register("jobLocation")}
               placeholder="Kathmandu, Nepal"
-              className="outline-none p-xs border-sm"
+              className="outline-none p-xs border-sm border-gray-light"
             />
           </div>
           <p className="text-red-600 text-sm">{errors.jobLocation?.message}</p>
         </div>
         <div>
-          <div className="grid sm:flex gap-xs items-center">
-            <span>Job Title </span>{" "}
+          <div className="grid sm:flex gap-2 items-center">
+            <span className="font-semibold">Job Title </span>{" "}
             <input
               type="text"
               {...register("jobTitle")}
               placeholder="Developer"
-              className="outline-none p-xs border-sm"
+              className="outline-none p-xs border-sm border-gray-light"
             />
           </div>
           <p className="text-red-600 text-sm">{errors.jobTitle?.message}</p>
         </div>
         <div>
-          <div className="grid sm:flex gap-xs  items-center">
-            <span>Job Category </span>{" "}
+          <div className="grid sm:flex gap-2  items-center">
+            <span className="font-semibold">Job Category </span>{" "}
             <select
               {...register("jobCategory")}
-              className="outline-none w-40 sm:w-full p-xs border-sm"
+              className="outline-none w-40 border-gray-light sm:w-full p-xs border-sm"
             >
               <option value="">Select</option>
               {categories?.map((cat) => {
@@ -150,8 +150,8 @@ const ExperienceForm = ({
           <p className="text-red-600 text-sm">{errors.jobCategory?.message}</p>
         </div>
         <div>
-          <div className="grid sm:flex gap-xs items-center">
-            <span>Job Level</span>{" "}
+          <div className="grid sm:flex gap-2 items-center">
+            <span className="font-semibold">Job Level</span>{" "}
             <Controller
               name="jobLevelId"
               control={control}
@@ -168,8 +168,8 @@ const ExperienceForm = ({
           <p className="text-red-600 text-sm">{errors.jobLevelId?.message}</p>
         </div>
         <div>
-          <div className="grid sm:flex gap-xs items-center">
-            <span>Start Date</span>{" "}
+          <div className="grid sm:flex gap-2 items-center">
+            <span className="font-semibold">Start Date</span>{" "}
             <Controller
               control={control}
               name="startDate"
@@ -186,8 +186,8 @@ const ExperienceForm = ({
           <p className="text-red-600 text-sm">{errors.startDate?.message}</p>
         </div>
         <div>
-          <div className="grid sm:flex gap-xs items-center">
-            <span>End Date</span>{" "}
+          <div className="grid sm:flex gap-2 items-center">
+            <span className="font-semibold">End Date</span>{" "}
             <Controller
               control={control}
               name="endDate"
@@ -204,8 +204,8 @@ const ExperienceForm = ({
           <p className="text-red-600 text-sm">{errors.endDate?.message}</p>
         </div>
         <div>
-          <div className="grid sm:flex gap-xs h-fit ">
-            <span>Duties & Responsibilities</span>
+          <div className="grid sm:flex gap-2 h-fit ">
+            <span className="font-semibold">Duties & Responsibilities</span>
             <Controller
               name="duties"
               control={control}

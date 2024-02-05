@@ -101,16 +101,16 @@ const basic_information = ({ basic_information }: basic_information) => {
         )}
       </header>
       <form className="grid gap-sm" onSubmit={handleSubmit(onSubmit)}>
-        <section className="grid gap-sm">
+        <section className="grid gap-xs">
           <div className="">
-            <div className="grid sm:flex gap-xs items-center">
-              <span>Full Name </span>{" "}
+            <div className="grid sm:flex gap-2 items-center">
+              <span className="font-semibold">Full Name </span>{" "}
               <input
                 type="text"
                 disabled={!isEditorOpen}
                 placeholder="Full Name"
                 {...register("fullname")}
-                className="outline-none p-xs border-sm"
+                className="outline-none p-xs border-sm border-gray-light"
               />
             </div>
             <p className="text-orange-dark text-sm">
@@ -118,27 +118,27 @@ const basic_information = ({ basic_information }: basic_information) => {
             </p>
           </div>
           <div className="">
-            <div className="grid w-40 sm:w-full sm:flex gap-xs items-center">
-              <span>Profile Picture </span>{" "}
+            <div className="grid  sm:flex gap-2 items-center">
+              <span className="font-semibold">Profile Picture </span>{" "}
               <input
                 type="file"
                 disabled={!isEditorOpen}
                 onChange={(e) => handleImage(e)}
                 placeholder="Upload image"
-                className="outline-none p-xs border-sm"
+                className="outline-none p-xs border-sm w-40 sm:w-full border-gray-light"
               />
             </div>
             {imagePreview && <img src={imagePreview} className="w-20 h-20" />}
           </div>
           <div>
-            <div className="grid sm:flex gap-xs items-center">
-              <span>Current Address </span>{" "}
+            <div className="grid sm:flex gap-2 items-center">
+              <span className="font-semibold">Current Address </span>{" "}
               <input
                 type="text"
                 disabled={!isEditorOpen}
                 {...register("currentAddress")}
                 placeholder="Current Address"
-                className="outline-none p-xs border-sm"
+                className="outline-none p-xs border-sm border-gray-light"
               />
             </div>
             <p className="text-orange-dark text-sm">
@@ -147,14 +147,14 @@ const basic_information = ({ basic_information }: basic_information) => {
           </div>
 
           <div>
-            <div className="grid gap-xs sm:flex items-center">
-              <span>Permanent Address</span>{" "}
+            <div className="grid gap-2 sm:flex items-center">
+              <span className="font-semibold">Permanent Address</span>{" "}
               <input
                 type="text"
                 disabled={!isEditorOpen}
                 {...register("permanentAddress")}
                 placeholder="Permanent Address"
-                className="outline-none p-xs border-sm"
+                className="outline-none p-xs border-sm border-gray-light"
               />
             </div>
             <p className="text-orange-dark text-sm">
@@ -162,14 +162,14 @@ const basic_information = ({ basic_information }: basic_information) => {
             </p>
           </div>
           <div>
-            <div className="grid sm:flex gap-xs items-center">
-              <span>Mobile No </span>{" "}
+            <div className="grid sm:flex gap-2 items-center">
+              <span className="font-semibold">Mobile No </span>{" "}
               <input
                 type="number"
                 disabled={!isEditorOpen}
                 {...register("phoneNumber")}
                 placeholder="Phone no"
-                className="outline-none p-xs border-sm"
+                className="outline-none p-xs border-sm border-gray-light" 
               />
             </div>
             <p className="text-orange-dark text-sm">
@@ -177,12 +177,12 @@ const basic_information = ({ basic_information }: basic_information) => {
             </p>
           </div>
           <div>
-            <div className="grid sm:flex gap-xs items-center">
-              <span>Gender </span>{" "}
+            <div className="grid sm:flex gap-2 items-center">
+              <span className="font-semibold">Gender </span>{" "}
               <select
                 disabled={!isEditorOpen}
                 {...register("gender")}
-                className="outline-none p-xs w-fit border-sm"
+                className="outline-none p-xs w-fit border-sm border-gray-light"
               >
                 <option value={undefined}>Select</option>
                 <option value="male">Male</option>
@@ -193,8 +193,8 @@ const basic_information = ({ basic_information }: basic_information) => {
             <p className="text-orange-dark text-sm">{errors.gender?.message}</p>
           </div>
           <div>
-            <div className="grid sm:flex gap-xs w-40 xs:w-60 sm:w-full items-center">
-              <span>Date of Birth</span>{" "}
+            <div className="grid sm:flex gap-2 w-40 xs:w-60 sm:w-full items-center">
+              <span className="font-semibold">Date of Birth</span>{" "}
               <Controller
                 control={control}
                 name="dateOfBirth"

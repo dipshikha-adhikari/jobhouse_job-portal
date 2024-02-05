@@ -73,7 +73,7 @@ const JobPreference = ({ job_preference }: JobPreference) => {
         Job Preference
         {!isEditorOpen && (
           <span
-            className="border-sm border-green-dark  px-sm py-1 flex items-center cursor-pointer gap-xs rounded-sm"
+            className="border-sm border-green-dark  px-sm py-1 flex items-center cursor-pointer gap-2 rounded-sm"
             onClick={() => setIsEditorOpen(true)}
           >
             <FaEdit /> Edit
@@ -84,10 +84,10 @@ const JobPreference = ({ job_preference }: JobPreference) => {
         className="grid gap-sm "
         onSubmit={handleSubmit(submitJobPreference)}
       >
-        <section className="grid gap-sm">
+        <section className="grid gap-xs">
           <div>
-            <div className="grid gap-xs sm:flex ">
-              <span>Objective</span>{" "}
+            <div className="grid gap-2 sm:flex ">
+              <span className="font-semibold">Objective</span>{" "}
               <div className="flex-1">
                 {" "}
                 <textarea
@@ -95,28 +95,28 @@ const JobPreference = ({ job_preference }: JobPreference) => {
                   disabled={!isEditorOpen}
                   {...register("objective")}
                   onInput={(e) => autoGrow(e)}
-                  className={`border-sm w-full  outline-none p-sm resize-none `}
+                  className={`border-sm w-full border-gray-light  outline-none p-sm resize-none `}
                 ></textarea>
               </div>
             </div>
             <p className="text-orange-dark">{errors.objective?.message}</p>
           </div>
           <div>
-            <div className="grid gap-xs w-fit sm:flex items-center">
-              <span>Preferred Job Title </span>
+            <div className="grid gap-2 w-fit sm:flex items-center">
+              <span className="font-semibold">Preferred Job Title </span>
               <input
                 type="text"
                 disabled={!isEditorOpen}
                 placeholder="Developer"
                 {...register("jobTitle")}
-                className="outline-none border-sm  px-sm p-xs  "
+                className="outline-none border-sm border-gray-light   px-sm p-xs  "
               />
             </div>
             <p className="text-orange-dark">{errors.jobTitle?.message}</p>
           </div>
           <div>
-            <div className="grid gap-xs w-fit sm:flex items-center">
-              <span>Preferred Job Categories </span>
+            <div className="grid gap-2 w-fit sm:flex items-center">
+              <span className="font-semibold">Preferred Job Categories </span>
               <Controller
                 name="jobCategories"
                 control={control}
@@ -137,8 +137,8 @@ const JobPreference = ({ job_preference }: JobPreference) => {
             <p className="text-orange-dark">{errors.jobCategories?.message}</p>
           </div>
           <div>
-            <div className="grid gap-xs w-fit sm:flex items-center">
-              <span>Preferred Job Industries </span>
+            <div className="grid gap-2 w-fit sm:flex items-center">
+              <span className="font-semibold">Preferred Job Industries </span>
               <Controller
                 name="jobIndustries"
                 control={control}
@@ -158,8 +158,8 @@ const JobPreference = ({ job_preference }: JobPreference) => {
             <p className="text-orange-dark">{errors.jobIndustries?.message}</p>
           </div>
           <div>
-            <div className="grid gap-xs  sm:flex ">
-              <span>Skills </span>
+            <div className="grid gap-2  sm:flex ">
+              <span className="font-semibold">Skills </span>
               <Controller
                 name="skills"
                 control={control}
@@ -178,8 +178,8 @@ const JobPreference = ({ job_preference }: JobPreference) => {
           </div>
 
           <div>
-            <div className="grid gap-xs w-fit sm:flex items-center">
-              <span>Available for </span>
+            <div className="grid gap-2 w-fit sm:flex items-center">
+              <span className="font-semibold">Available for </span>
               <Controller
                 name="jobTypeId"
                 control={control}
@@ -196,8 +196,8 @@ const JobPreference = ({ job_preference }: JobPreference) => {
             <p className="text-orange-dark">{errors.jobTypeId?.message}</p>
           </div>
           <div>
-            <div className="grid gap-xs w-fit sm:flex items-center">
-              <span>Looking For </span>
+            <div className="grid gap-2 w-fit sm:flex items-center">
+              <span className="font-semibold">Looking For </span>
               <Controller
                 name="jobLevelId"
                 control={control}
@@ -214,27 +214,27 @@ const JobPreference = ({ job_preference }: JobPreference) => {
             <p className="text-orange-dark">{errors.jobTypeId?.message}</p>
           </div>
           <div>
-            <div className="grid gap-xs w-fit sm:flex items-center">
-              <span>Preferred Job Location </span>
+            <div className="grid gap-2 w-fit sm:flex items-center">
+              <span className="font-semibold">Preferred Job Location </span>
               <input
                 type="text"
                 disabled={!isEditorOpen}
                 placeholder="Kathmandu"
                 {...register("jobLocation")}
-                className="outline-none border-sm px-sm p-xs "
+                className="outline-none border-sm border-gray-light  px-sm p-xs "
               />
             </div>
             <p className="text-orange-dark">{errors.jobLocation?.message}</p>
           </div>
           <div>
-            <div className="grid gap-xs w-fit sm:flex items-center">
-              <span>Expected salary</span>
+            <div className="grid gap-2 w-fit sm:flex items-center">
+              <span className="font-semibold">Expected salary</span>
               <input
                 type="text"
                 disabled={!isEditorOpen}
                 placeholder="40000"
                 {...register("expectedSalary")}
-                className="outline-none border-sm px-sm p-xs "
+                className="outline-none border-sm border-gray-light  px-sm p-xs "
               />
             </div>
             <p className="text-orange-dark">{errors.expectedSalary?.message}</p>

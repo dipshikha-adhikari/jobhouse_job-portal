@@ -59,10 +59,10 @@ const OtherInformation = ({
       )}
       <form onSubmit={handleSubmit(onSubmit)} className="w-full grid gap-xs">
         <div className="grid gap-2 ">
-          <span className="">Website</span>{" "}
+          <span className="font-semibold">Website</span>{" "}
           <input
             {...register("website")}
-            className="p-xs outline-none border-sm border-default "
+            className="p-xs outline-none border-sm border-gray-light "
             disabled={!isEditorOpen}
           />
           <p className="text-orange-dark">{errors.website?.message}</p>

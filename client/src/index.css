@@ -118,8 +118,11 @@ input[type=number]::-webkit-outer-spin-button {
   
 }
 
-input:hover:enabled,  textarea:hover:enabled{
+input:hover:enabled,  textarea:hover:enabled, select:hover:enabled{
   border-color: #5d5d5d;
+}
+select{
+  border:1px solid #d1d5db;
 }
 
 .job-details::-webkit-scrollbar{

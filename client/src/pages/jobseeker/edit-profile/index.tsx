@@ -74,7 +74,7 @@ const EditProfile = () => {
                 to={`/jobseeker/profile/${item.link}`}
                 key={item.title}
                 className={`${
-                  title === item.link && "text-green-dark"
+                  title === item.link && "text-green-dark "
                 } text-black-default w-fit hover:text-green-dark`}
               >
                 {item.title}

@@ -108,7 +108,7 @@ const EducationForm = ({
             </p>
           </div>
           <div>
-            <div className="grid sm:flex gap-2 items-center">
+            <div className="grid sm:flex gap-2 w-[200px] xs:w-60 sm:w-full items-center">
               <span className="font-semibold ">Graduation Year</span>{" "}
               <Controller
                 control={control}
@@ -135,11 +135,11 @@ const EducationForm = ({
                 placeholder="Marks"
                 {...register("marksValue")}
                 disabled={!isEditorOpen}
-                className="outline-none p-xs w-20 xs:w-40 border-sm border-gray-light"
+                className="outline-none p-xs w-20 sm:w-40 border-sm border-gray-light"
               />
               <select
                 disabled={!isEditorOpen}
-                className="outline-none border-sm border-gray-light w-20 xs:w-40  p-xs"
+                className="outline-none border-sm border-gray-light w-20 sm:w-40  p-xs"
                 {...register("marksType")}
               >
                 <option value="">Select</option>

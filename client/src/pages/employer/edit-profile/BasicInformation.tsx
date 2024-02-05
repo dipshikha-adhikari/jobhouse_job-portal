@@ -130,7 +130,7 @@ const BasicInformation = ({
       )}
       <form className="grid gap-3 " onSubmit={handleSubmit(onSubmit)}>
         <div className="grid gap-2">
-          <span>Organization Name</span>{" "}
+          <span className="font-semibold">Organization Name</span>{" "}
           <input
             type="text"
             {...register("organizationName")}
@@ -140,7 +140,7 @@ const BasicInformation = ({
           <p className="text-orange-dark">{errors.organizationName?.message}</p>
         </div>
         <div className="grid gap-2">
-          <span>Phone Number</span>{" "}
+          <span className="font-semibold">Phone Number</span>{" "}
           <input
             type="number"
             {...register("phoneNumber")}
@@ -150,7 +150,7 @@ const BasicInformation = ({
           <p className="text-orange-dark">{errors.phoneNumber?.message}</p>
         </div>
         <div className="grid gap-2">
-          <span>Address</span>{" "}
+          <span className="font-semibold">Address</span>{" "}
           <input
             {...register("address")}
             className="p-xs outline-none border-sm border-default "
@@ -160,7 +160,7 @@ const BasicInformation = ({
         </div>
 
         <div className="grid  gap-2 w-40 sm:w-fit ">
-          <label htmlFor="">Profile Image</label>
+          <label htmlFor="" className="font-semibold">Profile Image</label>
           <input
             type="file"
             disabled={!isEditorOpen}
@@ -168,23 +168,10 @@ const BasicInformation = ({
           />
           {imagePreview && <img src={imagePreview} className="w-20 h-20" />}
         </div>
-        {/* <div className="grid  gap-2 ">
-          <label htmlFor=""> Cover Image</label>
-          <input
-            type="file"
-            disabled={!isEditorOpen}
-            onChange={(e) => handleImage(e, "coverImage")}
-          />
-          {coverImagePreview && (
-            <img
-              src={coverImagePreview}
-              className="w-20 h-20 object-cover rounded-full"
-            />
-          )}
-        </div> */}
+        
         <div>
           <div className=" grid gap-2  items-center">
-            <span className="">* Industry Type</span>
+            <span className="font-semibold">Industry Type</span>
             <Controller
               name="industryType"
               control={control}
@@ -202,9 +189,7 @@ const BasicInformation = ({
         </div>
 
         <div className="grid  gap-2 ">
-          <label htmlFor="">
-            <span className="text-orange-default text-xl">*</span> Summary
-          </label>
+            <span className="font-semibold ">Summary</span> 
           <textarea
             cols={40}
             rows={4}

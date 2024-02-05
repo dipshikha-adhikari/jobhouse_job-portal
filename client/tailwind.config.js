@@ -39,7 +39,6 @@ module.exports = {
         dark: "#94a3b8",
       },
       borderWidth: {
-        xs: "0.2px",
         sm: "1px",
         md: "2px",
         lg: "3px",
