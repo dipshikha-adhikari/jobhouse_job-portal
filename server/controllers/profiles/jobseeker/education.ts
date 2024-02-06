@@ -107,6 +107,15 @@ export const createEducation= (req: IUserRequest, res: Response) => {
 
     
   
+export const  deleteEducation = (req: IUserRequest, res: Response) => {
+    const { id } = req.user
+            const{educationId} = req.params
+
+            pool.query('delete from jobseekers_education where id = $1 and user_id = $2',[educationId, id], (err:Error, result:QueryResult) => {
+                if(err) return res.status(401).send('Failed to delete')
+                return res.status(200).send({message:'Successfully deleted'})
+            })
+}
 
 
 

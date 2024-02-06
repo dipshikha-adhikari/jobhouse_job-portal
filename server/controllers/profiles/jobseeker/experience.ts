@@ -67,7 +67,14 @@ export const updateExperience = (req: IUserRequest, res: Response) => {
 
 
 
-
+export const  deleteExperience = (req: IUserRequest, res: Response) => {
+    const { id } = req.user
+            const{experienceId} = req.params
+            pool.query('delete from jobseekers_experience where id = $1 and user_id = $2',[experienceId, id], (err:Error, result:QueryResult) => {
+                if(err) return res.status(401).send('Failed to delete')
+                return res.status(200).send({message:'Successfully deleted'})
+            })
+}
 
 
 

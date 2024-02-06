@@ -2,6 +2,7 @@ import moment from "moment";
 import { useState } from "react";
 import ExperienceForm from "../../pages/jobseeker/edit-profile/ExperienceForm";
 import { IJobseekerExperience } from "../../types/postgres/types";
+import { deleteExperience } from "../../pages/jobseeker/actions/deleteExperience";
 
 type Props = {
   item: IJobseekerExperience;
@@ -9,6 +10,7 @@ type Props = {
 
 const EducationBox = ({ item }: Props) => {
   const [isEditorOpen, setIsEditorOpen] = useState(false);
+const[isLoading, setIsLoading] = useState(false)
 
   return (
     <div>
@@ -44,7 +46,7 @@ const EducationBox = ({ item }: Props) => {
             >
               Edit
             </button>
-            <button className="bg-orange-light text-white  rounded-sm p-xs px-sm">
+            <button className="bg-orange-light text-white disabled:opacity-50 rounded-sm p-xs px-sm" disabled={isLoading} onClick={() => deleteExperience(setIsLoading, item.id)}>
               Delete
             </button>
           </div>

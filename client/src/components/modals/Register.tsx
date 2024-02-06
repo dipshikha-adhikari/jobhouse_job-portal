@@ -32,7 +32,7 @@ const Register = () => {
   return (
     <div
       ref={ref}
-      className="fixed modal sm:absolute  sm:top-10 sm:right-0 sm:min-w-[400px] sm:left-auto sm:translate-x-0  bg-white p-md top-[10vh]  w-full  left-1/2 -translate-x-1/2 grid gap-4 place-items-center "
+      className="fixed modal sm:absolute  sm:top-10 sm:right-0 sm:min-w-[400px] sm:left-auto sm:translate-x-0  bg-white p-md top-8  w-full  left-1/2 -translate-x-1/2 grid gap-4 place-items-center "
     >
       <header className="flex items-center  justify-between  w-full">
         <div className="flex gap-10">

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { IJobseekerEducation } from "../../types/postgres/types";
 import moment from "moment";
 import EducationForm from "../../pages/jobseeker/edit-profile/EducationForm";
+import { deleteEducation } from "../../pages/jobseeker/actions/deleteEducation";
 
 type Props = {
   item: IJobseekerEducation;
@@ -9,6 +10,7 @@ type Props = {
 
 const EducationBox = ({ item }: Props) => {
   const [isEditorOpen, setIsEditorOpen] = useState(false);
+const [isLoading, setIsLoading] = useState(false)
 
   return (
     <div className="">
@@ -30,12 +32,12 @@ const EducationBox = ({ item }: Props) => {
           </div>
           <div className="grid justify-end h-fit gap-xs ">
             <button
-              className="bg-green-dark text-white  rounded-sm p-sm"
+              className="bg-green-dark text-white  rounded-sm p-xs px-sm"
               onClick={() => setIsEditorOpen(true)}
             >
               Edit
             </button>
-            <button className="bg-orange-light text-white  rounded-sm p-sm">
+            <button className="bg-orange-light disabled:opacity-50 text-white  rounded-sm p-xs px-sm" disabled={isLoading} onClick={() => deleteEducation(setIsLoading,item.id)}>
               Delete
             </button>
           </div>

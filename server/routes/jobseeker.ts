@@ -1,6 +1,6 @@
 import { createBasicInfo, updateBasicInfo } from "../controllers/profiles/jobseeker/basicInformation"
-import { createEducation, updateEducation } from "../controllers/profiles/jobseeker/education"
-import { createExperience, updateExperience } from "../controllers/profiles/jobseeker/experience"
+import { createEducation, deleteEducation, updateEducation } from "../controllers/profiles/jobseeker/education"
+import { createExperience, deleteExperience, updateExperience } from "../controllers/profiles/jobseeker/experience"
 import { getJobseekerProfileById } from "../controllers/profiles/jobseeker/getJobseekerProfileById"
 import { getJobseekerProfile } from "../controllers/profiles/jobseeker/getProfile"
 import { createJobPreference, updateJobPreference } from "../controllers/profiles/jobseeker/jobPreference"
@@ -17,8 +17,10 @@ router.post('/cloudinary/upload',verifyToken, uploadImage)
 router.put('/profile/basicInformation', verifyToken, updateBasicInfo)
 router.post('/profile/education', verifyToken, createEducation)
 router.put('/profile/education/:educationId', verifyToken, updateEducation)
+router.delete('/profile/education/:educationId', verifyToken, deleteEducation)
 router.post('/profile/experience', verifyToken, createExperience)
 router.put('/profile/experience/:experienceId', verifyToken, updateExperience)
+router.delete('/profile/experience/:experienceId', verifyToken, deleteExperience)
 router.post('/profile/jobPreference', verifyToken, createJobPreference)
 router.put('/profile/jobPreference', verifyToken, updateJobPreference)
 
