@@ -23,7 +23,7 @@ const EditProfile = () => {
   const { profile, isLoading, isError }: ProfileProps = useJobseekerProfile();
   const [error, setError] = useState(false);
   const { isAunthenticated } = useAuthStore();
-
+console.log(profile)
   const data = [
     {
       title: "Job Preference",

@@ -70,7 +70,7 @@ const Profile = () => {
             className="w-20 h-20 rounded-full object-cover"
           />
           <div className="grid gap-2 ">
-            <div className="font-semibold flex gap-2">
+            <div className="font-boldflex gap-2">
               {profile?.basic_information?.gender === "male" && <span>MR</span>}
               {profile?.basic_information?.gender === "female" && (
                 <span>MRS</span>
@@ -98,7 +98,7 @@ const Profile = () => {
         </section>
 
         <section className="">
-          <header className="font-semibold  uppercase text-xl flex gap-xs items-center">
+          <header className="font-bold uppercase  flex gap-xs items-center">
             <GiFlagObjective /> Objective
           </header>
           <p className="py-md break-all">
@@ -106,7 +106,7 @@ const Profile = () => {
           </p>
         </section>
         <section className="grid gap-xs ">
-          <header className="font-semibold text-xl uppercase flex items-center gap-xs">
+          <header className="font-bold uppercase flex items-center gap-xs">
             <MdOutlineMapsHomeWork /> Work Experience
           </header>
           {profile?.experience.length > 0 ? (
@@ -130,7 +130,7 @@ const Profile = () => {
                       </p>
                     </div>
                     <div className="grid flex-1 gap-2">
-                      <p className="flex font-semibold items-center gap-xs">
+                      <p className="flex font-bolditems-center gap-xs">
                         <MdOutlineMapsHomeWork /> {exp.organization_name} (
                         {exp.organization_type})
                       </p>
@@ -141,7 +141,7 @@ const Profile = () => {
 
                       {exp.duties !== undefined && (
                         <div className=" pl-8">
-                          <p className="flex items-center font-semibold gap-2">
+                          <p className="flex items-center font-boldgap-2">
                             {" "}
                             <FaArrowAltCircleDown /> Duties
                           </p>
@@ -162,7 +162,7 @@ const Profile = () => {
         </section>
 
         <section className="grid gap-xs">
-          <header className="font-semibold   w-fit  uppercase text-xl flex items-center gap-xs">
+          <header className="font-bold  w-fit  uppercase  flex items-center gap-xs">
             <SlGraduation /> Education
           </header>
           {profile?.education.length > 0 ? (
@@ -178,14 +178,14 @@ const Profile = () => {
                       <CiCalendar />
                       {moment(item.graduation_year).format("YYYY-MM-DD")}
                     </p>
-                    <p className="flex items-center font-semibold gap-2">
+                    <p className="flex items-center font-boldgap-2">
                       <CiCircleCheck /> {item.degree}
                     </p>
                     <p className="flex items-center gap-2">
                       <MdOutlineMapsHomeWork /> {item.institute_name},{" "}
                       {item.location}, {item.education_board}
                     </p>
-                    <span className="flex items-center font-semibold gap-2">
+                    <span className="flex items-center font-boldgap-2">
                       <GrCertificate /> Marks : {item.marks.value}{" "}
                       {item.marks.type}
                     </span>
@@ -198,7 +198,7 @@ const Profile = () => {
           )}
         </section>
         <section className="grid gap-xs">
-          <header className="font-semibold  flex items-center gap-xs uppercase text-xl ">
+          <header className="font-bold flex items-center gap-xs uppercase  ">
             <MdOutlineRoomPreferences /> Job Preference
           </header>
           {profile?.job_preference ? (
@@ -242,7 +242,7 @@ const Profile = () => {
           )}
         </section>
         <section className="grid gap-xs">
-          <header className="font-semibold flex items-center gap-xs uppercase text-xl ">
+          <header className="font-boldflex items-center gap-xs uppercase  ">
             <GiSkills /> Skills
           </header>
           <div className="grid gap-2 break-all">

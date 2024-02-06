@@ -33,7 +33,8 @@ export default function ResponsiveDatePicker({
             views={["year", "month"]}
             disabled={!isEditorOpen}
             onChange={(date) => handleChange(date?.toDate())}
-            value={dayjs(field.value)}
+            value={ dayjs(field.value)}
+            
           />
         </DemoItem>
       </DemoContainer>

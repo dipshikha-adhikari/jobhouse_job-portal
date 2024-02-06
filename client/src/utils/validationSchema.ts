@@ -1,3 +1,4 @@
+import moment from "moment";
 import * as Yup from "yup";
 
 export const registerValidationSchema = Yup.object().shape({
@@ -146,34 +147,15 @@ export const JobseekerExperienceSchema = Yup.object().shape({
   jobTitle: Yup.string().required("required"),
   jobCategory: Yup.string().required("required"),
   jobLevelId: Yup.string().required("required"),
-  startDate: Yup.date()
-    .required("required")
-    .typeError("start date must be a valid date"),
-  endDate: Yup.date()
-    .required("required")
-    .typeError("end date must be a valid date")
-    .when("startDate", (startDate, schema) => {
-      return (
-        startDate &&
-        schema
-          .min(startDate, "End date must be after start date")
-          .max(new Date(), "End date must be in the past")
-      );
-    })
-    .test(
-      "is-one-month-difference",
-      "Difference must be at least one month",
-      function (endDate) {
-        const startDate = this.parent.startDate;
-        if (startDate && endDate) {
-          const diffInMonths =
-            (endDate.getFullYear() - startDate.getFullYear()) * 12 +
-            (endDate.getMonth() - startDate.getMonth());
 
-          return diffInMonths >= 1;
-        }
-        return true;
-      },
-    ),
+  startDate: Yup.string().required("start time cannot be empty"),
+  endDate: Yup
+    .string()
+    .required("end time cannot be empty")
+    .test("is-greater", "end time should be greater", function (value) {
+      const { startDate } = this.parent
+      return moment(value).isAfter(moment(startDate));
+    })
+  ,
   duties: Yup.string().required("required"),
 });

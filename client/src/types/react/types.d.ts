@@ -66,7 +66,7 @@ export interface IJobseekerExperienceInputs {
   jobTitle: string;
   jobCategory: string;
   jobLevelId: string;
-  startDate: Date;
-  endDate: Date;
+  startDate: string;
+  endDate: string;
   duties: string;
 }

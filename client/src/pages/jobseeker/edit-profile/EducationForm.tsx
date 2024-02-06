@@ -43,7 +43,7 @@ const EducationForm = ({
   const onSubmit: SubmitHandler<IJobseekerEducationInputs> = (data) => {
     updateEducation(data, profile, setIsLoading, setIsEditorOpen);
   };
-
+console.log(profile)
   const handleCancel = () => {
     if (ref.current) {
       window.scrollTo({
@@ -168,7 +168,7 @@ const EducationForm = ({
               {isEditorOpen && errors.location?.message}
             </p>
           </div>
-          <div className="flex  gap-2 items-center">
+          <div className="flex  gap-xs items-center">
             <button
               type="submit"
               className="bg-green-dark h-full text-white p-sm rounded-sm disabled:opacity-50"
