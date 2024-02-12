@@ -5,17 +5,17 @@ import { useQuery } from "react-query";
 import running from "../../asstes/icons8-running.gif";
 import livingroom from "../../asstes/livingroom.avif";
 import Blogs from "../../blogs/components/Blogs";
-import Categories from "../../components/shared/Categories";
 import Error from "../../../components/ui/Error";
-import Industries from "../../components/shared/Industries";
-import SearchBox from "../../../components/ui/SearchBox";
 import { publicRequest } from "../../../lib/axios";
 import useStore from "../../../store/components";
 import { AppliedJobs, IJob } from "../../../types/postgres/types";
-import { useAppliedJobs } from "../../profiles/jobseeker/hooks/useAppliedJobs";
 import AllJobs from "./AllJobs";
 import JobsByTypeAndLevel from "./JobsByTypeAndLevel";
 import TopCompanies from "./TopCompanies";
+import { useAppliedJobs } from "../../profiles/jobseeker/api/getAppliedJobs";
+import Categories from "../../jobs/components/Categories";
+import Industries from "../../jobs/components/Industries";
+import SearchBox from "../../../components/elements/box/SearchBox";
 
 type AppliedJobsType = {
   jobs: AppliedJobs[];
