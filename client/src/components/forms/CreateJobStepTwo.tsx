@@ -1,18 +1,18 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import Editor from "../shared/Editor";
+import Editor from "../ui/Editor";
 import useJobInputs from "../../store/jobInputs";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { createJob } from "../../pages/employer/actions/createJob";
+import { createJob } from "../../features/profiles/employer/api/createJob";
 import { CreateJobStepTwoSchema } from "../../utils/validationSchema";
 import SelectJob from "../mui/SelectJob";
-import { useProfile } from "../../pages/employer/hooks/useEmployerProfile";
-import TagsInputBox from "../ui/TagsInputBox";
+import TagsInputBox from "../elements/box/TagsInputBox";
 import { IJob } from "../../types/postgres/types";
 import { Maybe } from "yup";
-import { useLevels } from "../../hooks/useJobLevels";
-import { useTypes } from "../../hooks/useJobTypes";
+import { useProfile } from "../../features/profiles/employer/api/getProfile";
+import { useLevels } from "../../features/jobs/api/getLevels";
+import { useTypes } from "../../features/jobs/api/getTypes";
 
 type StepTwoInputs = {
   noOfVacancy: number;
@@ -70,7 +70,7 @@ const CreateJobStepTwo = ({ setStep, job, step }: CreateJobStepTwoProps) => {
   useEffect(() => {
     setValue(
       "educationRequired",
-      job?.education_required || jobStore.stepTwo.educationRequired,
+      job?.education_required || jobStore.stepTwo.educationRequired
     );
     setValue("skills", job?.skills);
     setValue("noOfVacancy", job?.no_of_vacancy || jobStore.stepTwo.noOfVacancy);

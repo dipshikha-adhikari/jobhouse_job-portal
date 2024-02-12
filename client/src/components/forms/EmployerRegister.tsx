@@ -16,7 +16,7 @@ type Inputs = {
   confirmPassword: string;
 };
 
-const EmployerRegister = () => {
+const EmployerRegisterForm = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
@@ -66,7 +66,7 @@ const EmployerRegister = () => {
           }, 5000);
           return "Failed";
         },
-      },
+      }
     );
   };
 
@@ -144,7 +144,7 @@ const EmployerRegister = () => {
       <div>
         <span>Already have an account? </span>{" "}
         <Link
-          to="/user/login"
+          to="/auth/login"
           className="text-green-dark hover:text-green-light cursor-pointer"
         >
           Log in
@@ -154,4 +154,4 @@ const EmployerRegister = () => {
   );
 };
 
-export default EmployerRegister;
+export default EmployerRegisterForm;

@@ -3,15 +3,15 @@ import moment from "moment";
 import { useEffect } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import { useCategories } from "../../hooks/useCategories";
 import useJobInputs from "../../store/jobInputs";
 import { IJob } from "../../types/postgres/types";
 import { CreateJobStepOneSchema } from "../../utils/validationSchema";
 import ResponsiveDayPicker from "../mui/DayPicker";
 import SelectCategory from "../mui/SelectCategory";
+import { useCategories } from "../../features/jobs/api/getCategories";
 
 export interface ICreateJobStepOneInputs {
-  title: string 
+  title: string;
   categoryId: string;
   location: string;
   experienceRequired: string;
@@ -22,11 +22,10 @@ export interface ICreateJobStepOneInputs {
 type CreateJobStepOneProps = {
   setStep: (props: number) => void;
   step: number;
-  job:IJob | undefined
+  job: IJob | undefined;
 };
 
-const CreateJobStepOne = ({ setStep, step,job }: CreateJobStepOneProps) => {
-
+const CreateJobStepOne = ({ setStep, step, job }: CreateJobStepOneProps) => {
   const {
     register,
     handleSubmit,
@@ -40,11 +39,10 @@ const CreateJobStepOne = ({ setStep, step,job }: CreateJobStepOneProps) => {
 
   const onSubmit: SubmitHandler<ICreateJobStepOneInputs> = (data) => {
     jobStore.setStepOneInputs(data);
-    jobStore.setStepOneCompleted(true)
+    jobStore.setStepOneCompleted(true);
     setStep(step + 1);
   };
 
-  
   useEffect(() => {
     window.scrollTo(0, 0);
     jobStore.setStepOneInputs({
@@ -57,28 +55,30 @@ const CreateJobStepOne = ({ setStep, step,job }: CreateJobStepOneProps) => {
     });
   }, []);
 
-  
-
   useEffect(() => {
-    setValue("categoryId",  jobStore.stepOne.categoryId || job?.category_id || "");
-    setValue("title",  jobStore.stepOne.title || job?.title || "");
-    setValue("salary",jobStore.stepOne.salary || job?.salary || "");
+    setValue(
+      "categoryId",
+      jobStore.stepOne.categoryId || job?.category_id || ""
+    );
+    setValue("title", jobStore.stepOne.title || job?.title || "");
+    setValue("salary", jobStore.stepOne.salary || job?.salary || "");
     setValue(
       "deadline",
-    new Date(moment(job?.deadline).format("YYYY-MM-DD")) || jobStore.stepOne.deadline ,
+      new Date(moment(job?.deadline).format("YYYY-MM-DD")) ||
+        jobStore.stepOne.deadline
     );
-    setValue("location",  jobStore.stepOne.location ||job?.location || "");
+    setValue("location", jobStore.stepOne.location || job?.location || "");
     setValue(
       "experienceRequired",
-      jobStore.stepOne.experienceRequired ||  job?.experience_required || "",
+      jobStore.stepOne.experienceRequired || job?.experience_required || ""
     );
   }, [job]);
 
   useEffect(() => {
-   if(jobStore.isStepOneCompleted){
-    setValue('deadline', jobStore.stepOne.deadline)
-   }
-      },[jobStore.isStepOneCompleted])
+    if (jobStore.isStepOneCompleted) {
+      setValue("deadline", jobStore.stepOne.deadline);
+    }
+  }, [jobStore.isStepOneCompleted]);
 
   return (
     <div className="bg-white">

@@ -16,7 +16,7 @@ type Inputs = {
   confirmPassword: string;
 };
 
-const Register = () => {
+const JobseekerRegisterForm = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
@@ -64,7 +64,7 @@ const Register = () => {
           }, 5000);
           return "Failed";
         },
-      },
+      }
     );
   };
 
@@ -143,7 +143,7 @@ const Register = () => {
       <div>
         <span>Already have an account? </span>{" "}
         <Link
-          to="/user/login"
+          to="/auth/login"
           className="text-green-dark hover:text-green-light cursor-pointer"
         >
           Log in
@@ -153,4 +153,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default JobseekerRegisterForm;
