@@ -30,6 +30,6 @@ export const loginUser = async (req: Request, res: Response) => {
         }
     } catch (err) {
         console.log(err);
-        res.status(400).send({ message: err });
+      return  res.status(400).send({ message: err });
     }
 };
