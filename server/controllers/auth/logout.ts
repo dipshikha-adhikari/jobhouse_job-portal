@@ -20,6 +20,6 @@ export const logoutUser = async (req:IUserRequest, res: Response) => {
     
     } catch (err) {
         console.log(err);
-        res.status(400).send({ message: 'Logout failed' });
+     return   res.status(400).send({ message: 'Logout failed' });
     }
 };
