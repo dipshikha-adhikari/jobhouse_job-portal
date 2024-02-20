@@ -1,10 +1,22 @@
 import { BiPhone } from "react-icons/bi";
 import { FaEnvelope } from "react-icons/fa";
 import { FaLocationPin } from "react-icons/fa6";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ContentLayout from "../ContentLayout";
+import { useCurrentUser } from "../../../features/auth/api/getUser";
 
 const Footer = () => {
+  const navigate = useNavigate();
+  const { role } = useCurrentUser();
+
+  const postJob = () => {
+    if (role === "employer") {
+      navigate("/employer/jobs/create");
+    } else {
+      navigate("/auth/login");
+    }
+  };
+
   return (
     <div className=" relative text-white mt-10  bg-black-default">
       <ContentLayout>
@@ -41,12 +53,12 @@ const Footer = () => {
               >
                 Register
               </Link>
-              <Link
-                to="/employer/jobs/create"
-                className="text-blue-light hover:text-blue-dark"
+              <span
+                onClick={postJob}
+                className="text-blue-light font-semibold cursor-pointer hover:text-blue-dark"
               >
                 Post a job
-              </Link>
+              </span>
             </div>
           </div>
           <div className="flex-[0.5]  grid gap-xs">

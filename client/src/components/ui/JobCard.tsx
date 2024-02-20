@@ -33,13 +33,13 @@ const JobCard = ({ job, appliedJobs }: IJobCard) => {
               : "https://cdn-icons-png.flaticon.com/512/2399/2399888.png"
           }
           alt=""
-          loading='lazy'
+          loading="lazy"
           className="w-16 h-16 rounded-full object-cover"
         />
         <div>
           <Link
             className="text-black-dark hover:text-black-dark"
-            to={`/jobs/${job.title}/${job.job_id}`}
+            to={`/jobs/${job.title}-${job.job_id}`}
           >
             <p className="font-semibold">
               {job.employer_details?.organization_name}

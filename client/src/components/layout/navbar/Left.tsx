@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import image from "../../../asstes/logo.png";
 
 const Left = () => {
   return (
@@ -6,9 +7,13 @@ const Left = () => {
       {/* logo  */}
       <Link
         to="/"
-        className="text-xl flex hover:text-green-light  text-green-dark"
+        className=" flex items-center md:text-xl hover:text-green-light text-green-dark  "
       >
-        Job <span className="text-black-light ">House</span>
+        <img src={image} alt="" className="w-10 object-cover h-10" />
+        <span>
+          Job
+          <span className="text-black-dark">House</span>
+        </span>
       </Link>
     </div>
   );

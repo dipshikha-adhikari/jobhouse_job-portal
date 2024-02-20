@@ -12,7 +12,8 @@ export const JobsPublicRoutes = () => {
         <Route path="" element={<Jobs />} />
         <Route path="/employer/:employerName/:id" element={<PublicProfile />} />
         <Route path="/search" element={<SearchResults />} />
-        <Route path="/:jobTitle/:jobId" element={<Job />} />
+        <Route path="/:jobId" element={<Job />} />
+        <Route path="*" element={<Jobs />} />
       </Routes>
     </MainLayout>
   );

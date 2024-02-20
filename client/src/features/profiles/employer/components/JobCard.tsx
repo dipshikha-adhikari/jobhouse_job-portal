@@ -34,13 +34,13 @@ const JobCard: React.FC<JobCardProps> = ({ job }) => {
 
       <div className="flex  gap-xs">
         <Link
-          to={`/jobs/update/${job.job_id}`}
+          to={`/employer/jobs/update/${job.job_id}`}
           className="px-sm font-normal  bg-blue-light  text-white hover:text-white border-sm  rounded-sm p-xs"
         >
           Update
         </Link>
         <Link
-          to={`/jobs/${job.title}/${job.job_id}`}
+          to={`/jobs/${job.title}-${job.job_id}`}
           className="px-sm font-semibold border-blue-dark text-blue-dark hover:text-blue-light border-sm  rounded-sm p-xs"
         >
           View

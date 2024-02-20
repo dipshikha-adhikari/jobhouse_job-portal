@@ -6,15 +6,17 @@ import { IJob } from "../types/postgres/types";
 
 export const useCurrentJob = () => {
   const params = useParams();
-  const jobId = params.jobId;
+  const value = params.jobId;
+  const parts = value?.split("-");
 
+  const jobId = parts && parts[parts?.length - 1]
   const getJobDetails = async () => {
     const response: AxiosResponse = await publicRequest.get(
       `/api/v1/jobs/${jobId}`,
     );
     return response.data;
   };
-  
+
   const {
     data: job,
     isError,
