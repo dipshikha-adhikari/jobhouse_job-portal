@@ -16,7 +16,7 @@ export const EmployerRoutes = () => {
         <Route path="/jobs/applications/:jobId" element={<Applications />} />
         <Route path="/jobs/create" element={<CreateJob />} />
         <Route
-          path="/jobs/:jobTitle/applications/:applicantId"
+          path="/jobs/applicant/:applicantId"
           element={<JobseekerPublicProfile />}
         />
         <Route path="/jobs/update/:jobId" element={<CreateJob />} />

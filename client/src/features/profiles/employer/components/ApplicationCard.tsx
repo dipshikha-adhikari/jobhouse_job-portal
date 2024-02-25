@@ -44,7 +44,7 @@ const ApplicationCard = ({ item }: Data) => {
   return (
     <div className="shadow-sm grid gap-2 p-sm font-normal break-all mx-auto max-w-sm  h-fit w-full  ">
       <Link
-        to={`/employer/jobs/${item.job_title}/applications/${item.jobseeker_id}`}
+        to={`/employer/jobs/applicant/${item.jobseeker_id}`}
         className="flex  items-center  gap-xs flex-wrap  text-black-light hover:text-black-dark"
       >
         <img
