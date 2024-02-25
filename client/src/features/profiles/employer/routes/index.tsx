@@ -6,6 +6,7 @@ import Applications from "./Applications";
 import Overview from "./Overview";
 import PrivateProfile from "./PrivateProfile";
 import UpdateProfile from "./UpdateProfile";
+import PageNotFound from "../../../misc/routes/PageNotFound";
 
 export const EmployerRoutes = () => {
   return (
@@ -21,6 +22,7 @@ export const EmployerRoutes = () => {
         <Route path="/jobs/update/:jobId" element={<CreateJob />} />
         <Route path="/profile" element={<PrivateProfile />} />
         <Route path="/profile/:title" element={<UpdateProfile />} />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </MainLayout>
   );

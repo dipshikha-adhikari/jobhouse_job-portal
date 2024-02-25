@@ -5,24 +5,12 @@ import useAuthStore from "../store/auth";
 import { protectedEmployerRoutes } from "./protected/employer";
 import { protectedJobseekerRoutes } from "./protected/jobseeker";
 import { publicRoutes } from "./public";
-import PageNotFound from "../features/misc/routes/PageNotFound";
-import { MainLayout } from "../components/layout";
 
 export const AppRoutes = () => {
   const { isAunthenticated } = useAuthStore();
   const { role } = useCurrentUser();
 
-  const commonRoutes = [
-    { path: "/", element: <Landing /> },
-    {
-      path: "*",
-      element: (
-        <MainLayout>
-          <PageNotFound />{" "}
-        </MainLayout>
-      ),
-    },
-  ];
+  const commonRoutes = [{ path: "/", element: <Landing /> }];
 
   let routes: any = [];
 
