@@ -8,7 +8,7 @@ interface IUserRequest extends Request {
 
 export const getJobseekerProfileById = async (req: IUserRequest, res: Response) => {
   const { id } = req.user
-const {jobseekerId }= req.params
+  const { jobseekerId } = req.params
 
   let profile: any = {
 
@@ -47,21 +47,21 @@ GROUP BY
 jp.user_id, jp.id, l.level_name, t.type_name;
 `
   try {
-  
-    const employer:QueryResult = await pool.query('select * from employers_basic_information where user_id = $1', [id])
-if(employer.rowCount > 0){
-    const basicInformation: QueryResult = await pool.query(basicInformationQuery, [jobseekerId])
-    profile['basic_information'] = basicInformation.rows[0]
-    const experience: QueryResult = await pool.query(experienceQuery, [jobseekerId])
-    profile['experience'] = experience.rows
-    const education: QueryResult = await pool.query(educationQuery, [jobseekerId])
-    profile['education'] = education.rows
-    const jobPreference: QueryResult = await pool.query(jobPreferenceQuery, [jobseekerId])
-    profile['job_preference'] = jobPreference.rows[0]
-    return res.status(200).send(profile)
-}else{
-   return res.status(400).send({message:'You must be a valid employer'})
-}
+
+    const employer: QueryResult = await pool.query('select * from employers_basic_information where user_id = $1', [id])
+    if (employer.rowCount > 0) {
+      const basicInformation: QueryResult = await pool.query(basicInformationQuery, [jobseekerId])
+      profile['basic_information'] = basicInformation.rows[0]
+      const experience: QueryResult = await pool.query(experienceQuery, [jobseekerId])
+      profile['experience'] = experience.rows
+      const education: QueryResult = await pool.query(educationQuery, [jobseekerId])
+      profile['education'] = education.rows
+      const jobPreference: QueryResult = await pool.query(jobPreferenceQuery, [jobseekerId])
+      profile['job_preference'] = jobPreference.rows[0]
+      return res.status(200).send(profile)
+    } else {
+      return res.status(400).send({ message: 'You must be a valid employer' })
+    }
   } catch (err) {
     return res.status(400).send({ error: err })
   }

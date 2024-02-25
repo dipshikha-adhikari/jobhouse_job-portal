@@ -14,7 +14,7 @@ export const createBasicInfo = (req: IUserRequest, res: Response) => {
     const { id } = req.user
     const { fullname, date_of_birth, phone_number, permanent_address, current_address, gender, image }: IJobseekerBasicInformation = req.body
 
- 
+
     if (isValidBasicInformation(req.body)) {
         pool.query('select * from users where user_id = $1', [id], function (err: Error, result: QueryResult) {
             if (err) return res.status(400).send({ message: err })
@@ -41,27 +41,27 @@ export const createBasicInfo = (req: IUserRequest, res: Response) => {
                     pool.query(query, [id, fullname, date_of_birth, phone_number, permanent_address, current_address, gender, email], async function (err: Error, result: QueryResult) {
                         if (err) return res.status(400).send({ message: 'Error on inserting jobseekers_basic_information' })
 
-                        let public_id = image?.public_id 
+                        let public_id = image?.public_id
                         let url = image?.url
-                   
-                        if (image !== undefined &&  image?.url === undefined && image !== null && typeof image === 'string') {
+
+                        if (image !== undefined && image?.url === undefined && image !== null && typeof image === 'string') {
                             const imageData = await uploadImage(image, id)
                             if (!imageData) {
                                 res.status(400).send({ message: 'Error on upload image, image must be string' })
                             }
-                             public_id = imageData.public_id
-                             url = imageData.secure_url
-      
+                            public_id = imageData.public_id
+                            url = imageData.secure_url
+
                         }
-                       
-                            const imageQuery = 'insert into images (user_id, url, public_id) values ($1, $2, $3)'
-                            pool.query(imageQuery, [id, url, public_id], (err: Error, result: QueryResult) => {
-                                if (err) return res.status(400).send({ message: err })
-                                return res.status(201).send({ message: 'Successfully created basic_information, images and updated users ' })
-                             } )
-                            
-                        }
-                    
+
+                        const imageQuery = 'insert into images (user_id, url, public_id) values ($1, $2, $3)'
+                        pool.query(imageQuery, [id, url, public_id], (err: Error, result: QueryResult) => {
+                            if (err) return res.status(400).send({ message: err })
+                            return res.status(201).send({ message: 'Successfully created basic_information, images and updated users ' })
+                        })
+
+                    }
+
                     )
                 })
             } else {
@@ -101,13 +101,13 @@ export const updateBasicInfo = (req: IUserRequest, res: Response) => {
                         // if public_id and url is available , update image with the same data
                         let public_id = image?.public_id
                         let url = image?.url
-                  
+
 
                         // if url is anavailable , upload to the cloudinary and get url
                         if (image !== undefined && image?.url === undefined && image !== null && typeof image === 'string') {
                             const imageData = await uploadImage(image, id)
                             if (!imageData) {
-                             return   res.status(400).send({ message: 'Error on upload image, image must be string' })
+                                return res.status(400).send({ message: 'Error on upload image, image must be string' })
                             }
                             public_id = imageData.public_id
                             url = imageData.secure_url

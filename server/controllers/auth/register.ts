@@ -11,8 +11,8 @@ export const createUser = (req: Request, res: Response) => {
         return res.status(400).json({ message: 'Fill all the input fields' });
     }
 
-    // Check if email already exists
     const checkQuery = "SELECT * FROM users where email = $1";
+
     pool.query(checkQuery, [email], (err: Error, result: QueryResult) => {
         if (err) {
             return res.status(400).json({ error: err });
@@ -20,22 +20,17 @@ export const createUser = (req: Request, res: Response) => {
         if (result.rows.length > 0) {
             return res.status(409).json({ message: 'User with this email already exists' });
         }
-if(!validateEmail(email)){
-    return res.status(409).json({ message: 'Invalid email' });
-}
-
-
+        if (!validateEmail(email)) {
+            return res.status(409).json({ message: 'Invalid email' });
+        }
         if (role === undefined) {
             return res.status(409).json({ message: 'Please provide a role' });
         }
         bcrypt.hash(password, saltRounds, function (err: any, hash: any) {
             if (err) return err;
-            // Insert user into the database
             const insertQuery = "INSERT INTO users ( email, password, role, fullname, phone_number) VALUES ($1, $2, $3, $4, $5)";
             pool.query(insertQuery, [email, hash, role, fullName, phoneNumber], (err: Error, insertResult: QueryResult) => {
                 if (err) return res.status(400).send(err);
-
-                // create profile after regestration 
                 const query = 'select * from users where email = $1'
                 pool.query(query, [email], (err: Error, result: QueryResult) => {
                     if (err) return res.status(400).send(err);
@@ -48,18 +43,14 @@ if(!validateEmail(email)){
 };
 
 
-function validateEmail(email:string) {
-    // Check if the email contains uppercase letters
+function validateEmail(email: string) {
     const containsUppercase = /[A-Z]/.test(email);
-    
-    // Regular expression for validating email addresses with specific TLD (enforcing lowercase)
     const emailRegex = /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/;
-  
-    // Return invalid if uppercase letters are found
+
     if (containsUppercase) {
-      return false;
+        return false;
     }
-  
+
     return emailRegex.test(email);
-  }
-  
+}
+

@@ -30,7 +30,7 @@ export const createBasicInformation = (req: IUserRequest, res: Response) => {
 
                     const query = `insert into employers_basic_information (user_id,organization_name,industry_id, address, summary, phone_number, email ) values($1, $2, $3,$4,$5,$6,$7)`
                     pool.query(query, [id, organization_name, industry_type, address, summary, phone_number, email], async function (err: Error, result: QueryResult) {
-                        if (err) return res.status(400).send({ message: 'Failed to create basic_information'})
+                        if (err) return res.status(400).send({ message: 'Failed to create basic_information' })
 
                         // images 
                         let image_public_id = image?.public_id
@@ -58,7 +58,6 @@ export const createBasicInformation = (req: IUserRequest, res: Response) => {
                                 }
                                 coverImagePublicId = imageData.public_id
                                 coverImageUrl = imageData.secure_url
-
                             }
                             const coverImageQuery = 'insert into cover_images (user_id, url, public_id) values ($1, $2, $3)'
                             pool.query(coverImageQuery, [id, coverImageUrl, coverImagePublicId], (err: Error, result: QueryResult) => {

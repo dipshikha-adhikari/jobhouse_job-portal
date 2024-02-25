@@ -16,7 +16,6 @@ export const loginUser = async (req: Request, res: Response) => {
             const passwordMatch = await bcrypt.compare(password, user.password);
 
             if (passwordMatch) {
-
                 const token = jwt.sign({
                     id: user.user_id
                 }, process.env.JWT_SECRET, { expiresIn: '1d' });
@@ -30,6 +29,6 @@ export const loginUser = async (req: Request, res: Response) => {
         }
     } catch (err) {
         console.log(err);
-      return  res.status(400).send({ message: err });
+        return res.status(400).send({ message: err });
     }
 };

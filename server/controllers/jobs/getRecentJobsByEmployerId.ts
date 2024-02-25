@@ -9,7 +9,7 @@ export const getRecentJobsByEmployerId = async (req: IUserRequest, res: Response
     if (employerId === undefined) {
         return res.status(400).send({ message: 'Please provide a valid employerId' });
     }
-    
+
     const query = `
     SELECT j.*,
     i.industry_name, c.category_name,  l.level_name,

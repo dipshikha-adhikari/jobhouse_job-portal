@@ -13,5 +13,4 @@ router.get('/session', verifyToken, (req:Request, res:Response) => {
     return res.status(200).send({message:'Your session is active'})
 })
 
-
 module.exports = router

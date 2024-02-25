@@ -3,8 +3,8 @@ import { QueryResult } from "pg";
 const pool = require('../../lib/db')
 
 export const getAllJobs = async (req: Request, res: Response) => {
-  const{limit} = req.query
-  const{offset} = req.query
+  const { limit } = req.query
+  const { offset } = req.query
   const query = `
   SELECT j.*,
   c.category_name,
@@ -33,7 +33,7 @@ limit $1 offset $2
 
 `
 
-  pool.query(query,[limit,offset], function (err: Error, result: QueryResult) {
+  pool.query(query, [limit, offset], function (err: Error, result: QueryResult) {
     if (err) {
       return res.status(400).send({ error: err });
     }

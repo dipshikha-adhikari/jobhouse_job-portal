@@ -7,7 +7,7 @@ export const isValidBasicInformation = (info: any) => {
 }
 
 export const isValidOtherInformation = (contact: any) => {
-    return ( (contact.website !== undefined || true))
+    return ((contact.website !== undefined || true))
 }
 
 

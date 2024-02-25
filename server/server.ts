@@ -26,6 +26,7 @@ app.use(express.urlencoded({ extended: true }))
 app.get('/', (req: Request, res: Response) => {
     return res.status(200).send({ msg: 'hello from server' })
 })
+
 app.use('/api/v1/auth', usersRoute)
 app.use('/api/v1/employer', employerRoute)
 app.use('/api/v1/jobseeker', jobseekerRoute)

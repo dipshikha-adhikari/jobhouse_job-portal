@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { QueryResult } from "pg";
-import { IEmployerBasicInformation, IEmployerOtherInformation, } from "../../../types";
-import { isValidBasicInformation, isValidOtherInformation } from "../../../helpers/validateEmployerProfileInsertion";
+import { isValidOtherInformation } from "../../../helpers/validateEmployerProfileInsertion";
+import { IEmployerOtherInformation } from "../../../types";
 const pool = require('../../../lib/db')
 
 interface IUserRequest extends Request {
@@ -28,7 +28,6 @@ export const createOtherInformation = (req: IUserRequest, res: Response) => {
                         if (role !== 'employer') {
                             return res.status(401).send({ message: 'Only employer is allowed' })
                         }
-                        console.log(id)
                         const query = `insert into employers_other_information (user_id, website ) values($1, $2)`
                         pool.query(query, [id, website], function (err: Error, result: QueryResult) {
                             if (err) return res.status(400).send({ message: err })

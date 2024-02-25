@@ -3,10 +3,10 @@ import { IUserRequest } from "../../../types";
 import { QueryResult } from "pg";
 const pool = require('../../../lib/db')
 
-export const getMatchingJobs = (req:IUserRequest, res:Response) => {
-    const {id} = req.user 
+export const getMatchingJobs = (req: IUserRequest, res: Response) => {
+  const { id } = req.user
 
-    const query = `
+  const query = `
     SELECT j.*, u.fullname AS employer_name, img.url as employer_image
     FROM jobs j
     JOIN jobseekers_job_preference jjp ON 
@@ -17,8 +17,8 @@ export const getMatchingJobs = (req:IUserRequest, res:Response) => {
     WHERE jjp.user_id = $1 and deadline > now();
 `
 
-pool.query(query,[id], (err:Error, result:QueryResult) => {
-if(err) return res.status(400).send({message:err})
-res.status(200).send(result.rows)
-})
+  pool.query(query, [id], (err: Error, result: QueryResult) => {
+    if (err) return res.status(400).send({ message: err })
+    res.status(200).send(result.rows)
+  })
 }

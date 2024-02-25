@@ -2,9 +2,9 @@ import { Request, Response } from 'express';
 import { QueryResult } from 'pg';
 const pool = require('../lib/db')
 
-export const getTopEmployers = async(req:Request, res:Response) => {
-    try{
-const result:QueryResult = await pool.query(`SELECT
+export const getTopEmployers = async (req: Request, res: Response) => {
+    try {
+        const result: QueryResult = await pool.query(`SELECT
 ebi.user_id,
 ebi.organization_name,
 img.url as image_url,
@@ -23,8 +23,8 @@ ORDER BY
 COUNT(j.job_id) DESC
 LIMIT 5;
 `)
-res.status(200).send(result.rows)
-    }catch(err){
-        res.status(400).send({message:'Can not get employers'})
+        res.status(200).send(result.rows)
+    } catch (err) {
+        res.status(400).send({ message: 'Can not get employers' })
     }
 }

@@ -11,16 +11,14 @@ interface IUserRequest extends Request {
 export const createJobPreference = (req: IUserRequest, res: Response) => {
     const { id } = req.user
     const { summary,
-       job_level_id,
+        job_level_id,
         job_categories,
         job_industries,
         job_title,
-    job_type_id,
+        job_type_id,
         skills,
         expected_salary,
         job_location, }: IJobseekerJobPreference = req.body
-
-
 
     if (isValidJobPreferences(req.body)) {
         pool.query('select * from users where user_id = $1', [id], function (err: Error, result: QueryResult) {
@@ -86,7 +84,7 @@ export const updateJobPreference = (req: IUserRequest, res: Response) => {
     const { id } = req.user
     const {
         summary,
-      job_level_id,
+        job_level_id,
         job_categories,
         job_industries,
         job_title,

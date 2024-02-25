@@ -2,34 +2,34 @@ import { Request, Response } from "express";
 import { QueryResult } from "pg";
 const pool = require('../../../lib/db')
 
-export const getFilteredJobs =  (req: Request, res: Response) => {
-    let { categoryId, industryId, level, type, limit, offset } = req.query // Assuming the category value is obtained from the request
+export const getFilteredJobs = (req: Request, res: Response) => {
+  let { categoryId, industryId, level, type, limit, offset } = req.query // Assuming the category value is obtained from the request
 
 
-    let queryString = '';
-    let limitAndOffsetQuery = ''
-    let paramsArray = [];
+  let queryString = '';
+  let limitAndOffsetQuery = ''
+  let paramsArray = [];
 
-    if (categoryId !== undefined && categoryId !== 'undefined'  && categoryId !== 'null' && categoryId !== '') {
-      queryString += `j.category_id = $${paramsArray.push(categoryId)} AND `;
+  if (categoryId !== undefined && categoryId !== 'undefined' && categoryId !== 'null' && categoryId !== '') {
+    queryString += `j.category_id = $${paramsArray.push(categoryId)} AND `;
   }
-  if (industryId !== undefined && industryId !== 'undefined'  && industryId !== 'null' && industryId !== '') {
-      queryString += `j.industry_id = $${paramsArray.push(industryId)} AND `;
+  if (industryId !== undefined && industryId !== 'undefined' && industryId !== 'null' && industryId !== '') {
+    queryString += `j.industry_id = $${paramsArray.push(industryId)} AND `;
   }
   if (level !== undefined && level !== 'null' && level !== 'undefined' && level !== '') {
-      queryString += `jl.level_name ILIKE '%' || $${paramsArray.push(level)} || '%' AND `;
+    queryString += `jl.level_name ILIKE '%' || $${paramsArray.push(level)} || '%' AND `;
   }
   if (type !== undefined && type !== 'null' && type !== 'undefined' && type !== '') {
-      queryString += `jt.type_name ILIKE '%' || $${paramsArray.push(type)} || '%' AND `;
+    queryString += `jt.type_name ILIKE '%' || $${paramsArray.push(type)} || '%' AND `;
   }
   if (limit !== undefined && limit !== 'null' && limit !== 'undefined' && limit !== '') {
-     limitAndOffsetQuery += `limit $${paramsArray.push(limit)} `;
+    limitAndOffsetQuery += `limit $${paramsArray.push(limit)} `;
   }
   if (offset !== undefined && offset !== 'null' && offset !== 'undefined' && offset !== '') {
-      limitAndOffsetQuery += `offset $${paramsArray.push(offset)} `;
+    limitAndOffsetQuery += `offset $${paramsArray.push(offset)} `;
   }
 
-    const query = `
+  const query = `
     WITH employer_details AS (
       SELECT
         e.user_id,
@@ -56,13 +56,13 @@ export const getFilteredJobs =  (req: Request, res: Response) => {
     GROUP BY j.job_id, ed.employer_info, jt.type_name, jl.level_name
 ${limitAndOffsetQuery}
    `;
- 
-console.log(queryString, paramsArray)
-if(queryString === '' )  return res.status(400).send({message:'Query can not be empty ' });
-    pool.query(query, paramsArray, function (err: Error, result: QueryResult) {
-        if (err) {
-            return res.status(400).send({message:'Please set valid queries' });
-        }
-        return res.status(200).send(result.rows);
-    });
+
+  console.log(queryString, paramsArray)
+  if (queryString === '') return res.status(400).send({ message: 'Query can not be empty ' });
+  pool.query(query, paramsArray, function (err: Error, result: QueryResult) {
+    if (err) {
+      return res.status(400).send({ message: 'Please set valid queries' });
+    }
+    return res.status(200).send(result.rows);
+  });
 };
