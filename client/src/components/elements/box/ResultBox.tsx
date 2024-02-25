@@ -39,7 +39,7 @@ const ResultBox = ({ job, appliedJobs }: IResultBox) => {
         <div>
           <Link
             className="text-black-light hover:text-black-dark"
-            to={`/jobs/${job.title}/${job.job_id}`}
+            to={`/jobs/${job.title}-${job.job_id}`}
           >
             <p className="font-semibold">
               {job.employer_details?.organization_name}
