@@ -39,7 +39,7 @@ const Applications = () => {
     isLoading,
   }: Applications = useQuery(["applications", jobId], async () => {
     const result = await privateRequest.get(
-      `api/v1/jobs/applications?jobId=${jobId}`
+      `api/v1/jobs/applications/${jobId}`
     );
     return result.data;
   });

@@ -35,6 +35,7 @@ export const updateBasicInfo = async (
         setIsLoading(false);
         setIsEditorOpen(false);
         queryClient.invalidateQueries("jobseekerProfile");
+        window.scrollTo(0, 0)
         return "Success";
       },
       error: (err) => {

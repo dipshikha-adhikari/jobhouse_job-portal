@@ -63,7 +63,7 @@ const columns: GridColDef[] = [
       return (
         <div className="flex gap-xs">
           <Link
-            to={`/jobs/${params.row?.title}/${params.row?.job_id}`}
+            to={`/jobs/${params.row?.title}-${params.row?.job_id}`}
             className="bg-green-light hover:text-white text-white rounded-md p-xs px-sm"
           >
             View
@@ -80,13 +80,14 @@ export default function AppliedJobsTable() {
     isLoading,
     isError,
   } = useQuery("appliedJobs", async () => {
-    const result = await privateRequest.get("/api/v1/jobs/applied");
+    const result = await privateRequest.get("/api/v1/jobseeker/jobs/applied");
     return result.data;
   });
 
   if (isLoading) return <div className="text-center">Fetching...</div>;
   if (isError) return <div className="text-center py-md">Failed to fetch!</div>;
   if (jobs.length === 0) return <div>You have not applied to any job yet!</div>;
+
   return (
     <div className="h-full">
       <DataGrid

@@ -9,9 +9,10 @@ export const useAppliedJobs = () => {
 
     const getJobs = async () => {
         if (!isAunthenticated || role !== "jobseeker") return;
-        const result = await privateRequest.get("/api/v1/jobs/applied");
+        const result = await privateRequest.get("/api/v1/jobseeker/jobs/applied");
         return result.data;
     };
+
     const {
         data: jobs,
         isLoading,

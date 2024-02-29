@@ -3,6 +3,7 @@ import { BlogsRoutes } from "../features/blogs";
 import { JobsPublicRoutes } from "../features/jobs/routes";
 import PublicProfile from "../features/profiles/employer/routes/PublicProfile";
 import { MainLayout } from "../components/layout";
+import PageNotFound from "../features/misc/routes/PageNotFound";
 
 const AuthRoutes = lazy(() =>
   import("../features/auth/routes/index").then((module) => {
@@ -22,6 +23,14 @@ export const publicRoutes = [
   {
     path: "/blogs/*",
     element: <BlogsRoutes />,
+  },
+  {
+    path: "/faqs/*",
+    element: (
+      <MainLayout>
+        <PageNotFound />
+      </MainLayout>
+    ),
   },
   {
     path: "/employers/:employerName/:id",

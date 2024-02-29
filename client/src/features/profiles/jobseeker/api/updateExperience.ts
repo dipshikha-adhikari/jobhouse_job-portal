@@ -40,10 +40,7 @@ export const updateExperience = async (
         setIsLoading(false);
         setIsEditorOpen(false);
         queryClient.invalidateQueries("jobseekerProfile");
-        window.scrollTo({
-          top: 0,
-          left: 0,
-        });
+        window.scrollTo(0, 0)
         return "Success";
       },
       error: (err) => {

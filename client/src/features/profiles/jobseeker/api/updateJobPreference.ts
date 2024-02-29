@@ -2,6 +2,7 @@ import toast from "react-hot-toast";
 import { IJobseekerJobPreferenceInputs } from "../../../../types/react/types";
 import { privateRequest } from "../../../../lib/axios";
 import { IJobseekerJobPreference } from "../../../../types/postgres/types";
+import { queryClient } from "../../../../lib/react-query";
 
 type Category = {
   category_name: string;
@@ -62,6 +63,8 @@ export const updateJobPrefetence = (
       success: () => {
         setIsLoading(false);
         setIsEditorOpen(false);
+        queryClient.invalidateQueries('matchingjobs')
+        window.scrollTo(0, 0)
         return "Success";
       },
       error: (err) => {

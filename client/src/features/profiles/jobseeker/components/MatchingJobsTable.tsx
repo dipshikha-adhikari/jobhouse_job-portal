@@ -67,7 +67,7 @@ const columns: GridColDef[] = [
     renderCell(params) {
       return (
         <div>
-          <Link to={`/jobs/${params.row?.title}/${params.row?.job_id}`}>
+          <Link to={`/jobs/${params.row?.title}-${params.row?.job_id}`}>
             view
           </Link>
         </div>
@@ -88,7 +88,7 @@ export default function MatchingJobsTable({ profile }: Props) {
     isLoading,
     isError,
   }: JobsProps = useQuery("matchingJobs", async () => {
-    const result = await privateRequest.get("/api/v1/jobs/matching");
+    const result = await privateRequest.get("/api/v1/jobseeker/jobs/matching");
     return result.data;
   });
   if (!profile?.job_preference?.id)
