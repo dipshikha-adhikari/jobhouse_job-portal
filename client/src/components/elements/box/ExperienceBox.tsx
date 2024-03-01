@@ -1,8 +1,8 @@
 import moment from "moment";
 import { useState } from "react";
 import { IJobseekerExperience } from "../../../types/postgres/types";
-import { deleteExperience } from "../../../features/profiles/jobseeker/api/deleteExperience";
-import ExperienceForm from "../../../features/profiles/jobseeker/components/ExperienceForm";
+import { deleteExperience } from "../../../features/jobseeker/api/deleteExperience";
+import ExperienceForm from "../../../features/jobseeker/components/ExperienceForm";
 
 type Props = {
   item: IJobseekerExperience;

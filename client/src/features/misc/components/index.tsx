@@ -12,10 +12,10 @@ import { AppliedJobs, IJob } from "../../../types/postgres/types";
 import AllJobs from "./AllJobs";
 import JobsByTypeAndLevel from "./JobsByTypeAndLevel";
 import TopCompanies from "./TopCompanies";
-import { useAppliedJobs } from "../../profiles/jobseeker/api/getAppliedJobs";
 import Categories from "../../jobs/components/Categories";
 import Industries from "../../jobs/components/Industries";
 import SearchBox from "../../../components/elements/box/SearchBox";
+import { useAppliedJobs } from "../../jobseeker/api/getAppliedJobs";
 
 type AppliedJobsType = {
   jobs: AppliedJobs[];

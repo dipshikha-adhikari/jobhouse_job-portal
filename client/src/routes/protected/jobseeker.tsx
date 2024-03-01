@@ -1,6 +1,6 @@
 import { lazy } from "react";
 const JobseekerRoutes = lazy(() =>
-  import("../../features/profiles/jobseeker/routes").then((module) => {
+  import("../../features/jobseeker/routes").then((module) => {
     return { default: module.JobseekerRoutes };
   })
 );

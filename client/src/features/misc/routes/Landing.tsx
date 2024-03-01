@@ -15,8 +15,8 @@ import Industries from "../../jobs/components/Industries";
 import JobsByTypeAndLevel from "../components/JobsByTypeAndLevel";
 import Blogs from "../../blogs/components/Blogs";
 import SearchBox from "../../../components/elements/box/SearchBox";
-import { useAppliedJobs } from "../../profiles/jobseeker/api/getAppliedJobs";
 import { MainLayout } from "../../../components/layout";
+import { useAppliedJobs } from "../../jobseeker/api/getAppliedJobs";
 
 type AppliedJobsType = {
   jobs: AppliedJobs[];

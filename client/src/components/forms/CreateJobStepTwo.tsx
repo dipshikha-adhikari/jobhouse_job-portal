@@ -4,15 +4,15 @@ import Editor from "../ui/Editor";
 import useJobInputs from "../../store/jobInputs";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { createJob } from "../../features/profiles/employer/api/createJob";
 import { CreateJobStepTwoSchema } from "../../utils/validationSchema";
 import SelectJob from "../mui/SelectJob";
 import TagsInputBox from "../elements/box/TagsInputBox";
 import { IJob } from "../../types/postgres/types";
 import { Maybe } from "yup";
-import { useProfile } from "../../features/profiles/employer/api/getProfile";
 import { useLevels } from "../../features/jobs/api/getLevels";
 import { useTypes } from "../../features/jobs/api/getTypes";
+import { useProfile } from "../../features/employer/api/getProfile";
+import { createJob } from "../../features/employer/api/createJob";
 
 type StepTwoInputs = {
   noOfVacancy: number;

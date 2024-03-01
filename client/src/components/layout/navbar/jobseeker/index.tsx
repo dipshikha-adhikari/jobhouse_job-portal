@@ -2,9 +2,9 @@ import { FaArrowDown, FaArrowRight } from "react-icons/fa";
 import { LiaBarsSolid } from "react-icons/lia";
 import { Link } from "react-router-dom";
 import { IJobseekerProfile } from "../../../../types/postgres/types";
-import { useJobseekerProfile } from "../../../../features/profiles/jobseeker/api/getProfile";
 import useComponentsStore from "../../../../store/components";
 import JobseekerProfileMenu from "../../../elements/modals/JobseekerProfileMenu";
+import { useJobseekerProfile } from "../../../../features/jobseeker/api/getProfile";
 
 type JobseekerNav = {
   setMenuOpen: (props: boolean) => void;

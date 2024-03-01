@@ -4,7 +4,6 @@ import { FaIndustry } from "react-icons/fa";
 import { UseQueryResult, useQuery } from "react-query";
 import { useLocation } from "react-router-dom";
 import { AppliedJobs, IJob } from "../../../types/postgres/types";
-import { useAppliedJobs } from "../../profiles/jobseeker/api/getAppliedJobs";
 import { publicRequest } from "../../../lib/axios";
 import AlmostLoaded from "../../../components/elements/loader/AlmostLoaded";
 import Error from "../../../components/ui/Error";
@@ -12,6 +11,7 @@ import ContentLayout from "../../../components/layout/ContentLayout";
 import JobCard from "../../../components/ui/JobCard";
 import Categories from "../components/Categories";
 import Industries from "../components/Industries";
+import { useAppliedJobs } from "../../jobseeker/api/getAppliedJobs";
 
 type AppliedJobsType = {
   jobs: AppliedJobs[];

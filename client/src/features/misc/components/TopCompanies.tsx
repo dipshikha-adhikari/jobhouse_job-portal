@@ -24,7 +24,7 @@ const TopCompanies = () => {
   } = useQuery("topComapnies", getTopCompanies);
 
   return (
-    <div className=" border-sm  grid g">
+    <div className=" border-sm  grid ">
       <header className="border-b-sm  font-bold uppercase  p-sm  flex items-center gap-2">
         {" "}
         <MdHomeWork className="text-green-dark " />
@@ -43,12 +43,12 @@ const TopCompanies = () => {
             <Link
               key={item.user_id}
               to={`/employers/${item.organization_name}/${item.user_id}`}
-              className="grid gap-2 shadow-sm w-full text-black-default max-w-md hover:text-black-dark h-full  p-sm place-content-start"
+              className="grid gap-2 border-sm w-full text-black-default max-w-md hover:text-black-dark h-full  p-sm place-content-start"
             >
               <div className="flex items-start gap-xs">
                 <img src={item.image_url} alt="image" className="w-20 h-20" />
                 <p className="grid gap-2">
-                  <span className="font-bold text-black-light">
+                  <span className="font-semibold text-black-dark">
                     {item.organization_name}{" "}
                   </span>
                   <span className=" font-normal"> ({item.industry_name})</span>

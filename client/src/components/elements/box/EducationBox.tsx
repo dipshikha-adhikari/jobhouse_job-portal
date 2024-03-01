@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { IJobseekerEducation } from "../../../types/postgres/types";
 import moment from "moment";
-import { deleteEducation } from "../../../features/profiles/jobseeker/api/deleteEducation";
-import EducationForm from "../../../features/profiles/jobseeker/components/EducationForm";
+import { deleteEducation } from "../../../features/jobseeker/api/deleteEducation";
+import EducationForm from "../../../features/jobseeker/components/EducationForm";
 
 type Props = {
   item: IJobseekerEducation;

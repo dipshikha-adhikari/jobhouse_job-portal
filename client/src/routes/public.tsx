@@ -1,7 +1,7 @@
 import { lazy } from "react";
 import { BlogsRoutes } from "../features/blogs";
 import { JobsPublicRoutes } from "../features/jobs/routes";
-import PublicProfile from "../features/profiles/employer/routes/PublicProfile";
+import PublicProfile from "../features/employer/routes/PublicProfile";
 import { MainLayout } from "../components/layout";
 import PageNotFound from "../features/misc/routes/PageNotFound";
 

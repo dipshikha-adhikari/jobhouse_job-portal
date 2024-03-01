@@ -141,21 +141,24 @@ export const JobseekerEducationSchema = Yup.object().shape({
 });
 
 export const JobseekerExperienceSchema = Yup.object().shape({
-  organizationName: Yup.string().required("required"),
-  organizationType: Yup.string().required("required"),
-  jobLocation: Yup.string().required("required"),
-  jobTitle: Yup.string().required("required"),
-  jobCategory: Yup.string().required("required"),
-  jobLevelId: Yup.string().required("required"),
+  organizationName: Yup.string().required("Required"),
+  organizationType: Yup.string().required("Required"),
+  jobLocation: Yup.string().required("Required"),
+  jobTitle: Yup.string().required("Required"),
+  jobCategory: Yup.string().required("Required"),
+  jobLevelId: Yup.string().required("Required"),
 
-  startDate: Yup.string().required("start time cannot be empty"),
+  startDate: Yup.string().required("Start time cannot be empty"),
   endDate: Yup
     .string()
-    .required("end time cannot be empty")
-    .test("is-greater", "end time should be greater", function (value) {
+    .required("End time cannot be empty")
+    .test("is-greater", "End time should be greater", function (value) {
       const { startDate } = this.parent
       return moment(value).isAfter(moment(startDate));
     })
+    .test("is-in-past", "End time should be in the past", function (value) {
+      return moment(value).isBefore(moment());
+    })
   ,
-  duties: Yup.string().required("required"),
+  duties: Yup.string().required("Required"),
 });

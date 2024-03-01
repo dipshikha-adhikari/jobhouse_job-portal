@@ -5,11 +5,11 @@ import { IJob } from "../../../types/postgres/types";
 import { FaIndustry } from "react-icons/fa";
 import { BiCategory } from "react-icons/bi";
 import { useEffect } from "react";
-import { useAppliedJobs } from "../../profiles/jobseeker/api/getAppliedJobs";
 import SearchBox from "../../../components/elements/box/SearchBox";
 import ResultBox from "../../../components/elements/box/ResultBox";
 import Industries from "../components/Industries";
 import Categories from "../components/Categories";
+import { useAppliedJobs } from "../../jobseeker/api/getAppliedJobs";
 
 type Results = {
   isLoading: boolean;

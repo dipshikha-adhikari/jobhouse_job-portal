@@ -11,8 +11,8 @@ import { useCurrentJob } from "../../../hooks/useCurrentJob";
 import useAuthStore from "../../../store/auth";
 import { AppliedJobs } from "../../../types/postgres/types";
 import { useCurrentUser } from "../../auth/api/getUser";
-import { useAppliedJobs } from "../../profiles/jobseeker/api/getAppliedJobs";
-import { useRecentJobs } from "../../profiles/employer/api/getRecentJobs";
+import { useAppliedJobs } from "../../jobseeker/api/getAppliedJobs";
+import { useRecentJobs } from "../../employer/api/getRecentJobs";
 
 type AppliedJobsType = {
   jobs: AppliedJobs[];
@@ -95,10 +95,10 @@ const Job = () => {
       </section>
       {/* job  */}
       <main className="lg:flex grid  overflow-x-scroll job-details gap-sm lg:justify-between items-start">
-        <aside className="border-xs flex-[1.8] w-full rounded-sm border-light">
+        <aside className="border-sm  flex-[1.8] w-full rounded-sm ">
           <section className="">
             <header className="grid border-b-sm p-sm py-md gap-xs ">
-              <h2 className="text-xl font-bold  text-green-dark ">
+              <h2 className="text-xl font-bold  text-black-dark ">
                 {job?.title}
               </h2>
               <div>
@@ -181,7 +181,7 @@ const Job = () => {
             </div>
             <div className="p-sm  grid gap-2">
               <button
-                className="bg-blue-dark text-white p-xs px-sm rounded-md w-fit disabled:opacity-60"
+                className="bg-blue-light text-white p-xs px-sm rounded-md w-fit disabled:opacity-60"
                 disabled={role === "employer" || isApplied}
                 onClick={handleJobApply}
               >

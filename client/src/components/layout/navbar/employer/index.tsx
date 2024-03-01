@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { LiaBarsSolid } from "react-icons/lia";
 import useComponentsStore from "../../../../store/components";
 import EmployerProfileMenu from "../../../elements/modals/EmployerProfileMenu";
-import { useProfile } from "../../../../features/profiles/employer/api/getProfile";
+import { useProfile } from "../../../../features/employer/api/getProfile";
 
 type EmployerNav = {
   setMenuOpen: (props: boolean) => void;
