@@ -11,6 +11,6 @@ A job portal website, alternative to popular job platform <a href='https://meroj
 
 ## Features
 
-🛠 Built with [React][reactjs], [Express][express], [PostgreSQL][postgresql] and [TypeScript][typescript]
+🛠 Built with [React][reactjs], [Express][express] and [TypeScript][typescript]
 🚀 Full-stack [Express][express]/[React][reactjs] application with real-world features
 👮‍♂️ Local Authentication
