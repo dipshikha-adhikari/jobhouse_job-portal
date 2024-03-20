@@ -2,7 +2,6 @@ import { forwardRef, useEffect, useRef, useState } from "react";
 import { BiCategory } from "react-icons/bi";
 import { FaIndustry } from "react-icons/fa";
 import { useQuery } from "react-query";
-import running from "../../../asstes/icons8-running.gif";
 import livingroom from "../../../asstes/livingroom.avif";
 import { AppliedJobs, IJob } from "../../../types/postgres/types";
 import useStore from "../../../store/components";
@@ -17,6 +16,8 @@ import Blogs from "../../blogs/components/Blogs";
 import SearchBox from "../../../components/elements/box/SearchBox";
 import { MainLayout } from "../../../components/layout";
 import { useAppliedJobs } from "../../jobseeker/api/getAppliedJobs";
+import JobBoxSkeleton from "../../../components/elements/skeleton/JobBoxSkeleton";
+import CategorySkeleton from "../../../components/elements/skeleton/CategorySkeleton";
 
 type AppliedJobsType = {
   jobs: AppliedJobs[];
@@ -54,9 +55,26 @@ const Landing = () => {
 
   if (isLoading && !isJobsFetched)
     return (
-      <div>
+      <div className="grid h-screen overflow-hidden ">
         <Header ref={headerRef} />
-        <img src={running} alt="" className="w-12 h-12 mx-auto p-sm" />
+        <div className="grid h-fit p-sm  justify-center  grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  gap-sm">
+          <JobBoxSkeleton />
+          <JobBoxSkeleton />
+          <div className="h-fit  grid gap-xs w-full">
+            <CategorySkeleton />
+            <CategorySkeleton />
+            <CategorySkeleton />
+            <CategorySkeleton />
+            <CategorySkeleton />
+            <CategorySkeleton />
+            <CategorySkeleton />
+            <CategorySkeleton />
+            <CategorySkeleton />
+            <CategorySkeleton />
+            <CategorySkeleton />
+            <CategorySkeleton />
+          </div>
+        </div>
       </div>
     );
 
