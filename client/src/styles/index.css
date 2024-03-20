@@ -1,0 +1,142 @@
+@import "tailwindcss/base";
+
+@import "tailwindcss/components";
+
+@import "tailwindcss/utilities";
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  padding: 0;
+}
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.cover-image::after {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.ant-table-content::-webkit-scrollbar {
+  height: 4px;
+  /* width of the entire scrollbar */
+}
+
+.ant-table-content::-webkit-scrollbar-track {
+  /* color of the tracking area */
+  background-color: rgb(227, 228, 228);
+}
+
+.ant-table-content::-webkit-scrollbar-thumb {
+  background-color: rgb(178, 180, 180);
+  /* color of the scroll thumb */
+  border-radius: 20px;
+}
+
+.ant-table-wrapper {
+  width: 280px;
+}
+
+@media screen and (min-width: 370px) {
+  .ant-table-wrapper {
+    width: 300px;
+  }
+}
+@media screen and (min-width: 480px) {
+  .ant-table-wrapper {
+    width: 400px;
+  }
+}
+@media screen and (min-width: 600px) {
+  .ant-table-wrapper {
+    width: 500px;
+  }
+}
+@media screen and (min-width: 800px) {
+  .ant-table-wrapper {
+    width: 100%;
+  }
+}
+.ant-table-cell {
+  min-width: 140px;
+  text-overflow: clip;
+}
+
+textarea::-webkit-scrollbar {
+  display: none;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+input:hover:enabled,
+textarea:hover:enabled,
+select:hover:enabled {
+  border-color: #5d5d5d;
+}
+
+select {
+  border: 1px solid #d1d5db;
+}
+
+.job-details::-webkit-scrollbar {
+  display: none;
+}
+
+.job-box-skeleton,
+.category-skeleton {
+  animation: animate 3s linear infinite;
+}
+
+@keyframes animate {
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}

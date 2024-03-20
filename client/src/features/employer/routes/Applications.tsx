@@ -61,7 +61,7 @@ const Applications = () => {
           every jobseeker profile by clicking on the box
         </h2>
       </header>
-      <section className="grid grid-cols-auto-sm min-h-[70vh] ">
+      <section className="grid grid-cols-auto-sm gap-sm min-h-[70vh] ">
         {applications?.map((item) => {
           return <ApplicationCard key={item.jobseeker_id} item={item} />;
         })}
