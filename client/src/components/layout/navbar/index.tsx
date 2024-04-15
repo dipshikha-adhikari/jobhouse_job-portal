@@ -3,7 +3,7 @@ import { FaArrowDown } from "react-icons/fa";
 import { LiaBarsSolid } from "react-icons/lia";
 import { Link } from "react-router-dom";
 import { useCurrentUser } from "../../../features/auth/api/getUser";
-import RegisterModal from "../../../features/auth/routes/Register";
+import RegisterModal from "../../elements/modals/Register";
 import Categories from "../../../features/jobs/components/Categories";
 import useAuthStore from "../../../store/auth";
 import useComponentsStore from "../../../store/components";

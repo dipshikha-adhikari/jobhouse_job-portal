@@ -7,7 +7,7 @@ const BlogPage = () => {
 
   return (
     <div className="min-h-screen text-center py-md">
-      Sorry! blog is not available right now.
+      This page is under construction.
     </div>
   );
 };

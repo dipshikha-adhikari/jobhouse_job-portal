@@ -60,7 +60,10 @@ const RegisterModal = () => {
       ) : (
         <ImOffice fontSize={60} />
       )}
-      <Link to={`/auth/${selected}/register`} onClick={store.openRegisterModal}>
+      <Link
+        to={`/auth/${selected}/register`}
+        onClick={store.closeRegisterModal}
+      >
         Register
       </Link>
 

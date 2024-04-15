@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import Register from "./Register";
+import Register from "../../../components/elements/modals/Register";
 import Login from "./Login";
 import { MainLayout } from "../../../components/layout";
 import EmployerRegisterForm from "../../../components/forms/EmployerRegister";
