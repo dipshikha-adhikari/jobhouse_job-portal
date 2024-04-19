@@ -6,7 +6,6 @@ export const getSearchResults = async (req: Request, res: Response) => {
   const { query } = req.query
   const { limit } = req.query
   const { offset } = req.query
-
   if (query === '')
     return res.status(400).send({ message: 'Query can not be empty' })
   const searchQuery = `select j.* ,

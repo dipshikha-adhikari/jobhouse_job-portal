@@ -4,12 +4,13 @@ import { publicRequest } from "../../../lib/axios";
 import { IJob } from "../../../types/postgres/types";
 import { FaIndustry } from "react-icons/fa";
 import { BiCategory } from "react-icons/bi";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import SearchBox from "../../../components/elements/box/SearchBox";
 import ResultBox from "../../../components/elements/box/ResultBox";
 import Industries from "../components/Industries";
 import Categories from "../components/Categories";
 import { useAppliedJobs } from "../../jobseeker/api/getAppliedJobs";
+import Pagination from "../../../components/ui/Pagination";
 
 type Results = {
   isLoading: boolean;
@@ -21,27 +22,40 @@ const SearchResults = () => {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const query = params.get("q");
+  const [offset, setOffset] = useState(0);
   const { jobs: appliedJobs } = useAppliedJobs();
+  const limit = 4;
+  const ref = useRef(null);
+
+  const { data: counts } = useQuery("searchCounts", async () => {
+    const result = await publicRequest.get(
+      `/api/v1/jobs/search/counts?query=${query}`
+    );
+    return result.data;
+  });
+
   const {
     data: jobs,
     isLoading,
     isError,
-  }: Results = useQuery(["results", query], async () => {
+  }: Results = useQuery(["results", [query, offset]], async () => {
     const result = await publicRequest.get(
-      `/api/v1/jobs/search/results?query=${query}`
+      `/api/v1/jobs/search/results?query=${query}&&limit=${limit}&offset=${offset}`
     );
     return result.data;
   });
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+    if (ref.current) {
+      window.scrollTo(0, 0);
+    }
+  }, [offset]);
 
   return (
     <div className="grid gap-sm w-full min-h-screen ">
       <section className="grid gap-xs h-fit ">
         <SearchBox />
-        <div className=" ">
+        <div className=" " ref={ref}>
           <header className="p-sm py-md">
             <h2 className="text-center">
               {isLoading && "Loading..."}
@@ -77,6 +91,14 @@ const SearchResults = () => {
                 );
               })}
             </div>
+          )}
+          {jobs?.length && (
+            <Pagination
+              setOffset={setOffset}
+              limit={limit}
+              totalLength={counts.total_count}
+              offset={offset}
+            />
           )}
         </div>
       </section>

@@ -57,7 +57,7 @@ const Landing = () => {
     return (
       <div className="grid h-screen overflow-hidden ">
         <Header ref={headerRef} />
-        <div className="grid h-fit p-sm  justify-center  grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  gap-sm">
+        <div className="grid h-fit p-sm py-md justify-center  grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  gap-sm">
           <JobBoxSkeleton />
           <JobBoxSkeleton />
           <div className="h-fit  grid gap-xs w-full">

@@ -1,0 +1,8 @@
+{
+  "lint": "next lint",
+  "prepare": "husky",
+  "test": "next test",
+  "dependencies": {
+    "husky": "^9.0.11"
+  }
+}

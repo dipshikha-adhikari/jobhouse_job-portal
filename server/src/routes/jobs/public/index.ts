@@ -14,12 +14,14 @@ import {
   getTotalJobsCount
 } from '../../../controllers/jobs/public'
 import { getJobsCountByCategory, getJobsCountByIndustry, getJobsCountByType } from '../../../controllers/jobs/public/count'
+import { getSearchCounts } from '../../../controllers/jobs/public/search/getSearchCount'
 
 const express = require('express')
 const router = express.Router()
 
 router.get('/', getAllJobs)
 router.get('/search/suggestions', getSearchSuggestion)
+router.get('/search/counts', getSearchCounts)
 router.get('/search/results', getSearchResults)
 router.get('/employer/all/:employerId', getAllJobsByEmployerId)
 router.get('/employer/recent/:employerId', getRecentJobsByEmployerId)
