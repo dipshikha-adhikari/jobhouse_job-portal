@@ -1,5 +1,4 @@
 import moment from "moment";
-import { useEffect } from "react";
 import {
   CiCalendar,
   CiCircleCheck,
@@ -25,11 +24,14 @@ import {
   IJobseekerEducation,
   IJobseekerProfile,
 } from "../../../types/postgres/types";
+import { useCurrentUser } from "../../auth/api/getUser";
+import { useEffect } from "react";
 
 const JobseekerPublicProfile = () => {
   const params = useParams();
   const { applicantId } = params;
   const { isAunthenticated } = useAuthStore();
+  const { role } = useCurrentUser();
 
   const {
     data: profile,
@@ -250,6 +252,17 @@ const JobseekerPublicProfile = () => {
           </div>
         </section>
       </div>
+      {role === "employer" && (
+        <div className="mt-10 flex gap-xs items-center">
+          <button className="bg-green-light text-white p-xs rounded-sm">
+            Accept
+          </button>
+          <button className="bg-red-600 text-white p-xs rounded-sm">
+            Reject
+          </button>
+          <p className="">Comming soon!</p>
+        </div>
+      )}
     </div>
   );
 };
