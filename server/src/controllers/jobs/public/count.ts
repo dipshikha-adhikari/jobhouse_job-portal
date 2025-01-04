@@ -58,8 +58,10 @@ export const getJobsCountByLevel = async (req: Request, res: Response) => {
     const query = `SELECT jl.level_id, jl.level_name, COUNT(j.job_id) AS total_jobs
  FROM job_levels jl
  LEFT JOIN jobs j ON jl.level_id = j.level_id
+ WHERE deadline > NOW()
  GROUP BY jl.level_id, jl.level_name
- ORDER BY jl.level_id;`
+ ORDER BY jl.level_id
+ `
     const result: QueryResult = await pool.query(query)
     return res.status(200).send(result.rows)
   } catch (err) {
@@ -72,6 +74,7 @@ export const getJobsCountByType = async (req: Request, res: Response) => {
     const query = `SELECT jt.type_id, jt.type_name, COUNT(j.job_id) AS total_jobs
  FROM job_types jt
  LEFT JOIN jobs j ON jt.type_id = j.type_id
+ WHERE deadline > NOW()
  GROUP BY jt.type_id, jt.type_name
  ORDER BY jt.type_id;`
     const result: QueryResult = await pool.query(query)

@@ -43,12 +43,12 @@ const EmployerRegisterForm = () => {
         password,
         phoneNumber,
         fullName,
-        role,
+        role: "employer",
       }),
       {
         loading: "Processing",
         success: () => {
-          navigate("/user/login");
+          navigate("/auth/login");
           setIsLoading(false);
           return "Successfully registered";
         },

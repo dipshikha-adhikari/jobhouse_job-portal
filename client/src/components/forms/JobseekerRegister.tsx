@@ -42,12 +42,12 @@ const JobseekerRegisterForm = () => {
         password,
         phoneNumber,
         fullName,
-        role,
+        role: "jobseeker",
       }),
       {
         loading: "Processing",
         success: () => {
-          navigate("/user/login");
+          navigate("/auth/login");
           setIsLoading(false);
           return "Successfully registered";
         },
