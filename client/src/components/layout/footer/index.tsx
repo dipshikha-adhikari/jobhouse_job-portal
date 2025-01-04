@@ -18,7 +18,7 @@ const Footer = () => {
   };
 
   return (
-    <div className=" relative text-white mt-10  bg-black-default">
+    <div className=" relative text-white mt-[calc(40vh)]   bg-black-default">
       <ContentLayout>
         <div className=" py-sm grid gap-10 md:flex">
           <div className="flex-1">
