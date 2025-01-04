@@ -58,7 +58,7 @@ const ProfileReview = () => {
             <div>
               <img
                 src={
-                  profile.basic_information.image.url ||
+                  profile?.basic_information?.image?.url ||
                   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNL_ZnOTpXSvhf1UaK7beHey2BX42U6solRA&usqp=CAU"
                 }
                 alt=""
