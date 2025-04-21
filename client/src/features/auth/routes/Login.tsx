@@ -38,42 +38,39 @@ const Login = () => {
     try {
       const { email, password } = data;
       setIsLoading(true);
-      toast.promise(
-        publicRequest.post("/api/v1/auth/login", { email, password }),
-        {
-          loading: "Processing",
-          success: (res) => {
-            setIsLoading(false);
-            const data = res.data;
-            const token = data.token;
-            const id = data.user.user_id;
-            const role = data.user.role;
-            const fullName = data.user.fullname;
-            const phoneNumber = data.user.phone_number;
-            const email = data.user.email;
-            const userInfo = { fullName, email, token, role, phoneNumber, id };
+      toast.promise(publicRequest.post("/auth/login", { email, password }), {
+        loading: "Processing",
+        success: (res) => {
+          setIsLoading(false);
+          const data = res.data;
+          const token = data.token;
+          const id = data.user.user_id;
+          const role = data.user.role;
+          const fullName = data.user.fullname;
+          const phoneNumber = data.user.phone_number;
+          const email = data.user.email;
+          const userInfo = { fullName, email, token, role, phoneNumber, id };
 
-            localStorage.setItem("userInfo", JSON.stringify(userInfo));
-            authStore.setAuthentication(true);
-            setAuthToken(token);
-            navigate(`/${role}/overview`);
-            return "Success";
-          },
-          error: (err) => {
-            console.log(err);
-            setIsLoading(false);
-            if (err.response !== undefined) {
-              setErrorMessage(err.response.data.message);
-            } else {
-              setErrorMessage(err.message);
-            }
-            setTimeout(() => {
-              setErrorMessage("");
-            }, 4000);
-            return "Failed";
-          },
-        }
-      );
+          localStorage.setItem("userInfo", JSON.stringify(userInfo));
+          authStore.setAuthentication(true);
+          setAuthToken(token);
+          navigate(`/${role}/overview`);
+          return "Success";
+        },
+        error: (err) => {
+          console.log(err);
+          setIsLoading(false);
+          if (err.response !== undefined) {
+            setErrorMessage(err.response.data.message);
+          } else {
+            setErrorMessage(err.message);
+          }
+          setTimeout(() => {
+            setErrorMessage("");
+          }, 4000);
+          return "Failed";
+        },
+      });
     } catch (err) {
       console.log(err);
       toast.dismiss();

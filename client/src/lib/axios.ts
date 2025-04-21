@@ -9,7 +9,7 @@ export const publicRequest = axios.create({
 });
 
 export const privateRequest = axios.create({
-  baseURL: import.meta.env.VITE_APP_BASE_URL,
+  baseURL: "http://localhost:5000/api/v1",
 });
 
 export const setAuthToken = (token: string | null) => {

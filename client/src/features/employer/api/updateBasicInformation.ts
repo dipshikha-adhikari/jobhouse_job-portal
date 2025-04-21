@@ -12,7 +12,7 @@ export const updateBasicInformation = async (
   try {
     setIsLoading(true);
 
-    const url: string = "/api/v1/employer/profile/basicInformation";
+    const url: string = "/employer/profile/basicInformation";
 
     const axiosConfig = {
       method:

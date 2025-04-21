@@ -9,7 +9,7 @@ export const deleteEducation = async (
   try {
     setIsLoading(true);
 
-    toast.promise(privateRequest.delete(`/api/v1/jobseeker/profile/education/${educationId}`), {
+    toast.promise(privateRequest.delete(`/jobseeker/profile/education/${educationId}`), {
       loading: "Loading",
       success: () => {
         setIsLoading(false);

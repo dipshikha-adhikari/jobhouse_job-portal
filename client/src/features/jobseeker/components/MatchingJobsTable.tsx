@@ -88,7 +88,7 @@ export default function MatchingJobsTable({ profile }: Props) {
     isLoading,
     isError,
   }: JobsProps = useQuery("matchingJobs", async () => {
-    const result = await privateRequest.get("/api/v1/jobseeker/jobs/matching");
+    const result = await privateRequest.get("/jobseeker/jobs/matching");
     return result.data;
   });
   if (!profile?.job_preference?.id)

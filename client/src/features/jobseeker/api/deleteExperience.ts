@@ -9,7 +9,7 @@ export const deleteExperience = async (
   try {
     setIsLoading(true);
 
-    toast.promise(privateRequest.delete(`/api/v1/jobseeker/profile/experience/${experienceId}`), {
+    toast.promise(privateRequest.delete(`/jobseeker/profile/experience/${experienceId}`), {
       loading: "Loading",
       success: () => {
         setIsLoading(false);

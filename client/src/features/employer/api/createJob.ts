@@ -13,8 +13,8 @@ export const createJob = (
       method: jobId !== undefined ? "put" : "post",
       url:
         jobId !== undefined
-          ? `/api/v1/jobs/update/${jobId}`
-          : "/api/v1/jobs/create",
+          ? `/jobs/update/${jobId}`
+          : "/jobs/create",
       data,
     };
     setIsLoading(true);

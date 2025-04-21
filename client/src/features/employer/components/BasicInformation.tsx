@@ -9,7 +9,7 @@ import { IEmployerProfile } from "../../../types/postgres/types";
 import { updateBasicInformation } from "../api/updateBasicInformation";
 import SelectCategory from "../../../components/mui/SelectCategory";
 import { useCurrentUser } from "../../auth/api/getUser";
-import { useIndustries } from "../../jobs/api/getIndustries";
+import { useJobs } from "../../../hooks/useJobs";
 
 interface IEditProfileDetails {
   isEditorOpen: boolean;
@@ -30,7 +30,7 @@ const BasicInformation = ({
   const [isLoading, setIsLoading] = useState(false);
   const { isAunthenticated } = useAuthStore();
   const user = useCurrentUser();
-  const { industries } = useIndustries();
+  const { industries } = useJobs();
 
   const {
     register,

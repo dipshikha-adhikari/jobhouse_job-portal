@@ -26,7 +26,7 @@ export const updateBasicInfo = async (
     };
     const axiosConfig = {
       method: basicInfo?.id === undefined ? "post" : "put",
-      url: "/api/v1/jobseeker/profile/basicInformation",
+      url: "/jobseeker/profile/basicInformation",
       data: dataToBeSent,
     };
     toast.promise(privateRequest(axiosConfig), {

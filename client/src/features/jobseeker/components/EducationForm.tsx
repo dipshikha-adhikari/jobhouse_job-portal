@@ -43,7 +43,7 @@ const EducationForm = ({
   const onSubmit: SubmitHandler<IJobseekerEducationInputs> = (data) => {
     updateEducation(data, profile, setIsLoading, setIsEditorOpen);
   };
-  console.log(profile);
+
   const handleCancel = () => {
     if (ref.current) {
       window.scrollTo({

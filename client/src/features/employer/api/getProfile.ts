@@ -7,7 +7,7 @@ export const useProfile = () => {
     const { isAunthenticated } = useAuthStore();
 
     const getProfile = async () => {
-        const res = await privateRequest.get(`/api/v1/employer/profile`);
+        const res = await privateRequest.get(`/employer/profile`);
         return res.data;
     };
 

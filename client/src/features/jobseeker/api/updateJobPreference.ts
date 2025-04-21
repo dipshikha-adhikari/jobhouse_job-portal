@@ -55,7 +55,7 @@ export const updateJobPrefetence = (
 
     const axiosConfig = {
       method: profile?.id === undefined ? "post" : "put",
-      url: "/api/v1/jobseeker/profile/jobPreference",
+      url: "/jobseeker/profile/jobPreference",
       data: dataToBeSent,
     };
     toast.promise(privateRequest(axiosConfig), {

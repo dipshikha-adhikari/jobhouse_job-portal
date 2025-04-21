@@ -9,10 +9,9 @@ import SelectJob from "../mui/SelectJob";
 import TagsInputBox from "../elements/box/TagsInputBox";
 import { IJob } from "../../types/postgres/types";
 import { Maybe } from "yup";
-import { useLevels } from "../../features/jobs/api/getLevels";
-import { useTypes } from "../../features/jobs/api/getTypes";
 import { useProfile } from "../../features/employer/api/getProfile";
 import { createJob } from "../../features/employer/api/createJob";
+import { useJobs } from "../../hooks/useJobs";
 
 type StepTwoInputs = {
   noOfVacancy: number;
@@ -36,8 +35,7 @@ const CreateJobStepTwo = ({ setStep, job, step }: CreateJobStepTwoProps) => {
   const params = useParams();
   const { jobId } = params;
   const { profile } = useProfile();
-  const { levels } = useLevels();
-  const { types } = useTypes();
+  const { levels, types } = useJobs();
 
   const {
     register,

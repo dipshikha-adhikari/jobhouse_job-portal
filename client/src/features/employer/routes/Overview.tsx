@@ -23,11 +23,11 @@ const Overview = () => {
   const { profile, isLoading } = useProfile();
   const { jobs } = useRecentJobs(profile?.user_id);
   const { data: vacancies } = useQuery(["vacancies", user], async () => {
-    const result = await privateRequest.get("/api/v1/employer/vacancies");
+    const result = await privateRequest.get("/employer/vacancies");
     return result.data;
   });
   const { data: applicants } = useQuery(["applicants", user], async () => {
-    const result = await privateRequest.get("/api/v1/employer/applicants");
+    const result = await privateRequest.get("/employer/applicants");
     return result.data;
   });
 

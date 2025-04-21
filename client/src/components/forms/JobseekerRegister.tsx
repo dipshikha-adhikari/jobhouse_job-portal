@@ -37,7 +37,7 @@ const JobseekerRegisterForm = () => {
     setIsLoading(true);
     const { email, password, phoneNumber, fullName } = data;
     toast.promise(
-      publicRequest.post("/api/v1/auth/register", {
+      publicRequest.post("/auth/register", {
         email,
         password,
         phoneNumber,

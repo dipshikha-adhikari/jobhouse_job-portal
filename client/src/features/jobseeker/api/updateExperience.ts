@@ -30,8 +30,8 @@ export const updateExperience = async (
       method: profile?.id === undefined ? "post" : "put",
       url:
         profile?.id === undefined
-          ? "/api/v1/jobseeker/profile/experience"
-          : `/api/v1/jobseeker/profile/experience/${profile.id}`,
+          ? "/jobseeker/profile/experience"
+          : `/jobseeker/profile/experience/${profile.id}`,
       data: dataToBeSent,
     };
     toast.promise(privateRequest(axiosConfig), {

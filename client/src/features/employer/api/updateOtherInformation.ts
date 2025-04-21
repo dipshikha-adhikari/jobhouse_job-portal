@@ -12,7 +12,7 @@ export const updateOtherInformation = async (
 ) => {
   try {
     setIsLoading(true);
-    const url: string = "/api/v1/employer/profile/otherInformation";
+    const url: string = "/employer/profile/otherInformation";
 
     const axiosConfig = {
       method: profile?.other_information.id ? "put" : "post", // Casting 'method' to ensure it's one of the allowed values

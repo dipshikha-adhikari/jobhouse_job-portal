@@ -80,7 +80,7 @@ export default function AppliedJobsTable() {
     isLoading,
     isError,
   } = useQuery("appliedJobs", async () => {
-    const result = await privateRequest.get("/api/v1/jobseeker/jobs/applied");
+    const result = await privateRequest.get("/jobseeker/jobs/applied");
     return result.data;
   });
 

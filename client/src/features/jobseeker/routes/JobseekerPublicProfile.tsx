@@ -41,7 +41,7 @@ const JobseekerPublicProfile = () => {
     ["applicant", applicantId],
     async () => {
       const result = await privateRequest.get(
-        `/api/v1/jobseeker/profile/${applicantId}`
+        `/jobseeker/profile/${applicantId}`
       );
       return result.data;
     }

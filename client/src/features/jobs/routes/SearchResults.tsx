@@ -29,7 +29,7 @@ const SearchResults = () => {
 
   const { data: counts } = useQuery("searchCounts", async () => {
     const result = await publicRequest.get(
-      `/api/v1/jobs/search/counts?query=${query}`
+      `/jobs/search/counts?query=${query}`
     );
     return result.data;
   });
@@ -40,7 +40,7 @@ const SearchResults = () => {
     isError,
   }: Results = useQuery(["results", [query, offset]], async () => {
     const result = await publicRequest.get(
-      `/api/v1/jobs/search/results?query=${query}&&limit=${limit}&offset=${offset}`
+      `/jobs/search/results?query=${query}&&limit=${limit}&offset=${offset}`
     );
     return result.data;
   });
