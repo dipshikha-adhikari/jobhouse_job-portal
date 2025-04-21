@@ -44,7 +44,7 @@ const JobCard = ({ job, appliedJobs }: IJobCard) => {
             <p className="font-semibold text-black-dark">
               {job.employer_details?.organization_name}
             </p>
-            <p className="font-semibold flex items-center">
+            <p className="font-normal flex items-center">
               <GoDotFill className="text-blue-dark" /> {job.title}
             </p>
             <p className=" flex font-normal items-center gap-xs">

@@ -29,7 +29,7 @@ const PublicProfile = () => {
     isLoading,
     isError,
   }: UseQueryResult<IEmployerProfile> = useQuery(["profile", id], async () => {
-    const result = await publicRequest.get(`/api/v1/employer/profile/${id}`);
+    const result = await publicRequest.get(`/employer/profile/${id}`);
     return result.data;
   });
 

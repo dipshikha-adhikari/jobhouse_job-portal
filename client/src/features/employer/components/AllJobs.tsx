@@ -15,9 +15,7 @@ const AllJobs: React.FC<AllJobsProps> = ({ employerId }) => {
     error,
     isLoading,
   }: UseQueryResult<IJob[]> = useQuery(["AllJobs", employerId], async () => {
-    const res = await privateRequest.get(
-      `/api/v1/jobs/employer/all/${employerId}`
-    );
+    const res = await privateRequest.get(`/jobs/employer/all/${employerId}`);
     return res.data;
   });
 

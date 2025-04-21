@@ -12,11 +12,9 @@ import {
   getTotalApplicantsCount,
   getTotalJobsCount,
   getTotalVacancies,
-  getJobsCountByCategory,
-  getJobsCountByIndustry,
-  getJobsCountByLevel
 } from './count'
 import { getIndustries } from './getIndustries'
+import { getJobsCategoryWithCount, getJobsIndustryWithCount, getJobsLevelWithCount } from './count';
 
 export {
   getAllJobs,
@@ -32,8 +30,8 @@ export {
   getTotalApplicantsCount,
   getTotalJobsCount,
   getTotalVacancies,
-  getJobsCountByCategory,
-  getJobsCountByIndustry,
-  getJobsCountByLevel,
+  getJobsCategoryWithCount,
+  getJobsIndustryWithCount,
+  getJobsLevelWithCount,
   getIndustries
 }

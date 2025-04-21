@@ -7,7 +7,7 @@ import RecentJobs from "../components/RecentJobs";
 import { useEffect } from "react";
 import { CiStar } from "react-icons/ci";
 import useAuthStore from "../../../store/auth";
-import NoUser from "../../misc/routes/NoUser";
+import NoUser from "../../home/routes/NoUser";
 import AlmostLoaded from "../../../components/elements/loader/AlmostLoaded";
 import { CgWebsite } from "react-icons/cg";
 import { useCurrentUser } from "../../auth/api/getUser";

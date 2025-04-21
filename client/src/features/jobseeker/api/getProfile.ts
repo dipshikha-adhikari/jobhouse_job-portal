@@ -8,7 +8,7 @@ export const useJobseekerProfile = (query?: string) => {
     const getProfile = async () => {
         if (!isAunthenticated) return;
         const result = await privateRequest(
-            `/api/v1/jobseeker/profile?query=${query}`,
+            `/jobseeker/profile?query=${query}`,
         );
         return result.data;
     };

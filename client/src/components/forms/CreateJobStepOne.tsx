@@ -8,7 +8,7 @@ import { IJob } from "../../types/postgres/types";
 import { CreateJobStepOneSchema } from "../../utils/validationSchema";
 import ResponsiveDayPicker from "../mui/DayPicker";
 import SelectCategory from "../mui/SelectCategory";
-import { useCategories } from "../../features/jobs/api/getCategories";
+import { useJobs } from "../../hooks/useJobs";
 
 export interface ICreateJobStepOneInputs {
   title: string;
@@ -34,7 +34,7 @@ const CreateJobStepOne = ({ setStep, step, job }: CreateJobStepOneProps) => {
     control,
   } = useForm({ resolver: yupResolver(CreateJobStepOneSchema) });
   const jobStore = useJobInputs();
-  const { categories } = useCategories();
+  const { categories } = useJobs();
   const isEditorOpen = true;
 
   const onSubmit: SubmitHandler<ICreateJobStepOneInputs> = (data) => {

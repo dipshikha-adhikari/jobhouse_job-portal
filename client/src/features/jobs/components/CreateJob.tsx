@@ -4,7 +4,7 @@ import CreateJobStepOne from "../../../components/forms/CreateJobStepOne";
 import CreateJobStepTwo from "../../../components/forms/CreateJobStepTwo";
 import AlmostLoaded from "../../../components/elements/loader/AlmostLoaded";
 import Error from "../../../components/ui/Error";
-import NoUser from "../../misc/routes/NoUser";
+import NoUser from "../../home/routes/NoUser";
 import ProgressBar from "../../../components/ui/ProgressBar";
 import { useCurrentJob } from "../../../hooks/useCurrentJob";
 import useAuthStore from "../../../store/auth";

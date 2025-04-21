@@ -1,7 +1,7 @@
 import { FaIndustry } from "react-icons/fa";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
-import { publicRequest } from "../../../lib/axios";
+import { getAllLevels, getAllTypes } from "../../jobs/api/jobs.api";
 
 type Levels = {
   level_id: string;
@@ -20,19 +20,13 @@ const JobsByTypeAndLevel = () => {
     data: levels,
     isLoading: levelsLoading,
     isError: levelsError,
-  } = useQuery<Levels[]>("levels", async () => {
-    const result = await publicRequest.get("/api/v1/jobs/levels/jobscount");
-    return result.data;
-  });
+  } = useQuery<Levels[]>("levels", getAllLevels);
 
   const {
     data: types,
     isLoading: typesLoading,
     isError: typesError,
-  } = useQuery<Types[]>("types", async () => {
-    const result = await publicRequest.get("/api/v1/jobs/types/jobscount");
-    return result.data;
-  });
+  } = useQuery<Types[]>("types", getAllTypes);
 
   return (
     <div className="flex flex-wrap gap-sm  ">
@@ -49,7 +43,7 @@ const JobsByTypeAndLevel = () => {
               <Link
                 to={`/jobs/?level=${level.level_name}`}
                 key={level.level_id}
-                className="text-black-light border-b-sm p-sm pb-xs font-normal flex items-center gap-sm hover:text-black-dark "
+                className="text-black-light border-b-sm  px-sm py-xs font-normal flex items-center gap-sm hover:text-black-dark "
               >
                 {level.level_name}{" "}
                 <span className="text-green-dark">({level.total_jobs})</span>
@@ -80,7 +74,7 @@ const JobsByTypeAndLevel = () => {
               <Link
                 to={`/jobs/?type=${type.type_name}`}
                 key={type.type_id}
-                className="text-black-light  p-sm pb-xs hover:text-black-dark border-b-sm rounded-sm  font-normal  flex items-center gap-sm"
+                className="text-black-light  px-sm py-xs hover:text-black-dark border-b-sm rounded-sm  font-normal  flex items-center gap-sm"
               >
                 {type.type_name}{" "}
                 <span className="text-green-dark">({type.total_jobs})</span>

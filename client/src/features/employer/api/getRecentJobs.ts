@@ -4,7 +4,8 @@ import { IJob } from "../../../types/postgres/types";
 
 export const useRecentJobs = (id: string | undefined) => {
     const getRecentJobs = async () => {
-        const res = await publicRequest.get(`/api/v1/jobs/employer/recent/${id}`);
+        if (!id) return
+        const res = await publicRequest.get(`/jobs/employer/recent/${id}`);
         return res.data;
     };
 

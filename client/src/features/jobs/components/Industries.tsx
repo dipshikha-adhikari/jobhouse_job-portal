@@ -1,12 +1,16 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useIndustriesAndJobsCount } from "../api/getIndustries";
+import { getAllIndustriesWithJobsCount } from "../api/jobs.api";
+import { useQuery, UseQueryResult } from "react-query";
 
 const Industries = () => {
   const initialLimit = 8;
   const [limit, setLimit] = useState<number>(initialLimit);
 
-  const { data, isLoading, isError } = useIndustriesAndJobsCount();
+  const { data, isLoading, isError }: UseQueryResult<any[]> = useQuery(
+    "industriesandjjobscount",
+    getAllIndustriesWithJobsCount
+  );
 
   const handleLimit = () => {
     if (limit <= initialLimit) {
@@ -27,12 +31,12 @@ const Industries = () => {
         {data?.slice(0, limit).map((item) => {
           return (
             <Link
-              to={`/jobs?industry=${item.industry_name}&&id=${item.industry_id}`}
-              key={item.industry_name}
+              to={`/jobs?industry=${item?.industry_name}&&id=${item?.industry_id}`}
+              key={item?.industry_name}
               className="font-normal flex gap-2 items-center border-b-sm w-fit border-default text-black-light hover:text-black-dark"
             >
-              {item.industry_name}{" "}
-              <span className="text-green-dark"> ({item.job_count})</span>
+              {item?.industry_name}{" "}
+              <span className="text-green-dark"> ({item?.job_count})</span>
             </Link>
           );
         })}

@@ -4,7 +4,7 @@ import { FaIndustry } from "react-icons/fa";
 import { IJobseekerProfile } from "../../../types/postgres/types";
 import { useJobseekerProfile } from "../api/getProfile";
 import useAuthStore from "../../../store/auth";
-import NoUser from "../../misc/routes/NoUser";
+import NoUser from "../../home/routes/NoUser";
 import AlmostLoaded from "../../../components/elements/loader/AlmostLoaded";
 import Error from "../../../components/ui/Error";
 import ContentLayout from "../../../components/layout/ContentLayout";

@@ -37,7 +37,7 @@ const SearchBox = () => {
   const getSearchSuggestions = async () => {
     if (text === "") return;
     const result = await publicRequest.get(
-      `/api/v1/jobs/search/suggestions?query=${text}`
+      `/jobs/search/suggestions?query=${text}`
     );
     return result.data;
   };

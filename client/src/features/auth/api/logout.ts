@@ -9,7 +9,7 @@ export const useLogout = () => {
 
     const handleLogout = async () => {
         try {
-            toast.promise(privateRequest.post("/api/v1/auth/logout"), {
+            toast.promise(privateRequest.post("/auth/logout"), {
                 loading: "Processing",
                 success: () => {
                     setAuthToken(null);

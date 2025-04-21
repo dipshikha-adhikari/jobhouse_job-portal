@@ -11,7 +11,7 @@ export const applyJob = (
   try {
     setIsLoading(true);
     toast.promise(
-      privateRequest.post("/api/v1/jobs/apply", {
+      privateRequest.post("/jobs/apply", {
         job_id: jobId,
         employer_id: employerid,
       }),

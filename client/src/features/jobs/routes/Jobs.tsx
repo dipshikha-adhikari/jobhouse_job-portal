@@ -40,8 +40,8 @@ const Jobs = () => {
         : null;
     const url =
       queryStr || level || type
-        ? `/api/v1/jobs/filters?${queryStr}&level=${level}&type=${type}`
-        : `/api/v1/jobs`;
+        ? `/jobs/filters?${queryStr}&level=${level}&type=${type}`
+        : `/jobs`;
     const result = await publicRequest.get(url);
     return result.data;
   };

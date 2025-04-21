@@ -16,6 +16,7 @@ type Props = {
   setOffset: (props: number) => void;
   isLoading: boolean;
   isError: boolean;
+  jobsCount: number;
 };
 
 const AllJobs = ({
@@ -27,25 +28,9 @@ const AllJobs = ({
   appliedJobs,
   limit,
   setOffset,
+  jobsCount,
 }: Props) => {
   const { setIsJobsFetched } = useStore();
-  const { data: allJobsCount } = useQuery(
-    ["allJobsCount", offset],
-    async () => {
-      const result = await publicRequest.get("/api/v1/jobs/count");
-      return result.data;
-    }
-  );
-
-  useEffect(() => {
-    if (height) {
-      window.scrollTo(0, height);
-    }
-  }, [offset]);
-
-  useEffect(() => {
-    if (jobs && jobs.length) setIsJobsFetched(true);
-  }, [jobs]);
 
   return (
     <div className=" border-sm   min-h-[300px]">
@@ -61,11 +46,11 @@ const AllJobs = ({
           );
         })}
       </div>
-      {allJobsCount?.count && jobs && (
+      {jobsCount && (
         <Pagination
           offset={offset}
           setOffset={setOffset}
-          totalLength={allJobsCount?.count}
+          totalLength={jobsCount}
           limit={limit}
         />
       )}

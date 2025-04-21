@@ -4,15 +4,12 @@ import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { FaEdit } from "react-icons/fa";
 import { IJobseekerJobPreference } from "../../../types/postgres/types";
 import { JobseekerJobPreferenceSchema } from "../../../utils/validationSchema";
-import { useCategories } from "../../jobs/api/getCategories";
-import { useIndustries } from "../../jobs/api/getIndustries";
-import { useLevels } from "../../jobs/api/getLevels";
-import { useTypes } from "../../jobs/api/getTypes";
 import { IJobseekerJobPreferenceInputs } from "../../../types/react/types";
 import { updateJobPrefetence } from "../api/updateJobPreference";
 import MultipleSelectChip from "../../../components/mui/MultipleSelect";
 import TagsInputBox from "../../../components/elements/box/TagsInputBox";
 import SelectJob from "../../../components/mui/SelectJob";
+import { useJobs } from "../../../hooks/useJobs";
 
 type JobPreference = {
   job_preference: IJobseekerJobPreference;
@@ -29,10 +26,7 @@ const JobPreference = ({ job_preference }: JobPreference) => {
     clearErrors,
     control,
   } = useForm({ resolver: yupResolver(JobseekerJobPreferenceSchema) });
-  const { categories } = useCategories();
-  const { industries } = useIndustries();
-  const { levels } = useLevels();
-  const { types } = useTypes();
+  const { categories, industries, types, levels } = useJobs();
 
   useEffect(() => {
     if (job_preference?.id !== undefined) {

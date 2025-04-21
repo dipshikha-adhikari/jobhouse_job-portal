@@ -3,15 +3,13 @@ import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import moment from "moment";
 import { IJobseekerExperience } from "../../../types/postgres/types";
-import { useCategories } from "../../jobs/api/getCategories";
-import { useIndustries } from "../../jobs/api/getIndustries";
-import { useLevels } from "../../jobs/api/getLevels";
 import { IJobseekerExperienceInputs } from "../../../types/react/types";
 import { updateExperience } from "../api/updateExperience";
 import { JobseekerExperienceSchema } from "../../../utils/validationSchema";
 import SelectJob from "../../../components/mui/SelectJob";
 import ResponsiveDatePicker from "../../../components/mui/DatePicker";
 import EditorComponent from "../../../components/ui/Editor";
+import { useJobs } from "../../../hooks/useJobs";
 
 type ExperienceFormProps = {
   profile?: IJobseekerExperience | undefined;
@@ -27,9 +25,7 @@ const ExperienceForm = ({
 }: ExperienceFormProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
-  const { categories } = useCategories();
-  const { industries } = useIndustries();
-  const { levels } = useLevels();
+  const { categories, industries, levels } = useJobs();
 
   const {
     register,

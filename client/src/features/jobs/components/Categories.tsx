@@ -1,12 +1,20 @@
+import { useQuery, UseQueryResult } from "react-query";
 import { Link } from "react-router-dom";
-import { useCategoriesAndJobsCount } from "../api/getCategories";
+import { getAllCategoriesWithJobsCount } from "../api/jobs.api";
 
 type CategoryProps = {
   setIsModalOpen?: (props: boolean) => void;
 };
 
+type CategoriesType = {
+  category_name: string;
+  category_id: string;
+  job_count: string;
+};
+
 const Categories = ({ setIsModalOpen }: CategoryProps) => {
-  const { data, isLoading, isError } = useCategoriesAndJobsCount();
+  const { data, isLoading, isError }: UseQueryResult<CategoriesType[]> =
+    useQuery("categoriesandjjobscount", getAllCategoriesWithJobsCount);
   const handleClick = () => {
     if (setIsModalOpen) {
       setIsModalOpen(false);

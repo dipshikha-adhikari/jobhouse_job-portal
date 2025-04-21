@@ -2,14 +2,14 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { EmployerBasicInformationSchema } from "../../../utils/validationSchema";
-import NoUser from "../../misc/routes/NoUser";
+import NoUser from "../../home/routes/NoUser";
 import useAuthStore from "../../../store/auth";
 import { IEmployerBasicInformationInputs } from "../../../types/react/types";
 import { IEmployerProfile } from "../../../types/postgres/types";
 import { updateBasicInformation } from "../api/updateBasicInformation";
 import SelectCategory from "../../../components/mui/SelectCategory";
 import { useCurrentUser } from "../../auth/api/getUser";
-import { useIndustries } from "../../jobs/api/getIndustries";
+import { useJobs } from "../../../hooks/useJobs";
 
 interface IEditProfileDetails {
   isEditorOpen: boolean;
@@ -30,7 +30,7 @@ const BasicInformation = ({
   const [isLoading, setIsLoading] = useState(false);
   const { isAunthenticated } = useAuthStore();
   const user = useCurrentUser();
-  const { industries } = useIndustries();
+  const { industries } = useJobs();
 
   const {
     register,

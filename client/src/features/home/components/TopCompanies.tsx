@@ -1,7 +1,5 @@
 import { MdHomeWork } from "react-icons/md";
-import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
-import { publicRequest } from "../../../lib/axios";
 
 type TopComapny = {
   user_id: string;
@@ -11,18 +9,7 @@ type TopComapny = {
   job_count: string;
 };
 
-const TopCompanies = () => {
-  const getTopCompanies = async () => {
-    const result = await publicRequest.get("/api/v1/topEmployers");
-    return result.data;
-  };
-
-  const {
-    data: companies,
-    isLoading: loadingComapnies,
-    isError: errorComapnies,
-  } = useQuery("topComapnies", getTopCompanies);
-
+const TopCompanies = ({ companies, errorCompanies, loadingCompanies }: any) => {
   return (
     <div className=" border-sm  grid ">
       <header className="border-b-sm  font-bold uppercase  p-sm  flex items-center gap-2">
@@ -32,10 +19,10 @@ const TopCompanies = () => {
       </header>
 
       <div className="grid p-sm gap-xs sm:grid-cols-auto-sm place-items-center ">
-        {loadingComapnies && (
+        {loadingCompanies && (
           <div className=" text-start w-full ">Loading...</div>
         )}
-        {errorComapnies && !companies && (
+        {errorCompanies && !companies && (
           <div className=" text-start w-full">Error</div>
         )}
         {companies?.map((item: TopComapny) => {

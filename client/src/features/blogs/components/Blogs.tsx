@@ -14,7 +14,7 @@ const Blogs = () => {
     <div
       className={`${
         location.pathname === "/blogs" && "min-h-screen"
-      } border-sm`}
+      } mb-[2rem] border-sm`}
     >
       <h2 className="heading flex gap-2 items-center font-bold uppercase p-sm border-b-sm">
         <MdArticle className="text-green-dark" /> Recent blogs
