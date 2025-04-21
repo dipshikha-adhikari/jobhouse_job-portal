@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import { MainLayout } from "../../../components/layout";
-import PageNotFound from "../../misc/routes/PageNotFound";
+import PageNotFound from "../../home/routes/PageNotFound";
 import EditProfile from "./EditProfile";
 import JobseekerPrivateProfile from "./JobseekerPrivateProfile";
 import JobseekerOverview from "./Overview";

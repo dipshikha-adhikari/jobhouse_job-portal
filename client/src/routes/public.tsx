@@ -3,7 +3,7 @@ import { BlogsRoutes } from "../features/blogs";
 import { JobsPublicRoutes } from "../features/jobs/routes";
 import PublicProfile from "../features/employer/routes/PublicProfile";
 import { MainLayout } from "../components/layout";
-import PageNotFound from "../features/misc/routes/PageNotFound";
+import PageNotFound from "../features/home/routes/PageNotFound";
 
 const AuthRoutes = lazy(() =>
   import("../features/auth/routes/index").then((module) => {

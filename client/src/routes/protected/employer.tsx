@@ -1,5 +1,5 @@
 import { lazy } from "react";
-import PageNotFound from "../../features/misc/routes/PageNotFound";
+import PageNotFound from "../../features/home/routes/PageNotFound";
 
 const EmployerRoutes = lazy(() =>
   import("../../features/employer/routes").then((module) => {

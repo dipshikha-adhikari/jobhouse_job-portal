@@ -2,7 +2,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { EmployerBasicInformationSchema } from "../../../utils/validationSchema";
-import NoUser from "../../misc/routes/NoUser";
+import NoUser from "../../home/routes/NoUser";
 import useAuthStore from "../../../store/auth";
 import { IEmployerBasicInformationInputs } from "../../../types/react/types";
 import { IEmployerProfile } from "../../../types/postgres/types";

@@ -15,7 +15,7 @@ export const getTotalJobsCount = async (req: Request, res: Response) => {
   }
 }
 
-export const getJobsCountByCategory = async (req: Request, res: Response) => {
+export const getJobsCategoryWithCount = async (req: Request, res: Response) => {
   try {
     const query = `SELECT c.category_name, c.category_id,
 coalesce(job_count,0) as job_count from categories c
@@ -30,7 +30,7 @@ as j on c.category_id = j.category_id ORDER BY job_count DESC;
   }
 }
 
-export const getJobsCountByIndustry = async (req: Request, res: Response) => {
+export const getJobsIndustryWithCount = async (req: Request, res: Response) => {
   try {
     const query = `SELECT i.industry_name,
 i.industry_id,
@@ -53,7 +53,7 @@ ORDER BY job_count DESC;
   }
 }
 
-export const getJobsCountByLevel = async (req: Request, res: Response) => {
+export const getJobsLevelWithCount = async (req: Request, res: Response) => {
   try {
     const query = `SELECT jl.level_id, jl.level_name, COUNT(j.job_id) AS total_jobs
  FROM job_levels jl
@@ -69,7 +69,7 @@ export const getJobsCountByLevel = async (req: Request, res: Response) => {
   }
 }
 
-export const getJobsCountByType = async (req: Request, res: Response) => {
+export const getJobsTypeWithCount = async (req: Request, res: Response) => {
   try {
     const query = `SELECT jt.type_id, jt.type_name, COUNT(j.job_id) AS total_jobs
  FROM job_types jt

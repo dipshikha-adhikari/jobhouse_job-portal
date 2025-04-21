@@ -7,13 +7,12 @@ import {
   getJobById,
   getJobLevels,
   getJobTypes,
-  getJobsCountByLevel,
   getRecentJobsByEmployerId,
   getSearchResults,
   getSearchSuggestion,
   getTotalJobsCount
 } from '../../../controllers/jobs/public'
-import { getJobsCountByCategory, getJobsCountByIndustry, getJobsCountByType } from '../../../controllers/jobs/public/count'
+import { getJobsCategoryWithCount, getJobsIndustryWithCount, getJobsLevelWithCount, getJobsTypeWithCount } from '../../../controllers/jobs/public/count'
 import { getSearchCounts } from '../../../controllers/jobs/public/search/getSearchCount'
 
 const express = require('express')
@@ -28,13 +27,13 @@ router.get('/employer/recent/:employerId', getRecentJobsByEmployerId)
 router.get('/count', getTotalJobsCount)
 router.get('/filters', getFilteredJobs)
 router.get('/levels', getJobLevels)
-router.get('/levels/jobscount', getJobsCountByLevel)
-router.get('/types/jobscount', getJobsCountByType)
+router.get('/levels-with-count', getJobsLevelWithCount)
+router.get('/types-with-count', getJobsTypeWithCount)
 router.get('/types', getJobTypes)
 router.get('/categories', getCategories)
 router.get('/industries', getIndustries)
-router.get('/categories/jobscount', getJobsCountByCategory)
-router.get('/industries/jobscount', getJobsCountByIndustry)
+router.get('/categories-with-count', getJobsCategoryWithCount)
+router.get('/industries-with-count', getJobsIndustryWithCount)
 router.get('/:jobId', getJobById)
 
 module.exports = router

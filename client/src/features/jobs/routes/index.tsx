@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import { MainLayout } from "../../../components/layout";
-import PageNotFound from "../../misc/routes/PageNotFound";
+import PageNotFound from "../../home/routes/PageNotFound";
 import Job from "./JobDetails";
 import Jobs from "./Jobs";
 import SearchResults from "./SearchResults";

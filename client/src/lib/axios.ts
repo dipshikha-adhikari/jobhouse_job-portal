@@ -1,7 +1,8 @@
 import axios from "axios";
 
 export const publicRequest = axios.create({
-  baseURL: import.meta.env.VITE_APP_BASE_URL,
+  baseURL: "http://localhost:5000/api/v1",
+  // baseURL: import.meta.env.VITE_APP_BASE_URL,
   headers: {
     "Content-Type": "application/json",
   },

@@ -1,58 +1,38 @@
-import { forwardRef, useEffect, useRef, useState } from "react";
+import { forwardRef, useEffect, useRef } from "react";
 import { BiCategory } from "react-icons/bi";
 import { FaIndustry } from "react-icons/fa";
-import { useQuery } from "react-query";
 import livingroom from "../../../asstes/livingroom.avif";
-import { AppliedJobs, IJob } from "../../../types/postgres/types";
-import useStore from "../../../store/components";
-import { publicRequest } from "../../../lib/axios";
+import SearchBox from "../../../components/elements/box/SearchBox";
+import CategorySkeleton from "../../../components/elements/skeleton/CategorySkeleton";
+import JobBoxSkeleton from "../../../components/elements/skeleton/JobBoxSkeleton";
+import { MainLayout } from "../../../components/layout";
 import Error from "../../../components/ui/Error";
-import AllJobs from "../components/AllJobs";
-import TopCompanies from "../components/TopCompanies";
+import Blogs from "../../blogs/components/Blogs";
 import Categories from "../../jobs/components/Categories";
 import Industries from "../../jobs/components/Industries";
+import AllJobs from "../components/AllJobs";
 import JobsByTypeAndLevel from "../components/JobsByTypeAndLevel";
-import Blogs from "../../blogs/components/Blogs";
-import SearchBox from "../../../components/elements/box/SearchBox";
-import { MainLayout } from "../../../components/layout";
-import { useAppliedJobs } from "../../jobseeker/api/getAppliedJobs";
-import JobBoxSkeleton from "../../../components/elements/skeleton/JobBoxSkeleton";
-import CategorySkeleton from "../../../components/elements/skeleton/CategorySkeleton";
+import TopCompanies from "../components/TopCompanies";
+import { useHomePageController } from "../controllers/useHomeController";
 
-type AppliedJobsType = {
-  jobs: AppliedJobs[];
-  isLoading: boolean;
-  isError: boolean;
-};
-
-const Landing = () => {
-  const headerRef = useRef<HTMLDivElement>(null);
-  const [headerHeight, setHeaderHeight] = useState(0);
-  const { isJobsFetched } = useStore();
-  const { jobs: appliedJobs }: AppliedJobsType = useAppliedJobs();
-  const [offset, setOffset] = useState(0);
-  const limit = 6;
-
-  const getAllJobs = async () => {
-    const res = await publicRequest.get(
-      `/api/v1/jobs/?limit=${limit}&offset=${offset}`
-    );
-
-    return res.data;
-  };
+const Home = () => {
   const {
-    data: jobs,
+    jobs,
     isLoading,
     isError,
-  } = useQuery<IJob[]>(["allJobs", offset], getAllJobs);
-
-  useEffect(() => {
-    if (headerRef.current) {
-      setHeaderHeight(headerRef.current.offsetHeight);
-    }
-    window.scrollTo(0, 0);
-  }, [headerRef]);
-
+    appliedJobs,
+    headerRef,
+    headerHeight,
+    offset,
+    setOffset,
+    limit,
+    companies,
+    loadingCompanies,
+    errorCompanies,
+    jobsCount,
+    isJobsFetched,
+  } = useHomePageController();
+  console.log(errorCompanies);
   if (isLoading && !isJobsFetched)
     return (
       <div className="grid h-screen overflow-hidden ">
@@ -95,8 +75,15 @@ const Landing = () => {
               offset={offset}
               setOffset={setOffset}
               appliedJobs={appliedJobs}
+              jobsCount={jobsCount?.count}
             />
-            {<TopCompanies />}
+            {
+              <TopCompanies
+                companies={companies}
+                loadingCompanies={loadingCompanies}
+                errorCompanies={errorCompanies}
+              />
+            }
             <div className="border-sm   ">
               <header className="flex items-center gap-2 font-bold border-b-sm p-sm  uppercase">
                 <BiCategory className="text-green-dark " /> Jobs By Category
@@ -114,13 +101,13 @@ const Landing = () => {
             {<JobsByTypeAndLevel />}
           </aside>
         </main>
-        {isJobsFetched && <Blogs />}
+        {<Blogs />}
       </div>
     </MainLayout>
   );
 };
 
-export default Landing;
+export default Home;
 
 const Header = forwardRef<HTMLDivElement>((props, ref) => {
   const imageRef = useRef<HTMLImageElement>(null);
@@ -135,7 +122,6 @@ const Header = forwardRef<HTMLDivElement>((props, ref) => {
     };
   }, []);
 
-  console.log(props);
   return (
     <header className=" justify-start  relative " ref={ref}>
       <img

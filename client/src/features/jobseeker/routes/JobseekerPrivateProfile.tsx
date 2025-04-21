@@ -21,7 +21,7 @@ import { SlGraduation } from "react-icons/sl";
 import { Link } from "react-router-dom";
 import AlmostLoaded from "../../../components/elements/loader/AlmostLoaded";
 import Error from "../../../components/ui/Error";
-import NoUser from "../../misc/routes/NoUser";
+import NoUser from "../../home/routes/NoUser";
 import useAuthStore from "../../../store/auth";
 import {
   IJobseekerEducation,

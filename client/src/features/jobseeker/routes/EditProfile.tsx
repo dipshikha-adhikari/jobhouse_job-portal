@@ -7,8 +7,8 @@ import Education from "../components/Education";
 import BasicInformation from "../components/BasicInfo";
 import Experience from "../components/Experience";
 import AlmostLoaded from "../../../components/elements/loader/AlmostLoaded";
-import NoUser from "../../misc/routes/NoUser";
-import PageNotFound from "../../misc/routes/PageNotFound";
+import NoUser from "../../home/routes/NoUser";
+import PageNotFound from "../../home/routes/PageNotFound";
 import { useJobseekerProfile } from "../api/getProfile";
 
 type ProfileProps = {

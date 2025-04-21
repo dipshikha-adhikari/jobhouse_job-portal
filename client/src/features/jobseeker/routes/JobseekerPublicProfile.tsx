@@ -17,7 +17,7 @@ import { UseQueryResult, useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import AlmostLoaded from "../../../components/elements/loader/AlmostLoaded";
 import Error from "../../../components/ui/Error";
-import NoUser from "../../misc/routes/NoUser";
+import NoUser from "../../home/routes/NoUser";
 import { privateRequest } from "../../../lib/axios";
 import useAuthStore from "../../../store/auth";
 import {

@@ -4,7 +4,7 @@ import useAuthStore from "../../../store/auth";
 import { useProfile } from "../api/getProfile";
 import BasicInformation from "../components/BasicInformation";
 import OtherInformation from "../components/OtherInformation";
-import NoUser from "../../misc/routes/NoUser";
+import NoUser from "../../home/routes/NoUser";
 import AlmostLoaded from "../../../components/elements/loader/AlmostLoaded";
 import Error from "../../../components/ui/Error";
 

@@ -6,7 +6,7 @@ import Applications from "./Applications";
 import Overview from "./Overview";
 import PrivateProfile from "./PrivateProfile";
 import UpdateProfile from "./UpdateProfile";
-import PageNotFound from "../../misc/routes/PageNotFound";
+import PageNotFound from "../../home/routes/PageNotFound";
 
 export const EmployerRoutes = () => {
   return (
